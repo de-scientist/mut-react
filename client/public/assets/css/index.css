@@ -1,0 +1,782 @@
+/* Global Styles */
+:root {
+    /* MUTCU Primary Colors */
+    --mutcu-navy-blue: #04003d;
+    --mutcu-orange: #ff9700;
+    /* MUTCU Secondary Colors */
+    --mutcu-red: #ff1229;
+    --mutcu-teal: #30d5c8;
+
+    /* Font Families */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Lato', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.7;
+    color: #333;
+    background-color: #f8f9fa;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--mutcu-navy-blue);
+    text-transform: uppercase; /* As per brand guidelines for headings */
+    font-weight: 700; /* Montserrat Bold */
+}
+
+p {
+    font-family: var(--font-body); /* Lato Regular */
+}
+
+/* Custom Utilities */
+.text-primary-light {
+    color: var(--mutcu-orange) !important;
+}
+
+.bg-primary-dark {
+    background-color: var(--mutcu-navy-blue) !important;
+}
+
+.btn-primary {
+    background-color: var(--mutcu-orange);
+    border-color: var(--mutcu-orange);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600; /* Montserrat SemiBold for buttons */
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-primary:hover {
+    background-color: #e68a00; /* Slightly darker orange */
+    border-color: #e68a00;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background-color: var(--mutcu-navy-blue);
+    border-color: var(--mutcu-navy-blue);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600; /* Montserrat SemiBold for buttons */
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-secondary:hover {
+    background-color: #00002a; /* Slightly darker navy */
+    border-color: #00002a;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.navbar.scrolled {
+    background-color: rgba(4, 0, 61, 0.95); /* Slightly transparent when scrolled */
+}
+
+.navbar-brand img {
+    height: 60px; /* Adjusted logo height as per new HTML */
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand img:hover {
+    transform: scale(1.05);
+}
+
+.navbar-nav .nav-link {
+    color: #ff1229;
+    font-weight: 600; /* Montserrat SemiBold */
+    text-transform: uppercase;
+    margin-right: 20px;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--mutcu-orange);
+    border-bottom-color: var(--mutcu-orange);
+}
+
+/* Hero Section with Carousel */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.8s ease-in-out; /* Smooth zoom effect */
+}
+
+.carousel-item.active .hero-bg {
+    transform: scale(1.05); /* Slight zoom on active item */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(4, 0, 61, 0.7); /* Navy Blue overlay */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Occupy full viewport height */
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 3.8rem;
+    color: #fff;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    margin-bottom: 20px;
+}
+
+.hero-content p.lead {
+    font-size: 1.6rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin-bottom: 40px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: var(--mutcu-orange);
+    border-radius: 50%;
+    padding: 20px;
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 15px;
+    color: var(--mutcu-navy-blue);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 5px;
+    background-color: var(--mutcu-orange);
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    font-size: 2rem;
+    font-weight: 600; /* Montserrat SemiBold */
+    color: var(--mutcu-navy-blue);
+    margin-bottom: 15px;
+}
+
+/* About Section */
+.about-section {
+    background-color: #fff;
+    padding: 80px 0;
+}
+
+.about-section img {
+    border-radius: 15px;
+    transition: transform 0.5s ease;
+}
+
+.about-section img:hover {
+    transform: scale(1.02);
+}
+
+/* Core Values Section */
+.core-values-section {
+    background: linear-gradient(to right, var(--mutcu-navy-blue), #00002a); /* Darker gradient */
+    padding: 80px 0;
+}
+
+.core-values-section .section-title {
+    color: #fff;
+}
+
+.value-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 30px;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    height: 100%; /* Ensure cards have equal height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff; /* Text color for cards */
+}
+
+.value-card:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+}
+
+.value-card .feature-icon {
+    color: var(--mutcu-orange);
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.value-card h4 {
+    color: var(--mutcu-orange);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.value-card p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+}
+
+/* Ministries Preview Section */
+.ministries-section {
+    background-color: #f8f9fa;
+    padding: 80px 0;
+}
+
+.ministry-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ministry-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.ministry-card img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.ministry-card .card-body {
+    padding: 25px;
+}
+
+.ministry-card .feature-icon {
+    color: var(--mutcu-navy-blue);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.ministry-card .card-title {
+    font-size: 1.6rem;
+    color: var(--mutcu-navy-blue);
+    margin-bottom: 10px;
+}
+
+.ministry-card .card-text {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Events Section */
+.events-section {
+    padding: 80px 0;
+    background-color: #e9ecef;
+}
+
+.event-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.event-card img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.event-card .card-body {
+    padding: 25px;
+}
+
+.event-card .card-title {
+    font-size: 1.8rem;
+    color: var(--mutcu-navy-blue);
+    margin-bottom: 15px;
+}
+
+.event-card .card-text {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.event-card .card-text i {
+    color: var(--mutcu-orange);
+}
+
+/* Prayer Section */
+.prayer-section {
+    background-color: var(--mutcu-teal); /* Using Teal for a calming feel */
+    padding: 80px 0;
+    color: #fff;
+}
+
+.prayer-section .section-title {
+    color: #04003d;
+}
+
+.prayer-section .section-title::after {
+    background-color: var(--mutcu-orange);
+}
+
+.prayer-section p.lead {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.prayer-section form {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 40px;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+}
+
+.prayer-section .form-label {
+    color: #04003d;
+    font-weight: 600;
+}
+
+.prayer-section .form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.prayer-section .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.prayer-section .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--mutcu-orange);
+    box-shadow: 0 0 0 0.25rem rgba(255, 151, 0, 0.25);
+    color: #fff;
+}
+
+.prayer-section .form-text {
+    color: #04003d !important;
+}
+
+.prayer-section .invalid-feedback {
+    color: var(--mutcu-red) !important;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    background: linear-gradient(to right, var(--mutcu-navy-blue), var(--mutcu-red)); /* Gradient from Navy Blue to Red */
+    padding: 80px 0;
+    color: #ff9700;
+}
+
+.testimonials-section .section-title {
+    color: #e68a00;
+}
+
+.testimonials-section .section-title::after {
+    background-color: var(--mutcu-orange);
+}
+
+.testimonial-card {
+    max-width: 800px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    color: #30d5c8;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.testimonial-card i.text-orange {
+    color: var(--mutcu-orange) !important;
+}
+
+.testimonial-card strong {
+    color: var(--mutcu-orange);
+}
+
+/* Gallery Section */
+.gallery-section {
+    background-color: #fff;
+    padding: 80px 0;
+}
+
+.gallery-item {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 250px; /* Fixed height for consistency */
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(4, 0, 61, 0.6); /* Navy Blue overlay */
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-text {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.gallery-text i {
+    margin-right: 8px;
+}
+
+/* Newsletter Section */
+.newsletter-section {
+    background: linear-gradient(to right, var(--mutcu-navy-blue), var(--mutcu-teal)); /* Gradient from Navy Blue to Teal */
+    padding: 80px 0;
+    color: #04003d;
+}
+
+.newsletter-section .section-title {
+    color: #ff9700;
+}
+
+.newsletter-section .section-title::after {
+    background-color: var(--mutcu-orange);
+}
+
+.newsletter-section p.lead {
+    color: #04003d;
+}
+
+.newsletter-section form {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 40px;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+}
+
+.newsletter-section .form-label {
+    color: #04003d;
+    font-weight: 600;
+}
+
+.newsletter-section .form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #04003d;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.newsletter-section .form-control::placeholder {
+    color: #04003d;
+}
+
+.newsletter-section .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--mutcu-orange);
+    box-shadow: 0 0 0 0.25rem rgba(255, 151, 0, 0.25);
+    color: #04003d;
+}
+
+.newsletter-section .invalid-feedback {
+    color: var(--mutcu-red) !important;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--mutcu-navy-blue);
+    color: #fff;
+    padding: 50px 0;
+    font-size: 0.95rem;
+}
+
+.footer-title {
+    color: var(--mutcu-orange);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+}
+
+.footer-text {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-links li a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    padding: 5px 0;
+    display: block;
+}
+
+.footer-links li a:hover {
+    color: var(--mutcu-orange);
+}
+
+.footer-contact {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 10px;
+}
+
+.footer-contact i {
+    color: var(--mutcu-orange);
+    width: 25px; /* Align icons */
+}
+
+.footer .social-icons a {
+    color: #fff;
+    font-size: 1.6rem;
+    margin-right: 15px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer .social-icons a:hover {
+    color: var(--mutcu-orange);
+    transform: translateY(-3px);
+}
+
+/* Confirmation Modal */
+.modal-content {
+    border: none;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-body {
+    background-color: #fff;
+    color: #333;
+}
+
+.modal-body .fa-check-circle {
+    color: var(--mutcu-teal); /* Using Teal for success icon */
+}
+
+/* AOS Animations */
+/* Custom pop-in for modal */
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    75% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.animate-pop-in {
+    animation: popIn 0.6s ease-out forwards;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .hero-content h1 {
+        font-size: 3.2rem;
+    }
+    .hero-content p.lead {
+        font-size: 1.4rem;
+    }
+    .section-title {
+        font-size: 2.5rem;
+    }
+    .section-subtitle {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .navbar-brand img {
+        height: 50px;
+    }
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+    .hero-content p.lead {
+        font-size: 1.2rem;
+    }
+    .section-title {
+        font-size: 2.2rem;
+        text-align: center;
+    }
+    .section-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .about-section .col-lg-6.order-lg-1 {
+        order: 2; /* Text below image on mobile */
+    }
+    .about-section .col-lg-6.order-lg-2 {
+        order: 1; /* Image above text on mobile */
+    }
+    .value-card, .ministry-card, .event-card, .testimonial-card {
+        margin-bottom: 20px;
+    }
+    .testimonial-card {
+        padding: 30px;
+        font-size: 1rem;
+    }
+    .gallery-item img {
+        height: 200px;
+    }
+    .footer-title {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    .hero-content p.lead {
+        font-size: 1rem;
+    }
+    .btn-primary, .btn-secondary {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    .section-title {
+        font-size: 1.8rem;
+    }
+    .section-subtitle {
+        font-size: 1.4rem;
+    }
+    .value-card .feature-icon, .ministry-card .feature-icon {
+        font-size: 2rem;
+    }
+    .ministry-card .card-title {
+        font-size: 1.4rem;
+    }
+    .event-card .card-title {
+        font-size: 1.5rem;
+    }
+    .gallery-item img {
+        height: 180px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hero-content {
+        padding: 10px;
+    }
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    .hero-content p.lead {
+        font-size: 0.9rem;
+    }
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .btn-primary.me-3 {
+        margin-right: 0 !important;
+    }
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 10%;
+    }
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        padding: 15px;
+    }
+    .section-title {
+        font-size: 1.5rem;
+    }
+    .section-subtitle {
+        font-size: 1.2rem;
+    }
+    .value-card, .ministry-card, .event-card, .testimonial-card, .prayer-section form, .newsletter-section form {
+        padding: 20px;
+    }
+    .testimonial-card {
+        font-size: 0.9rem;
+    }
+    .gallery-item img {
+        height: 150px;
+    }
+}

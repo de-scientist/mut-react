@@ -1,0 +1,351 @@
+/* Global Styles (Copied from ministries.css for consistency) */
+:root {
+    /* MUTCU Primary Colors */
+    --mutcu-navy-blue: #04003d;
+    --mutcu-orange: #ff9700;
+    /* MUTCU Secondary Colors */
+    --mutcu-red: #ff1229;
+    --mutcu-teal: #30d5c8;
+
+    /* Font Families */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Lato', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.7;
+    color: #333;
+    background-color: #f8f9fa;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--mutcu-navy-blue);
+    text-transform: uppercase; /* As per brand guidelines for headings */
+    font-weight: 700; /* Montserrat Bold */
+}
+
+p {
+    font-family: var(--font-body); /* Lato Regular */
+}
+
+/* Custom Utilities (Copied for consistency) */
+.text-primary-light {
+    color: var(--mutcu-orange) !important;
+}
+
+.bg-primary-dark {
+    background-color: var(--mutcu-navy-blue) !important;
+}
+
+.btn-primary {
+    background-color: var(--mutcu-orange);
+    border-color: var(--mutcu-orange);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-primary:hover {
+    background-color: #e68a00;
+    border-color: #e68a00;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background-color: var(--mutcu-navy-blue);
+    border-color: var(--mutcu-navy-blue);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-secondary:hover {
+    background-color: #00002a;
+    border-color: #00002a;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Navbar Styling (Consistent with Homepage) */
+.navbar {
+    background-color: var(--mutcu-navy-blue);
+    padding: 1.2rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand img {
+    height: 60px;
+    transition: transform 0.3s;
+}
+
+.navbar-brand img:hover {
+    transform: scale(1.05);
+}
+
+.nav-link {
+    color: white !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-left: 1.5rem;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--mutcu-orange) !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--mutcu-orange);
+    transition: width 0.3s, left 0.3s;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+    left: 0;
+}
+
+.nav-link.active {
+    color: var(--mutcu-orange) !important;
+}
+
+/* Page Hero Section */
+.page-hero-section {
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 61, 0.6);
+    z-index: 1;
+}
+
+.page-hero-section .container {
+    z-index: 2;
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+    color: var(--mutcu-navy-blue);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--mutcu-orange);
+    border-radius: 2px;
+}
+
+.ministry-intro-section .section-title::after {
+    left: 0;
+    transform: translateX(0);
+}
+
+.leadership-spotlight-section .section-title::after,
+.framework-section .section-title::after,
+.cta-section .section-title::after,
+.fundraising-approaches-section .section-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* RMC Cards */
+.framework-section .rmc-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.framework-section .rmc-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.framework-section .card-title {
+    color: var(--mutcu-navy-blue);
+    font-size: 1.5rem;
+}
+
+/* Ministry-specific icons */
+.finance-icon { color: var(--mutcu-teal); font-size: 3rem; }
+.ethics-icon { color: var(--mutcu-red); font-size: 3rem; }
+.reporting-icon { color: var(--mutcu-orange); font-size: 3rem; }
+
+/* Fundraising Approaches Section */
+.fundraising-approaches-section {
+    background-color: var(--mutcu-navy-blue);
+    color: white;
+}
+
+.fundraising-approaches-section .section-title::after {
+    background-color: white;
+}
+
+.fundraising-approaches-section .card-body ul li {
+    padding-bottom: 1rem;
+}
+.fundraising-approaches-section .card-body ul li:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+}
+
+
+/* Leadership Section */
+.leadership-spotlight-section {
+    background-color: var(--mutcu-orange);
+    color: white;
+}
+
+.leadership-spotlight-section .section-title::after {
+    background-color: white;
+}
+
+.executive-member-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease-in-out;
+    backdrop-filter: blur(5px);
+}
+
+.executive-member-card:hover {
+    transform: translateY(-5px);
+}
+
+.executive-member-card img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-color: var(--mutcu-navy-blue) !important;
+}
+
+.executive-member-card .btn {
+    border-color: white;
+    color: white;
+    transition: all 0.3s;
+}
+.executive-member-card .btn:hover {
+    background-color: white;
+    color: var(--mutcu-navy-blue);
+}
+
+/* CTA Section */
+.cta-section {
+    background-color: var(--mutcu-navy-blue);
+    color: white;
+}
+.cta-section .section-title::after {
+    background-color: white;
+}
+
+.cta-section .btn-primary {
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-weight: 600;
+}
+
+/* Modals */
+.modal-content {
+    border-radius: 10px;
+    border: none;
+}
+
+.modal-header {
+    background-color: var(--mutcu-navy-blue);
+    color: white;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+.modal-body {
+    background-color: #f8f9fa;
+}
+
+.modal-confirmation-message {
+    animation: pop-in 0.5s ease-out;
+}
+@keyframes pop-in {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Footer (Consistent with Homepage) */
+.footer {
+    background-color: var(--mutcu-navy-blue);
+    color: white;
+}
+
+.footer-title {
+    color: var(--mutcu-teal);
+    font-weight: 700;
+}
+
+.footer-text, .footer-contact {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--mutcu-orange);
+}
+
+.social-icons a {
+    color: white;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: var(--mutcu-orange);
+}
+
+/* Responsive Styles */
+@media (max-width: 767.98px) {
+    .section-title {
+        font-size: 2rem;
+    }
+}

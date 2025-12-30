@@ -1,0 +1,711 @@
+/* Global Styles (Copied from index.css for consistency, can be moved to a global.css if preferred) */
+:root {
+    /* MUTCU Primary Colors */
+    --mutcu-navy-blue: #04003d;
+    --mutcu-orange: #ff9700;
+    /* MUTCU Secondary Colors */
+    --mutcu-red: #ff1229;
+    --mutcu-teal: #30d5c8;
+
+    /* Font Families */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Lato', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.7;
+    color: #333;
+    background-color: #f8f9fa;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--mutcu-navy-blue);
+    text-transform: uppercase; /* As per brand guidelines for headings */
+    font-weight: 700; /* Montserrat Bold */
+}
+
+p {
+    font-family: var(--font-body); /* Lato Regular */
+}
+
+/* Custom Utilities (Copied for consistency) */
+.text-primary-light {
+    color: var(--mutcu-orange) !important;
+}
+
+.bg-primary-dark {
+    background-color: var(--mutcu-navy-blue) !important;
+}
+
+.btn-primary {
+    background-color: var(--mutcu-orange);
+    border-color: var(--mutcu-orange);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600; /* Montserrat SemiBold for buttons */
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-primary:hover {
+    background-color: #e68a00; /* Slightly darker orange */
+    border-color: #e68a00;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background-color: var(--mutcu-navy-blue);
+    border-color: var(--mutcu-navy-blue);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600; /* Montserrat SemiBold for buttons */
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-secondary:hover {
+    background-color: #00002a; /* Slightly darker navy */
+    border-color: #00002a;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Navbar Styling (Consistent with Homepage) */
+.navbar {
+    background-color: var(--mutcu-navy-blue);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.navbar.scrolled {
+    background-color: rgba(4, 0, 61, 0.95); /* Slightly transparent when scrolled */
+}
+
+.navbar-brand img {
+    height: 60px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand img:hover {
+    transform: scale(1.05);
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+    font-weight: 600; /* Montserrat SemiBold */
+    text-transform: uppercase;
+    margin-right: 20px;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--mutcu-orange);
+    border-bottom-color: var(--mutcu-orange);
+}
+
+/* Page Hero Section (Specific to About Page) */
+.page-hero-section {
+    position: relative;
+    height: 50vh; /* Shorter than homepage hero */
+    min-height: 300px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    padding-top: 80px; /* To account for fixed navbar */
+}
+
+.page-hero-section .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(4, 0, 61, 0.75); /* Slightly darker overlay for text readability */
+    z-index: 1;
+}
+
+.page-hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.page-hero-section h1 {
+    font-size: 3.5rem;
+    color: #fff;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.page-hero-section p.lead {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Section Titles (Consistent with Homepage) */
+.section-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 15px;
+    color: var(--mutcu-navy-blue);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%; /* Centered by default */
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 5px;
+    background-color: var(--mutcu-orange);
+    border-radius: 2px;
+}
+
+/* For left-aligned titles, adjust ::after */
+.introduction-section .section-title,
+.structure-section .section-title {
+    text-align: left;
+}
+.introduction-section .section-title::after,
+.structure-section .section-title::after {
+    left: 0;
+    transform: translateX(0);
+}
+
+
+.section-subtitle {
+    font-size: 2rem;
+    font-weight: 600; /* Montserrat SemiBold */
+    color: var(--mutcu-navy-blue);
+    margin-bottom: 15px;
+}
+
+/* Introduction Section */
+.introduction-section {
+    background-color: #fff;
+    padding: 80px 0;
+}
+
+.introduction-section img {
+    border-radius: 15px;
+    transition: transform 0.5s ease;
+}
+
+.introduction-section img:hover {
+    transform: scale(1.02);
+}
+
+.mutcu-link-orange {
+    color: var(--mutcu-orange);
+    font-weight: 600;
+}
+.mutcu-link-orange:hover {
+    color: #e68a00;
+}
+
+
+/* Guiding Principles Section */
+.principles-section {
+    background-color: #e9ecef;
+    padding: 80px 0;
+}
+
+.principle-card {
+    background-color: #fff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 30px;
+}
+
+.principle-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.principle-card .feature-icon {
+    color: var(--mutcu-orange);
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.principle-card .card-title {
+    font-size: 1.8rem;
+    color: var(--mutcu-navy-blue);
+    margin-bottom: 10px;
+}
+
+.principle-card .lead-sm {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #555;
+}
+
+/* Aims of the Union Section */
+.aims-section {
+    background-color: #fff;
+    padding: 80px 0;
+}
+
+.aim-item {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.aim-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.aim-item .aim-icon {
+    color: var(--mutcu-teal); /* Using Teal for aim icons */
+    font-size: 2.5rem;
+    margin-right: 20px;
+}
+
+.aim-item h4 {
+    font-size: 1.6rem;
+    color: var(--mutcu-navy-blue);
+    margin-bottom: 5px;
+}
+
+.aim-item p {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Doctrinal Basis Section */
+.doctrinal-section {
+    background: linear-gradient(to right, var(--mutcu-navy-blue), var(--mutcu-red)); /* Consistent with homepage testimonials */
+    padding: 80px 0;
+    color: #fff;
+}
+
+.doctrinal-section .section-title {
+    color: #fff;
+}
+
+.doctrinal-section .section-title::after {
+    background-color: var(--mutcu-orange);
+}
+
+.doctrinal-section p.lead {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.doctrinal-content {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    padding: 40px;
+}
+
+.doctrinal-list li {
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.doctrinal-list li i {
+    color: var(--mutcu-orange); /* Orange checkmarks */
+}
+
+/* Organizational Structure & Leadership Section */
+.structure-section {
+    background-color: #f8f9fa;
+    padding: 80px 0;
+}
+
+.structure-overview {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+}
+
+.structure-overview p {
+    color: #555;
+}
+
+.structure-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 30px;
+}
+
+.structure-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.structure-card .feature-icon {
+    color: var(--mutcu-navy-blue);
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.structure-card .card-title {
+    font-size: 1.8rem;
+    color: var(--mutcu-navy-blue);
+    margin-bottom: 10px;
+}
+
+.structure-card p {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Executive Committee Section */
+.executive-committee-section {
+    background-color: #fff;
+    padding: 80px 0;
+}
+
+.executive-member-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: var(--mutcu-navy-blue); /* Ensure text color is consistent */
+    height: 100%; /* Ensure all cards are same height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.executive-member-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    color: var(--mutcu-navy-blue); /* Keep text color on hover */
+}
+
+.executive-member-card img {
+    width: 120px; /* Adjust size of circular images */
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.executive-member-card .border-orange {
+    border-color: var(--mutcu-orange) !important;
+}
+
+.executive-member-card .border-navy {
+    border-color: var(--mutcu-navy-blue) !important;
+}
+
+.executive-member-card .member-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--mutcu-navy-blue);
+}
+
+.executive-member-card .member-role {
+    font-size: 0.95rem;
+    color: #555;
+    text-transform: none; /* Keep role text as is */
+}
+
+
+/* Why Join MUTCU Section */
+.join-section {
+    background: linear-gradient(to right, var(--mutcu-navy-blue), var(--mutcu-teal)); /* Consistent with homepage newsletter */
+    padding: 80px 0;
+    color: #fff;
+}
+
+.join-section .section-title {
+    color: #fff;
+}
+
+.join-section .section-title::after {
+    background-color: var(--mutcu-orange);
+}
+
+.join-section p.lead {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.join-benefit-card {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    padding: 30px;
+}
+
+.join-benefit-card:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+}
+
+.join-benefit-card .feature-icon {
+    color: var(--mutcu-orange);
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.join-benefit-card .card-title {
+    color: var(--mutcu-orange);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.join-benefit-card p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+}
+
+
+/* Footer (Consistent with Homepage) */
+.footer {
+    background-color: var(--mutcu-navy-blue);
+    color: #fff;
+    padding: 50px 0;
+    font-size: 0.95rem;
+}
+
+.footer-title {
+    color: var(--mutcu-orange);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+}
+
+.footer-text {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-links li a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    padding: 5px 0;
+    display: block;
+}
+
+.footer-links li a:hover {
+    color: var(--mutcu-orange);
+}
+
+.footer-contact {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 10px;
+}
+
+.footer-contact i {
+    color: var(--mutcu-orange);
+    width: 25px; /* Align icons */
+}
+
+.footer .social-icons a {
+    color: #fff;
+    font-size: 1.6rem;
+    margin-right: 15px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer .social-icons a:hover {
+    color: var(--mutcu-orange);
+    transform: translateY(-3px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .page-hero-section h1 {
+        font-size: 3rem;
+    }
+    .page-hero-section p.lead {
+        font-size: 1.3rem;
+    }
+    .section-title {
+        font-size: 2.5rem;
+    }
+    .section-subtitle {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .navbar-brand img {
+        height: 50px;
+    }
+    .page-hero-section h1 {
+        font-size: 2.5rem;
+    }
+    .page-hero-section p.lead {
+        font-size: 1.2rem;
+    }
+    .section-title {
+        font-size: 2.2rem;
+        text-align: center;
+    }
+    .section-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .introduction-section .section-title {
+        text-align: center;
+    }
+    .introduction-section .section-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .introduction-section .col-lg-7,
+    .introduction-section .col-lg-5 {
+        text-align: center;
+    }
+    .introduction-section img {
+        margin-top: 20px;
+    }
+    .principle-card, .aim-item, .structure-card, .join-benefit-card {
+        margin-bottom: 20px;
+    }
+    .doctrinal-content {
+        padding: 30px;
+    }
+    .doctrinal-list li {
+        font-size: 0.95rem;
+    }
+    .footer-title {
+        margin-top: 20px;
+    }
+    .executive-member-card {
+        padding: 15px;
+    }
+    .executive-member-card img {
+        width: 100px;
+        height: 100px;
+    }
+    .executive-member-card .member-name {
+        font-size: 1.2rem;
+    }
+    .executive-member-card .member-role {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .page-hero-section {
+        height: 40vh;
+        min-height: 250px;
+    }
+    .page-hero-section h1 {
+        font-size: 2rem;
+    }
+    .page-hero-section p.lead {
+        font-size: 1rem;
+    }
+    .btn-primary, .btn-secondary {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    .section-title {
+        font-size: 1.8rem;
+    }
+    .section-subtitle {
+        font-size: 1.4rem;
+    }
+    .feature-icon, .aim-icon {
+        font-size: 2.5rem;
+    }
+    .principle-card .card-title, .aim-item h4, .structure-card .card-title, .join-benefit-card .card-title {
+        font-size: 1.5rem;
+    }
+    .doctrinal-content {
+        padding: 20px;
+    }
+    .footer-contact {
+        font-size: 0.85rem;
+    }
+    .executive-member-card img {
+        width: 80px;
+        height: 80px;
+    }
+    .executive-member-card .member-name {
+        font-size: 1.1rem;
+    }
+    .executive-member-card .member-role {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .page-hero-section {
+        height: 30vh;
+        min-height: 200px;
+    }
+    .page-hero-section h1 {
+        font-size: 1.8rem;
+    }
+    .page-hero-section p.lead {
+        font-size: 0.9rem;
+    }
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .btn-primary.me-3 {
+        margin-right: 0 !important;
+    }
+    .section-title {
+        font-size: 1.5rem;
+    }
+    .section-subtitle {
+        font-size: 1.2rem;
+    }
+    .principle-card, .aim-item, .structure-card, .join-benefit-card {
+        padding: 20px;
+    }
+    .aim-item .aim-icon {
+        font-size: 2rem;
+        margin-right: 15px;
+    }
+    .doctrinal-content {
+        padding: 15px;
+    }
+    .doctrinal-list li {
+        font-size: 0.9rem;
+    }
+    .executive-member-card img {
+        width: 70px;
+        height: 70px;
+    }
+    .executive-member-card .member-name {
+        font-size: 1rem;
+    }
+    .executive-member-card .member-role {
+        font-size: 0.75rem;
+    }
+}

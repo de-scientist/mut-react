@@ -1,0 +1,605 @@
+/* Missions & Evangelism Ministry Specific Styles */
+:root {
+    --missions-accent: #ff9700; /* Orange for energy and outreach */
+    --mutcu-navy-blue: #04003d;
+    --mutcu-orange: #ff9700;
+    --mutcu-red: #ff1229;
+    --mutcu-teal: #30d5c8;
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Lato', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.7;
+    color: #333;
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--mutcu-navy-blue);
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+p {
+    font-family: var(--font-body);
+}
+
+.text-primary-light {
+    color: var(--missions-accent) !important;
+}
+
+.bg-primary-dark {
+    background-color: var(--mutcu-navy-blue) !important;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--mutcu-orange);
+    border-color: var(--mutcu-orange);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-primary:hover {
+    background-color: #e68a00;
+    border-color: #e68a00;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background-color: var(--mutcu-navy-blue);
+    border-color: var(--mutcu-navy-blue);
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-secondary:hover {
+    background-color: #00002a;
+    border-color: #00002a;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--mutcu-navy-blue);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.navbar.scrolled {
+    background-color: rgba(4, 0, 61, 0.95);
+}
+
+.navbar-brand img {
+    height: 60px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand img:hover {
+    transform: scale(1.05);
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-right: 20px;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--mutcu-orange);
+    border-bottom-color: var(--mutcu-orange);
+}
+
+/* Hero Section */
+.page-hero-section {
+    position: relative;
+    height: 50vh;
+    min-height: 300px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    padding-top: 80px;
+}
+
+.page-hero-section .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(4, 0, 61, 0.75), rgba(255, 151, 0, 0.3)); /* Using orange accent */
+    z-index: 1;
+}
+
+.page-hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.page-hero-section h1 {
+    font-size: 3.5rem;
+    color: #fff;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.page-hero-section p.lead {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 15px;
+    color: var(--mutcu-navy-blue);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 5px;
+    background-color: var(--missions-accent);
+    border-radius: 2px;
+}
+
+.ministry-intro-section .section-title {
+    text-align: left;
+}
+
+.ministry-intro-section .section-title::after {
+    left: 0;
+    transform: translateX(0);
+}
+
+/* Ministry Intro */
+.ministry-intro-section {
+    background-color: #fff;
+    padding: 80px 0;
+}
+
+.ministry-intro-section img {
+    border-radius: 15px;
+    transition: transform 0.5s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.ministry-intro-section img:hover {
+    transform: scale(1.02);
+}
+
+/* Sub-Ministries */
+.sub-ministries-section {
+    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+    padding: 80px 0;
+}
+
+.sub-ministry-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%; /* Ensure uniform height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sub-ministry-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.sub-ministry-card .card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.sub-ministry-card .card-title {
+    font-size: 1.8rem;
+    color: var(--mutcu-navy-blue);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.sub-ministry-card p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.sub-ministry-card h6 {
+    color: var(--missions-accent);
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.sub-ministry-card ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 15px;
+}
+
+.sub-ministry-card ul li {
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 0.9rem;
+    position: relative;
+    padding-left: 25px;
+    line-height: 1.4;
+}
+
+.sub-ministry-card ul li::before {
+    content: '\f00c';
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--missions-accent);
+    position: absolute;
+    left: 0;
+    top: 2px;
+}
+
+.sub-ministry-card .text-muted {
+    font-size: 0.85rem;
+    margin-top: auto; /* Push to bottom */
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.sub-ministry-card i {
+    margin-bottom: 15px;
+}
+
+/* Custom Icons for Programs */
+.choir-icon { color: var(--mutcu-red); font-size: 3rem; }
+.band-icon { color: var(--mutcu-teal); font-size: 3rem; }
+.praise-icon { color: var(--mutcu-orange); font-size: 3rem; }
+.instrumentalists-icon { color: var(--mutcu-navy-blue); font-size: 3rem; }
+
+/* Key Events */
+.key-events-section {
+    background: linear-gradient(to right, var(--mutcu-navy-blue), var(--missions-accent));
+    padding: 80px 0;
+    color: #fff;
+}
+
+.key-events-section .section-title {
+    color: #fff;
+}
+
+.key-events-section .section-title::after {
+    background-color: var(--mutcu-orange);
+}
+
+.key-events-section p.lead {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.event-highlight-card {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    color: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.event-highlight-card:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+}
+
+.event-highlight-card .card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.event-highlight-card .event-icon {
+    color: var(--mutcu-orange);
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.event-highlight-card .card-title {
+    color: var(--mutcu-orange);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.event-highlight-card p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.event-highlight-card .text-muted {
+    color: rgba(255, 255, 255, 0.7) !important;
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.event-highlight-card .text-muted i {
+    color: var(--missions-accent);
+}
+
+/* Leadership Spotlight */
+.leadership-spotlight-section {
+    background: linear-gradient(to right, var(--mutcu-navy-blue), var(--missions-accent));
+    padding: 80px 0;
+    color: #fff;
+}
+
+.leadership-spotlight-section .section-title {
+    color: #fff;
+}
+
+.leadership-spotlight-section .section-title::after {
+    background-color: var(--mutcu-orange);
+}
+
+.leadership-spotlight-section p.lead {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.executive-member-card {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.executive-member-card:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.executive-member-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.executive-member-card .border-orange {
+    border: 3px solid var(--mutcu-orange);
+}
+
+.executive-member-card .member-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--mutcu-orange);
+}
+
+.executive-member-card .member-role {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: none;
+}
+
+.executive-member-card .btn-outline-light {
+    color: #fff;
+    border-color: #fff;
+    transition: all 0.3s ease;
+}
+
+.executive-member-card .btn-outline-light:hover {
+    background-color: #fff;
+    color: var(--mutcu-navy-blue);
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(to right, var(--mutcu-navy-blue), var(--missions-accent));
+    padding: 80px 0;
+    color: #fff;
+}
+
+.cta-section .section-title {
+    color: #fff;
+}
+
+.cta-section .section-title::after {
+    background-color: var(--mutcu-orange);
+}
+
+.cta-section p.lead {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+form .form-control {
+    border-radius: 0;
+    border-bottom: 2px solid var(--missions-accent);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+form .form-control:focus {
+    box-shadow: none;
+    border-bottom-color: var(--mutcu-orange);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+form .form-label {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+form .form-select {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-bottom: 2px solid var(--missions-accent);
+}
+
+form .form-select:focus {
+    border-bottom-color: var(--mutcu-orange);
+}
+
+/* Gallery */
+.sub-ministries-section img {
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.sub-ministries-section img:hover {
+    transform: scale(1.05);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--mutcu-navy-blue);
+    color: #fff;
+    padding: 50px 0;
+    font-size: 0.95rem;
+}
+
+.footer-title {
+    color: var(--mutcu-orange);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+}
+
+.footer-links li a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links li a:hover {
+    color: var(--mutcu-orange);
+}
+
+.footer-contact {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 10px;
+}
+
+.footer-contact i {
+    color: var(--mutcu-orange);
+    width: 25px;
+}
+
+.footer .social-icons a {
+    color: #fff;
+    font-size: 1.6rem;
+    margin-right: 15px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer .social-icons a:hover {
+    color: var(--mutcu-orange);
+    transform: translateY(-3px);
+}
+
+/* Animations */
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    75% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.animate-pop-in {
+    animation: popIn 0.6s ease-out forwards;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .page-hero-section h1 { font-size: 3rem; }
+    .page-hero-section p.lead { font-size: 1.3rem; }
+    .section-title { font-size: 2.5rem; }
+    .sub-ministry-card .card-title { font-size: 1.6rem; }
+}
+
+@media (max-width: 991.98px) {
+    .navbar-brand img { height: 50px; }
+    .page-hero-section h1 { font-size: 2.5rem; }
+    .page-hero-section p.lead { font-size: 1.2rem; }
+    .section-title { font-size: 2.2rem; text-align: center; }
+    .section-title::after { left: 50%; transform: translateX(-50%); }
+    .ministry-intro-section .section-title { text-align: center; }
+    .ministry-intro-section .section-title::after { left: 50%; transform: translateX(-50%); }
+    .ministry-intro-section img { margin-top: 20px; }
+    .sub-ministry-card { margin-bottom: 20px; }
+}
+
+@media (max-width: 767.98px) {
+    .page-hero-section { height: 40vh; min-height: 250px; }
+    .page-hero-section h1 { font-size: 2rem; }
+    .page-hero-section p.lead { font-size: 1rem; }
+    .btn-primary, .btn-secondary { padding: 10px 20px; font-size: 0.9rem; }
+    .section-title { font-size: 1.8rem; }
+    .sub-ministry-card .card-title { font-size: 1.4rem; }
+    .sub-ministry-card .choir-icon, .band-icon, .praise-icon, .instrumentalists-icon { font-size: 2.5rem; }
+    .event-highlight-card .event-icon { font-size: 2.5rem; }
+    .executive-member-card img { width: 80px; height: 80px; }
+    .sub-ministry-card .card-body { padding: 15px; }
+}
+
+@media (max-width: 575.98px) {
+    .page-hero-section { height: 30vh; min-height: 200px; }
+    .page-hero-section h1 { font-size: 1.8rem; }
+    .page-hero-section p.lead { font-size: 0.9rem; }
+    .btn-primary, .btn-secondary { width: 100%; margin-bottom: 10px; }
+    .btn-primary.me-3 { margin-right: 0 !important; }
+    .section-title { font-size: 1.5rem; }
+    .sub-ministry-card ul li { font-size: 0.85rem; }
+    .executive-member-card img { width: 70px; height: 70px; }
+    .sub-ministry-card .card-title { font-size: 1.2rem; }
+}
