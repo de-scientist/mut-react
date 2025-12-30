@@ -50,19 +50,7 @@ function App() {
 
         {/* Committee routes */}
         <Route path="committees/chairman" element={<ChairmanPage />} />
-        {/* TODO: Add remaining committee routes when pages are created:
-        - committees/vice-chair1
-        - committees/vice-chair2
-        - committees/secretary
-        - committees/vice-secretary
-        - committees/treasurer
-        - committees/bible-study
-        - committees/prayer
-        - committees/missions
-        - committees/music
-        - committees/technical
-        - committees/creative
-        */}
+        <Route path="committees/bs" element={<BibleStudyCoordinatorPage />} />
       </Route>
     </Routes>
   )
