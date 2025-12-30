@@ -1,6 +1,6 @@
 // src/pages/committees/TreasurerPage.tsx
 import React from "react";
-import { LeaderProfileLayout } from "@/components/LeaderProfileLayout";
+import { LeaderProfileLayout } from "../../components/LeaderProfileLayout";
 
 export const TreasurerPage: React.FC = () => (
   <LeaderProfileLayout
