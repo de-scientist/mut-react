@@ -1,6 +1,6 @@
 // src/pages/committees/PrayerCoordinatorPage.tsx
 import React from "react";
-import { LeaderProfileLayout } from "@/components/LeaderProfileLayout";
+import { LeaderProfileLayout } from "../../components/LeaderProfileLayout";
 
 export const PrayerCoordinatorPage: React.FC = () => (
   <LeaderProfileLayout
