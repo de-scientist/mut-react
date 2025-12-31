@@ -133,7 +133,6 @@ export const LeaderProfileLayout: React.FC<LeaderProfileLayoutProps> = ({
               {primaryCtaLabel}
             </Button>
             <Button
-              variant="outline"
               className="border-white text-white hover:bg-white/10"
               onClick={() => (window.location.href = secondaryCtaHref)}
             >
