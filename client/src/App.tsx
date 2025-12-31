@@ -57,6 +57,7 @@ function App() {
         <Route path="committees/bible-study" element={<BibleStudyCoordinatorPage />} />
         <Route path="committees/creative" element={<CreativeCoordinatorPage />} />
         <Route path="committees/missions" element={<MissionsCoordinatorPage />} />
+        <Route path="committees/music" element={<MusicCoordinatorPage />} />
       </Route>
     </Routes>
   )
