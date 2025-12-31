@@ -1,6 +1,6 @@
 // src/pages/committees/MissionsCoordinatorPage.tsx
 import { Link } from "react-router-dom";
-import "../../assets/mut/css/music-ministry.css";
+import "../../assets/mut/css/missions-evangelism.css";
 
 const MissionsCoordinatorPage = () => {
   return (

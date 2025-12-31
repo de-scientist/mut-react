@@ -1,6 +1,6 @@
 // src/pages/committees/MusicCoordinatorPage.tsx
 import { Link } from "react-router-dom";
-import "../../assets/mut/css/about.css";
+import "../../assets/mut/css/music-ministry.css";
 
 const MusicCoordinatorPage = () => {
   return (
