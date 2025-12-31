@@ -24,6 +24,8 @@ import RMCPage from './pages/ministries/RMCPage'
 import ChairmanPage from './pages/committees/ChairmanPage'
 import BibleStudyCoordinatorPage from './pages/committees/BibleStudyCoordinatorPage'
 import CreativeCoordinatorPage from './pages/committees/CreativeCoordinatorPage'
+import MissionsCoordinatorPage from './pages/committees/MissionsCoordinatorPage'
+
 
 function App() {
   return (
