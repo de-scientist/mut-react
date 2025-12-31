@@ -65,6 +65,7 @@ function App() {
         <Route path="committees/prayer" element={<PrayerCoordinatorPage />} />
         <Route path="committees/secretary" element={<SecretaryPage />} />
         <Route path="committees/technical" element={<TechnicalCoordinatorPage />} />
+        <Route path="committees/treasurer" element={<TreasurerPage />} />
       </Route>
     </Routes>
   )
