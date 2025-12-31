@@ -71,6 +71,7 @@ function App() {
         <Route path="committees/treasurer" element={<TreasurerPage />} />
         <Route path="committees/vice-chair-1" element={<ViceChair1Page />} />
         <Route path="committees/vice-chair-2" element={<ViceChair2Page />} />
+        <Route path="committees/vice-secretary" element={<ViceSecretaryPage />} />
       </Route>
     </Routes>
   )
