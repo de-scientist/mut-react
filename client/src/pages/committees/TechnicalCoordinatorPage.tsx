@@ -1,6 +1,6 @@
 // src/pages/committees/TechnicalCoordinatorPage.tsx
 import { Link } from "react-router-dom";
-import "../../assets/mut/css/about.css";
+import "../../assets/mut/css/technical-ministry.css";
 
 const TechnicalCoordinatorPage = () => {
   return (
