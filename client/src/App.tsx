@@ -28,6 +28,7 @@ import MissionsCoordinatorPage from './pages/committees/MissionsCoordinatorPage'
 import MusicCoordinatorPage from './pages/committees/MusicCoordinatorPage'
 import PrayerCoordinatorPage from './pages/committees/PrayerCoordinatorPage'
 import SecretaryPage from './pages/committees/SecretaryPage'
+import TechnicalCoordinatorPage from './pages/committees/TechnicalCoordinatorPage'
 
 
 function App() {
