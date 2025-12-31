@@ -23,6 +23,7 @@ import RMCPage from './pages/ministries/RMCPage'
 // Committee pages
 import ChairmanPage from './pages/committees/ChairmanPage'
 import BibleStudyCoordinatorPage from './pages/committees/BibleStudyCoordinatorPage'
+import CreativeCoordinatorPage from './pages/committees/CreativeCoordinatorPage'
 
 function App() {
   return (
