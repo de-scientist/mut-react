@@ -25,6 +25,7 @@ import ChairmanPage from './pages/committees/ChairmanPage'
 import BibleStudyCoordinatorPage from './pages/committees/BibleStudyCoordinatorPage'
 import CreativeCoordinatorPage from './pages/committees/CreativeCoordinatorPage'
 import MissionsCoordinatorPage from './pages/committees/MissionsCoordinatorPage'
+import MusicCoordinatorPage from './pages/committees/MusicCoordinatorPage'
 
 
 function App() {
