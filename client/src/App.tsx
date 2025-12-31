@@ -61,6 +61,7 @@ function App() {
         <Route path="committees/missions" element={<MissionsCoordinatorPage />} />
         <Route path="committees/music" element={<MusicCoordinatorPage />} />
         <Route path="committees/prayer" element={<PrayerCoordinatorPage />} />
+        <Route path="committees/secretary" element={<SecretaryPage />} />
       </Route>
     </Routes>
   )
