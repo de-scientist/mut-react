@@ -31,6 +31,7 @@ import SecretaryPage from './pages/committees/SecretaryPage'
 import TechnicalCoordinatorPage from './pages/committees/TechnicalCoordinatorPage'
 import TreasurerPage from './pages/committees/TreasurerPage'
 import ViceChair1Page from './pages/committees/ViceChair1Page'
+import ViceChair2Page from './pages/committees/ViceChair2Page'
 
 
 function App() {
