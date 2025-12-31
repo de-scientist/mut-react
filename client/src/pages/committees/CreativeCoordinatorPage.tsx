@@ -1,6 +1,6 @@
 // src/pages/committees/CreativeCoordinatorPage.tsx
 import { Link } from "react-router-dom";
-import "../../assets/mut/css/about.css";
+import "../../assets/mut/css/creative-arts.css";
 
 const CreativeCoordinatorPage = () => {
   return (
