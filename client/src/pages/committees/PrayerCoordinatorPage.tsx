@@ -1,6 +1,6 @@
 // src/pages/committees/PrayerCoordinatorPage.tsx
 import { Link } from "react-router-dom";
-import "../../assets/mut/css/about.css";
+import "../../assets/mut/css/prayer.css";
 
 const PrayerCoordinatorPage = () => {
   return (
