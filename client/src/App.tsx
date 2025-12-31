@@ -52,6 +52,7 @@ function App() {
         {/* Committee routes */}
         <Route path="committees/chairman" element={<ChairmanPage />} />
         <Route path="committees/bible-study" element={<BibleStudyCoordinatorPage />} />
+        <Route path="committees/creative" element={<CreativeCoordinatorPage />} />
       </Route>
     </Routes>
   )
