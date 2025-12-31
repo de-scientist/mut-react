@@ -1,7 +1,7 @@
 // src/components/LeaderProfileLayout.tsx
 import React from "react";
 import { MainLayout } from "../layouts/MainLayout1";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 
 type BorderColor = "orange" | "navy";
 
