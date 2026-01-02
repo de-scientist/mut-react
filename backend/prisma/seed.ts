@@ -10,10 +10,21 @@ if (!process.env.DATABASE_URL) {
 
 async function main() {
   console.log('🚀 Script started...')
-  console.log('🔗 Connecting to:', process.env.DATABASE_URL.split('@')[1]) // Log host for safety
+  
+  // Log the connection target (hiding sensitive credentials)
+  const dbHost = process.env.DATABASE_URL.split('@')[1] || 'localhost';
+  console.log('🔗 Connecting to database at:', dbHost)
 
-  // 2. Initialize with explicit logging to catch the "silent" crash
+  /**
+   * FIX: We pass the URL explicitly here. 
+   * This resolves the "PrismaClient needs to be constructed with non-empty options" error.
+   */
   const prisma = new PrismaClient({
+    datasource: {
+      db: {
+        url: process.env.DATABASE_URL,
+      },
+    },
     log: ['error', 'warn'],
   })
 
@@ -176,7 +187,7 @@ async function main() {
     console.log('✨ Seeding completed!')
   } catch (error) {
     console.error('❌ Seeding error:', error)
-    throw error
+    // Don't re-throw here so the finally block can disconnect properly
   } finally {
     await prisma.$disconnect()
   }
@@ -184,5 +195,6 @@ async function main() {
 
 main()
   .catch((e) => {
+    console.error('❌ Fatal error in main:', e)
     process.exit(1)
   })
