@@ -8,7 +8,7 @@ import errorHandler from './middlewares/errorHandler.js'
 
 // Import routes
 import authRoutes from './routes/authRoutes.ts'
-import eventRoutes from './routes/eventRoutes.js'
+import eventRoutes from './routes/eventRoutes.ts'
 import ministryRoutes from './routes/ministryRoutes.js'
 import prayerRoutes from './routes/prayerRoutes.js'
 import contactRoutes from './routes/contactRoutes.js'
