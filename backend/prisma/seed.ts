@@ -2,31 +2,20 @@ import 'dotenv/config'
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 
-// 1. Check if the env is actually loaded before doing ANYTHING
-if (!process.env.DATABASE_URL) {
-  console.error('❌ ERROR: DATABASE_URL is not defined in your environment!')
-  process.exit(1)
-}
-
 async function main() {
   console.log('🚀 Script started...')
-  
-  // Log the connection target (hiding sensitive credentials)
-  const dbHost = process.env.DATABASE_URL.split('@')[1] || 'localhost';
-  console.log('🔗 Connecting to database at:', dbHost)
+
+  // Check for the environment variable
+  const url = process.env.DATABASE_URL;
+  if (!url) {
+    throw new Error('❌ DATABASE_URL is not defined in .env file');
+  }
 
   /**
-   * FIX: We pass the URL explicitly here. 
-   * This resolves the "PrismaClient needs to be constructed with non-empty options" error.
+   * We initialize without constructor arguments to avoid the 'never' type error.
+   * Prisma will automatically look for DATABASE_URL in the environment.
    */
-  const prisma = new PrismaClient({
-    datasource: {
-      db: {
-        url: process.env.DATABASE_URL,
-      },
-    },
-    log: ['error', 'warn'],
-  })
+  const prisma = new PrismaClient()
 
   try {
     console.log('🌱 Seeding database...')
@@ -187,7 +176,6 @@ async function main() {
     console.log('✨ Seeding completed!')
   } catch (error) {
     console.error('❌ Seeding error:', error)
-    // Don't re-throw here so the finally block can disconnect properly
   } finally {
     await prisma.$disconnect()
   }
@@ -195,6 +183,6 @@ async function main() {
 
 main()
   .catch((e) => {
-    console.error('❌ Fatal error in main:', e)
+    console.error(e)
     process.exit(1)
   })
