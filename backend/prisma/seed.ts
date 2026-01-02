@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs'
 console.log('🚀 Script started...');
 
 async function main() {
+  console.log('🏁 Entering main function...');
   // Initializing inside main ensures environment variables are loaded first
   const prisma = new PrismaClient()
   
