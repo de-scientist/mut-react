@@ -1,4 +1,4 @@
-import app from './app.js'
+import app from './app.ts'
 import env from './config/env.js'
 
 const server = app.listen(env.port, () => {
