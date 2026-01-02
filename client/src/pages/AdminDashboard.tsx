@@ -3,10 +3,21 @@ import { useNavigate } from 'react-router-dom'
 import { adminAPI } from '../services/api'
 import '../assets/mut/css/about.css'
 
+interface DashboardStats {
+  users: number
+  events: number
+  ministries: number
+  prayerRequests: number
+  pendingPrayerRequests: number
+  contacts: number
+  newContacts: number
+  subscriptions: number
+}
+
 const AdminDashboard = () => {
-  const [stats, setStats] = useState(null)
+  const [stats, setStats] = useState<DashboardStats | null>(null)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -16,7 +27,6 @@ const AdminDashboard = () => {
       return
     }
 
-    // quick role check from token payload (avoid unnecessary API call if not admin)
     try {
       const payload = JSON.parse(atob(token.split('.')[1]))
       if (!payload || (payload.role !== 'ADMIN' && payload.role !== 'SUPER_ADMIN')) {
@@ -24,7 +34,6 @@ const AdminDashboard = () => {
         return
       }
     } catch (e) {
-      // invalid token -> go to login
       navigate('/admin/login')
       return
     }
@@ -36,9 +45,8 @@ const AdminDashboard = () => {
     try {
       setLoading(true)
       const response = await adminAPI.getDashboardStats()
-      setStats(response.data)
-    } catch (err) {
-      // handle unauthorized / forbidden
+      setStats(response.data as DashboardStats)
+    } catch (err: any) {
       const message = err?.message || 'Failed to load dashboard'
       if (message.toLowerCase().includes('401') || message.toLowerCase().includes('403')) {
         setError('Unauthorized. Please login with an admin account.')
@@ -91,54 +99,14 @@ const AdminDashboard = () => {
           <h2 className="section-title mb-4">Statistics</h2>
           {stats && (
             <div className="row">
-              <div className="col-md-3 mb-4">
-                <div className="card text-center p-4 shadow-sm">
-                  <h3 className="text-primary">{stats.users}</h3>
-                  <p className="mb-0">Total Users</p>
-                </div>
-              </div>
-              <div className="col-md-3 mb-4">
-                <div className="card text-center p-4 shadow-sm">
-                  <h3 className="text-primary">{stats.events}</h3>
-                  <p className="mb-0">Events</p>
-                </div>
-              </div>
-              <div className="col-md-3 mb-4">
-                <div className="card text-center p-4 shadow-sm">
-                  <h3 className="text-primary">{stats.ministries}</h3>
-                  <p className="mb-0">Ministries</p>
-                </div>
-              </div>
-              <div className="col-md-3 mb-4">
-                <div className="card text-center p-4 shadow-sm">
-                  <h3 className="text-primary">{stats.prayerRequests}</h3>
-                  <p className="mb-0">Prayer Requests</p>
-                </div>
-              </div>
-              <div className="col-md-3 mb-4">
-                <div className="card text-center p-4 shadow-sm">
-                  <h3 className="text-warning">{stats.pendingPrayerRequests}</h3>
-                  <p className="mb-0">Pending Prayers</p>
-                </div>
-              </div>
-              <div className="col-md-3 mb-4">
-                <div className="card text-center p-4 shadow-sm">
-                  <h3 className="text-primary">{stats.contacts}</h3>
-                  <p className="mb-0">Contact Submissions</p>
-                </div>
-              </div>
-              <div className="col-md-3 mb-4">
-                <div className="card text-center p-4 shadow-sm">
-                  <h3 className="text-warning">{stats.newContacts}</h3>
-                  <p className="mb-0">New Contacts</p>
-                </div>
-              </div>
-              <div className="col-md-3 mb-4">
-                <div className="card text-center p-4 shadow-sm">
-                  <h3 className="text-primary">{stats.subscriptions}</h3>
-                  <p className="mb-0">Newsletter Subscribers</p>
-                </div>
-              </div>
+              <StatCard label="Total Users" value={stats.users} color="text-primary" />
+              <StatCard label="Events" value={stats.events} color="text-primary" />
+              <StatCard label="Ministries" value={stats.ministries} color="text-primary" />
+              <StatCard label="Prayer Requests" value={stats.prayerRequests} color="text-primary" />
+              <StatCard label="Pending Prayers" value={stats.pendingPrayerRequests} color="text-warning" />
+              <StatCard label="Contact Submissions" value={stats.contacts} color="text-primary" />
+              <StatCard label="New Contacts" value={stats.newContacts} color="text-warning" />
+              <StatCard label="Newsletter Subscribers" value={stats.subscriptions} color="text-primary" />
             </div>
           )}
         </div>
@@ -147,6 +115,20 @@ const AdminDashboard = () => {
   )
 }
 
+// Small reusable card component for stats
+interface StatCardProps {
+  label: string
+  value: number
+  color?: string
+}
+
+const StatCard: React.FC<StatCardProps> = ({ label, value, color }) => (
+  <div className="col-md-3 mb-4">
+    <div className="card text-center p-4 shadow-sm">
+      <h3 className={color || 'text-primary'}>{value}</h3>
+      <p className="mb-0">{label}</p>
+    </div>
+  </div>
+)
+
 export default AdminDashboard
-
-
