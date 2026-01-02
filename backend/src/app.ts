@@ -13,7 +13,7 @@ import ministryRoutes from './routes/ministryRoutes.ts'
 import prayerRoutes from './routes/prayerRoutes.ts'
 import contactRoutes from './routes/contactRoutes.ts'
 import newsletterRoutes from './routes/newsletterRoutes.ts'
-import adminRoutes from './routes/adminRoutes.js'
+import adminRoutes from './routes/adminRoutes.ts'
 
 const app = express()
 
