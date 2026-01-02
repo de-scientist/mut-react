@@ -43,10 +43,33 @@ const GalleryPage = () => {
     return () => window.removeEventListener('keydown', onKey)
   }, [index, showNext, showPrev])
 
+  const downloadAll = async () => {
+    // sequentially trigger downloads to avoid popup blocking
+    for (let i = 0; i < images.length; i++) {
+      const img = images[i]
+      const a = document.createElement('a')
+      a.href = img.src
+      a.download = img.src.split('/').pop() || `image-${i + 1}`
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      // small delay between downloads
+      await new Promise((r) => setTimeout(r, 300))
+    }
+  }
+
   return (
     <div className="gallery-page container py-5">
-      <h1 className="mb-4">Gallery</h1>
-      <p className="lead mb-4">Images from MUTCU fellowships, events, and outreach activities.</p>
+      <div className="d-flex align-items-center justify-content-between mb-4">
+        <div>
+          <h1 className="mb-0">Gallery</h1>
+          <p className="lead mb-0 text-muted">Images from MUTCU fellowships, events, and outreach activities.</p>
+        </div>
+        <div className="text-end">
+          <a href="/admin/login" className="btn btn-outline-secondary me-2">Admin</a>
+          <button className="btn btn-primary" onClick={downloadAll} aria-label="Download all images">Download All</button>
+        </div>
+      </div>
 
       <div className="row">
         {images.map((img, i) => (
