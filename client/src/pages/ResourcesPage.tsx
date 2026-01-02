@@ -37,13 +37,10 @@ const ResourcesPage = () => {
           setResources(fallbackResources)
         }
       } catch (err: any) {
-        // If 404 or endpoint missing, show fallback content instead of failing
-        const status = err?.status
-        if (status === 404) {
-          setResources(fallbackResources)
-        } else {
-          setError(err?.message || 'Failed to load resources')
-        }
+        // On any fetch error, fall back to built-in mock resources (do not break the page)
+        console.error('Resources fetch failed, using fallback:', err)
+        setResources(fallbackResources)
+        setError(null)
       } finally {
         if (mounted) setLoading(false)
       }
