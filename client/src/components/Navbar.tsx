@@ -59,6 +59,11 @@ const Navbar = () => {
                 Contact
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink to="/admin/login" className="nav-link btn btn-sm btn-outline-light ms-2" style={{ padding: '6px 10px' }}>
+                Admin
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>
