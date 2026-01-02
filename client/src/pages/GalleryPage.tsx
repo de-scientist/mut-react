@@ -51,14 +51,22 @@ const GalleryPage = () => {
       <div className="row">
         {images.map((img, i) => (
           <div className="col-6 col-sm-4 col-md-3 mb-4" key={img.src}>
-            <button
-              className="card p-0 border-0 shadow-sm"
-              style={{ cursor: 'pointer' }}
-              onClick={() => openAt(i)}
-              aria-label={`Open image ${i + 1}`}
-            >
-              <img src={img.src} alt={img.alt || `Image ${i + 1}`} className="img-fluid rounded" />
-            </button>
+            <div className="card p-0 border-0 shadow-sm">
+              <button
+                className="p-0 border-0 bg-transparent"
+                style={{ cursor: 'pointer', width: '100%' }}
+                onClick={() => openAt(i)}
+                aria-label={`Open image ${i + 1}`}
+              >
+                <img src={img.src} alt={img.alt || `Image ${i + 1}`} className="img-fluid rounded-top" />
+              </button>
+              <div className="card-body p-2 d-flex justify-content-between align-items-center">
+                <small className="text-muted">{img.alt}</small>
+                <a href={img.src} download={img.src.split('/').pop()} className="btn btn-sm btn-outline-primary">
+                  Download
+                </a>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -78,7 +86,7 @@ const GalleryPage = () => {
           }}
           onClick={close}
         >
-          <div style={{ maxWidth: '95%', maxHeight: '95%', position: 'relative' }} onClick={(e) => e.stopPropagation()}>
+            <div style={{ maxWidth: '95%', maxHeight: '95%', position: 'relative' }} onClick={(e) => e.stopPropagation()}>
             <img
               src={images[index].src}
               alt={images[index].alt}
@@ -92,6 +100,15 @@ const GalleryPage = () => {
             >
               ×
             </button>
+
+            <a
+              href={images[index].src}
+              download={images[index].src.split('/').pop()}
+              className="btn btn-sm btn-light"
+              style={{ position: 'absolute', right: 60, top: 10, color: '#000' }}
+            >
+              ⤓
+            </a>
 
             <button
               onClick={showPrev}
