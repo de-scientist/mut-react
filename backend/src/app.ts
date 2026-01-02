@@ -7,7 +7,7 @@ import env from './config/env.js'
 import errorHandler from './middlewares/errorHandler.js'
 
 // Import routes
-import authRoutes from './routes/authRoutes.js'
+import authRoutes from './routes/authRoutes.ts'
 import eventRoutes from './routes/eventRoutes.js'
 import ministryRoutes from './routes/ministryRoutes.js'
 import prayerRoutes from './routes/prayerRoutes.js'
