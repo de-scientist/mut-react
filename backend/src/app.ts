@@ -4,7 +4,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import rateLimit from 'express-rate-limit'
 import env from './config/env.js'
-import errorHandler from './middlewares/errorHandler.js'
+import errorHandler from './middlewares/errorHandler.ts'
 
 // Import routes
 import authRoutes from './routes/authRoutes.ts'
