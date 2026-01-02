@@ -1,24 +1,26 @@
-import 'dotenv/config'
-import { PrismaClient } from '@prisma/client'
-import bcrypt from 'bcryptjs'
+import * as dotenv from 'dotenv';
+import path from 'path';
+
+// Force load the .env file from the absolute path
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
+
+import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcryptjs';
 
 async function main() {
-  console.log('🚀 Script started...')
+  console.log('🚀 Script started...');
 
-  // Check for the environment variable
-  const url = process.env.DATABASE_URL;
-  if (!url) {
-    throw new Error('❌ DATABASE_URL is not defined in .env file');
+  // Verification step: If this is undefined, the script stops here with a clear message
+  if (!process.env.DATABASE_URL) {
+    console.error('❌ DATABASE_URL is missing from process.env');
+    return;
   }
 
-  /**
-   * We initialize without constructor arguments to avoid the 'never' type error.
-   * Prisma will automatically look for DATABASE_URL in the environment.
-   */
-  const prisma = new PrismaClient()
-
+  // Now we initialize. Since we've forced dotenv above, this should now succeed.
+  const prisma = new PrismaClient();
+  
   try {
-    console.log('🌱 Seeding database...')
+    console.log('🌱 Seeding database...');
 
     // 1. Create admin user
     const hashedPassword = await bcrypt.hash('admin123', 10)
