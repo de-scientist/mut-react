@@ -2,6 +2,8 @@ import 'dotenv/config'
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 
+console.log('🚀 Script started...');
+
 async function main() {
   // Initializing inside main ensures environment variables are loaded first
   const prisma = new PrismaClient()
