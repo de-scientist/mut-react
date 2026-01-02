@@ -11,7 +11,7 @@ import authRoutes from './routes/authRoutes.ts'
 import eventRoutes from './routes/eventRoutes.ts'
 import ministryRoutes from './routes/ministryRoutes.ts'
 import prayerRoutes from './routes/prayerRoutes.ts'
-import contactRoutes from './routes/contactRoutes.js'
+import contactRoutes from './routes/contactRoutes.ts'
 import newsletterRoutes from './routes/newsletterRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 
