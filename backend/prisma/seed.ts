@@ -2,13 +2,21 @@ import 'dotenv/config'
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
 
-console.log('🚀 Script started...');
+// 1. Check if the env is actually loaded before doing ANYTHING
+if (!process.env.DATABASE_URL) {
+  console.error('❌ ERROR: DATABASE_URL is not defined in your environment!')
+  process.exit(1)
+}
 
 async function main() {
-  console.log('🏁 Entering main function...');
-  // Initializing inside main ensures environment variables are loaded first
-  const prisma = new PrismaClient()
-  
+  console.log('🚀 Script started...')
+  console.log('🔗 Connecting to:', process.env.DATABASE_URL.split('@')[1]) // Log host for safety
+
+  // 2. Initialize with explicit logging to catch the "silent" crash
+  const prisma = new PrismaClient({
+    log: ['error', 'warn'],
+  })
+
   try {
     console.log('🌱 Seeding database...')
 
