@@ -37,7 +37,7 @@ const AdminLogin = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label className="form-label">Email</label>
-              <input className="form-control"  value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input className="form-control" title='log' value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className="mb-3">
               <label className="form-label">Password</label>
