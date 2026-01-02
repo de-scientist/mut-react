@@ -211,6 +211,11 @@ export const adminAPI = {
   getDashboardStats: () => apiRequest('/admin/dashboard'),
 }
 
+// Resources API (optional backend support)
+export const resourcesAPI = {
+  getAll: () => apiRequest('/resources'),
+}
+
 export default {
   auth: authAPI,
   events: eventsAPI,
@@ -219,6 +224,7 @@ export default {
   contact: contactAPI,
   newsletter: newsletterAPI,
   admin: adminAPI,
+  resources: resourcesAPI,
 }
 
 
