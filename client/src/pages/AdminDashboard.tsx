@@ -12,7 +12,20 @@ const AdminDashboard = () => {
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (!token) {
-      navigate('/contact')
+      navigate('/admin/login')
+      return
+    }
+
+    // quick role check from token payload (avoid unnecessary API call if not admin)
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]))
+      if (!payload || (payload.role !== 'ADMIN' && payload.role !== 'SUPER_ADMIN')) {
+        navigate('/admin/login')
+        return
+      }
+    } catch (e) {
+      // invalid token -> go to login
+      navigate('/admin/login')
       return
     }
 
@@ -25,7 +38,14 @@ const AdminDashboard = () => {
       const response = await adminAPI.getDashboardStats()
       setStats(response.data)
     } catch (err) {
-      setError(err.message || 'Failed to load dashboard')
+      // handle unauthorized / forbidden
+      const message = err?.message || 'Failed to load dashboard'
+      if (message.toLowerCase().includes('401') || message.toLowerCase().includes('403')) {
+        setError('Unauthorized. Please login with an admin account.')
+        navigate('/admin/login')
+        return
+      }
+      setError(message || 'Failed to load dashboard')
       console.error('Dashboard error:', err)
     } finally {
       setLoading(false)

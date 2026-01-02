@@ -25,7 +25,10 @@ async function apiRequest(endpoint: string, options: RequestInit = {}) {
     const data = await response.json()
 
     if (!response.ok) {
-      throw new Error(data.message || data.error || 'Request failed')
+      const err: any = new Error(data.message || data.error || 'Request failed')
+      err.status = response.status
+      err.data = data
+      throw err
     }
 
     return data

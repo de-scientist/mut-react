@@ -8,6 +8,7 @@ import ContactPage from './pages/ContactPage'
 import ResourcesPage from './pages/ResourcesPage'
 import GalleryPage from './pages/GalleryPage'
 import AdminDashboard from './pages/AdminDashboard'
+import AdminLogin from './pages/AdminLogin'
 
 // Ministry detail pages
 import MusicMinistryPage from './pages/ministries/MusicMinistryPage'
@@ -47,6 +48,7 @@ function App() {
         <Route path="resources" element={<ResourcesPage />} />
         <Route path="gallery" element={<GalleryPage />} />
         <Route path="admin" element={<AdminDashboard />} />
+        <Route path="admin/login" element={<AdminLogin />} />
 
         {/* Ministry detail routes */}
         <Route path="ministries/music-ministry" element={<MusicMinistryPage />} />
