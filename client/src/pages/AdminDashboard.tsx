@@ -21,15 +21,16 @@ const AdminDashboard = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (!token) {
-      navigate('/admin/login')
-      return
-    }
+  const token = localStorage.getItem('token')
+  if (!token) {
+    navigate('/admin/login')
+    return
+  }
 
-    // Just fetch stats — backend handles admin validation
-    fetchStats()
-  }, [navigate])
+  // Just fetch stats — backend enforces admin role
+  fetchStats()
+}, [navigate])
+
 
   const fetchStats = async () => {
     try {
