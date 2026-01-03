@@ -22,7 +22,7 @@ const AdminLogin = () => {
     if (!token) throw new Error('Login did not return a token')
 
     localStorage.setItem('token', token)
-
+    console.log('Login response:', response)
     // redirect to admin dashboard
     navigate('/admin')
   } catch (err: any) {
@@ -57,5 +57,6 @@ const AdminLogin = () => {
     </div>
   )
 }
+
 
 export default AdminLogin
