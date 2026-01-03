@@ -33,26 +33,23 @@ const AdminDashboard = () => {
 
 
   const fetchStats = async () => {
-    try {
-      setLoading(true)
-      const response = await adminAPI.getDashboardStats()
-      setStats(response.data as DashboardStats)
-    } catch (err: any) {
-      const message = err?.message || 'Failed to load dashboard'
-
-      // If backend returns 401 or 403, redirect to login
-      if (err.status === 401 || err.status === 403) {
-        localStorage.removeItem('token') // optional: clear invalid token
-        navigate('/admin/login')
-        return
-      }
-
-      setError(message)
-      console.error('Dashboard error:', err)
-    } finally {
-      setLoading(false)
+  try {
+    setLoading(true)
+    const response = await adminAPI.getDashboardStats()
+    setStats(response.data || response) // some backends wrap in data
+  } catch (err: any) {
+    if (err.status === 401 || err.status === 403) {
+      localStorage.removeItem('token')
+      navigate('/admin/login')
+      return
     }
+    setError(err.message || 'Failed to load dashboard')
+    console.error('Dashboard error:', err)
+  } finally {
+    setLoading(false)
   }
+}
+
 
   const handleLogout = () => {
     localStorage.removeItem('token')
