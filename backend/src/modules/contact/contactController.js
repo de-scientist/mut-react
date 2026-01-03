@@ -1,7 +1,9 @@
-const prisma = require('../../config/database')
+const db = require('../../config/drizzle')
+const { contactSubmissions } = require('../../db/schema')
 const { successResponse, errorResponse, paginatedResponse } = require('../../utils/response')
 const { getPaginationParams, getPaginationMeta } = require('../../utils/pagination')
 const { z } = require('zod')
+const { eq } = require('drizzle-orm')
 
 // Validation schemas
 const createContactSchema = z.object({
@@ -20,15 +22,13 @@ const createContact = async (req, res) => {
   try {
     const { name, email, subject, message } = req.body
 
-    const contact = await prisma.contactSubmission.create({
-      data: {
-        name,
-        email,
-        subject,
-        message,
-        status: 'NEW',
-      },
-    })
+    const [contact] = await db.insert(contactSubmissions).values({
+      name,
+      email,
+      subject,
+      message,
+      status: 'NEW',
+    }).returning()
 
     return successResponse(res, contact, 'Contact form submitted successfully', 201)
   } catch (error) {
@@ -45,20 +45,15 @@ const getContacts = async (req, res) => {
     const { page, limit, skip } = getPaginationParams(req.query)
     const { status } = req.query
 
-    const where = {}
+    const whereClauses = []
     if (status) {
-      where.status = status
+      whereClauses.push(eq(contactSubmissions.status, status))
     }
 
-    const [contacts, total] = await Promise.all([
-      prisma.contactSubmission.findMany({
-        where,
-        skip,
-        take: limit,
-        orderBy: { createdAt: 'desc' },
-      }),
-      prisma.contactSubmission.count({ where }),
-    ])
+    const q = db.select().from(contactSubmissions)
+    const itemsQuery = whereClauses.length ? q.where(...whereClauses).limit(limit).offset(skip) : q.limit(limit).offset(skip)
+    const contacts = await itemsQuery
+    const total = contacts.length
 
     const pagination = getPaginationMeta(total, page, limit)
 
@@ -81,10 +76,8 @@ const updateContactStatus = async (req, res) => {
       return errorResponse(res, 'Invalid status', 400)
     }
 
-    const contact = await prisma.contactSubmission.update({
-      where: { id },
-      data: { status },
-    })
+    const updatedArr = await db.update(contactSubmissions).set({ status }).where(eq(contactSubmissions.id, id)).returning()
+    const contact = updatedArr[0]
 
     return successResponse(res, contact, 'Contact status updated successfully')
   } catch (error) {
