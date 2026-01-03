@@ -1,7 +1,9 @@
-const prisma = require('../../config/database')
+const db = require('../../config/drizzle')
+const { prayerRequests } = require('../../db/schema')
 const { successResponse, errorResponse, paginatedResponse } = require('../../utils/response')
 const { getPaginationParams, getPaginationMeta } = require('../../utils/pagination')
 const { z } = require('zod')
+const { eq } = require('drizzle-orm')
 
 // Validation schemas
 const createPrayerRequestSchema = z.object({
@@ -19,13 +21,11 @@ const createPrayerRequest = async (req, res) => {
   try {
     const { name, request, isPublic } = req.body
 
-    const prayerRequest = await prisma.prayerRequest.create({
-      data: {
-        name: name || null,
-        request,
-        isPublic: isPublic || false,
-      },
-    })
+    const [prayerRequest] = await db.insert(prayerRequests).values({
+      name: name || null,
+      request,
+      isPublic: isPublic || false,
+    }).returning()
 
     return successResponse(res, prayerRequest, 'Prayer request submitted successfully', 201)
   } catch (error) {
@@ -42,20 +42,15 @@ const getPrayerRequests = async (req, res) => {
     const { page, limit, skip } = getPaginationParams(req.query)
     const { status } = req.query
 
-    const where = {}
+    const whereClauses = []
     if (status) {
-      where.status = status
+      whereClauses.push(eq(prayerRequests.status, status))
     }
 
-    const [requests, total] = await Promise.all([
-      prisma.prayerRequest.findMany({
-        where,
-        skip,
-        take: limit,
-        orderBy: { createdAt: 'desc' },
-      }),
-      prisma.prayerRequest.count({ where }),
-    ])
+    const q = db.select().from(prayerRequests)
+    const itemsQuery = whereClauses.length ? q.where(...whereClauses).limit(limit).offset(skip) : q.limit(limit).offset(skip)
+    const requests = await itemsQuery
+    const total = requests.length
 
     const pagination = getPaginationMeta(total, page, limit)
 
@@ -78,10 +73,8 @@ const updatePrayerRequestStatus = async (req, res) => {
       return errorResponse(res, 'Invalid status', 400)
     }
 
-    const prayerRequest = await prisma.prayerRequest.update({
-      where: { id },
-      data: { status },
-    })
+    const updatedArr = await db.update(prayerRequests).set({ status }).where(eq(prayerRequests.id, id)).returning()
+    const prayerRequest = updatedArr[0]
 
     return successResponse(res, prayerRequest, 'Prayer request status updated successfully')
   } catch (error) {
