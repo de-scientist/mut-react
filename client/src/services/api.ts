@@ -208,7 +208,7 @@ export const newsletterAPI = {
 
 // Admin API
 export const adminAPI = {
-  getDashboardStats: () => apiRequest('/dashboard'),
+  getDashboardStats: () => apiRequest('/admin/dashboard'),
 }
 
 // Resources API (optional backend support)
