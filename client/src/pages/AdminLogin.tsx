@@ -11,22 +11,27 @@ const AdminLogin = () => {
   const navigate = useNavigate()
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    setError(null)
-    try {
-      setLoading(true)
-      const response = await authAPI.login({ email, password })
-      // backend returns token in data.token or data
-      const token = response.data?.token || response.token || response?.accessToken || null
-      if (!token) throw new Error('Login did not return a token')
-      localStorage.setItem('token', token)
-      navigate('/admin')
-    } catch (err: any) {
-      setError(err.message || 'Login failed')
-    } finally {
-      setLoading(false)
-    }
+  e.preventDefault()
+  setError(null)
+  try {
+    setLoading(true)
+    const response = await authAPI.login({ email, password })
+
+    // Since apiRequest returns parsed JSON, token should be at response.token or response.accessToken
+    const token = response.token || response.accessToken
+    if (!token) throw new Error('Login did not return a token')
+
+    localStorage.setItem('token', token)
+
+    // redirect to admin dashboard
+    navigate('/admin')
+  } catch (err: any) {
+    setError(err.message || 'Login failed')
+  } finally {
+    setLoading(false)
   }
+}
+
 
   return (
     <div className="container py-5">
