@@ -5,6 +5,7 @@ import path from 'path';
 dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
 import bcrypt from 'bcryptjs';
+import { randomUUID } from 'crypto'
 import { db, pool } from '../src/config/drizzle'
 import { users, ministries, events as eventsTable, executiveMembers } from '../src/db/schema'
 import { eq } from 'drizzle-orm'
@@ -24,10 +25,13 @@ async function main() {
     const existingAdmin = await db.select().from(users).where(eq(users.email, 'admin@mutcu.ac.ke')).limit(1)
     if (!existingAdmin[0]) {
       await db.insert(users).values({
+        id: randomUUID(),
         email: 'admin@mutcu.ac.ke',
         password: hashedPassword,
         name: 'Admin User',
         role: 'ADMIN',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }).returning()
       console.log('✅ Admin user created: admin@mutcu.ac.ke')
     } else {
@@ -49,7 +53,7 @@ async function main() {
     for (const ministry of ministriesData) {
       const existing = await db.select().from(ministries).where(eq(ministries.slug, ministry.slug)).limit(1)
       if (!existing[0]) {
-        await db.insert(ministries).values(ministry).returning()
+        await db.insert(ministries).values({ id: randomUUID(), ...ministry, createdAt: new Date(), updatedAt: new Date() }).returning()
       }
     }
     console.log(`✅ Ensured ${ministriesData.length} ministries`)
@@ -63,7 +67,7 @@ async function main() {
     for (const ev of eventsData) {
       const existing = await db.select().from(eventsTable).where(eq(eventsTable.title, ev.title)).limit(1)
       if (!existing[0]) {
-        await db.insert(eventsTable).values(ev).returning()
+        await db.insert(eventsTable).values({ id: randomUUID(), ...ev, createdAt: new Date(), updatedAt: new Date() }).returning()
       }
     }
     console.log(`✅ Ensured ${eventsData.length} events`)
@@ -86,7 +90,7 @@ async function main() {
     for (const exec of executives) {
       const existing = await db.select().from(executiveMembers).where(eq(executiveMembers.name, exec.name)).limit(1)
       if (!existing[0]) {
-        await db.insert(executiveMembers).values(exec).returning()
+        await db.insert(executiveMembers).values({ id: randomUUID(), ...exec, createdAt: new Date(), updatedAt: new Date() }).returning()
       }
     }
     console.log(`✅ Ensured ${executives.length} executive members`)
