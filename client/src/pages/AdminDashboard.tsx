@@ -27,17 +27,7 @@ const AdminDashboard = () => {
       return
     }
 
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1]))
-      if (!payload || (payload.role !== 'ADMIN' && payload.role !== 'SUPER_ADMIN')) {
-        navigate('/admin/login')
-        return
-      }
-    } catch (e) {
-      navigate('/admin/login')
-      return
-    }
-
+    // Just fetch stats — backend handles admin validation
     fetchStats()
   }, [navigate])
 
@@ -48,12 +38,15 @@ const AdminDashboard = () => {
       setStats(response.data as DashboardStats)
     } catch (err: any) {
       const message = err?.message || 'Failed to load dashboard'
-      if (message.toLowerCase().includes('401') || message.toLowerCase().includes('403')) {
-        setError('Unauthorized. Please login with an admin account.')
+
+      // If backend returns 401 or 403, redirect to login
+      if (err.status === 401 || err.status === 403) {
+        localStorage.removeItem('token') // optional: clear invalid token
         navigate('/admin/login')
         return
       }
-      setError(message || 'Failed to load dashboard')
+
+      setError(message)
       console.error('Dashboard error:', err)
     } finally {
       setLoading(false)
