@@ -1,6 +1,8 @@
-import prisma from '../../config/database.js'
+import db from '../../config/drizzle.js'
+import { newsletterSubscriptions } from '../../db/schema.js'
 import { successResponse, errorResponse, paginatedResponse } from '../../utils/response.js'
 import { getPaginationParams, getPaginationMeta } from '../../utils/pagination.js'
+import { eq } from 'drizzle-orm'
 import { z } from 'zod'
 import type { Request, Response } from 'express'
 
@@ -19,30 +21,21 @@ export const subscribe = async (req: Request, res: Response) => {
     const { email } = req.body
 
     // Check if already subscribed
-    const existing = await prisma.newsletterSubscription.findUnique({
-      where: { email },
-    })
+    const existingArr = await db.select().from(newsletterSubscriptions).where(eq(newsletterSubscriptions.email, email)).limit(1)
+    const existing = existingArr[0]
 
     if (existing) {
       if (existing.isActive) {
         return errorResponse(res, 'Email already subscribed', 409)
       } else {
         // Reactivate subscription
-        const subscription = await prisma.newsletterSubscription.update({
-          where: { email },
-          data: { isActive: true },
-        })
+        const [subscription] = await db.update(newsletterSubscriptions).set({ isActive: true }).where(eq(newsletterSubscriptions.email, email)).returning()
         return successResponse(res, subscription, 'Subscription reactivated successfully')
       }
     }
 
     // Create new subscription
-    const subscription = await prisma.newsletterSubscription.create({
-      data: {
-        email,
-        isActive: true,
-      },
-    })
+    const [subscription] = await db.insert(newsletterSubscriptions).values({ email, isActive: true }).returning()
 
     return successResponse(res, subscription, 'Subscribed successfully', 201)
   } catch (error) {
@@ -58,10 +51,7 @@ export const unsubscribe = async (req: Request, res: Response) => {
   try {
     const { email } = req.body
 
-    const subscription = await prisma.newsletterSubscription.update({
-      where: { email },
-      data: { isActive: false },
-    })
+    const [subscription] = await db.update(newsletterSubscriptions).set({ isActive: false }).where(eq(newsletterSubscriptions.email, email)).returning()
 
     return successResponse(res, subscription, 'Unsubscribed successfully')
   } catch (error: any) {
@@ -81,20 +71,15 @@ export const getSubscriptions = async (req: Request, res: Response) => {
     const { page, limit, skip } = getPaginationParams(req.query)
     const { active } = req.query
 
-    const where: any = {}
+    const whereClauses: any[] = []
     if (active === 'true') {
-      where.isActive = true
+      whereClauses.push(eq(newsletterSubscriptions.isActive, true))
     }
 
-    const [subscriptions, total] = await Promise.all([
-      prisma.newsletterSubscription.findMany({
-        where,
-        skip,
-        take: limit,
-        orderBy: { createdAt: 'desc' },
-      }),
-      prisma.newsletterSubscription.count({ where }),
-    ])
+    const q = db.select().from(newsletterSubscriptions)
+    const itemsQuery = whereClauses.length ? q.where(...whereClauses).limit(limit).offset(skip) : q.limit(limit).offset(skip)
+    const subscriptions = await itemsQuery
+    const total = subscriptions.length
 
     const pagination = getPaginationMeta(total, page, limit)
 
