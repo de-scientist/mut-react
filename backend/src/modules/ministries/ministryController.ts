@@ -1,6 +1,8 @@
-import prisma from '../../config/database.js'
+import db from '../../config/drizzle.js'
+import { ministries } from '../../db/schema.js'
 import { successResponse, errorResponse, paginatedResponse } from '../../utils/response.js'
 import { getPaginationParams, getPaginationMeta } from '../../utils/pagination.js'
+import { eq } from 'drizzle-orm'
 import { z } from 'zod'
 import type { Request, Response } from 'express'
 
@@ -22,15 +24,13 @@ export const getMinistries = async (req: Request, res: Response) => {
   try {
     const { active } = req.query
 
-    const where: any = {}
+    const whereClauses: any[] = []
     if (active === 'true') {
-      where.isActive = true
+      whereClauses.push(eq(ministries.isActive, true))
     }
 
-    const ministries = await prisma.ministry.findMany({
-      where,
-      orderBy: { name: 'asc' },
-    })
+    const q = db.select().from(ministries)
+    const ministriesList = whereClauses.length ? await q.where(...whereClauses).orderBy(ministries.name).all() : await q.orderBy(ministries.name).all()
 
     return successResponse(res, ministries, 'Ministries retrieved successfully')
   } catch (error) {
@@ -46,9 +46,8 @@ export const getMinistry = async (req: Request, res: Response) => {
   try {
     const { slug } = req.params
 
-    const ministry = await prisma.ministry.findUnique({
-      where: { slug },
-    })
+    const arr = await db.select().from(ministries).where(eq(ministries.slug, slug)).limit(1)
+    const ministry = arr[0]
 
     if (!ministry) {
       return errorResponse(res, 'Ministry not found', 404)
@@ -68,15 +67,13 @@ export const createMinistry = async (req: Request, res: Response) => {
   try {
     const { name, description, icon, imageUrl, slug } = req.body
 
-    const ministry = await prisma.ministry.create({
-      data: {
-        name,
-        description,
-        icon,
-        imageUrl,
-        slug,
-      },
-    })
+    const [ministry] = await db.insert(ministries).values({
+      name,
+      description,
+      icon,
+      imageUrl,
+      slug,
+    }).returning()
 
     return successResponse(res, ministry, 'Ministry created successfully', 201)
   } catch (error) {
@@ -93,10 +90,8 @@ export const updateMinistry = async (req: Request, res: Response) => {
     const { slug } = req.params
     const updateData = { ...req.body }
 
-    const ministry = await prisma.ministry.update({
-      where: { slug },
-      data: updateData,
-    })
+    const updatedArr = await db.update(ministries).set(updateData).where(eq(ministries.slug, slug)).returning()
+    const ministry = updatedArr[0]
 
     return successResponse(res, ministry, 'Ministry updated successfully')
   } catch (error: any) {
@@ -115,9 +110,7 @@ export const deleteMinistry = async (req: Request, res: Response) => {
   try {
     const { slug } = req.params
 
-    await prisma.ministry.delete({
-      where: { slug },
-    })
+    await db.delete(ministries).where(eq(ministries.slug, slug)).returning()
 
     return successResponse(res, null, 'Ministry deleted successfully')
   } catch (error: any) {
