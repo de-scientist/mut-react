@@ -6,32 +6,36 @@ import '../assets/mut/css/about.css'
 const AdminLogin = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleSubmit = async (e: FormEvent) => {
-  e.preventDefault()
-  setError(null)
-  try {
-    setLoading(true)
-    const response = await authAPI.login({ email, password })
+    e.preventDefault()
+    setError(null)
+    try {
+      setLoading(true)
+      const response = await authAPI.login({ email, password })
 
-    // Since apiRequest returns parsed JSON, token should be at response.token or response.accessToken
-    const token = response.token || response.accessToken
-    if (!token) throw new Error('Login did not return a token')
+      // Debug: log full response to inspect token location
+      console.log('Login response:', response)
 
-    localStorage.setItem('token', token)
-    console.log('Login response:', response)
-    // redirect to admin dashboard
-    navigate('/admin')
-  } catch (err: any) {
-    setError(err.message || 'Login failed')
-  } finally {
-    setLoading(false)
+      // Robust token extraction
+      const token =
+        response.token || response.accessToken || response.data?.token
+
+      if (!token) throw new Error('Login did not return a token')
+
+      // Store token and redirect to admin dashboard
+      localStorage.setItem('token', token)
+      navigate('/admin')
+    } catch (err: any) {
+      // Show friendly error message
+      setError(err?.message || 'Login failed. Please check your credentials.')
+    } finally {
+      setLoading(false)
+    }
   }
-}
-
 
   return (
     <div className="container py-5">
@@ -42,11 +46,25 @@ const AdminLogin = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label className="form-label">Email</label>
-              <input className="form-control" title='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input
+                type="email"
+                className="form-control"
+                title="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
             <div className="mb-3">
               <label className="form-label">Password</label>
-              <input type="password" className="form-control" title="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <input
+                type="password"
+                className="form-control"
+                title="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
             </div>
             <button className="btn btn-primary" disabled={loading}>
               {loading ? 'Signing in...' : 'Sign in'}
@@ -57,6 +75,5 @@ const AdminLogin = () => {
     </div>
   )
 }
-
 
 export default AdminLogin
