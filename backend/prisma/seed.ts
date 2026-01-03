@@ -95,7 +95,7 @@ async function main() {
   } catch (error) {
     console.error('❌ Seeding error:', error)
   } finally {
-    await pool.end()
+    // Do not end the pool here; `drizzle` config handles pool shutdown on process exit.
   }
 }
 

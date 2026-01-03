@@ -14,9 +14,9 @@ export const users = pgTable('users', {
   password: text('password').notNull(),
   name: text('name'),
   role: text('role').default('USER'),
-  isActive: boolean('is_active').default(true),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  isActive: boolean('isActive').default(true),
+  createdAt: timestamp('createdAt').defaultNow().notNull(),
+  updatedAt: timestamp('updatedAt').defaultNow().notNull(),
 })
 
 export const events = pgTable('events', {
@@ -26,10 +26,10 @@ export const events = pgTable('events', {
   date: timestamp('date').notNull(),
   time: text('time'),
   location: text('location'),
-  imageUrl: text('image_url'),
-  isActive: boolean('is_active').default(true),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  imageUrl: text('imageUrl'),
+  isActive: boolean('isActive').default(true),
+  createdAt: timestamp('createdAt').defaultNow().notNull(),
+  updatedAt: timestamp('updatedAt').defaultNow().notNull(),
 })
 
 export const ministries = pgTable('ministries', {
@@ -37,11 +37,11 @@ export const ministries = pgTable('ministries', {
   name: text('name').notNull(),
   description: text('description'),
   icon: text('icon'),
-  imageUrl: text('image_url'),
+  imageUrl: text('imageUrl'),
   slug: text('slug').notNull(),
-  isActive: boolean('is_active').default(true),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  isActive: boolean('isActive').default(true),
+  createdAt: timestamp('createdAt').defaultNow().notNull(),
+  updatedAt: timestamp('updatedAt').defaultNow().notNull(),
 })
 
 // Additional tables (prayer_requests, newsletter_subscriptions, contact_submissions, executive_members, media)
@@ -49,18 +49,18 @@ export const prayerRequests = pgTable('prayer_requests', {
   id: uuid('id').defaultRandom().primaryKey(),
   name: text('name'),
   request: text('request').notNull(),
-  isPublic: boolean('is_public').default(false),
+  isPublic: boolean('isPublic').default(false),
   status: text('status').default('PENDING'),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  createdAt: timestamp('createdAt').defaultNow().notNull(),
+  updatedAt: timestamp('updatedAt').defaultNow().notNull(),
 })
 
 export const newsletterSubscriptions = pgTable('newsletter_subscriptions', {
   id: uuid('id').defaultRandom().primaryKey(),
   email: text('email').notNull(),
-  isActive: boolean('is_active').default(true),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  isActive: boolean('isActive').default(true),
+  createdAt: timestamp('createdAt').defaultNow().notNull(),
+  updatedAt: timestamp('updatedAt').defaultNow().notNull(),
 })
 
 export const contactSubmissions = pgTable('contact_submissions', {
@@ -70,31 +70,31 @@ export const contactSubmissions = pgTable('contact_submissions', {
   subject: text('subject').notNull(),
   message: text('message').notNull(),
   status: text('status').default('NEW'),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  createdAt: timestamp('createdAt').defaultNow().notNull(),
+  updatedAt: timestamp('updatedAt').defaultNow().notNull(),
 })
 
 export const executiveMembers = pgTable('executive_members', {
   id: uuid('id').defaultRandom().primaryKey(),
   name: text('name').notNull(),
   role: text('role').notNull(),
-  imageUrl: text('image_url'),
+  imageUrl: text('imageUrl'),
   bio: text('bio'),
   email: text('email'),
   phone: text('phone'),
   order: integer('order').default(0),
-  isActive: boolean('is_active').default(true),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  isActive: boolean('isActive').default(true),
+  createdAt: timestamp('createdAt').defaultNow().notNull(),
+  updatedAt: timestamp('updatedAt').defaultNow().notNull(),
 })
 
 export const media = pgTable('media', {
   id: uuid('id').defaultRandom().primaryKey(),
   title: text('title'),
   description: text('description'),
-  imageUrl: text('image_url').notNull(),
+  imageUrl: text('imageUrl').notNull(),
   category: text('category'),
-  isActive: boolean('is_active').default(true),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  isActive: boolean('isActive').default(true),
+  createdAt: timestamp('createdAt').defaultNow().notNull(),
+  updatedAt: timestamp('updatedAt').defaultNow().notNull(),
 })
