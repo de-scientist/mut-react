@@ -37,6 +37,7 @@ const AdminDashboard = () => {
     setLoading(true)
     const response = await adminAPI.getDashboardStats()
     setStats(response.data || response) // some backends wrap in data
+    console.log('Dashboard stats response:', response)
   } catch (err: any) {
     if (err.status === 401 || err.status === 403) {
       localStorage.removeItem('token')
@@ -45,6 +46,7 @@ const AdminDashboard = () => {
     }
     setError(err.message || 'Failed to load dashboard')
     console.error('Dashboard error:', err)
+    
   } finally {
     setLoading(false)
   }
