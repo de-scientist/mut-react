@@ -41,11 +41,11 @@ const Register = () => {
             </div>
             <div className="mb-3">
               <label className="form-label">Email</label>
-              <input className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input className="form-control" title='email' value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className="mb-3">
               <label className="form-label">Password</label>
-              <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <input type="password" title='password' className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
             <button className="btn btn-primary" disabled={loading}>{loading ? 'Registering...' : 'Register'}</button>
           </form>
