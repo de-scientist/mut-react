@@ -13,11 +13,12 @@ const AdminLogin = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setError(null)
+
     try {
       setLoading(true)
       const response = await authAPI.login({ email, password })
 
-      // Debug: log full response to inspect token location
+      // Debug: log full response to inspect structure
       console.log('Login response:', response)
 
       // Robust token extraction
@@ -26,11 +27,19 @@ const AdminLogin = () => {
 
       if (!token) throw new Error('Login did not return a token')
 
-      // Store token and redirect to admin dashboard
+      // Optional: check if the user is an admin
+      const userRole = response.data?.user?.role
+      if (userRole !== 'ADMIN' && userRole !== 'SUPER_ADMIN') {
+        throw new Error('Unauthorized. Admin access required.')
+      }
+
+      // Store token
       localStorage.setItem('token', token)
+
+      console.log('Login successful. Token stored. Redirecting to admin dashboard.')
       navigate('/admin')
     } catch (err: any) {
-      // Show friendly error message
+      console.error('Admin login error:', err) // Full error log for debugging
       setError(err?.message || 'Login failed. Please check your credentials.')
     } finally {
       setLoading(false)
