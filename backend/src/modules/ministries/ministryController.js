@@ -1,7 +1,9 @@
-const prisma = require('../../config/database')
+const db = require('../../config/drizzle')
+const { ministries } = require('../../db/schema')
 const { successResponse, errorResponse, paginatedResponse } = require('../../utils/response')
 const { getPaginationParams, getPaginationMeta } = require('../../utils/pagination')
 const { z } = require('zod')
+const { eq } = require('drizzle-orm')
 
 // Validation schemas
 const createMinistrySchema = z.object({
@@ -21,17 +23,15 @@ const getMinistries = async (req, res) => {
   try {
     const { active } = req.query
 
-    const where = {}
+    const whereClauses = []
     if (active === 'true') {
-      where.isActive = true
+      whereClauses.push(eq(ministries.isActive, true))
     }
 
-    const ministries = await prisma.ministry.findMany({
-      where,
-      orderBy: { name: 'asc' },
-    })
+    const q = db.select().from(ministries)
+    const ministriesList = whereClauses.length ? await q.where(...whereClauses).orderBy(ministries.name) : await q.orderBy(ministries.name)
 
-    return successResponse(res, ministries, 'Ministries retrieved successfully')
+    return successResponse(res, ministriesList, 'Ministries retrieved successfully')
   } catch (error) {
     console.error('Get ministries error:', error)
     return errorResponse(res, 'Failed to retrieve ministries', 500)
@@ -45,9 +45,8 @@ const getMinistry = async (req, res) => {
   try {
     const { slug } = req.params
 
-    const ministry = await prisma.ministry.findUnique({
-      where: { slug },
-    })
+    const arr = await db.select().from(ministries).where(eq(ministries.slug, slug)).limit(1)
+    const ministry = arr[0]
 
     if (!ministry) {
       return errorResponse(res, 'Ministry not found', 404)
@@ -67,15 +66,13 @@ const createMinistry = async (req, res) => {
   try {
     const { name, description, icon, imageUrl, slug } = req.body
 
-    const ministry = await prisma.ministry.create({
-      data: {
-        name,
-        description,
-        icon,
-        imageUrl,
-        slug,
-      },
-    })
+    const [ministry] = await db.insert(ministries).values({
+      name,
+      description,
+      icon,
+      imageUrl,
+      slug,
+    }).returning()
 
     return successResponse(res, ministry, 'Ministry created successfully', 201)
   } catch (error) {
@@ -92,10 +89,8 @@ const updateMinistry = async (req, res) => {
     const { slug } = req.params
     const updateData = { ...req.body }
 
-    const ministry = await prisma.ministry.update({
-      where: { slug },
-      data: updateData,
-    })
+    const updatedArr = await db.update(ministries).set(updateData).where(eq(ministries.slug, slug)).returning()
+    const ministry = updatedArr[0]
 
     return successResponse(res, ministry, 'Ministry updated successfully')
   } catch (error) {
@@ -114,9 +109,7 @@ const deleteMinistry = async (req, res) => {
   try {
     const { slug } = req.params
 
-    await prisma.ministry.delete({
-      where: { slug },
-    })
+    await db.delete(ministries).where(eq(ministries.slug, slug)).returning()
 
     return successResponse(res, null, 'Ministry deleted successfully')
   } catch (error) {

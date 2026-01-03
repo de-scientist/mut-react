@@ -1,9 +1,11 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const prisma = require('../../config/database')
+const db = require('../../config/drizzle')
+const { users } = require('../../db/schema')
 const { jwtSecret, jwtExpire } = require('../../config/env')
 const { successResponse, errorResponse } = require('../../utils/response')
 const { z } = require('zod')
+const { eq } = require('drizzle-orm')
 
 // Validation schemas
 const loginSchema = z.object({
@@ -29,9 +31,8 @@ const register = async (req, res) => {
     const { email, password, name } = req.body
 
     // Check if user already exists
-    const existingUser = await prisma.user.findUnique({
-      where: { email },
-    })
+    const existingArr = await db.select().from(users).where(eq(users.email, email)).limit(1)
+    const existingUser = existingArr[0]
 
     if (existingUser) {
       return errorResponse(res, 'User with this email already exists', 409)
@@ -41,21 +42,12 @@ const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10)
 
     // Create user
-    const user = await prisma.user.create({
-      data: {
-        email,
-        password: hashedPassword,
-        name,
-        role: 'USER',
-      },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        role: true,
-        createdAt: true,
-      },
-    })
+    const [user] = await db.insert(users).values({
+      email,
+      password: hashedPassword,
+      name,
+      role: 'USER',
+    }).returning({ id: users.id, email: users.email, name: users.name, role: users.role, createdAt: users.createdAt })
 
     // Generate token
     const token = jwt.sign({ userId: user.id }, jwtSecret, {
@@ -77,9 +69,8 @@ const login = async (req, res) => {
     const { email, password } = req.body
 
     // Find user
-    const user = await prisma.user.findUnique({
-      where: { email },
-    })
+    const usersArr = await db.select().from(users).where(eq(users.email, email)).limit(1)
+    const user = usersArr[0]
 
     if (!user || !user.isActive) {
       return errorResponse(res, 'Invalid credentials', 401)
@@ -117,17 +108,8 @@ const login = async (req, res) => {
  */
 const getProfile = async (req, res) => {
   try {
-    const user = await prisma.user.findUnique({
-      where: { id: req.user.id },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        role: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-    })
+    const userArr = await db.select().from(users).where(eq(users.id, req.user.id)).limit(1)
+    const user = userArr[0]
 
     return successResponse(res, user, 'Profile retrieved successfully')
   } catch (error) {

@@ -1,6 +1,8 @@
-const prisma = require('../../config/database')
+const db = require('../../config/drizzle')
+const { events } = require('../../db/schema')
 const { successResponse, errorResponse, paginatedResponse } = require('../../utils/response')
 const { getPaginationParams, getPaginationMeta } = require('../../utils/pagination')
+const { eq } = require('drizzle-orm')
 const { z } = require('zod')
 
 // Validation schemas
@@ -35,25 +37,19 @@ const getEvents = async (req, res) => {
     const { page, limit, skip } = getPaginationParams(req.query)
     const { active } = req.query
 
-    const where = {}
+    const whereClauses = []
     if (active === 'true') {
-      where.isActive = true
-      where.date = { gte: new Date() }
+      whereClauses.push(eq(events.isActive, true))
     }
 
-    const [events, total] = await Promise.all([
-      prisma.event.findMany({
-        where,
-        skip,
-        take: limit,
-        orderBy: { date: 'asc' },
-      }),
-      prisma.event.count({ where }),
-    ])
+    const q = db.select().from(events)
+    const itemsQuery = whereClauses.length ? q.where(...whereClauses).limit(limit).offset(skip) : q.limit(limit).offset(skip)
+    const eventsList = await itemsQuery
+    const total = eventsList.length
 
     const pagination = getPaginationMeta(total, page, limit)
 
-    return paginatedResponse(res, events, pagination, 'Events retrieved successfully')
+    return paginatedResponse(res, eventsList, pagination, 'Events retrieved successfully')
   } catch (error) {
     console.error('Get events error:', error)
     return errorResponse(res, 'Failed to retrieve events', 500)
@@ -67,9 +63,8 @@ const getEvent = async (req, res) => {
   try {
     const { id } = req.params
 
-    const event = await prisma.event.findUnique({
-      where: { id },
-    })
+    const arr = await db.select().from(events).where(eq(events.id, id)).limit(1)
+    const event = arr[0]
 
     if (!event) {
       return errorResponse(res, 'Event not found', 404)
@@ -89,16 +84,14 @@ const createEvent = async (req, res) => {
   try {
     const { title, description, date, time, location, imageUrl } = req.body
 
-    const event = await prisma.event.create({
-      data: {
-        title,
-        description,
-        date: new Date(date),
-        time,
-        location,
-        imageUrl,
-      },
-    })
+    const [event] = await db.insert(events).values({
+      title,
+      description,
+      date: new Date(date),
+      time,
+      location,
+      imageUrl,
+    }).returning()
 
     return successResponse(res, event, 'Event created successfully', 201)
   } catch (error) {
@@ -119,10 +112,8 @@ const updateEvent = async (req, res) => {
       updateData.date = new Date(updateData.date)
     }
 
-    const event = await prisma.event.update({
-      where: { id },
-      data: updateData,
-    })
+    const updatedArr = await db.update(events).set(updateData).where(eq(events.id, id)).returning()
+    const event = updatedArr[0]
 
     return successResponse(res, event, 'Event updated successfully')
   } catch (error) {
@@ -141,9 +132,7 @@ const deleteEvent = async (req, res) => {
   try {
     const { id } = req.params
 
-    await prisma.event.delete({
-      where: { id },
-    })
+    await db.delete(events).where(eq(events.id, id)).returning()
 
     return successResponse(res, null, 'Event deleted successfully')
   } catch (error) {
