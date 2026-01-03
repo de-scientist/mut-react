@@ -9,6 +9,7 @@ import ResourcesPage from './pages/ResourcesPage'
 import GalleryPage from './pages/GalleryPage'
 import AdminDashboard from './pages/AdminDashboard'
 import AdminLogin from './pages/AdminLogin'
+import Register from './pages/Register'
 
 // Ministry detail pages
 import MusicMinistryPage from './pages/ministries/MusicMinistryPage'
@@ -49,6 +50,7 @@ function App() {
         <Route path="gallery" element={<GalleryPage />} />
         <Route path="admin" element={<AdminDashboard />} />
         <Route path="admin/login" element={<AdminLogin />} />
+        <Route path="register" element={<Register />} />
 
         {/* Ministry detail routes */}
         <Route path="ministries/music-ministry" element={<MusicMinistryPage />} />
