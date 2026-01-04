@@ -11,6 +11,14 @@ import AdminDashboard from './pages/AdminDashboard'
 import AdminLogin from './pages/AdminLogin'
 import Register from './pages/Register'
 
+// Admin management pages
+import EventsManagement from './pages/admin/EventsManagement'
+import MinistriesManagement from './pages/admin/MinistriesManagement'
+import PrayerRequestsManagement from './pages/admin/PrayerRequestsManagement'
+import ContactSubmissionsManagement from './pages/admin/ContactSubmissionsManagement'
+import NewsletterSubscriptionsManagement from './pages/admin/NewsletterSubscriptionsManagement'
+import UsersManagement from './pages/admin/UsersManagement'
+
 // Ministry detail pages
 import MusicMinistryPage from './pages/ministries/MusicMinistryPage'
 import BibleStudyMinistryPage from './pages/ministries/BibleStudyMinistryPage'
@@ -50,6 +58,12 @@ function App() {
         <Route path="gallery" element={<GalleryPage />} />
         <Route path="admin" element={<AdminDashboard />} />
         <Route path="admin/login" element={<AdminLogin />} />
+        <Route path="admin/events" element={<EventsManagement />} />
+        <Route path="admin/ministries" element={<MinistriesManagement />} />
+        <Route path="admin/prayer-requests" element={<PrayerRequestsManagement />} />
+        <Route path="admin/contacts" element={<ContactSubmissionsManagement />} />
+        <Route path="admin/newsletter" element={<NewsletterSubscriptionsManagement />} />
+        <Route path="admin/users" element={<UsersManagement />} />
         <Route path="register" element={<Register />} />
 
         {/* Ministry detail routes */}
