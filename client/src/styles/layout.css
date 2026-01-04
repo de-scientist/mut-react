@@ -1,0 +1,120 @@
+/* Layout Width Fixes - Ensure Full Width for Navbar, Main, and Footer */
+
+/* Root HTML and Body */
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* App Root Container */
+.app-root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar - Full Width */
+.navbar {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar .container {
+  width: 100%;
+  max-width: 1320px; /* Bootstrap's default container max-width */
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Main Content - Full Width */
+main {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+/* Footer - Full Width */
+footer.footer {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 50px 0;
+  box-sizing: border-box;
+}
+
+footer.footer .container {
+  width: 100%;
+  max-width: 1320px; /* Bootstrap's default container max-width */
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Page Sections - Full Width Backgrounds */
+.page-hero-section,
+.about-section,
+.core-values-section,
+.ministries-section,
+.events-section,
+.prayer-section,
+.testimonials-section,
+.gallery-section,
+.newsletter-section,
+.contact-section {
+  width: 100%;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure container inside sections doesn't break layout */
+.page-hero-section .container,
+.about-section .container,
+.core-values-section .container,
+.ministries-section .container,
+.events-section .container,
+.prayer-section .container,
+.testimonials-section .container,
+.gallery-section .container,
+.newsletter-section .container,
+.contact-section .container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Admin Pages */
+.admin-dashboard,
+.admin-management {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.admin-dashboard .container,
+.admin-management .container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
