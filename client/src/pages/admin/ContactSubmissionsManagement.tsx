@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { contactAPI } from '../../services/api'
+import Toast from '../../components/Toast'
 
 interface ContactSubmission {
   id: string
@@ -64,8 +65,11 @@ const ContactSubmissionsManagement = () => {
       setSubmissions(
         submissions.map((s) => (s.id === id ? { ...s, status: newStatus as any } : s))
       )
+      setSuccessMessage('Contact submission status updated successfully')
+      setError(null)
     } catch (err: any) {
       setError(err.message || 'Failed to update status')
+      setSuccessMessage(null)
     }
   }
 
