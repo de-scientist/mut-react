@@ -98,3 +98,18 @@ export const media = pgTable('media', {
   createdAt: timestamp('createdAt').defaultNow().notNull(),
   updatedAt: timestamp('updatedAt').defaultNow().notNull(),
 })
+
+// Members registration table
+export const members = pgTable('members', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  name: text('name').notNull(),
+  email: text('email').notNull(),
+  yearOfStudy: text('yearOfStudy').notNull(),
+  course: text('course').notNull(),
+  ministry1: text('ministry1'),
+  ministry2: text('ministry2'),
+  message: text('message'),
+  status: text('status').default('PENDING'), // PENDING, APPROVED, REJECTED
+  createdAt: timestamp('createdAt').defaultNow().notNull(),
+  updatedAt: timestamp('updatedAt').defaultNow().notNull(),
+})
