@@ -124,14 +124,14 @@ const AdminDashboard = () => {
 
         {/* STATS CARDS GRID */}
         <section className="row g-4 mb-5">
-          <StatCard label="Total Users" value={stats.users} icon="👥" />
-          <StatCard label="Events" value={stats.events} icon="📅" />
-          <StatCard label="Ministries" value={stats.ministries} icon="⛪" />
-          <StatCard label="Prayer Requests" value={stats.prayerRequests} icon="🙏" />
-          <StatCard label="Pending Prayers" value={stats.pendingPrayerRequests} color="text-warning" icon="⏳" />
-          <StatCard label="Contact Submissions" value={stats.contacts} icon="📩" />
-          <StatCard label="New Contacts" value={stats.newContacts} color="text-warning" icon="✨" />
-          <StatCard label="Subscribers" value={stats.subscriptions} icon="📧" />
+          <StatCard label="Total Users" value={stats.users} icon="👥" link="/admin/users" />
+          <StatCard label="Events" value={stats.events} icon="📅" link="/admin/events" />
+          <StatCard label="Ministries" value={stats.ministries} icon="⛪" link="/admin/ministries" />
+          <StatCard label="Prayer Requests" value={stats.prayerRequests} icon="🙏" link="/admin/prayer-requests" />
+          <StatCard label="Pending Prayers" value={stats.pendingPrayerRequests} color="text-warning" icon="⏳" link="/admin/prayer-requests?status=PENDING" />
+          <StatCard label="Contact Submissions" value={stats.contacts} icon="📩" link="/admin/contacts" />
+          <StatCard label="New Contacts" value={stats.newContacts} color="text-warning" icon="✨" link="/admin/contacts?status=NEW" />
+          <StatCard label="Subscribers" value={stats.subscriptions} icon="📧" link="/admin/newsletter" />
         </section>
 
         {/* CHARTS SECTION */}
@@ -201,11 +201,13 @@ interface StatCardProps {
   value: number
   color?: string
   icon?: string
+  link?: string
 }
 
-const StatCard: React.FC<StatCardProps> = ({ label, value, color, icon }) => (
-  <div className="col-sm-6 col-md-4 col-xl-3">
-    <div className="card border-0 shadow-sm p-3 h-100 transition-up">
+const StatCard: React.FC<StatCardProps> = ({ label, value, color, icon, link }) => {
+  const navigate = useNavigate()
+  const cardContent = (
+    <div className="card border-0 shadow-sm p-3 h-100 transition-up" style={{ cursor: link ? 'pointer' : 'default' }}>
       <div className="d-flex align-items-center justify-content-between">
         <div>
           <p className="text-muted small fw-medium mb-1 uppercase tracking-wider">{label}</p>
@@ -214,7 +216,17 @@ const StatCard: React.FC<StatCardProps> = ({ label, value, color, icon }) => (
         <div className="fs-3 opacity-50">{icon}</div>
       </div>
     </div>
-  </div>
-)
+  )
+
+  if (link) {
+    return (
+      <div className="col-sm-6 col-md-4 col-xl-3" onClick={() => navigate(link)}>
+        {cardContent}
+      </div>
+    )
+  }
+
+  return <div className="col-sm-6 col-md-4 col-xl-3">{cardContent}</div>
+}
 
 export default AdminDashboard

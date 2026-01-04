@@ -211,6 +211,32 @@ export const adminAPI = {
   getDashboardStats: () => apiRequest('/admin/dashboard'),
 }
 
+// Users API (Admin only)
+export const usersAPI = {
+  getAll: (params: Record<string, string> = {}) => {
+    const queryString = new URLSearchParams(params).toString()
+    return apiRequest(`/users${queryString ? `?${queryString}` : ''}`)
+  },
+
+  getById: (id: string) => apiRequest(`/users/${id}`),
+
+  update: (id: string, userData: Partial<{
+    name: string
+    role: string
+    isActive: boolean
+    password: string
+  }>) =>
+    apiRequest(`/users/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(userData),
+    }),
+
+  deactivate: (id: string) =>
+    apiRequest(`/users/${id}/deactivate`, {
+      method: 'PATCH',
+    }),
+}
+
 // Resources API (optional backend support)
 export const resourcesAPI = {
   getAll: () => apiRequest('/resources'),
@@ -224,6 +250,7 @@ export default {
   contact: contactAPI,
   newsletter: newsletterAPI,
   admin: adminAPI,
+  users: usersAPI,
   resources: resourcesAPI,
 }
 
