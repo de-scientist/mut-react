@@ -24,7 +24,7 @@ export const createEventSchema = z.object({
     ),
     time: z.string().optional(),
     location: z.string().optional(),
-    imageUrl: z.string().url('Invalid image URL').optional().or(z.literal('')),
+    imageUrl: z.string().url('Invalid image URL').optional().or(z.literal('')).nullable(),
     isActive: z.boolean().optional(),
   }),
 })
@@ -105,21 +105,30 @@ export const getEvent = async (req: Request, res: Response) => {
  */
 export const createEvent = async (req: Request, res: Response) => {
   try {
-    const { title, description, date, time, location, imageUrl } = req.body
+    const { title, description, date, time, location, imageUrl, isActive } = req.body
 
     const [event] = await db.insert(events).values({
+      id: randomUUID(),
       title,
-      description,
+      description: description || null,
       date: new Date(date),
-      time,
-      location,
-      imageUrl,
+      time: time || null,
+      location: location || null,
+      imageUrl: imageUrl || null,
+      isActive: isActive !== undefined ? isActive : true,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }).returning()
 
     return successResponse(res, event, 'Event created successfully', 201)
-  } catch (error) {
+  } catch (error: any) {
     console.error('Create event error:', error)
-    return errorResponse(res, 'Failed to create event', 500)
+    console.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      detail: error.detail,
+    })
+    return errorResponse(res, error.message || 'Failed to create event', 500)
   }
 }
 
