@@ -60,7 +60,12 @@ const ContactPage = () => {
 
     try {
       // Submit to backend
-      await contactAPI.submit(formData)
+      await contactAPI.submit({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        subject: formData.subject.trim(),
+        message: formData.message.trim(),
+      })
 
       openModal(
         <p>
@@ -75,10 +80,18 @@ const ContactPage = () => {
         subject: '',
         message: '',
       })
-    } catch (error) {
+      setErrors({
+        name: false,
+        email: false,
+        subject: false,
+        message: false,
+      })
+    } catch (error: any) {
+      console.error('Contact form error:', error)
+      const errorMessage = error?.message || error?.data?.message || 'Sorry, there was an error submitting your message. Please try again later.'
       openModal(
         <p>
-          Sorry, there was an error submitting your message. Please try again later.
+          {errorMessage}
         </p>,
       )
     }

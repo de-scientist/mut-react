@@ -9,10 +9,10 @@ import type { Request, Response } from 'express'
 // Validation schemas
 export const createContactSchema = z.object({
   body: z.object({
-    name: z.string().min(1, 'Name is required'),
-    email: z.string().email('Invalid email address'),
-    subject: z.string().min(1, 'Subject is required'),
-    message: z.string().min(1, 'Message is required'),
+    name: z.string().trim().min(1, 'Name is required'),
+    email: z.string().trim().email('Invalid email address'),
+    subject: z.string().trim().min(1, 'Subject is required'),
+    message: z.string().trim().min(1, 'Message is required'),
   }),
 })
 
@@ -21,18 +21,14 @@ export const createContactSchema = z.object({
  */
 export const createContact = async (req: Request, res: Response) => {
   try {
+    // Data is already validated and trimmed by Zod middleware
     const { name, email, subject, message } = req.body
 
-    // Validate required fields
-    if (!name || !email || !subject || !message) {
-      return errorResponse(res, 'All fields are required', 400)
-    }
-
     const [contact] = await db.insert(contactSubmissions).values({
-      name: name.trim(),
-      email: email.trim(),
-      subject: subject.trim(),
-      message: message.trim(),
+      name,
+      email,
+      subject,
+      message,
       status: 'NEW',
     }).returning()
 
