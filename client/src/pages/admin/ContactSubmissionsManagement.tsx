@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { contactAPI } from '../../services/api'
 
 interface ContactSubmission {
@@ -20,6 +20,7 @@ const ContactSubmissionsManagement = () => {
   const [statusFilter, setStatusFilter] = useState<string>('')
   const [selectedSubmission, setSelectedSubmission] = useState<ContactSubmission | null>(null)
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -27,8 +28,16 @@ const ContactSubmissionsManagement = () => {
       navigate('/admin/login')
       return
     }
+    // Check for status in URL params
+    const statusParam = searchParams.get('status')
+    if (statusParam) {
+      setStatusFilter(statusParam)
+    }
+  }, [navigate, searchParams])
+
+  useEffect(() => {
     fetchSubmissions()
-  }, [navigate, statusFilter])
+  }, [statusFilter])
 
   const fetchSubmissions = async () => {
     try {

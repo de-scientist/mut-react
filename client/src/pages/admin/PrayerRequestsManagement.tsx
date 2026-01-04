@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { prayerAPI } from '../../services/api'
 
 interface PrayerRequest {
@@ -18,6 +18,7 @@ const PrayerRequestsManagement = () => {
   const [error, setError] = useState<string | null>(null)
   const [statusFilter, setStatusFilter] = useState<string>('')
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -25,8 +26,16 @@ const PrayerRequestsManagement = () => {
       navigate('/admin/login')
       return
     }
+    // Check for status in URL params
+    const statusParam = searchParams.get('status')
+    if (statusParam) {
+      setStatusFilter(statusParam)
+    }
+  }, [navigate, searchParams])
+
+  useEffect(() => {
     fetchRequests()
-  }, [navigate, statusFilter])
+  }, [statusFilter])
 
   const fetchRequests = async () => {
     try {
