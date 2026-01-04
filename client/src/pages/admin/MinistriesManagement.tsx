@@ -98,8 +98,11 @@ const MinistriesManagement = () => {
       )
       setShowModal(false)
       setSelectedMinistry(null)
+      setSuccessMessage(`Ministry ${!selectedMinistry.isActive ? 'activated' : 'deactivated'} successfully`)
+      setError(null)
     } catch (err: any) {
       setError(err.message || 'Failed to update ministry')
+      setSuccessMessage(null)
     }
   }
 
@@ -108,15 +111,19 @@ const MinistriesManagement = () => {
     try {
       if (editingMinistry) {
         await ministriesAPI.update(editingMinistry.slug, formData)
+        setSuccessMessage('Ministry updated successfully')
       } else {
         await ministriesAPI.create(formData)
+        setSuccessMessage('Ministry added successfully')
       }
       setShowForm(false)
       setEditingMinistry(null)
       resetForm()
       fetchMinistries()
+      setError(null)
     } catch (err: any) {
       setError(err.message || 'Failed to save ministry')
+      setSuccessMessage(null)
     }
   }
 
@@ -193,6 +200,13 @@ const MinistriesManagement = () => {
             ></button>
           </div>
         )}
+
+        <Toast
+          message={successMessage || ''}
+          type="success"
+          isVisible={!!successMessage}
+          onClose={() => setSuccessMessage(null)}
+        />
 
         {showForm && (
           <div className="card border-0 shadow-sm mb-4 admin-form-container">
