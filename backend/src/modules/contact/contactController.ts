@@ -9,10 +9,10 @@ import type { Request, Response } from 'express'
 // Validation schemas
 export const createContactSchema = z.object({
   body: z.object({
-    name: z.string().trim().min(1, 'Name is required'),
-    email: z.string().trim().email('Invalid email address'),
-    subject: z.string().trim().min(1, 'Subject is required'),
-    message: z.string().trim().min(1, 'Message is required'),
+    name: z.string().min(1, 'Name is required'),
+    email: z.string().email('Invalid email address'),
+    subject: z.string().min(1, 'Subject is required'),
+    message: z.string().min(1, 'Message is required'),
   }),
 })
 
