@@ -18,6 +18,7 @@ const ContactSubmissionsManagement = () => {
   const [submissions, setSubmissions] = useState<ContactSubmission[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [successMessage, setSuccessMessage] = useState<string | null>(null)
   const [statusFilter, setStatusFilter] = useState<string>('')
   const [selectedSubmission, setSelectedSubmission] = useState<ContactSubmission | null>(null)
   const navigate = useNavigate()
@@ -120,6 +121,13 @@ const ContactSubmissionsManagement = () => {
             ></button>
           </div>
         )}
+
+        <Toast
+          message={successMessage || ''}
+          type="success"
+          isVisible={!!successMessage}
+          onClose={() => setSuccessMessage(null)}
+        />
 
         <div className="card border-0 shadow-sm mb-4">
           <div className="card-body">
