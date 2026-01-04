@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto'
 import db from '../../config/drizzle.js'
 import { events } from '../../db/schema.js'
 import { successResponse, errorResponse, paginatedResponse } from '../../utils/response.js'
@@ -11,10 +12,20 @@ export const createEventSchema = z.object({
   body: z.object({
     title: z.string().min(1, 'Title is required'),
     description: z.string().optional(),
-    date: z.string().datetime('Invalid date format'),
+    date: z.string().refine(
+      (val) => {
+        // Accept ISO datetime strings (with or without timezone)
+        // Also accept datetime-local format from HTML input
+        const isoRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?(\.\d{3})?(Z|[+-]\d{2}:\d{2})?$/
+        const dateRegex = /^\d{4}-\d{2}-\d{2}$/
+        return isoRegex.test(val) || dateRegex.test(val) || !isNaN(Date.parse(val))
+      },
+      { message: 'Invalid date format' }
+    ),
     time: z.string().optional(),
     location: z.string().optional(),
-    imageUrl: z.string().url('Invalid image URL').optional(),
+    imageUrl: z.string().url('Invalid image URL').optional().or(z.literal('')),
+    isActive: z.boolean().optional(),
   }),
 })
 
