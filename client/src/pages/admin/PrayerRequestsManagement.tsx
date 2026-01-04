@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { prayerAPI } from '../../services/api'
+import Toast from '../../components/Toast'
 
 interface PrayerRequest {
   id: string
@@ -16,6 +17,7 @@ const PrayerRequestsManagement = () => {
   const [requests, setRequests] = useState<PrayerRequest[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [successMessage, setSuccessMessage] = useState<string | null>(null)
   const [statusFilter, setStatusFilter] = useState<string>('')
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
@@ -62,8 +64,11 @@ const PrayerRequestsManagement = () => {
       setRequests(
         requests.map((r) => (r.id === id ? { ...r, status: newStatus as any } : r))
       )
+      setSuccessMessage('Prayer request status updated successfully')
+      setError(null)
     } catch (err: any) {
       setError(err.message || 'Failed to update status')
+      setSuccessMessage(null)
     }
   }
 
@@ -113,6 +118,13 @@ const PrayerRequestsManagement = () => {
             ></button>
           </div>
         )}
+
+        <Toast
+          message={successMessage || ''}
+          type="success"
+          isVisible={!!successMessage}
+          onClose={() => setSuccessMessage(null)}
+        />
 
         <div className="card border-0 shadow-sm mb-4">
           <div className="card-body">
