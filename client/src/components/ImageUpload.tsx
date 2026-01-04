@@ -1,5 +1,6 @@
-import { useState, useRef, ChangeEvent } from 'react'
+import { useState, useRef, ChangeEvent, useEffect } from 'react'
 import { uploadImageToCloudinary, getImageUrl, type CloudinaryUploadResponse } from '../services/cloudinary'
+import '../styles/imageUpload.css'
 
 interface ImageUploadProps {
   value?: string
@@ -29,11 +30,13 @@ const ImageUpload = ({
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   // Update preview when value changes externally
-  useState(() => {
+  useEffect(() => {
     if (value) {
       setPreview(value)
+    } else {
+      setPreview(null)
     }
-  })
+  }, [value])
 
   const handleFileSelect = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]

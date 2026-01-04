@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { eventsAPI } from '../../services/api'
 import ConfirmationModal from '../../components/ConfirmationModal'
+import ImageUpload from '../../components/ImageUpload'
 import '../../styles/adminForms.css'
 
 interface Event {
