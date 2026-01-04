@@ -122,6 +122,73 @@ const AdminDashboard = () => {
           <p className="text-muted">Real-time performance and activity metrics.</p>
         </header>
 
+        {/* QUICK NAVIGATION MENU */}
+        <section className="mb-5">
+          <div className="card border-0 shadow-sm">
+            <div className="card-header bg-white">
+              <h5 className="mb-0 fw-bold">Quick Navigation</h5>
+            </div>
+            <div className="card-body">
+              <div className="row g-3">
+                <div className="col-6 col-md-4 col-lg-3">
+                  <button
+                    onClick={() => navigate('/admin/events')}
+                    className="btn btn-outline-primary w-100 d-flex flex-column align-items-center p-3"
+                  >
+                    <span className="fs-3 mb-2">📅</span>
+                    <span className="fw-medium">Events</span>
+                  </button>
+                </div>
+                <div className="col-6 col-md-4 col-lg-3">
+                  <button
+                    onClick={() => navigate('/admin/ministries')}
+                    className="btn btn-outline-primary w-100 d-flex flex-column align-items-center p-3"
+                  >
+                    <span className="fs-3 mb-2">⛪</span>
+                    <span className="fw-medium">Ministries</span>
+                  </button>
+                </div>
+                <div className="col-6 col-md-4 col-lg-3">
+                  <button
+                    onClick={() => navigate('/admin/prayer-requests')}
+                    className="btn btn-outline-primary w-100 d-flex flex-column align-items-center p-3"
+                  >
+                    <span className="fs-3 mb-2">🙏</span>
+                    <span className="fw-medium">Prayer Requests</span>
+                  </button>
+                </div>
+                <div className="col-6 col-md-4 col-lg-3">
+                  <button
+                    onClick={() => navigate('/admin/contacts')}
+                    className="btn btn-outline-primary w-100 d-flex flex-column align-items-center p-3"
+                  >
+                    <span className="fs-3 mb-2">📩</span>
+                    <span className="fw-medium">Contact Forms</span>
+                  </button>
+                </div>
+                <div className="col-6 col-md-4 col-lg-3">
+                  <button
+                    onClick={() => navigate('/admin/newsletter')}
+                    className="btn btn-outline-primary w-100 d-flex flex-column align-items-center p-3"
+                  >
+                    <span className="fs-3 mb-2">📧</span>
+                    <span className="fw-medium">Newsletter</span>
+                  </button>
+                </div>
+                <div className="col-6 col-md-4 col-lg-3">
+                  <button
+                    onClick={() => navigate('/admin/users')}
+                    className="btn btn-outline-primary w-100 d-flex flex-column align-items-center p-3"
+                  >
+                    <span className="fs-3 mb-2">👥</span>
+                    <span className="fw-medium">Users</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* STATS CARDS GRID */}
         <section className="row g-4 mb-5">
           <StatCard label="Total Users" value={stats.users} icon="👥" link="/admin/users" />
