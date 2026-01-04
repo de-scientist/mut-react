@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { eventsAPI } from '../../services/api'
 import ConfirmationModal from '../../components/ConfirmationModal'
 import ImageUpload from '../../components/ImageUpload'
+import Toast from '../../components/Toast'
 import '../../styles/adminForms.css'
 
 interface Event {
@@ -22,6 +23,7 @@ const EventsManagement = () => {
   const [events, setEvents] = useState<Event[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [successMessage, setSuccessMessage] = useState<string | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
   const [action, setAction] = useState<'delete' | 'toggle' | null>(null)
@@ -72,8 +74,11 @@ const EventsManagement = () => {
       setEvents(events.filter((e) => e.id !== selectedEvent.id))
       setShowModal(false)
       setSelectedEvent(null)
+      setSuccessMessage('Event deleted successfully')
+      setError(null)
     } catch (err: any) {
       setError(err.message || 'Failed to delete event')
+      setSuccessMessage(null)
     }
   }
 
@@ -86,8 +91,11 @@ const EventsManagement = () => {
       )
       setShowModal(false)
       setSelectedEvent(null)
+      setSuccessMessage(`Event ${!selectedEvent.isActive ? 'activated' : 'deactivated'} successfully`)
+      setError(null)
     } catch (err: any) {
       setError(err.message || 'Failed to update event')
+      setSuccessMessage(null)
     }
   }
 
@@ -96,15 +104,19 @@ const EventsManagement = () => {
     try {
       if (editingEvent) {
         await eventsAPI.update(editingEvent.id, formData)
+        setSuccessMessage('Event updated successfully')
       } else {
         await eventsAPI.create(formData)
+        setSuccessMessage('Event created successfully')
       }
       setShowForm(false)
       setEditingEvent(null)
       resetForm()
       fetchEvents()
+      setError(null)
     } catch (err: any) {
       setError(err.message || 'Failed to save event')
+      setSuccessMessage(null)
     }
   }
 
@@ -176,6 +188,13 @@ const EventsManagement = () => {
             ></button>
           </div>
         )}
+
+        <Toast
+          message={successMessage || ''}
+          type="success"
+          isVisible={!!successMessage}
+          onClose={() => setSuccessMessage(null)}
+        />
 
         {showForm && (
           <div className="card border-0 shadow-sm mb-4 admin-form-container">

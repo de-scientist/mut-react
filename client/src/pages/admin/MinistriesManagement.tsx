@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { ministriesAPI } from '../../services/api'
 import ConfirmationModal from '../../components/ConfirmationModal'
 import ImageUpload from '../../components/ImageUpload'
+import Toast from '../../components/Toast'
 import '../../styles/adminForms.css'
 
 interface Ministry {
@@ -21,6 +22,7 @@ const MinistriesManagement = () => {
   const [ministries, setMinistries] = useState<Ministry[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [successMessage, setSuccessMessage] = useState<string | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [selectedMinistry, setSelectedMinistry] = useState<Ministry | null>(null)
   const [action, setAction] = useState<'delete' | 'toggle' | null>(null)
@@ -77,8 +79,11 @@ const MinistriesManagement = () => {
       setMinistries(ministries.filter((m) => m.id !== selectedMinistry.id))
       setShowModal(false)
       setSelectedMinistry(null)
+      setSuccessMessage('Ministry deleted successfully')
+      setError(null)
     } catch (err: any) {
       setError(err.message || 'Failed to delete ministry')
+      setSuccessMessage(null)
     }
   }
 
