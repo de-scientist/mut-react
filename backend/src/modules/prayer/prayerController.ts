@@ -2,7 +2,7 @@ import db from '../../config/drizzle.js'
 import { prayerRequests } from '../../db/schema.js'
 import { successResponse, errorResponse, paginatedResponse } from '../../utils/response.js'
 import { getPaginationParams, getPaginationMeta } from '../../utils/pagination.js'
-import { eq } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import { z } from 'zod'
 import type { Request, Response } from 'express'
 
@@ -43,15 +43,22 @@ export const getPrayerRequests = async (req: Request, res: Response) => {
     const { page, limit, skip } = getPaginationParams(req.query)
     const { status } = req.query
 
-    const whereClauses: any[] = []
+    // Build queries
+    let requestsQuery = db.select().from(prayerRequests)
+    let countQuery = db.select({ count: sql<number>`count(*)` }).from(prayerRequests)
+
     if (status) {
-      whereClauses.push(eq(prayerRequests.status, status as string))
+      requestsQuery = requestsQuery.where(eq(prayerRequests.status, status as string))
+      countQuery = countQuery.where(eq(prayerRequests.status, status as string))
     }
 
-    const q = db.select().from(prayerRequests)
-    const itemsQuery = whereClauses.length ? q.where(...whereClauses).limit(limit).offset(skip) : q.limit(limit).offset(skip)
-    const requests = await itemsQuery
-    const total = requests.length
+    // Execute queries in parallel
+    const [requests, countResult] = await Promise.all([
+      requestsQuery.limit(limit).offset(skip),
+      countQuery,
+    ])
+
+    const total = Number(countResult[0]?.count ?? 0)
     const pagination = getPaginationMeta(total, page, limit)
 
     return paginatedResponse(res, requests, pagination, 'Prayer requests retrieved successfully')

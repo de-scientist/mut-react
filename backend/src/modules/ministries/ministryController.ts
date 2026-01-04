@@ -30,9 +30,9 @@ export const getMinistries = async (req: Request, res: Response) => {
     }
 
     const q = db.select().from(ministries)
-    const ministriesList = whereClauses.length ? await q.where(...whereClauses).orderBy(ministries.name).all() : await q.orderBy(ministries.name).all()
+    const ministriesList = whereClauses.length ? await q.where(...whereClauses).orderBy(ministries.name) : await q.orderBy(ministries.name)
 
-    return successResponse(res, ministries, 'Ministries retrieved successfully')
+    return successResponse(res, ministriesList, 'Ministries retrieved successfully')
   } catch (error) {
     console.error('Get ministries error:', error)
     return errorResponse(res, 'Failed to retrieve ministries', 500)

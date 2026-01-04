@@ -2,7 +2,7 @@ import db from '../../config/drizzle.js'
 import { events } from '../../db/schema.js'
 import { successResponse, errorResponse, paginatedResponse } from '../../utils/response.js'
 import { getPaginationParams, getPaginationMeta } from '../../utils/pagination.js'
-import { eq } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import { z } from 'zod'
 import type { Request, Response } from 'express'
 
@@ -38,25 +38,30 @@ export const getEvents = async (req: Request, res: Response) => {
     const { page, limit, skip } = getPaginationParams(req.query)
     const { active } = req.query
 
-    const whereClauses: any[] = []
+    // Build base query
+    let eventsQuery = db.select().from(events)
+    
+    // Apply filters
     if (active === 'true') {
-      whereClauses.push(eq(events.isActive, true))
-      // date filter handled in JS side when necessary
+      eventsQuery = eventsQuery.where(eq(events.isActive, true))
     }
 
-    const q = db.select().from(events)
-    const itemsQuery = whereClauses.length ? q.where(...whereClauses).limit(limit).offset(skip) : q.limit(limit).offset(skip)
-    const [eventsList] = await Promise.all([
-      itemsQuery,
-      db.select({ count: db.raw('count(*)') }).from(events),
+    // Get total count
+    let countQuery = db.select({ count: sql<number>`count(*)` }).from(events)
+    if (active === 'true') {
+      countQuery = countQuery.where(eq(events.isActive, true))
+    }
+
+    // Execute queries in parallel
+    const [eventsList, countResult] = await Promise.all([
+      eventsQuery.limit(limit).offset(skip),
+      countQuery,
     ])
 
-    const eventsRes: any = eventsList
-    const total = (eventsRes && eventsRes.length) || 0
-
+    const total = Number(countResult[0]?.count ?? 0)
     const pagination = getPaginationMeta(total, page, limit)
 
-    return paginatedResponse(res, events, pagination, 'Events retrieved successfully')
+    return paginatedResponse(res, eventsList, pagination, 'Events retrieved successfully')
   } catch (error) {
     console.error('Get events error:', error)
     return errorResponse(res, 'Failed to retrieve events', 500)

@@ -2,7 +2,7 @@ import db from '../../config/drizzle.js'
 import { newsletterSubscriptions } from '../../db/schema.js'
 import { successResponse, errorResponse, paginatedResponse } from '../../utils/response.js'
 import { getPaginationParams, getPaginationMeta } from '../../utils/pagination.js'
-import { eq } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import { z } from 'zod'
 import type { Request, Response } from 'express'
 
@@ -71,16 +71,22 @@ export const getSubscriptions = async (req: Request, res: Response) => {
     const { page, limit, skip } = getPaginationParams(req.query)
     const { active } = req.query
 
-    const whereClauses: any[] = []
+    // Build queries
+    let subscriptionsQuery = db.select().from(newsletterSubscriptions)
+    let countQuery = db.select({ count: sql<number>`count(*)` }).from(newsletterSubscriptions)
+
     if (active === 'true') {
-      whereClauses.push(eq(newsletterSubscriptions.isActive, true))
+      subscriptionsQuery = subscriptionsQuery.where(eq(newsletterSubscriptions.isActive, true))
+      countQuery = countQuery.where(eq(newsletterSubscriptions.isActive, true))
     }
 
-    const q = db.select().from(newsletterSubscriptions)
-    const itemsQuery = whereClauses.length ? q.where(...whereClauses).limit(limit).offset(skip) : q.limit(limit).offset(skip)
-    const subscriptions = await itemsQuery
-    const total = subscriptions.length
+    // Execute queries in parallel
+    const [subscriptions, countResult] = await Promise.all([
+      subscriptionsQuery.limit(limit).offset(skip),
+      countQuery,
+    ])
 
+    const total = Number(countResult[0]?.count ?? 0)
     const pagination = getPaginationMeta(total, page, limit)
 
     return paginatedResponse(res, subscriptions, pagination, 'Subscriptions retrieved successfully')
