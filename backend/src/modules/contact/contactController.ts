@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto'
 import db from '../../config/drizzle.js'
 import { contactSubmissions } from '../../db/schema.js'
 import { successResponse, errorResponse, paginatedResponse } from '../../utils/response.js'
@@ -32,11 +33,14 @@ export const createContact = async (req: Request, res: Response) => {
     }
 
     const [contact] = await db.insert(contactSubmissions).values({
+      id: randomUUID(),
       name,
       email,
       subject,
       message,
       status: 'NEW',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }).returning()
 
     if (!contact) {
