@@ -44,10 +44,14 @@ export const register = async (req: Request, res: Response) => {
 
     // Create user
     const [user] = await db.insert(users).values({
+      id: randomUUID(),
       email,
       password: hashedPassword,
-      name,
+      name: name || null,
       role: 'USER',
+      isActive: true,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }).returning({ id: users.id, email: users.email, name: users.name, role: users.role, createdAt: users.createdAt })
 
     // Generate token
