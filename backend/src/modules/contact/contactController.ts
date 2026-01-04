@@ -23,18 +23,45 @@ export const createContact = async (req: Request, res: Response) => {
   try {
     const { name, email, subject, message } = req.body
 
+    // Validate required fields
+    if (!name || !email || !subject || !message) {
+      return errorResponse(res, 'All fields are required', 400)
+    }
+
     const [contact] = await db.insert(contactSubmissions).values({
-      name,
-      email,
-      subject,
-      message,
+      name: name.trim(),
+      email: email.trim(),
+      subject: subject.trim(),
+      message: message.trim(),
       status: 'NEW',
     }).returning()
 
+    if (!contact) {
+      return errorResponse(res, 'Failed to create contact submission', 500)
+    }
+
     return successResponse(res, contact, 'Contact form submitted successfully', 201)
-  } catch (error) {
+  } catch (error: any) {
     console.error('Create contact error:', error)
-    return errorResponse(res, 'Failed to submit contact form', 500)
+    console.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      detail: error.detail,
+      constraint: error.constraint,
+    })
+    
+    // Handle specific database errors
+    if (error.code === '23505') { // Unique constraint violation
+      return errorResponse(res, 'A submission with this email already exists', 409)
+    }
+    if (error.code === '23502') { // Not null constraint violation
+      return errorResponse(res, 'Missing required fields', 400)
+    }
+    if (error.code === '42P01') { // Table does not exist
+      return errorResponse(res, 'Database table not found. Please run migrations.', 500)
+    }
+    
+    return errorResponse(res, error.message || 'Failed to submit contact form', 500)
   }
 }
 

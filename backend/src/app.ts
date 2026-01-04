@@ -15,6 +15,7 @@ import contactRoutes from './routes/contactRoutes.ts'
 import newsletterRoutes from './routes/newsletterRoutes.ts'
 import adminRoutes from './routes/adminRoutes.ts'
 import usersRoutes from './routes/usersRoutes.ts'
+import resourcesRoutes from './routes/resourcesRoutes.ts'
 
 const app = express()
 
@@ -60,6 +61,7 @@ app.use('/api/contact', contactRoutes)
 app.use('/api/newsletter', newsletterRoutes)
 app.use('/api/admin', adminRoutes)
 app.use('/api/users', usersRoutes)
+app.use('/api/resources', resourcesRoutes)
 
 // 404 handler
 app.use((req, res) => {
