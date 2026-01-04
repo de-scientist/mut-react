@@ -142,81 +142,91 @@ const ContactPage = () => {
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="p-4 rounded-3 shadow-lg" data-aos="fade-up" data-aos-delay="400">
-                <div className="mb-4">
-                  <label htmlFor="name" className="form-label">
-                    Your Name <span className="text-danger">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    className={`form-control${errors.name ? ' is-invalid' : ''}`}
-                    id="name"
-                    name="name"
-                    placeholder="Enter your name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                  {errors.name && <div className="invalid-feedback">Please enter your name.</div>}
+              <div className="card border-0 shadow-lg admin-form-container" data-aos="fade-up" data-aos-delay="400">
+                <div className="card-header">
+                  <h3 className="mb-0">Send Us a Message</h3>
                 </div>
+                <div className="card-body">
+                  <form onSubmit={handleSubmit}>
+                    <div className="row">
+                      <div className="col-md-6 mb-3">
+                        <label htmlFor="name" className="form-label">
+                          Your Name
+                        </label>
+                        <input
+                          type="text"
+                          className={`form-control${errors.name ? ' is-invalid' : ''}`}
+                          id="name"
+                          name="name"
+                          placeholder="Enter your full name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                        />
+                        {errors.name && <div className="invalid-feedback">Please enter your name.</div>}
+                      </div>
 
-                <div className="mb-4">
-                  <label htmlFor="email" className="form-label">
-                    Email Address <span className="text-danger">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    className={`form-control${errors.email ? ' is-invalid' : ''}`}
-                    id="email"
-                    name="email"
-                    placeholder="your.email@example.com"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                  {errors.email && <div className="invalid-feedback">Please enter a valid email address.</div>}
-                </div>
+                      <div className="col-md-6 mb-3">
+                        <label htmlFor="email" className="form-label">
+                          Email Address
+                        </label>
+                        <input
+                          type="email"
+                          className={`form-control${errors.email ? ' is-invalid' : ''}`}
+                          id="email"
+                          name="email"
+                          placeholder="your.email@example.com"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                        />
+                        {errors.email && <div className="invalid-feedback">Please enter a valid email address.</div>}
+                      </div>
 
-                <div className="mb-4">
-                  <label htmlFor="subject" className="form-label">
-                    Subject <span className="text-danger">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    className={`form-control${errors.subject ? ' is-invalid' : ''}`}
-                    id="subject"
-                    name="subject"
-                    placeholder="What is this regarding?"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                  />
-                  {errors.subject && <div className="invalid-feedback">Please enter a subject.</div>}
-                </div>
+                      <div className="col-12 mb-3">
+                        <label htmlFor="subject" className="form-label">
+                          Subject
+                        </label>
+                        <input
+                          type="text"
+                          className={`form-control${errors.subject ? ' is-invalid' : ''}`}
+                          id="subject"
+                          name="subject"
+                          placeholder="What is this regarding?"
+                          value={formData.subject}
+                          onChange={handleChange}
+                          required
+                        />
+                        {errors.subject && <div className="invalid-feedback">Please enter a subject.</div>}
+                      </div>
 
-                <div className="mb-4">
-                  <label htmlFor="message" className="form-label">
-                    Message <span className="text-danger">*</span>
-                  </label>
-                  <textarea
-                    className={`form-control${errors.message ? ' is-invalid' : ''}`}
-                    id="message"
-                    name="message"
-                    rows={6}
-                    placeholder="Share your message here..."
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                  />
-                  {errors.message && <div className="invalid-feedback">Please enter your message.</div>}
-                </div>
+                      <div className="col-12 mb-3">
+                        <label htmlFor="message" className="form-label">
+                          Message
+                        </label>
+                        <textarea
+                          className={`form-control${errors.message ? ' is-invalid' : ''}`}
+                          id="message"
+                          name="message"
+                          rows={6}
+                          placeholder="Share your message here..."
+                          value={formData.message}
+                          onChange={handleChange}
+                          required
+                        />
+                        {errors.message && <div className="invalid-feedback">Please enter your message.</div>}
+                      </div>
+                    </div>
 
-                <div className="d-grid">
-                  <button type="submit" className="btn btn-primary btn-lg">
-                    Send Message <i className="fas fa-paper-plane ms-2" />
-                  </button>
+                    <div className="d-flex gap-2 mt-4">
+                      <button type="submit" className="btn btn-primary">
+                        <i className="fas fa-paper-plane me-2" />
+                        Send Message
+                      </button>
+                    </div>
+                  </form>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
