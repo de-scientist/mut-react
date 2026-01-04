@@ -16,16 +16,32 @@ const validate = (schema: ZodSchema) => {
         })
       }
 
+      // Debug logging in development
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Validation - Request body:', JSON.stringify(req.body, null, 2))
+      }
+
       // Validate the request
-      schema.parse({
+      const result = schema.parse({
         body: req.body,
         query: req.query,
         params: req.params,
       })
 
+      // Update req.body with validated data (in case schema transforms it)
+      if (result && result.body) {
+        req.body = result.body
+      }
+
       // Validation passed, continue to next middleware
       next()
     } catch (error: any) {
+      // Debug logging in development
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Validation error:', error.errors)
+        console.error('Request body that failed:', JSON.stringify(req.body, null, 2))
+      }
+
       // Extract the first validation error message
       const zodError = error.errors?.[0]
       const errorMessage = zodError?.message || 'Validation error'
