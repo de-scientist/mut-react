@@ -62,7 +62,8 @@ export const createContact = async (req: Request, res: Response) => {
       return errorResponse(res, 'A submission with this email already exists', 409)
     }
     if (error.code === '23502') { // Not null constraint violation
-      return errorResponse(res, 'Missing required fields', 400)
+      const column = error.column || 'unknown field'
+      return errorResponse(res, `Missing required field: ${column}`, 400)
     }
     if (error.code === '42P01') { // Table does not exist
       return errorResponse(res, 'Database table not found. Please run migrations.', 500)

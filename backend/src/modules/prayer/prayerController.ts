@@ -24,9 +24,13 @@ export const createPrayerRequest = async (req: Request, res: Response) => {
     const { name, request, isPublic } = req.body
 
     const [prayerRequest] = await db.insert(prayerRequests).values({
+      id: randomUUID(),
       name: name || null,
       request,
       isPublic: isPublic || false,
+      status: 'PENDING',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }).returning()
 
     return successResponse(res, prayerRequest, 'Prayer request submitted successfully', 201)
