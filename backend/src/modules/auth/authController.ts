@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import db from '../../config/drizzle.js'
