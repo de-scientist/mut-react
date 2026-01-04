@@ -182,6 +182,7 @@ const Register = () => {
                     {error}
                     <button
                       type="button"
+                      title='btn'
                       className="btn-close"
                       onClick={() => setError(null)}
                     ></button>
@@ -231,6 +232,7 @@ const Register = () => {
                       <select
                         className={`form-select${errors.yearOfStudy ? ' is-invalid' : ''}`}
                         value={yearOfStudy}
+                        title='yearOfStudy'
                         onChange={(e) => handleChange('yearOfStudy', e.target.value)}
                         required
                       >
@@ -270,6 +272,7 @@ const Register = () => {
                       <select
                         className="form-select"
                         value={ministry1}
+                        title='min1'
                         onChange={(e) => handleChange('ministry1', e.target.value)}
                         disabled={loadingMinistries}
                       >
@@ -292,6 +295,7 @@ const Register = () => {
                       <select
                         className={`form-select${errors.ministry2 ? ' is-invalid' : ''}`}
                         value={ministry2}
+                        title='min2'
                         onChange={(e) => handleChange('ministry2', e.target.value)}
                         disabled={loadingMinistries || !ministry1}
                       >
