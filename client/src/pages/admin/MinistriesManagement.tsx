@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ministriesAPI } from '../../services/api'
 import ConfirmationModal from '../../components/ConfirmationModal'
+import '../../styles/adminForms.css'
 
 interface Ministry {
   id: string
@@ -188,8 +189,8 @@ const MinistriesManagement = () => {
         )}
 
         {showForm && (
-          <div className="card border-0 shadow-sm mb-4">
-            <div className="card-header bg-white">
+          <div className="card border-0 shadow-sm mb-4 admin-form-container">
+            <div className="card-header">
               <h5 className="mb-0">{editingMinistry ? 'Edit Ministry' : 'Create New Ministry'}</h5>
             </div>
             <div className="card-body">

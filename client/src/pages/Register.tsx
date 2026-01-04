@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { authAPI } from '../services/api'
 import '../assets/mut/css/about.css'
+import '../styles/adminForms.css'
 
 const Register = () => {
   const [name, setName] = useState('')
@@ -32,23 +33,31 @@ const Register = () => {
     <div className="container py-5">
       <div className="row justify-content-center">
         <div className="col-md-6">
-          <h2 className="mb-4">Register</h2>
-          {error && <div className="alert alert-danger">{error}</div>}
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label className="form-label">Name</label>
-              <input className="form-control" title='name' value={name} onChange={(e) => setName(e.target.value)} />
+          <div className="card border-0 shadow-sm admin-form-container">
+            <div className="card-header">
+              <h2 className="mb-0">Register</h2>
             </div>
-            <div className="mb-3">
-              <label className="form-label">Email</label>
-              <input className="form-control" title='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+            <div className="card-body">
+              {error && <div className="alert alert-danger">{error}</div>}
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label className="form-label">Name</label>
+                  <input className="form-control" title='name' value={name} onChange={(e) => setName(e.target.value)} />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Email</label>
+                  <input type="email" className="form-control" title='email' value={email} onChange={(e) => setEmail(e.target.value)} required />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">Password</label>
+                  <input type="password" title='password' className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                </div>
+                <div className="d-flex gap-2">
+                  <button type="submit" className="btn btn-primary" disabled={loading}>{loading ? 'Registering...' : 'Register'}</button>
+                </div>
+              </form>
             </div>
-            <div className="mb-3">
-              <label className="form-label">Password</label>
-              <input type="password" title='password' className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} />
-            </div>
-            <button className="btn btn-primary" disabled={loading}>{loading ? 'Registering...' : 'Register'}</button>
-          </form>
+          </div>
         </div>
       </div>
     </div>

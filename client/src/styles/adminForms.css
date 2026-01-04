@@ -1,0 +1,362 @@
+/* Admin Forms Styling - MUTCU Theme */
+:root {
+  --mutcu-navy-blue: #04003d;
+  --mutcu-orange: #ff9700;
+  --mutcu-red: #ff1229;
+  --mutcu-teal: #30d5c8;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Lato', sans-serif;
+}
+
+/* Form Container */
+.admin-form-container {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(4, 0, 61, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.admin-form-container .card-header {
+  background: linear-gradient(135deg, var(--mutcu-navy-blue) 0%, #00002a 100%);
+  color: #ffffff;
+  border-radius: 12px 12px 0 0 !important;
+  padding: 1.25rem 1.5rem;
+  border: none;
+}
+
+.admin-form-container .card-header h5 {
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-form-container .card-body {
+  padding: 2rem;
+  background: #ffffff;
+}
+
+/* Form Labels */
+.admin-form-container .form-label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--mutcu-navy-blue);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.admin-form-container .form-label::after {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 12px;
+  background: var(--mutcu-orange);
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* Input Fields */
+.admin-form-container .form-control,
+.admin-form-container .form-select {
+  background-color: #ffffff !important;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--mutcu-navy-blue) !important;
+  transition: all 0.3s ease;
+  min-height: 44px;
+}
+
+/* Ensure text is always visible */
+.admin-form-container .form-control:-webkit-autofill,
+.admin-form-container .form-control:-webkit-autofill:hover,
+.admin-form-container .form-control:-webkit-autofill:focus,
+.admin-form-container .form-control:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+  -webkit-text-fill-color: var(--mutcu-navy-blue) !important;
+  background-color: #ffffff !important;
+  color: var(--mutcu-navy-blue) !important;
+}
+
+/* Input Focus State */
+.admin-form-container .form-control:focus,
+.admin-form-container .form-select:focus {
+  background-color: #ffffff !important;
+  border-color: var(--mutcu-orange) !important;
+  color: var(--mutcu-navy-blue) !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 151, 0, 0.15);
+  outline: none;
+}
+
+/* Input Active/Editing State */
+.admin-form-container .form-control:not(:placeholder-shown),
+.admin-form-container .form-control:valid,
+.admin-form-container .form-control:invalid {
+  background-color: #ffffff !important;
+  color: var(--mutcu-navy-blue) !important;
+}
+
+/* Textarea */
+.admin-form-container textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+/* Checkbox and Radio */
+.admin-form-container .form-check {
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.admin-form-container .form-check:hover {
+  background: #f0f0f0;
+}
+
+.admin-form-container .form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.25rem;
+  border: 2px solid #e0e0e0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-form-container .form-check-input:checked {
+  background-color: var(--mutcu-orange);
+  border-color: var(--mutcu-orange);
+}
+
+.admin-form-container .form-check-input:focus {
+  border-color: var(--mutcu-orange);
+  box-shadow: 0 0 0 0.2rem rgba(255, 151, 0, 0.25);
+}
+
+.admin-form-container .form-check-label {
+  font-family: var(--font-body);
+  color: var(--mutcu-navy-blue);
+  font-weight: 500;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+/* Form Buttons */
+.admin-form-container .btn-primary {
+  background: linear-gradient(135deg, var(--mutcu-orange) 0%, #e68a00 100%);
+  border: none;
+  color: #ffffff;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(255, 151, 0, 0.3);
+}
+
+.admin-form-container .btn-primary:hover {
+  background: linear-gradient(135deg, #e68a00 0%, var(--mutcu-orange) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 151, 0, 0.4);
+}
+
+.admin-form-container .btn-primary:active {
+  transform: translateY(0);
+}
+
+.admin-form-container .btn-secondary {
+  background: #ffffff;
+  border: 2px solid var(--mutcu-navy-blue);
+  color: var(--mutcu-navy-blue);
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.admin-form-container .btn-secondary:hover {
+  background: var(--mutcu-navy-blue);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(4, 0, 61, 0.2);
+}
+
+/* Form Groups */
+.admin-form-container .mb-3 {
+  margin-bottom: 1.5rem !important;
+}
+
+/* Required Field Indicator */
+.admin-form-container .form-label:has(+ .form-control[required])::before,
+.admin-form-container .form-label:has(+ .form-select[required])::before {
+  content: '*';
+  color: var(--mutcu-red);
+  margin-right: 4px;
+  font-weight: 700;
+}
+
+/* Input Group Enhancements */
+.admin-form-container .input-group {
+  margin-bottom: 1.5rem;
+}
+
+.admin-form-container .input-group-text {
+  background: var(--mutcu-navy-blue);
+  color: #ffffff;
+  border: 2px solid var(--mutcu-navy-blue);
+  border-right: none;
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+.admin-form-container .input-group .form-control {
+  border-left: none;
+}
+
+.admin-form-container .input-group .form-control:focus {
+  border-left: 2px solid var(--mutcu-orange);
+}
+
+/* Form Validation States */
+.admin-form-container .form-control.is-valid {
+  border-color: #28a745;
+  background-color: #ffffff !important;
+  color: var(--mutcu-navy-blue) !important;
+}
+
+.admin-form-container .form-control.is-invalid {
+  border-color: var(--mutcu-red);
+  background-color: #ffffff !important;
+  color: var(--mutcu-navy-blue) !important;
+}
+
+.admin-form-container .invalid-feedback {
+  color: var(--mutcu-red);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.admin-form-container .valid-feedback {
+  color: #28a745;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* Form Help Text */
+.admin-form-container .form-text {
+  color: #6c757d;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* Select Dropdown */
+.admin-form-container .form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2304003d' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  padding-right: 2.5rem;
+}
+
+.admin-form-container .form-select:focus {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ff9700' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+
+/* Date and Time Inputs */
+.admin-form-container input[type="date"],
+.admin-form-container input[type="time"],
+.admin-form-container input[type="datetime-local"] {
+  color-scheme: light;
+  background-color: #ffffff !important;
+  color: var(--mutcu-navy-blue) !important;
+}
+
+.admin-form-container input[type="date"]::-webkit-calendar-picker-indicator,
+.admin-form-container input[type="time"]::-webkit-calendar-picker-indicator,
+.admin-form-container input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(0.1);
+}
+
+/* Placeholder Styling */
+.admin-form-container .form-control::placeholder {
+  color: #adb5bd;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* Form Row Spacing */
+.admin-form-container .row {
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+}
+
+.admin-form-container .row > * {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+/* Disabled Inputs */
+.admin-form-container .form-control:disabled,
+.admin-form-container .form-select:disabled {
+  background-color: #f8f9fa !important;
+  color: #6c757d !important;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Readonly Inputs */
+.admin-form-container .form-control[readonly] {
+  background-color: #f8f9fa !important;
+  color: var(--mutcu-navy-blue) !important;
+  border-color: #e0e0e0;
+}
+
+/* Form Section Dividers */
+.admin-form-section {
+  border-top: 2px solid #e0e0e0;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.admin-form-section:first-child {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .admin-form-container {
+    padding: 1.5rem;
+  }
+
+  .admin-form-container .card-body {
+    padding: 1.5rem;
+  }
+
+  .admin-form-container .btn-primary,
+  .admin-form-container .btn-secondary {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+

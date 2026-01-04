@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { usersAPI } from '../../services/api'
 import ConfirmationModal from '../../components/ConfirmationModal'
+import '../../styles/adminForms.css'
 
 interface User {
   id: string
@@ -149,8 +150,8 @@ const UsersManagement = () => {
         )}
 
         {showForm && editingUser && (
-          <div className="card border-0 shadow-sm mb-4">
-            <div className="card-header bg-white">
+          <div className="card border-0 shadow-sm mb-4 admin-form-container">
+            <div className="card-header">
               <h5 className="mb-0">Edit User: {editingUser.email}</h5>
             </div>
             <div className="card-body">
