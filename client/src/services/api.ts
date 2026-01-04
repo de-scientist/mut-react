@@ -242,6 +242,34 @@ export const resourcesAPI = {
   getAll: () => apiRequest('/resources'),
 }
 
+// Members API
+export const membersAPI = {
+  register: (memberData: {
+    name: string
+    email: string
+    yearOfStudy: string
+    course: string
+    ministry1?: string
+    ministry2?: string
+    message?: string
+  }) =>
+    apiRequest('/members/register', {
+      method: 'POST',
+      body: JSON.stringify(memberData),
+    }),
+
+  getAll: (params: Record<string, string> = {}) => {
+    const queryString = new URLSearchParams(params).toString()
+    return apiRequest(`/members${queryString ? `?${queryString}` : ''}`)
+  },
+
+  updateStatus: (id: string, status: string) =>
+    apiRequest(`/members/${id}/status`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status }),
+    }),
+}
+
 export default {
   auth: authAPI,
   events: eventsAPI,
@@ -252,6 +280,7 @@ export default {
   admin: adminAPI,
   users: usersAPI,
   resources: resourcesAPI,
+  members: membersAPI,
 }
 
 
