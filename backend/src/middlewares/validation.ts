@@ -38,19 +38,20 @@ const validate = (schema: ZodSchema) => {
     } catch (error: any) {
       // Debug logging in development
       if (process.env.NODE_ENV === 'development') {
-        console.error('Validation error:', error.errors)
+        console.error('Validation error:', error.errors || error.issues)
         console.error('Request body that failed:', JSON.stringify(req.body, null, 2))
       }
 
-      // Extract the first validation error message
-      const zodError = error.errors?.[0]
-      const errorMessage = zodError?.message || 'Validation error'
+      // Zod errors have an 'issues' array, not 'errors'
+      const issues = error.issues || error.errors || []
+      const firstIssue = issues[0]
+      const errorMessage = firstIssue?.message || firstIssue?.path?.join('.') + ' validation failed' || 'Validation error'
       
       return res.status(400).json({
         success: false,
         message: errorMessage,
         error: 'Validation error',
-        details: error.errors,
+        details: issues,
       })
     }
   }

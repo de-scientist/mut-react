@@ -11,20 +11,24 @@ import type { Request, Response } from 'express'
 export const createEventSchema = z.object({
   body: z.object({
     title: z.string().min(1, 'Title is required'),
-    description: z.string().optional(),
+    description: z.string().optional().or(z.literal('')),
     date: z.string().refine(
       (val) => {
-        // Accept ISO datetime strings (with or without timezone)
-        // Also accept datetime-local format from HTML input
+        if (!val) return false
+        // Accept ISO datetime strings (with or without timezone, with or without seconds)
+        // Also accept datetime-local format from HTML input (YYYY-MM-DDTHH:mm)
         const isoRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?(\.\d{3})?(Z|[+-]\d{2}:\d{2})?$/
         const dateRegex = /^\d{4}-\d{2}-\d{2}$/
         return isoRegex.test(val) || dateRegex.test(val) || !isNaN(Date.parse(val))
       },
-      { message: 'Invalid date format' }
+      { message: 'Invalid date format. Expected format: YYYY-MM-DDTHH:mm or YYYY-MM-DD' }
     ),
-    time: z.string().optional(),
-    location: z.string().optional(),
-    imageUrl: z.string().url('Invalid image URL').optional().or(z.literal('')).nullable(),
+    time: z.string().optional().or(z.literal('')),
+    location: z.string().optional().or(z.literal('')),
+    imageUrl: z.union([
+      z.string().url('Invalid image URL'),
+      z.literal(''),
+    ]).optional(),
     isActive: z.boolean().optional(),
   }),
 })
