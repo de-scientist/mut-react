@@ -34,9 +34,28 @@ export const createPrayerRequest = async (req: Request, res: Response) => {
     }).returning()
 
     return successResponse(res, prayerRequest, 'Prayer request submitted successfully', 201)
-  } catch (error) {
+  } catch (error: any) {
     console.error('Create prayer request error:', error)
-    return errorResponse(res, 'Failed to submit prayer request', 500)
+    console.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      detail: error.detail,
+      constraint: error.constraint,
+    })
+    
+    // Handle specific database errors
+    if (error.code === '23505') { // Unique constraint violation
+      return errorResponse(res, 'A prayer request with this information already exists', 409)
+    }
+    if (error.code === '23502') { // Not null constraint violation
+      const column = error.column || 'unknown field'
+      return errorResponse(res, `Missing required field: ${column}`, 400)
+    }
+    if (error.code === '42P01') { // Table does not exist
+      return errorResponse(res, 'Database table not found. Please run migrations.', 500)
+    }
+    
+    return errorResponse(res, error.message || 'Failed to submit prayer request', 500)
   }
 }
 
