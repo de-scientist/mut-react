@@ -234,12 +234,11 @@ const MinistriesManagement = () => {
                     />
                   </div>
                   <div className="col-md-6 mb-3">
-                    <label className="form-label">Image URL</label>
-                    <input
-                      type="url"
-                      className="form-control"
+                    <ImageUpload
+                      label="Ministry Image"
                       value={formData.imageUrl}
-                      onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+                      onChange={(imageUrl) => setFormData({ ...formData, imageUrl })}
+                      className="mb-2"
                     />
                   </div>
                   <div className="col-12 mb-3">
