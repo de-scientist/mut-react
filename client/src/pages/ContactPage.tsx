@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react'
 import '../assets/mut/css/contact.css'
+import '../styles/adminForms.css'
 import ConfirmationModal from '../components/ConfirmationModal'
 import { contactAPI } from '../services/api'
 

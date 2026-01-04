@@ -24,6 +24,13 @@ export const createContact = async (req: Request, res: Response) => {
     // Data is already validated and trimmed by Zod middleware
     const { name, email, subject, message } = req.body
 
+    // Additional safety check (shouldn't be needed if Zod validation works)
+    if (!name || !email || !subject || !message) {
+      console.error('Contact form validation failed - missing fields:', { name: !!name, email: !!email, subject: !!subject, message: !!message })
+      console.error('Request body:', req.body)
+      return errorResponse(res, 'All fields are required', 400)
+    }
+
     const [contact] = await db.insert(contactSubmissions).values({
       name,
       email,
