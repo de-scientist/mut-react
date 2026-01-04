@@ -135,6 +135,7 @@ const Register = () => {
                     <button
                       type="button"
                       className="btn-close"
+                      title='submit'
                       onClick={() => setError(null)}
                     ></button>
                   </div>
