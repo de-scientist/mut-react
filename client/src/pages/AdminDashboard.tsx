@@ -203,6 +203,8 @@ const AdminDashboard = () => {
           <StatCard label="Contact Submissions" value={stats.contacts} icon="📩" link="/admin/contacts" />
           <StatCard label="New Contacts" value={stats.newContacts} color="text-warning" icon="✨" link="/admin/contacts?status=NEW" />
           <StatCard label="Subscribers" value={stats.subscriptions} icon="📧" link="/admin/newsletter" />
+          <StatCard label="Members" value={stats.members} icon="🧑‍🤝‍🧑" link="/admin/members" />
+<StatCard label="Pending Members" value={stats.pendingMembers} color="text-warning" icon="⏳" link="/admin/members?status=PENDING" />
         </section>
 
         {/* CHARTS SECTION */}
