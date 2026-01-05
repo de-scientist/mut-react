@@ -403,16 +403,16 @@ const EventsManagement = () => {
 
       <ConfirmationModal
         // Fixed prop name based on typical Modal libraries, adjust to your specific library if it uses 'isOpen'
-        show={showModal} 
-        onHide={() => {
+        isOpen={showModal} 
+        onClose={() => {
           setShowModal(false)
           setSelectedEvent(null)
           setAction(null)
         }}
-        onConfirm={() => {
-          if (action === 'delete') handleDelete()
-          else if (action === 'toggle') handleToggleActive()
-        }}
+        // onConfirm={() => {
+        //   if (action === 'delete') handleDelete()
+        //   else if (action === 'toggle') handleToggleActive()
+        // }}
         title={action === 'delete' ? 'Confirm Deletion' : 'Update Visibility'}
         message={
           action === 'delete'
