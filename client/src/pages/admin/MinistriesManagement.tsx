@@ -13,7 +13,6 @@ import {
   Globe, 
   Layout, 
   Search,
-  Filter,
   CheckCircle,
   XCircle
 } from 'lucide-react' 
@@ -79,7 +78,6 @@ const MinistriesManagement = () => {
     }
   }
 
-  // UX: Filtered Ministries logic
   const filteredMinistries = useMemo(() => {
     return ministries.filter(m => 
       m.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -157,13 +155,19 @@ const MinistriesManagement = () => {
 
   return (
     <div className="admin-management bg-light min-vh-100 py-4">
+      {/* SCOPED CSS TO AVOID INLINE STYLE WARNINGS */}
+      <style>{`
+        .stat-label { font-size: 10px; }
+        .icon-box { width: 42px; height: 42px; }
+      `}</style>
+
       <div className="container">
-        {/* Header & Quick Stats */}
         <div className="row align-items-center mb-4 g-3">
           <div className="col-md-6">
             <button 
               onClick={() => navigate('/admin')} 
               className="btn btn-link text-decoration-none text-muted p-0 mb-2 d-flex align-items-center gap-1"
+              title="Return to Dashboard"
             >
               <ArrowLeft size={14} /> Back to Dashboard
             </button>
@@ -174,21 +178,20 @@ const MinistriesManagement = () => {
             <div className="d-inline-flex gap-3 bg-white p-2 px-3 rounded-4 shadow-sm border">
                <div className="text-center border-end pe-3">
                   <span className="d-block fw-bold text-primary">{stats.total}</span>
-                  <small className="text-uppercase text-muted" style={{fontSize: '10px'}}>Total</small>
+                  <small className="text-uppercase text-muted stat-label">Total</small>
                </div>
                <div className="text-center border-end pe-3">
                   <span className="d-block fw-bold text-success">{stats.active}</span>
-                  <small className="text-uppercase text-muted" style={{fontSize: '10px'}}>Active</small>
+                  <small className="text-uppercase text-muted stat-label">Active</small>
                </div>
                <div className="text-center">
                   <span className="d-block fw-bold text-warning">{stats.inactive}</span>
-                  <small className="text-uppercase text-muted" style={{fontSize: '10px'}}>Drafts</small>
+                  <small className="text-uppercase text-muted stat-label">Drafts</small>
                </div>
             </div>
           </div>
         </div>
 
-        {/* Search & Actions Bar */}
         <div className="card border-0 shadow-sm mb-4 rounded-4">
           <div className="card-body p-3">
             <div className="row g-3 align-items-center">
@@ -208,6 +211,7 @@ const MinistriesManagement = () => {
                 <button
                   onClick={() => { setEditingMinistry(null); setShowForm(true) }}
                   className="btn btn-primary w-100 w-md-auto px-4 rounded-pill d-flex align-items-center justify-content-center gap-2"
+                  title="Create a new ministry"
                 >
                   <Plus size={18} /> New Ministry
                 </button>
@@ -219,7 +223,7 @@ const MinistriesManagement = () => {
         {error && (
           <div className="alert alert-danger border-0 shadow-sm d-flex justify-content-between align-items-center" role="alert">
             <span>{error}</span>
-            <button type="button" className="btn-close" onClick={() => setError(null)}></button>
+            <button type="button" className="btn-close" onClick={() => setError(null)} title="Dismiss error"></button>
           </div>
         )}
 
@@ -230,13 +234,12 @@ const MinistriesManagement = () => {
           onClose={() => setSuccessMessage(null)}
         />
 
-        {/* Sliding Form Container */}
         {showForm && (
           <div className="card border-0 shadow-lg mb-4 rounded-4 animate-fade-in border-top border-primary border-4">
             <div className="card-body p-4">
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <h5 className="fw-bold mb-0">{editingMinistry ? 'Edit Ministry Details' : 'Register New Ministry'}</h5>
-                <button className="btn-close" onClick={() => setShowForm(false)}></button>
+                <button className="btn-close" onClick={() => setShowForm(false)} title="Close form"></button>
               </div>
               <form onSubmit={handleSubmit}>
                 <div className="row g-4">
@@ -261,7 +264,7 @@ const MinistriesManagement = () => {
                       <span className="input-group-text bg-white border-end-0">/</span>
                       <input
                         type="text"
-                        title='web'
+                        title="Website URL Slug"
                         className="form-control bg-light border-0 py-2"
                         value={formData.slug}
                         onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
@@ -324,7 +327,6 @@ const MinistriesManagement = () => {
           </div>
         )}
 
-        {/* Data List */}
         <div className="card border-0 shadow-sm rounded-4 overflow-hidden">
           <div className="table-responsive">
             <table className="table table-hover align-middle mb-0">
@@ -349,7 +351,7 @@ const MinistriesManagement = () => {
                     <tr key={ministry.id}>
                       <td className="px-4">
                         <div className="d-flex align-items-center gap-3 py-1">
-                          <div className="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold" style={{ width: '42px', height: '42px' }}>
+                          <div className="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold icon-box">
                             {ministry.icon || <Layout size={18} />}
                           </div>
                           <div>
@@ -386,21 +388,21 @@ const MinistriesManagement = () => {
                               setShowForm(true);
                               window.scrollTo({ top: 0, behavior: 'smooth' });
                             }}
-                            title="Edit"
+                            title={`Edit ${ministry.name}`}
                           >
                             <Edit3 size={15} />
                           </button>
                           <button
                             className={`btn btn-sm px-3 ${ministry.isActive ? 'text-warning' : 'text-success'}`}
                             onClick={() => { setSelectedMinistry(ministry); setAction('toggle'); setShowModal(true) }}
-                            title={ministry.isActive ? 'Deactivate' : 'Activate'}
+                            title={ministry.isActive ? 'Deactivate Ministry' : 'Activate Ministry'}
                           >
                             <Power size={15} />
                           </button>
                           <button
                             className="btn btn-white btn-sm px-3 text-danger"
                             onClick={() => { setSelectedMinistry(ministry); setAction('delete'); setShowModal(true) }}
-                            title="Delete"
+                            title={`Delete ${ministry.name}`}
                           >
                             <Trash2 size={15} />
                           </button>
