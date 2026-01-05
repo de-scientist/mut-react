@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { memberAPI } from '../services/api'
+import { membersAPI } from '../../services/api'
 
 interface Member {
   id: string
@@ -25,7 +25,7 @@ const AdminMembersPage = () => {
   const fetchMembers = async () => {
     try {
       setLoading(true)
-      const response = await membersAPI.getAll()
+      const response = await memberAPI.getAll()
       setMembers(response.data || response.items || [])
     } catch (err: any) {
       setError(err.message || 'Failed to load members')
@@ -36,7 +36,7 @@ const AdminMembersPage = () => {
 
   const handleStatusChange = async (id: string, status: string) => {
     try {
-      await membersAPI.updateStatus(id, status)
+      await memberAPI.updateStatus(id, status)
       setMembers((prev) => prev.map(m => m.id === id ? { ...m, status } : m))
     } catch (err: any) {
       console.error('Failed to update member status:', err)

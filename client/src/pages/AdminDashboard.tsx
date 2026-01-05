@@ -11,7 +11,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  Legend,
   CartesianGrid,
 } from 'recharts'
 import '../assets/mut/css/about.css'
@@ -89,6 +88,7 @@ const AdminDashboard = () => {
 
   if (!stats) return null
 
+  /** --- BAR CHART DATA --- */
   const barData = [
     { name: 'Users', value: stats.users },
     { name: 'Events', value: stats.events },
@@ -97,19 +97,21 @@ const AdminDashboard = () => {
     { name: 'Contacts', value: stats.contacts },
     { name: 'Subscribers', value: stats.subscriptions },
     { name: 'Members', value: stats.members },
+    { name: 'Pending Members', value: stats.pendingMembers },
   ]
 
+  /** --- PIE CHART DATA --- */
   const pieData = [
     { name: 'Pending Prayers', value: stats.pendingPrayerRequests },
     { name: 'New Contacts', value: stats.newContacts },
     { name: 'Pending Members', value: stats.pendingMembers },
   ]
 
-  const COLORS = ['#f59e0b', '#2563eb']
+  const COLORS = ['#f59e0b', '#2563eb', '#ef4444'] // Added red for Pending Members
 
   return (
     <div className="admin-dashboard bg-light min-vh-100">
-      {/* COMPACT NAV/HEADER */}
+      {/* NAVBAR */}
       <nav className="navbar navbar-dark bg-primary-dark shadow-sm py-3 mb-4">
         <div className="container">
           <span className="navbar-brand mb-0 h1 fw-bold">Admin Dashboard</span>
@@ -120,13 +122,12 @@ const AdminDashboard = () => {
       </nav>
 
       <div className="container">
-        {/* WELCOME SECTION */}
         <header className="mb-4">
           <h2 className="fw-bold text-dark">System Overview</h2>
           <p className="text-muted">Real-time performance and activity metrics.</p>
         </header>
 
-        {/* QUICK NAVIGATION MENU */}
+        {/* QUICK NAVIGATION */}
         <section className="mb-5">
           <div className="card border-0 shadow-sm">
             <div className="card-header bg-white">
@@ -134,82 +135,50 @@ const AdminDashboard = () => {
             </div>
             <div className="card-body">
               <div className="row g-3">
-                <div className="col-6 col-md-4 col-lg-3">
-                  <button
-                    onClick={() => navigate('/admin/events')}
-                    className="btn btn-outline-primary w-100 d-flex flex-column align-items-center p-3"
-                  >
-                    <span className="fs-3 mb-2">📅</span>
-                    <span className="fw-medium">Events</span>
-                  </button>
-                </div>
-                <div className="col-6 col-md-4 col-lg-3">
-                  <button
-                    onClick={() => navigate('/admin/ministries')}
-                    className="btn btn-outline-primary w-100 d-flex flex-column align-items-center p-3"
-                  >
-                    <span className="fs-3 mb-2">⛪</span>
-                    <span className="fw-medium">Ministries</span>
-                  </button>
-                </div>
-                <div className="col-6 col-md-4 col-lg-3">
-                  <button
-                    onClick={() => navigate('/admin/prayer-requests')}
-                    className="btn btn-outline-primary w-100 d-flex flex-column align-items-center p-3"
-                  >
-                    <span className="fs-3 mb-2">🙏</span>
-                    <span className="fw-medium">Prayer Requests</span>
-                  </button>
-                </div>
-                <div className="col-6 col-md-4 col-lg-3">
-                  <button
-                    onClick={() => navigate('/admin/contacts')}
-                    className="btn btn-outline-primary w-100 d-flex flex-column align-items-center p-3"
-                  >
-                    <span className="fs-3 mb-2">📩</span>
-                    <span className="fw-medium">Contact Forms</span>
-                  </button>
-                </div>
-                <div className="col-6 col-md-4 col-lg-3">
-                  <button
-                    onClick={() => navigate('/admin/newsletter')}
-                    className="btn btn-outline-primary w-100 d-flex flex-column align-items-center p-3"
-                  >
-                    <span className="fs-3 mb-2">📧</span>
-                    <span className="fw-medium">Newsletter</span>
-                  </button>
-                </div>
-                <div className="col-6 col-md-4 col-lg-3">
-                  <button
-                    onClick={() => navigate('/admin/users')}
-                    className="btn btn-outline-primary w-100 d-flex flex-column align-items-center p-3"
-                  >
-                    <span className="fs-3 mb-2">👥</span>
-                    <span className="fw-medium">Users</span>
-                  </button>
-                </div>
+                {[
+                  { label: 'Events', icon: '📅', link: '/admin/events' },
+                  { label: 'Ministries', icon: '⛪', link: '/admin/ministries' },
+                  { label: 'Prayer Requests', icon: '🙏', link: '/admin/prayer-requests' },
+                  { label: 'Contacts', icon: '📩', link: '/admin/contacts' },
+                  { label: 'Newsletter', icon: '📧', link: '/admin/newsletter' },
+                  { label: 'Users', icon: '👥', link: '/admin/users' },
+                  { label: 'Members', icon: '🧑‍🤝‍🧑', link: '/admin/members' },
+                ].map((item, index) => (
+                  <div key={index} className="col-6 col-md-4 col-lg-3">
+                    <button
+                      onClick={() => navigate(item.link)}
+                      className="btn btn-outline-primary w-100 d-flex flex-column align-items-center p-3"
+                    >
+                      <span className="fs-3 mb-2">{item.icon}</span>
+                      <span className="fw-medium">{item.label}</span>
+                    </button>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* STATS CARDS GRID */}
+        {/* STATS CARDS */}
         <section className="row g-4 mb-5">
-          <StatCard label="Total Users" value={stats.users} icon="👥" link="/admin/users" />
-          <StatCard label="Events" value={stats.events} icon="📅" link="/admin/events" />
-          <StatCard label="Ministries" value={stats.ministries} icon="⛪" link="/admin/ministries" />
-          <StatCard label="Prayer Requests" value={stats.prayerRequests} icon="🙏" link="/admin/prayer-requests" />
-          <StatCard label="Pending Prayers" value={stats.pendingPrayerRequests} color="text-warning" icon="⏳" link="/admin/prayer-requests?status=PENDING" />
-          <StatCard label="Contact Submissions" value={stats.contacts} icon="📩" link="/admin/contacts" />
-          <StatCard label="New Contacts" value={stats.newContacts} color="text-warning" icon="✨" link="/admin/contacts?status=NEW" />
-          <StatCard label="Subscribers" value={stats.subscriptions} icon="📧" link="/admin/newsletter" />
-          <StatCard label="Members" value={stats.members} icon="🧑‍🤝‍🧑" link="/admin/members" />
-<StatCard label="Pending Members" value={stats.pendingMembers} color="text-warning" icon="⏳" link="/admin/members?status=PENDING" />
+          {[
+            { label: 'Total Users', value: stats.users, icon: '👥', link: '/admin/users' },
+            { label: 'Events', value: stats.events, icon: '📅', link: '/admin/events' },
+            { label: 'Ministries', value: stats.ministries, icon: '⛪', link: '/admin/ministries' },
+            { label: 'Prayer Requests', value: stats.prayerRequests, icon: '🙏', link: '/admin/prayer-requests' },
+            { label: 'Pending Prayers', value: stats.pendingPrayerRequests, icon: '⏳', color: 'text-warning', link: '/admin/prayer-requests?status=PENDING' },
+            { label: 'Contact Submissions', value: stats.contacts, icon: '📩', link: '/admin/contacts' },
+            { label: 'New Contacts', value: stats.newContacts, icon: '✨', color: 'text-warning', link: '/admin/contacts?status=NEW' },
+            { label: 'Subscribers', value: stats.subscriptions, icon: '📧', link: '/admin/newsletter' },
+            { label: 'Members', value: stats.members, icon: '🧑‍🤝‍🧑', link: '/admin/members' },
+            { label: 'Pending Members', value: stats.pendingMembers, icon: '⏳', color: 'text-warning', link: '/admin/members?status=PENDING' },
+          ].map((item, idx) => (
+            <StatCard key={idx} {...item} />
+          ))}
         </section>
 
-        {/* CHARTS SECTION */}
+        {/* CHARTS */}
         <section className="row g-4 pb-5">
-          {/* BAR CHART */}
           <div className="col-lg-8">
             <div className="card border-0 shadow-sm p-4 h-100">
               <div className="d-flex justify-content-between align-items-center mb-4">
@@ -231,7 +200,6 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          {/* PIE CHART / TASKS */}
           <div className="col-lg-4">
             <div className="card border-0 shadow-sm p-4 h-100">
               <h5 className="fw-bold mb-4 text-secondary">Action Required</h5>
@@ -268,7 +236,7 @@ const AdminDashboard = () => {
   )
 }
 
-/** Reusable Stat Card */
+/** --- STAT CARD --- */
 interface StatCardProps {
   label: string
   value: number
