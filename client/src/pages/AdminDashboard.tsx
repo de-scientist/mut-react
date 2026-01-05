@@ -101,6 +101,7 @@ const AdminDashboard = () => {
   const pieData = [
     { name: 'Pending Prayers', value: stats.pendingPrayerRequests },
     { name: 'New Contacts', value: stats.newContacts },
+    { name: 'Pending Members', value: stats.pendingMembers },
   ]
 
   const COLORS = ['#f59e0b', '#2563eb']
