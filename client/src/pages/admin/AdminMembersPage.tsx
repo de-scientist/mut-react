@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { membersAPI } from '../services/api'
+import { memberAPI } from '../services/api'
 
 interface Member {
   id: string
