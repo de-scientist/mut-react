@@ -65,6 +65,7 @@ function App() {
         <Route path="admin/contacts" element={<ContactSubmissionsManagement />} />
         <Route path="admin/newsletter" element={<NewsletterSubscriptionsManagement />} />
         <Route path="admin/users" element={<UsersManagement />} />
+        <Route path="admin/members" element={<AdminMembersPage />} />
         <Route path="register" element={<Register />} />
 
         {/* Ministry detail routes */}
