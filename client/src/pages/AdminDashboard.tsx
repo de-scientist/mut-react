@@ -94,6 +94,7 @@ const AdminDashboard = () => {
     { name: 'Prayers', value: stats.prayerRequests },
     { name: 'Contacts', value: stats.contacts },
     { name: 'Subscribers', value: stats.subscriptions },
+    { name: 'Members', value: stats.members },
   ]
 
   const pieData = [
