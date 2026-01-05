@@ -86,13 +86,14 @@ const Register = () => {
 
     // Validation
     const newErrors = {
-      name: !name.trim(),
-      email: !email.trim() || !emailPattern.test(email.trim()),
-      yearOfStudy: !yearOfStudy.trim(),
-      course: !course.trim(),
-      ministry1: false,
-      ministry2: ministry2 && ministry2 === ministry1,
-    }
+  name: !name.trim(),
+  email: !email.trim() || !emailPattern.test(email.trim()),
+  yearOfStudy: !yearOfStudy.trim(),
+  course: !course.trim(),
+  ministry1: false,
+  // Fix: Force the result to be a boolean using !!
+  ministry2: !!(ministry2 && ministry2 === ministry1), 
+}
 
     setErrors(newErrors)
 
