@@ -6,6 +6,7 @@ import {
   prayerRequests,
   contactSubmissions,
   newsletterSubscriptions,
+  members,
 } from '../../db/schema.js'
 import { successResponse, errorResponse } from '../../utils/response.js'
 import { sql, eq } from 'drizzle-orm'
@@ -25,24 +26,19 @@ export const getDashboardStats = async (req: Request, res: Response) => {
       subscriptionsCount,
       pendingPrayerRequestsCount,
       newContactsCount,
+      membersCount,
+      pendingMembersCount,
     ] = await Promise.all([
       db.select({ count: sql<number>`count(*)` }).from(users),
       db.select({ count: sql<number>`count(*)` }).from(events),
       db.select({ count: sql<number>`count(*)` }).from(ministries),
       db.select({ count: sql<number>`count(*)` }).from(prayerRequests),
       db.select({ count: sql<number>`count(*)` }).from(contactSubmissions),
-      db
-        .select({ count: sql<number>`count(*)` })
-        .from(newsletterSubscriptions)
-        .where(eq(newsletterSubscriptions.isActive, true)),
-      db
-        .select({ count: sql<number>`count(*)` })
-        .from(prayerRequests)
-        .where(eq(prayerRequests.status, 'PENDING')),
-      db
-        .select({ count: sql<number>`count(*)` })
-        .from(contactSubmissions)
-        .where(eq(contactSubmissions.status, 'NEW')),
+      db.select({ count: sql<number>`count(*)` }).from(newsletterSubscriptions).where(eq(newsletterSubscriptions.isActive, true)),
+      db.select({ count: sql<number>`count(*)` }).from(prayerRequests).where(eq(prayerRequests.status, 'PENDING')),
+      db.select({ count: sql<number>`count(*)` }).from(contactSubmissions).where(eq(contactSubmissions.status, 'NEW')),
+      db.select({ count: sql<number>`count(*)` }).from(members),
+      db.select({ count: sql<number>`count(*)` }).from(members).where(eq(members.status, 'PENDING')),
     ])
 
     return successResponse(
@@ -56,6 +52,8 @@ export const getDashboardStats = async (req: Request, res: Response) => {
         subscriptions: Number(subscriptionsCount[0]?.count ?? 0),
         pendingPrayerRequests: Number(pendingPrayerRequestsCount[0]?.count ?? 0),
         newContacts: Number(newContactsCount[0]?.count ?? 0),
+        members: Number(membersCount[0]?.count ?? 0),
+        pendingMembers: Number(pendingMembersCount[0]?.count ?? 0),
       },
       'Dashboard statistics retrieved successfully'
     )
