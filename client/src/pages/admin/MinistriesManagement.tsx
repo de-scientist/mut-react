@@ -261,6 +261,7 @@ const MinistriesManagement = () => {
                       <span className="input-group-text bg-white border-end-0">/</span>
                       <input
                         type="text"
+                        title='web'
                         className="form-control bg-light border-0 py-2"
                         value={formData.slug}
                         onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
