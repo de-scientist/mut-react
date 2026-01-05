@@ -90,7 +90,7 @@ const Navbar = () => {
 
         /* Scrolled state: Using high-contrast Navy/Dark theme */
         .navbar-scrolled {
-          background: rgba(10, 25, 47, 0.95) !important;
+          background: rgba(7, 29, 61, 0.95) !important;
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           padding: 0.6rem 0;
