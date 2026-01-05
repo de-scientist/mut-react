@@ -26,6 +26,7 @@ interface DashboardStats {
   newContacts: number
   subscriptions: number
   members: number
+  pendingMembers: number
 }
 
 const AdminDashboard = () => {
