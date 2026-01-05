@@ -18,6 +18,7 @@ import PrayerRequestsManagement from './pages/admin/PrayerRequestsManagement'
 import ContactSubmissionsManagement from './pages/admin/ContactSubmissionsManagement'
 import NewsletterSubscriptionsManagement from './pages/admin/NewsletterSubscriptionsManagement'
 import UsersManagement from './pages/admin/UsersManagement'
+import AdminMembersPage from './pages/admin/AdminMembersPage'
 
 // Ministry detail pages
 import MusicMinistryPage from './pages/ministries/MusicMinistryPage'
