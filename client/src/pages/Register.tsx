@@ -109,7 +109,7 @@ const Register = () => {
 
     try {
       setLoading(true)
-      const response = await membersAPI.register({
+      await membersAPI.register({
         name: name.trim(),
         email: email.trim(),
         yearOfStudy: yearOfStudy.trim(),

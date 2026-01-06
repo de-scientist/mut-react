@@ -95,7 +95,7 @@ const MinistriesManagement = () => {
     return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
   }
 
-  const handleDelete = async () => {
+  async () => {
     if (!selectedMinistry) return
     try {
       await ministriesAPI.delete(selectedMinistry.slug)
@@ -108,7 +108,7 @@ const MinistriesManagement = () => {
     }
   }
 
-  const handleToggleActive = async () => {
+  async () => {
     if (!selectedMinistry) return
     try {
       await ministriesAPI.update(selectedMinistry.slug, { isActive: !selectedMinistry.isActive })

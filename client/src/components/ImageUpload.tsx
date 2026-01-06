@@ -1,5 +1,6 @@
-import { useState, useRef, ChangeEvent, useEffect } from 'react'
-import { uploadImageToCloudinary, getImageUrl, type CloudinaryUploadResponse } from '../services/cloudinary'
+import { useState, useRef, useEffect } from 'react'
+import type { ChangeEvent } from 'react'
+import { uploadImageToCloudinary, getImageUrl } from '../services/cloudinary'
 import '../styles/imageUpload.css'
 
 interface ImageUploadProps {
@@ -169,6 +170,7 @@ const ImageUpload = ({
                 <div
                   className="progress-bar progress-bar-striped progress-bar-animated"
                   role="progressbar"
+                  title='img'
                   style={{ width: `${uploadProgress}%` }}
                   aria-valuenow={uploadProgress}
                   aria-valuemin={0}
@@ -184,6 +186,7 @@ const ImageUpload = ({
         <input
           ref={fileInputRef}
           type="file"
+          title='upload'
           accept={acceptedFormats.join(',')}
           onChange={handleFileSelect}
           className="d-none"

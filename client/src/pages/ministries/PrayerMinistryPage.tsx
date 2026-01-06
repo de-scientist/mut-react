@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { type FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTimedSuccess } from '../../hooks/useTimedSuccess'
 import '../../assets/mut/css/prayer.css'

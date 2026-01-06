@@ -84,7 +84,7 @@ const AboutPage = () => {
                   <a href="https://focuskenya.org/" target="_blank" rel="noopener noreferrer" className="fw-bold text-decoration-none text-primary">
                     Fellowship of Christian Unions - Kenya (FOCUS-KENYA)
                   </a>
-                  , we operate under a national framework of support and accountability. This ensures our mission remains theologically sound and impactful.
+                  , we operate under a national framework of support and accountability.
                 </p>
               </div>
             </div>
@@ -107,9 +107,9 @@ const AboutPage = () => {
 
           <div className="row g-4">
             {[
-              { icon: 'fa-bullhorn', color: 'bg-primary-subtle text-primary', title: 'Our Motto', text: '"To Inspire Love, Hope, and Godliness."', desc: 'A daily call to action in every interaction.' },
-              { icon: 'fa-eye', color: 'bg-success-subtle text-success', title: 'Our Vision', text: '"To be a model Christian Union cultivating Christ-centeredness."', desc: 'Aspiring to be an exemplary union for societal influence.' },
-              { icon: 'fa-hands-helping', color: 'bg-warning-subtle text-warning', title: 'Our Mission', text: '"To raise a family well-equipped in all aspects of life."', desc: 'Equipping members holistically and reaching out beyond.' }
+              { icon: 'fa-bullhorn', color: 'bg-primary-subtle text-primary', title: 'Our Motto', text: '"To Inspire Love, Hope, and Godliness."' },
+              { icon: 'fa-eye', color: 'bg-success-subtle text-success', title: 'Our Vision', text: '"To be a model Christian Union cultivating Christ-centeredness."' },
+              { icon: 'fa-hands-helping', color: 'bg-warning-subtle text-warning', title: 'Our Mission', text: '"To raise a family well-equipped in all aspects of life."' }
             ].map((principle, idx) => (
               <div className="col-md-4" key={idx} data-aos="zoom-in" data-aos-delay={idx * 100}>
                 <div className="card border-0 shadow-sm h-100 p-4 text-center rounded-4">
@@ -117,8 +117,33 @@ const AboutPage = () => {
                     <i className={`fas ${principle.icon} fs-3`} />
                   </div>
                   <h4 className="fw-bold">{principle.title}</h4>
-                  <p className="fw-semibold text-primary mb-3 small">{principle.text}</p>
-                  <p className="text-muted mb-0">{principle.desc}</p>
+                  <p className="fw-semibold text-primary mb-0 small">{principle.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* AIMS SECTION - NEWLY MAPPED */}
+      <section className="py-5 aims-section">
+        <div className="container py-lg-4">
+          <div className="text-center mb-5">
+            <h2 className="fw-bold mb-2">Our Aims</h2>
+            <p className="text-muted">The core objectives that drive our fellowship and activities.</p>
+            <div className="mx-auto bg-primary rounded" style={{ height: '4px', width: '60px' }}></div>
+          </div>
+          <div className="row g-4">
+            {aims.map((aim, index) => (
+              <div key={index} className="col-md-4" data-aos="fade-up" data-aos-delay={aim.delay}>
+                <div className="card border-0 shadow-sm h-100 p-4 rounded-4 transition-all shadow-hover">
+                  <div className="d-flex align-items-center mb-3">
+                    <div className="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', flexShrink: 0 }}>
+                      <i className={`fas ${aim.icon}`} />
+                    </div>
+                    <h5 className="fw-bold mb-0">{aim.title}</h5>
+                  </div>
+                  <p className="text-muted small mb-0">{aim.description}</p>
                 </div>
               </div>
             ))}
@@ -156,7 +181,6 @@ const AboutPage = () => {
             <h2 className="fw-bold mb-2">The Executive Committee</h2>
             <p className="text-muted">Leading MUTCU with dedication for the 2024/2025 Spiritual Year.</p>
           </div>
-
           <div className="row g-4">
             {executiveMembers.map((member, index) => (
               <div key={index} className="col-6 col-md-4 col-lg-3" data-aos="fade-up">
@@ -186,7 +210,7 @@ const AboutPage = () => {
           <h2 className="fw-bold text-center mb-5">Why Join MUTCU?</h2>
           <div className="row g-4">
             {benefits.map((benefit, idx) => (
-              <div className="col-md-4" key={idx}>
+              <div className="col-md-4" key={idx} data-aos="fade-up" data-aos-delay={benefit.delay}>
                 <div className="h-100 p-4 rounded-4" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}>
                   <i className={`fas ${benefit.icon} mb-3 fs-3 text-warning`} />
                   <h5 className="fw-bold">{benefit.title}</h5>
@@ -206,7 +230,6 @@ const AboutPage = () => {
         </div>
       </section>
       
-      {/* ADDED STYLES FOR HOVER EFFECTS */}
       <style>{`
         .shadow-hover:hover {
           transform: translateY(-10px);

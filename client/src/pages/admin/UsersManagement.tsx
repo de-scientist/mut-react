@@ -6,7 +6,7 @@ import {
   ArrowLeft, 
   UserPlus, 
   ShieldCheck, 
-  ShieldAlert, 
+ // ShieldAlert, 
   UserCircle, 
   Edit3, 
   UserX, 
@@ -67,7 +67,7 @@ const UsersManagement = () => {
     }
   }
 
-  const handleDeactivate = async () => {
+  async () => {
     if (!selectedUser) return
     try {
       await usersAPI.deactivate(selectedUser.id)

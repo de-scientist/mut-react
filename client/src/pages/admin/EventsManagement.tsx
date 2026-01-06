@@ -77,7 +77,7 @@ const EventsManagement = () => {
     }
   }
 
-  const handleDelete = async () => {
+  async () => {
     if (!selectedEvent) return
     try {
       await eventsAPI.delete(selectedEvent.id)
@@ -90,7 +90,7 @@ const EventsManagement = () => {
     }
   }
 
-  const handleToggleActive = async () => {
+   async () => {
     if (!selectedEvent) return
     try {
       await eventsAPI.update(selectedEvent.id, { isActive: !selectedEvent.isActive })
