@@ -72,3 +72,21 @@ mut-react/
 │   │   ├── pages/         # View logic (Committees, Ministries)
 │   │   └── services/      # API client functions
 └── AdminReadme.md         # Detailed Admin documentation
+
+🚀 Quick Start1. Environment ConfigurationCreate .env files in both the client/ and backend/ directories.Backend (/backend/.env):Code snippetDATABASE_URL="postgresql://user:pass@localhost:5432/mutcu_db"
+JWT_SECRET="your_secure_jwt_key"
+FRONTEND_URL="http://localhost:5173"
+ADMIN_EMAIL="admin@mutcu.ac.ke"
+ADMIN_PASSWORD="admin_secure_password"
+Frontend (/client/.env):Code snippetVITE_API_URL="http://localhost:5000/api"
+2. Installation & LaunchBash# Clone the repository
+git clone [https://github.com/your-username/mut-react.git](https://github.com/your-username/mut-react.git)
+
+# Install & Run Backend
+cd backend && npm install
+npm run dev
+
+# Install & Run Frontend (In a new terminal)
+cd client && npm install
+npm run dev
+📡 Primary API EndpointsMethodEndpointDescriptionAccessPOST/api/auth/loginAuthenticate & get JWTPublicGET/api/eventsFetch all upcoming eventsPublicPOST/api/prayerSubmit a prayer requestPublicGET/api/admin/statsDashboard metricsAdminPATCH/api/contact/:idUpdate inquiry statusAdmin🧭 Design PhilosophyWe follow a "Leadership-First" approach. Every ministry and committee page adheres to a standardized flow:Hero: Spiritual theme and identity.Profile: Current office holders.Vision: Mandate and objectives.Action: Roles and meeting times.🛡️ License & OwnershipProprietary Software. Copyright © 2026 Murang'a University of Technology Christian Union.Unauthorized duplication or redistribution is strictly prohibited.Lead Architect: Mark Kinyanjui (De-Scientist) CEO — TechVision Studios & SolutionsBuilt with discipline.Last Updated: January 2026
