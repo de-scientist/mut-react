@@ -206,6 +206,7 @@ const MediaManagement = () => {
                     <label className="form-label fw-bold small text-uppercase">Description</label>
                     <textarea
                       className="form-control bg-light border-0"
+                      title='desc'
                       rows={3}
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
