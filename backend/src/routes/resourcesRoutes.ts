@@ -7,7 +7,7 @@ import {
   toggleResource,
   deleteResource,
 } from '../modules/resources/resourcesController.js'
-import { requireAdmin } from '../middleware/auth.js'
+import { authenticate, requireAdmin } from '../middlewares/auth.js'
 
 const router = express.Router()
 
