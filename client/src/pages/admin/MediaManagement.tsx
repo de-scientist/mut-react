@@ -180,7 +180,7 @@ const MediaManagement = () => {
         {showForm && (
           <div className="card mb-5 shadow-sm rounded-4 overflow-hidden">
             <div className="card-header bg-white py-3 border-bottom">
-              <h5 className="mb-0 fw-bold">{editingItem ? '📝 Edit Media' : '✨ Add New Media'}</h5>
+              <h5 className="mb-0 fw-bold">{editingItem ? '📝 Edit Media' : ' Add New Media'}</h5>
             </div>
             <div className="card-body p-4">
               <form onSubmit={handleSubmit}>
