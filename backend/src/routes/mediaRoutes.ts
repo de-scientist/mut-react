@@ -14,6 +14,7 @@ router.use(requireAdmin)
 router.post('/admin', createGalleryItem)
 router.put('/admin/:id', updateGalleryItem)
 router.delete('/admin/:id', deleteGalleryItem)
+router.patch('/admin/:id/toggle', toggleGalleryItem)
 router.get('/admin', getAllGalleryAdmin)
 
 
