@@ -101,7 +101,7 @@ const MediaManagement = () => {
     }
   }
 
-   async () => {
+  const handleDelete = async () => {
     if (!selectedItem) return
     try {
       await mediaAPI.delete(selectedItem.id)
@@ -114,7 +114,7 @@ const MediaManagement = () => {
     }
   }
 
-  async () => {
+  const handleToggle = async () => {
     if (!selectedItem) return
     try {
       await mediaAPI.toggle(selectedItem.id)
@@ -152,14 +152,16 @@ const MediaManagement = () => {
           </div>
           <div className="d-flex gap-2">
             <button
-              onClick={() => navigate('/admin')}
+              aria-label="Back to Dashboard"
               className="btn btn-white border shadow-sm d-flex align-items-center gap-2"
+              onClick={() => navigate('/admin')}
             >
               <ArrowLeft size={18} /> Dashboard
             </button>
             <button
-              onClick={() => { resetForm(); setEditingItem(null); setShowForm(true) }}
+              aria-label="Add new media"
               className="btn btn-primary shadow-sm d-flex align-items-center gap-2"
+              onClick={() => { resetForm(); setEditingItem(null); setShowForm(true) }}
             >
               <Plus size={18} /> Add Media
             </button>
@@ -187,7 +189,7 @@ const MediaManagement = () => {
                     <label className="form-label fw-bold small text-uppercase">Title *</label>
                     <input
                       type="text"
-                      title='title'
+                      placeholder='Add a title'
                       className="form-control form-control-lg bg-light border-0"
                       value={formData.title}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
@@ -198,7 +200,7 @@ const MediaManagement = () => {
                     <label className="form-label fw-bold small text-uppercase">Category</label>
                     <input
                       type="text"
-                      title='cat'
+                      placeholder='Enter a category'
                       className="form-control form-control-lg bg-light border-0"
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
@@ -208,7 +210,7 @@ const MediaManagement = () => {
                     <label className="form-label fw-bold small text-uppercase">Description</label>
                     <textarea
                       className="form-control bg-light border-0"
-                      title='desc'
+                      placeholder='Add a description'
                       rows={3}
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -224,8 +226,8 @@ const MediaManagement = () => {
                   <div className="col-12">
                     <div className="form-check form-switch p-0 ps-5">
                       <input
+                        aria-label="Toggle visibility to public"
                         className="form-check-input"
-                        title='toggle'
                         type="checkbox"
                         checked={formData.isActive}
                         onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
@@ -235,11 +237,12 @@ const MediaManagement = () => {
                   </div>
                 </div>
                 <div className="d-flex gap-2 mt-4 pt-3 border-top">
-                  <button type="submit" className="btn btn-primary px-4 py-2 rounded-pill">
+                  <button type="submit" aria-label={editingItem ? 'Save changes' : 'Add media'} className="btn btn-primary px-4 py-2 rounded-pill">
                     {editingItem ? 'Save Changes' : 'Add Media'}
                   </button>
                   <button
                     type="button"
+                    aria-label="Cancel changes"
                     className="btn btn-light px-4 py-2 rounded-pill"
                     onClick={() => { setShowForm(false); setEditingItem(null); resetForm() }}
                   >
@@ -286,9 +289,29 @@ const MediaManagement = () => {
                       </td>
                       <td className="text-end">
                         <div className="d-flex justify-content-end gap-2">
-                          <button title='update' className="btn btn-sm btn-light-primary rounded-circle p-2" onClick={() => openEditForm(item)}><Edit3 size={16} /></button>
-                          <button className={`btn btn-sm rounded-circle p-2 ${item.isActive ? 'btn-light-warning' : 'btn-light-success'}`} onClick={() => { setSelectedItem(item); setAction('toggle'); setShowModal(true) }}><Power size={16} /></button>
-                          <button title="Delete" className="btn btn-sm btn-light-danger rounded-circle p-2" onClick={() => { setSelectedItem(item); setAction('delete'); setShowModal(true) }}><Trash2 size={16} /></button>
+                          <button
+                            aria-label={`Edit ${item.title}`}
+                            className="btn btn-sm btn-light-primary rounded-circle p-2"
+                            onClick={() => openEditForm(item)}
+                          >
+                            <Edit3 size={16} />
+                          </button>
+
+                          <button
+                            aria-label={`${item.isActive ? 'Deactivate' : 'Activate'} ${item.title}`}
+                            className={`btn btn-sm rounded-circle p-2 ${item.isActive ? 'btn-light-warning' : 'btn-light-success'}`}
+                            onClick={() => { setSelectedItem(item); setAction('toggle'); setShowModal(true) }}
+                          >
+                            <Power size={16} />
+                          </button>
+
+                          <button
+                            aria-label={`Delete ${item.title}`}
+                            className="btn btn-sm btn-light-danger rounded-circle p-2"
+                            onClick={() => { setSelectedItem(item); setAction('delete'); setShowModal(true) }}
+                          >
+                            <Trash2 size={16} />
+                          </button>
                         </div>
                       </td>
                     </tr>
