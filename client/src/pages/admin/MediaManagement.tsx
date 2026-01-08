@@ -299,7 +299,7 @@ const MediaManagement = () => {
       <ConfirmationModal
         isOpen={showModal}
         onClose={() => { setShowModal(false); setSelectedItem(null); setAction(null) }}
-        onConfirm={() => { if(action === 'delete') handleDelete(); else if(action === 'toggle') handleToggle(); }}
+        // onConfirm={() => { if(action === 'delete') handleDelete(); else if(action === 'toggle') handleToggle(); }}
         title={action === 'delete' ? 'Confirm Deletion' : 'Update Visibility'}
         message={action === 'delete' ? `Are you sure you want to delete "${selectedItem?.title}"?` : `Do you want to ${selectedItem?.isActive ? 'hide' : 'show'} "${selectedItem?.title}"?`}
       />
