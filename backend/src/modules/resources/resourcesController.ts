@@ -1,4 +1,4 @@
-import { db } from '../../db/index.js'
+import db from '../../config/drizzle.js'
 import { resources } from '../../db/schema.js'
 import { successResponse, errorResponse } from '../../utils/response.js'
 import { eq } from 'drizzle-orm'
