@@ -31,16 +31,24 @@ export const getAllGalleryAdmin = async (_req: Request, res: Response) => {
 
 export const createGalleryItem = async (req: Request, res: Response) => {
   try {
+    const { title, imageUrl } = req.body
+
+    if (!title || !imageUrl) {
+      return errorResponse(res, 'Title and imageUrl are required', 400)
+    }
+
     const [created] = await db
       .insert(media)
       .values(req.body)
       .returning()
+
     return successResponse(res, created, 'Gallery item created')
   } catch (err) {
     console.error(err)
     return errorResponse(res, 'Failed to create gallery item')
   }
 }
+
 
 export const updateGalleryItem = async (req: Request, res: Response) => {
   try {
