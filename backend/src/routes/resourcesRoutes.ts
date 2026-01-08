@@ -11,6 +11,10 @@ import { authenticate, requireAdmin } from '../middlewares/auth.js'
 
 const router = express.Router()
 
+// All routes protected for admin
+router.use(authenticate)
+router.use(requireAdmin)
+
 // Public
 router.get('/', getResources)
 
