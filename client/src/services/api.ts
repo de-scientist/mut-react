@@ -237,10 +237,6 @@ export const usersAPI = {
     }),
 }
 
-// Resources API (optional backend support)
-export const resourcesAPI = {
-  getAll: () => apiRequest('/resources'),
-}
 
 // Members API
 export const membersAPI = {
