@@ -187,6 +187,7 @@ const MediaManagement = () => {
                     <label className="form-label fw-bold small text-uppercase">Title *</label>
                     <input
                       type="text"
+                      title='title'
                       className="form-control form-control-lg bg-light border-0"
                       value={formData.title}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
@@ -197,6 +198,7 @@ const MediaManagement = () => {
                     <label className="form-label fw-bold small text-uppercase">Category</label>
                     <input
                       type="text"
+                      title='cat'
                       className="form-control form-control-lg bg-light border-0"
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
