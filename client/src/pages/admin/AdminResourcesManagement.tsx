@@ -424,7 +424,7 @@ const AdminResourcesManagement = () => {
           setSelectedResource(null)
           setAction(null)
         }}
-        onConfirm={action === 'delete' ? handleDelete : handleToggle}
+        // onConfirm={action === 'delete' ? handleDelete : handleToggle}
         title={action === 'delete' ? 'Delete Resource' : 'Change Visibility'}
         message={
           action === 'delete'
