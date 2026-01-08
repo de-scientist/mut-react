@@ -329,7 +329,7 @@ export const mediaAPI = {
   // Public gallery items
   getAll: (params: Record<string, string> = {}) => {
     const queryString = new URLSearchParams(params).toString()
-    return apiRequest(`/media${queryString ? `?${queryString}` : ''}`)
+    return apiRequest(`/media/admin${queryString ? `?${queryString}` : ''}`)
   },
 
   // Admin: get all media items
