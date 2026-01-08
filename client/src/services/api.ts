@@ -324,6 +324,47 @@ export const resourcesAPI = {
     }),
 }
 
+// Media API
+export const mediaAPI = {
+  // Public gallery items
+  getAll: (params: Record<string, string> = {}) => {
+    const queryString = new URLSearchParams(params).toString()
+    return apiRequest(`/media${queryString ? `?${queryString}` : ''}`)
+  },
+
+  // Admin: get all media items
+  adminGetAll: (params: Record<string, string> = {}) => {
+    const queryString = new URLSearchParams(params).toString()
+    return apiRequest(`/media/admin${queryString ? `?${queryString}` : ''}`)
+  },
+
+  // Admin: create media
+  create: (mediaData: FormData) =>
+    apiRequest('/media/admin', {
+      method: 'POST',
+      body: mediaData, // FormData handles files
+    }),
+
+  // Admin: update media
+  update: (id: string, mediaData: FormData) =>
+    apiRequest(`/media/admin/${id}`, {
+      method: 'PUT',
+      body: mediaData,
+    }),
+
+  // Admin: toggle visibility
+  toggle: (id: string) =>
+    apiRequest(`/media/admin/${id}/toggle`, {
+      method: 'PATCH',
+    }),
+
+  // Admin: delete media
+  delete: (id: string) =>
+    apiRequest(`/media/admin/${id}`, {
+      method: 'DELETE',
+    }),
+}
+
 
 export default {
   auth: authAPI,
