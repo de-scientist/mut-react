@@ -1,6 +1,6 @@
 import express from 'express'
-import { createGalleryItem, getGallery, updateGalleryItem } from '../controllers/mediaController.ts'
-import { upload } from '../middleware/upload.js'
+import { createGalleryItem, getGallery, updateGalleryItem, getAllGalleryAdmin } from '../modules/media/mediaController.ts'
+
 
 const router = express.Router()
 
