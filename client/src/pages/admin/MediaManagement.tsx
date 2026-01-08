@@ -282,9 +282,9 @@ const MediaManagement = () => {
                       </td>
                       <td className="text-end">
                         <div className="d-flex justify-content-end gap-2">
-                          <button className="btn btn-sm btn-light-primary rounded-circle p-2" onClick={() => openEditForm(item)}><Edit3 size={16} /></button>
+                          <button title='update' className="btn btn-sm btn-light-primary rounded-circle p-2" onClick={() => openEditForm(item)}><Edit3 size={16} /></button>
                           <button className={`btn btn-sm rounded-circle p-2 ${item.isActive ? 'btn-light-warning' : 'btn-light-success'}`} onClick={() => { setSelectedItem(item); setAction('toggle'); setShowModal(true) }}><Power size={16} /></button>
-                          <button className="btn btn-sm btn-light-danger rounded-circle p-2" onClick={() => { setSelectedItem(item); setAction('delete'); setShowModal(true) }}><Trash2 size={16} /></button>
+                          <button title="Delete" className="btn btn-sm btn-light-danger rounded-circle p-2" onClick={() => { setSelectedItem(item); setAction('delete'); setShowModal(true) }}><Trash2 size={16} /></button>
                         </div>
                       </td>
                     </tr>
