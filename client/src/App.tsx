@@ -19,6 +19,7 @@ import ContactSubmissionsManagement from './pages/admin/ContactSubmissionsManage
 import NewsletterSubscriptionsManagement from './pages/admin/NewsletterSubscriptionsManagement'
 import UsersManagement from './pages/admin/UsersManagement'
 import AdminMembersPage from './pages/admin/AdminMembersPage'
+import AdminResourcesManagement from './pages/admin/AdminResourcesManagement'
 
 // Ministry detail pages
 import MusicMinistryPage from './pages/ministries/MusicMinistryPage'
