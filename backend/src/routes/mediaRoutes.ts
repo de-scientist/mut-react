@@ -6,7 +6,7 @@ import {
   getAllGalleryAdmin,
   deleteGalleryItem,
   toggleGalleryItem,
-} from '../modules/media/mediaController.js'
+} from '../modules/media/mediaController.ts'
 import { authenticate, requireAdmin } from '../middlewares/auth.js'
 
 const router = express.Router()
