@@ -17,6 +17,7 @@ import adminRoutes from './routes/adminRoutes.ts'
 import usersRoutes from './routes/usersRoutes.ts'
 import resourcesRoutes from './routes/resourcesRoutes.ts'
 import memberRoutes from './routes/memberRoutes.ts'
+import mediaRoutes from './routes/mediaRoutes.ts'
 
 const app = express()
 
