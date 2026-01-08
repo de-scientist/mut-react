@@ -11,12 +11,12 @@ import { authenticate, requireAdmin } from '../middlewares/auth.js'
 
 const router = express.Router()
 
+// Public
+router.get('/', getResources)
+
 // All routes protected for admin
 router.use(authenticate)
 router.use(requireAdmin)
-
-// Public
-router.get('/', getResources)
 
 // Admin
 router.get('/admin', getAllResourcesAdmin)
