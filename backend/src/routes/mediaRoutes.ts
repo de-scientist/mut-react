@@ -1,6 +1,6 @@
 import express from 'express'
 import { createGalleryItem, getGallery, updateGalleryItem, getAllGalleryAdmin, deleteGalleryItem } from '../modules/media/mediaController.ts'
-
+import { authenticate, requireAdmin } from '../middlewares/auth.js'
 
 const router = express.Router()
 
