@@ -326,44 +326,45 @@ export const resourcesAPI = {
 
 // Media API
 export const mediaAPI = {
-  // Public gallery items
   getAll: (params: Record<string, string> = {}) => {
     const queryString = new URLSearchParams(params).toString()
     return apiRequest(`/media/admin${queryString ? `?${queryString}` : ''}`)
   },
 
-  // Admin: get all media items
   adminGetAll: (params: Record<string, string> = {}) => {
     const queryString = new URLSearchParams(params).toString()
     return apiRequest(`/media/admin${queryString ? `?${queryString}` : ''}`)
   },
 
-  // Admin: create media
-  create: (mediaData: FormData) =>
+  create: (mediaData: {
+    title: string
+    description?: string
+    category?: string
+    imageUrl: string
+    isActive: boolean
+  }) =>
     apiRequest('/media/admin', {
       method: 'POST',
-      body: mediaData, // FormData handles files
+      body: JSON.stringify(mediaData),
     }),
 
-  // Admin: update media
-  update: (id: string, mediaData: FormData) =>
+  update: (id: string, mediaData: any) =>
     apiRequest(`/media/admin/${id}`, {
       method: 'PUT',
-      body: mediaData,
+      body: JSON.stringify(mediaData),
     }),
 
-  // Admin: toggle visibility
   toggle: (id: string) =>
     apiRequest(`/media/admin/${id}/toggle`, {
       method: 'PATCH',
     }),
 
-  // Admin: delete media
   delete: (id: string) =>
     apiRequest(`/media/admin/${id}`, {
       method: 'DELETE',
     }),
 }
+
 
 
 export default {
