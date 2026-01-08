@@ -222,6 +222,7 @@ const MediaManagement = () => {
                     <div className="form-check form-switch p-0 ps-5">
                       <input
                         className="form-check-input"
+                        title='toggle'
                         type="checkbox"
                         checked={formData.isActive}
                         onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
