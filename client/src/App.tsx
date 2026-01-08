@@ -69,6 +69,7 @@ function App() {
         <Route path="admin/users" element={<UsersManagement />} />
         <Route path="admin/members" element={<AdminMembersPage />} />
         <Route path="admin/resources" element={<AdminResourcesManagement />} />
+        <Route path="admin/media" element={<MediaManagement />} />
         <Route path="register" element={<Register />} />
 
         {/* Ministry detail routes */}
