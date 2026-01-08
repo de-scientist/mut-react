@@ -57,3 +57,5 @@ const Toast = ({ message, type, isVisible, onClose, duration = 5000 }: ToastProp
 
 export default Toast
 
+
+
