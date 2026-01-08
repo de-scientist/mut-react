@@ -266,14 +266,64 @@ export const membersAPI = {
     }),
 }
 
+// Resources API
 export const resourcesAPI = {
-  getAll: () => api.get('/resources'),
-  adminGetAll: () => api.get('/resources/admin'),
-  create: (data: any) => api.post('/resources/admin', data),
-  update: (id: string, data: any) => api.put(`/resources/admin/${id}`, data),
-  toggle: (id: string) => api.patch(`/resources/admin/${id}/toggle`),
-  delete: (id: string) => api.delete(`/resources/admin/${id}`),
+  // Public resources (client-facing)
+  getAll: (params: Record<string, string> = {}) => {
+    const queryString = new URLSearchParams(params).toString()
+    return apiRequest(`/resources${queryString ? `?${queryString}` : ''}`)
+  },
+
+  // Admin: get all resources
+  adminGetAll: (params: Record<string, string> = {}) => {
+    const queryString = new URLSearchParams(params).toString()
+    return apiRequest(`/resources/admin${queryString ? `?${queryString}` : ''}`)
+  },
+
+  // Admin: create resource
+  create: (resourceData: {
+    title: string
+    description?: string
+    url?: string
+    type?: string
+    imageUrl?: string
+    isActive?: boolean
+  }) =>
+    apiRequest('/resources/admin', {
+      method: 'POST',
+      body: JSON.stringify(resourceData),
+    }),
+
+  // Admin: update resource
+  update: (
+    id: string,
+    resourceData: {
+      title?: string
+      description?: string
+      url?: string
+      type?: string
+      imageUrl?: string
+      isActive?: boolean
+    }
+  ) =>
+    apiRequest(`/resources/admin/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(resourceData),
+    }),
+
+  // Admin: toggle visibility
+  toggle: (id: string) =>
+    apiRequest(`/resources/admin/${id}/toggle`, {
+      method: 'PATCH',
+    }),
+
+  // Admin: delete resource
+  delete: (id: string) =>
+    apiRequest(`/resources/admin/${id}`, {
+      method: 'DELETE',
+    }),
 }
+
 
 export default {
   auth: authAPI,
