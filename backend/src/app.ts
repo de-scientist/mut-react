@@ -64,6 +64,7 @@ app.use('/api/newsletter', newsletterRoutes)
 app.use('/api/admin', adminRoutes)
 app.use('/api/users', usersRoutes)
 app.use('/api/resources', resourcesRoutes)
+app.use('/api/media', mediaRoutes)
 app.use('/api/members', memberRoutes)
 
 // 404 handler
