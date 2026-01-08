@@ -4,7 +4,7 @@ import { mediaAPI } from '../../services/api'
 import ConfirmationModal from '../../components/ConfirmationModal'
 import ImageUpload from '../../components/ImageUpload'
 import Toast from '../../components/Toast'
-import { Plus, Edit3, Trash2, Power } from 'lucide-react'
+import { Plus, Edit3, Trash2, ArrowLeft, Power } from 'lucide-react'
 import '../../styles/adminForms.css'
 
 interface MediaItem {
