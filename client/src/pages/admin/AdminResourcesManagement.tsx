@@ -229,6 +229,7 @@ const AdminResourcesManagement = () => {
                     <label className="form-label fw-bold">Title *</label>
                     <input
                       className="form-control form-control-lg bg-light border-0"
+                      title='title'
                       value={formData.title}
                       onChange={e => setFormData({ ...formData, title: e.target.value })}
                       required
@@ -239,6 +240,7 @@ const AdminResourcesManagement = () => {
                     <label className="form-label fw-bold">Resource Type</label>
                     <select
                       className="form-select form-select-lg bg-light border-0"
+                      title='resource-type'
                       value={formData.type}
                       onChange={e => setFormData({ ...formData, type: e.target.value })}
                     >
@@ -253,6 +255,7 @@ const AdminResourcesManagement = () => {
                     <label className="form-label fw-bold">Description</label>
                     <textarea
                       className="form-control bg-light border-0"
+                      title='desc'
                       rows={3}
                       value={formData.description}
                       onChange={e =>
@@ -265,6 +268,7 @@ const AdminResourcesManagement = () => {
                     <label className="form-label fw-bold">Resource URL</label>
                     <input
                       className="form-control bg-light border-0"
+                      title='url'
                       value={formData.url}
                       onChange={e => setFormData({ ...formData, url: e.target.value })}
                     />
@@ -284,6 +288,7 @@ const AdminResourcesManagement = () => {
                     <div className="form-check form-switch">
                       <input
                         className="form-check-input"
+                        title='active'
                         type="checkbox"
                         checked={formData.isActive}
                         onChange={e =>
