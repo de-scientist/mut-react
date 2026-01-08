@@ -14,6 +14,7 @@ import {
   Clock,
   AlertCircle,
   FolderOpen,
+  Image,
 } from 'lucide-react'
 import {
   BarChart,
@@ -41,6 +42,7 @@ interface DashboardStats {
   members: number
   pendingMembers: number
   resources?: number
+  media?: number
 }
 
 const AdminDashboard = () => {
@@ -121,6 +123,7 @@ const AdminDashboard = () => {
     ...(stats.resources !== undefined
       ? [{ name: 'Resources', value: stats.resources }]
       : []),
+    ...(stats.media !== undefined ? [{ name: 'Media', value: stats.media }] : []),
   ]
 
   const pieData = [
@@ -185,6 +188,7 @@ const AdminDashboard = () => {
               { label: 'Users', icon: <Users />, link: '/admin/users', color: '#4f46e5' },
               { label: 'Members', icon: <UserPlus />, link: '/admin/members', color: '#f59e0b' },
               { label: 'Resources', icon: <FolderOpen />, link: '/admin/resources', color: '#0ea5e9' },
+              { label: 'Media', icon: <Image />, link: '/admin/media', color: '#f97316' },
             ].map((item, index) => (
               <div key={index} className="col-4 col-md-3 col-lg">
                 <button
@@ -225,6 +229,14 @@ const AdminDashboard = () => {
               value={stats.resources}
               icon={<FolderOpen />}
               link="/admin/resources"
+            />
+          )}
+          {stats.media !== undefined && (
+            <StatCard
+              label="Media"
+              value={stats.media}
+              icon={<Image />}
+              link="/admin/media"
             />
           )}
         </section>
