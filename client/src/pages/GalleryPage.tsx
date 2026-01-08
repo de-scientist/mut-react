@@ -66,7 +66,7 @@ const GalleryPage = () => {
           <p className="lead mb-0 text-muted">Images from MUTCU fellowships, events, and outreach activities.</p>
         </div>
         <div className="text-end">
-          <a href="/admin/login" className="btn btn-outline-secondary me-2">Admin</a>
+          {/* <a href="/admin/login" className="btn btn-outline-secondary me-2">Admin</a> */}
           <button className="btn btn-primary" onClick={downloadAll} aria-label="Download all images">Download All</button>
         </div>
       </div>
