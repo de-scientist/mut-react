@@ -20,6 +20,7 @@ import NewsletterSubscriptionsManagement from './pages/admin/NewsletterSubscript
 import UsersManagement from './pages/admin/UsersManagement'
 import AdminMembersPage from './pages/admin/AdminMembersPage'
 import AdminResourcesManagement from './pages/admin/AdminResourcesManagement'
+import MediaManagement from './pages/admin/MediaManagement'
 
 // Ministry detail pages
 import MusicMinistryPage from './pages/ministries/MusicMinistryPage'
