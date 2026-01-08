@@ -19,10 +19,9 @@ router.use(requireAdmin)
 router.get('/', getResources)
 
 // Admin
-router.get('/admin', requireAdmin, getAllResourcesAdmin)
-router.post('/admin', requireAdmin, createResource)
-router.put('/admin/:id', requireAdmin, updateResource)
-router.patch('/admin/:id/toggle', requireAdmin, toggleResource)
-router.delete('/admin/:id', requireAdmin, deleteResource)
-
+router.get('/admin', getAllResourcesAdmin)
+router.post('/admin', createResource)
+router.put('/admin/:id', updateResource)
+router.patch('/admin/:id/toggle', toggleResource)
+router.delete('/admin/:id', deleteResource)
 export default router
