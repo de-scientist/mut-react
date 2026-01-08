@@ -378,12 +378,14 @@ const AdminResourcesManagement = () => {
                         <div className="d-flex justify-content-end gap-2">
                           <button
                             className="btn btn-sm btn-light-primary rounded-circle"
+                            title='Edit Resource'
                             onClick={() => openEditForm(resource)}
                           >
                             <Edit3 size={16} />
                           </button>
                           <button
                             className="btn btn-sm btn-light-warning rounded-circle"
+                            title='toggle'
                             onClick={() => {
                               setSelectedResource(resource)
                               setAction('toggle')
@@ -394,6 +396,7 @@ const AdminResourcesManagement = () => {
                           </button>
                           <button
                             className="btn btn-sm btn-light-danger rounded-circle"
+                            title='delete'
                             onClick={() => {
                               setSelectedResource(resource)
                               setAction('delete')
