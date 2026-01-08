@@ -166,20 +166,20 @@ const ImageUpload = ({
               Accepted: JPEG, PNG, WebP, GIF (Max {maxSizeMB}MB)
             </p>
             {uploading && (
-              <div className="progress mt-2" style={{ width: '100%' }}>
-                <div
-                  className="progress-bar progress-bar-striped progress-bar-animated"
-                  role="progressbar"
-                  title='img'
-                  style={{ width: `${uploadProgress}%` }}
-                  aria-valuenow={uploadProgress}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                >
-                  {uploadProgress}%
-                </div>
-              </div>
-            )}
+  <div className="mt-2" style={{ width: '100%' }}>
+    <progress
+      className="w-100"
+      value={uploadProgress}
+      max={100}
+      aria-label="Image upload progress"
+    />
+    <div className="text-center small mt-1">
+      {uploadProgress}%
+    </div>
+  </div>
+)}
+
+
           </div>
         )}
 
