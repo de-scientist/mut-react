@@ -113,3 +113,19 @@ export const members = pgTable('members', {
   createdAt: timestamp('createdAt').defaultNow().notNull(),
   updatedAt: timestamp('updatedAt').defaultNow().notNull(),
 })
+
+// resources table
+export const resources = pgTable('resources', {
+  id: uuid('id').defaultRandom().primaryKey(),
+
+  title: text('title').notNull(),
+  description: text('description'),
+  url: text('url'), // file or external link
+  type: text('type'), // PDF | AUDIO | VIDEO | LINK
+  imageUrl: text('imageUrl'),
+
+  isActive: boolean('isActive').default(true),
+
+  createdAt: timestamp('createdAt').defaultNow().notNull(),
+  updatedAt: timestamp('updatedAt').defaultNow().notNull(),
+})
