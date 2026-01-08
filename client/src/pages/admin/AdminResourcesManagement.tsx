@@ -11,7 +11,7 @@ import {
   Trash2,
   Power,
   Link as LinkIcon,
-  FileText,
+//   FileText,
 } from 'lucide-react'
 import '../../styles/adminForms.css'
 
@@ -120,7 +120,7 @@ const AdminResourcesManagement = () => {
     }
   }
 
-  const handleDelete = async () => {
+  async () => {
     if (!selectedResource) return
     try {
       await resourcesAPI.delete(selectedResource.id)
@@ -135,7 +135,7 @@ const AdminResourcesManagement = () => {
     }
   }
 
-  const handleToggle = async () => {
+   async () => {
     if (!selectedResource) return
     try {
       await resourcesAPI.toggle(selectedResource.id)
