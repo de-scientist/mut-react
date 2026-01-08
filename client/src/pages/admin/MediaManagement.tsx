@@ -101,7 +101,7 @@ const MediaManagement = () => {
     }
   }
 
-  const handleDelete = async () => {
+   async () => {
     if (!selectedItem) return
     try {
       await mediaAPI.delete(selectedItem.id)
@@ -114,7 +114,7 @@ const MediaManagement = () => {
     }
   }
 
-  const handleToggle = async () => {
+  async () => {
     if (!selectedItem) return
     try {
       await mediaAPI.toggle(selectedItem.id)
