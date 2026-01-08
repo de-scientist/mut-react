@@ -229,6 +229,7 @@ const AdminResourcesManagement = () => {
                     <label className="form-label fw-bold">Title *</label>
                     <input
                       className="form-control form-control-lg bg-light border-0"
+                      placeholder='Enter the title'
                       title='title'
                       value={formData.title}
                       onChange={e => setFormData({ ...formData, title: e.target.value })}
