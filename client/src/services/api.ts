@@ -270,6 +270,15 @@ export const membersAPI = {
     }),
 }
 
+export const resourcesAPI = {
+  getAll: () => api.get('/resources'),
+  adminGetAll: () => api.get('/resources/admin'),
+  create: (data: any) => api.post('/resources/admin', data),
+  update: (id: string, data: any) => api.put(`/resources/admin/${id}`, data),
+  toggle: (id: string) => api.patch(`/resources/admin/${id}/toggle`),
+  delete: (id: string) => api.delete(`/resources/admin/${id}`),
+}
+
 export default {
   auth: authAPI,
   events: eventsAPI,
