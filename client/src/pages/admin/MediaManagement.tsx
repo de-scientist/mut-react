@@ -76,43 +76,39 @@ const MediaManagement = () => {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    try {
-      const payload = new FormData()
-      payload.append('title', formData.title)
-      payload.append('description', formData.description)
-      payload.append('category', formData.category)
-      payload.append('isActive', String(formData.isActive))
-      if ((formData as any).file) payload.append('image', (formData as any).file)
+  e.preventDefault()
 
-      if (editingItem) {
-        await mediaAPI.update(editingItem.id, payload)
-        setSuccessMessage('Gallery item updated successfully')
-      } else {
-        await mediaAPI.create(payload)
-        setSuccessMessage('Gallery item created successfully')
-      }
-      setShowForm(false)
-      setEditingItem(null)
-      resetForm()
-      fetchGallery()
-    } catch (err: any) {
-      setError(err.message || 'Failed to save gallery item')
+  try {
+    const payload = {
+      title: formData.title,
+      description: formData.description,
+      category: formData.category,
+      imageUrl: formData.imageUrl, // already from Cloudinary
+      isActive: formData.isActive,
     }
-  }
 
-  async () => {
-    if (!selectedItem) return
-    try {
-      await mediaAPI.delete(selectedItem.id)
-      setGallery(gallery.filter((g) => g.id !== selectedItem.id))
-      setShowModal(false)
-      setSelectedItem(null)
-      setSuccessMessage('Gallery item deleted successfully')
-    } catch (err: any) {
-      setError(err.message || 'Failed to delete gallery item')
+    if (!payload.imageUrl) {
+      setError('Please upload an image first')
+      return
     }
+
+    if (editingItem) {
+      await mediaAPI.update(editingItem.id, payload)
+      setSuccessMessage('Gallery item updated successfully')
+    } else {
+      await mediaAPI.create(payload)
+      setSuccessMessage('Gallery item created successfully')
+    }
+
+    setShowForm(false)
+    setEditingItem(null)
+    resetForm()
+    fetchGallery()
+  } catch (err: any) {
+    setError(err.message || 'Failed to save gallery item')
   }
+}
+
 
  async () => {
     if (!selectedItem) return
