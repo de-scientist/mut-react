@@ -66,7 +66,7 @@ const AboutPage = () => {
               </div>
             </div>
             <div className="col-lg-6 bg-navy d-flex align-items-center justify-content-center p-5">
-              <img src="/assets/images/Full Logo.png" alt="MUTCU Logo" className="img-fluid logo-glow" style={{ maxHeight: '250px' }} />
+              <img src="/assets/images/best logo.png" alt="MUTCU Logo" className="img-fluid logo-glow" style={{ maxHeight: '250px' }} />
             </div>
           </div>
         </div>
