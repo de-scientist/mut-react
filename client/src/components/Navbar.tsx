@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { useNavbarScroll } from '../hooks/useNavbarScroll'
-import logo from '../assets/mut/images/Full Logo.png'
+import logo from '../assets/mut/images/best logo.png'
 
 const Navbar = () => {
   const isScrolled = useNavbarScroll(50)
