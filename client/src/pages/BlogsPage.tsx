@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { blogsAPI } from '../services/api'
-import '../styles/blogs.css'
 
 interface Blog {
   id: string
@@ -39,18 +38,24 @@ const BlogsPage = () => {
 
   useEffect(() => {
     fetchBlogs(page, page > 1)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeSearch, page])
 
   const fetchBlogs = async (pageToLoad = 1, append = false) => {
     try {
       setLoading(true)
       setError(null)
-      const response = await blogsAPI.list({
+
+      // FIX: Build query object conditionally to avoid passing 'undefined' to search
+      const queryParams: { page: number; limit: number; search?: string } = {
         page: pageToLoad,
         limit: 6,
-        search: activeSearch || undefined,
-      })
+      }
+
+      if (activeSearch) {
+        queryParams.search = activeSearch
+      }
+
+      const response = await blogsAPI.list(queryParams)
 
       const data = response.data || response
       const paginationMeta = response.pagination || data.pagination
@@ -77,101 +82,100 @@ const BlogsPage = () => {
   }
 
   return (
-    <div className="blog-page bg-surface">
-      <section className="blog-hero gradient-hero text-white">
-        <div className="container py-5">
-          <p className="text-uppercase small fw-bold letter-space-1 mb-2">Insights & Stories</p>
-          <h1 className="display-5 fw-bold mb-3">MUTCU Blog</h1>
-          <p className="lead text-light opacity-90 col-lg-7">
-            Reflections, testimonies, events, and ministry updates from the Murang’a University of Technology Christian Union.
-          </p>
-
-          <form className="blog-search mt-4" onSubmit={handleSearch} role="search" aria-label="Search blogs">
-            <div className="row g-2 align-items-center">
-              <div className="col-md-8">
-                <input
-                  type="search"
-                  className="form-control form-control-lg rounded-3"
-                  placeholder="Search by title or keywords..."
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                  aria-label="Search by title or keywords"
-                />
-              </div>
-              <div className="col-md-4 d-grid">
-                <button type="submit" className="btn btn-brand btn-lg">
-                  <i className="fas fa-search me-2" aria-hidden="true" />
-                  Search
-                </button>
-              </div>
+    <div className="blog-page">
+      {/* HERO SECTION */}
+      <section className="blog-hero">
+        <div className="container py-5 text-center text-lg-start">
+          <div className="row align-items-center">
+            <div className="col-lg-7">
+              <span className="badge-pill mb-3">Insights & Stories</span>
+              <h1 className="display-4 fw-bold text-white mb-3">
+                MUTCU <span className="text-orange">Blog</span>
+              </h1>
+              <p className="lead text-white-50 mb-4">
+                Explore reflections, ministry updates, and faith-building stories from the 
+                Murang’a University of Technology Christian Union.
+              </p>
+              
+              <form className="blog-search-container" onSubmit={handleSearch}>
+                <div className="input-group shadow-lg">
+                  <span className="input-group-text bg-white border-0 ps-4">
+                    <i className="fas fa-search text-muted"></i>
+                  </span>
+                  <input
+                    type="search"
+                    className="form-control form-control-lg border-0"
+                    placeholder="Search by title or keywords..."
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                  />
+                  <button type="submit" className="btn btn-search px-4">Search</button>
+                </div>
+              </form>
             </div>
-          </form>
+          </div>
         </div>
       </section>
 
-      <section className="container py-5">
+      {/* BLOG FEED */}
+      <section className="container py-5 mt-n5">
         {error && (
-          <div className="alert alert-danger shadow-sm" role="alert">
-            {error}
+          <div className="alert alert-custom d-flex align-items-center" role="alert">
+            <i className="fas fa-exclamation-circle me-3"></i>
+            <div>{error}</div>
           </div>
         )}
 
         {loading && items.length === 0 ? (
           <div className="text-center py-5">
-            <div className="spinner-border text-brand" role="status" aria-label="Loading blogs" />
-            <p className="text-muted mt-3">Loading blog posts...</p>
+            <div className="spinner-grow text-teal" role="status"></div>
+            <p className="text-muted mt-3 fw-medium">Preparing your reading list...</p>
           </div>
         ) : items.length === 0 ? (
-          <div className="text-center py-5">
-            <p className="fw-semibold text-muted">No blog posts yet. Check back soon!</p>
+          <div className="text-center py-5 no-results shadow-sm rounded-4 bg-white">
+            <i className="fas fa-folder-open fa-3x mb-3 text-muted"></i>
+            <h4 className="text-navy">No stories found</h4>
+            <p className="text-muted">Try adjusting your search or check back later.</p>
           </div>
         ) : (
           <>
             <div className="row g-4">
               {items.map((blog) => (
                 <article key={blog.id} className="col-md-6 col-lg-4">
-                  <div className="blog-card h-100 shadow-sm">
-                    <div className="blog-card-image-wrapper">
+                  <div className="blog-card h-100">
+                    <div className="card-img-container">
                       {blog.featuredImage ? (
-                        <img
-                          src={blog.featuredImage}
-                          alt={blog.title}
-                          className="blog-card-image"
-                          loading="lazy"
-                        />
+                        <img src={blog.featuredImage} alt={blog.title} className="card-img-top" />
                       ) : (
-                        <div className="blog-card-placeholder">
-                          <i className="fas fa-feather-alt fa-2x text-muted" aria-hidden="true" />
+                        <div className="placeholder-img">
+                          <i className="fas fa-cross fa-2x"></i>
                         </div>
                       )}
+                      <div className="date-tag">
+                        {blog.publishedAt
+                          ? new Date(blog.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+                          : new Date(blog.createdAt || '').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      </div>
                     </div>
-                    <div className="blog-card-body">
-                      <p className="badge bg-soft-brand text-brand fw-semibold text-uppercase small mb-2">
-                        {blog.publishedAt ? 'Published' : 'Draft'}
-                      </p>
-                      <h3 className="h5 fw-bold mb-2">
-                        <Link to={`/blogs/${blog.slug}`} className="text-decoration-none text-heading">
+                    
+                    <div className="card-body p-4">
+                      <div className="d-flex align-items-center mb-2">
+                        <span className="author-name">
+                          <i className="far fa-user me-2"></i>{blog.author || 'MUTCU Team'}
+                        </span>
+                      </div>
+                      <h3 className="blog-title mb-3">
+                        <Link to={`/blogs/${blog.slug}`} className="stretched-link text-decoration-none">
                           {blog.title}
                         </Link>
                       </h3>
-                      <p className="text-muted small mb-3">
-                        {blog.excerpt || 'No summary provided yet.'}
+                      <p className="blog-excerpt text-muted mb-4">
+                        {blog.excerpt || 'Read more about this inspiring update from our community.'}
                       </p>
-                      <div className="d-flex justify-content-between align-items-center">
-                        <div className="text-muted small">
-                          {blog.author || 'MUTCU Team'}
-                        </div>
-                        <div className="text-muted small">
-                          {blog.publishedAt
-                            ? new Date(blog.publishedAt).toLocaleDateString()
-                            : new Date(blog.createdAt || '').toLocaleDateString()}
-                        </div>
+                      <div className="blog-footer-link">
+                        <span>Read More</span>
+                        <i className="fas fa-arrow-right ms-2"></i>
                       </div>
-                    </div>
-                    <div className="blog-card-footer">
-                      <Link to={`/blogs/${blog.slug}`} className="btn btn-link fw-semibold text-brand p-0">
-                        Read article <i className="fas fa-arrow-right ms-2" aria-hidden="true" />
-                      </Link>
                     </div>
                   </div>
                 </article>
@@ -179,22 +183,123 @@ const BlogsPage = () => {
             </div>
 
             {pagination?.hasNext && (
-              <div className="text-center mt-4">
+              <div className="text-center mt-5">
                 <button
-                  className="btn btn-outline-brand px-4 py-2 rounded-pill"
+                  className="btn btn-load-more px-5 py-3 rounded-pill shadow"
                   onClick={handleLoadMore}
                   disabled={loading}
                 >
-                  {loading ? 'Loading…' : 'Load more'}
+                  {loading ? <span className="spinner-border spinner-border-sm me-2"></span> : null}
+                  Load More Stories
                 </button>
               </div>
             )}
           </>
         )}
       </section>
+
+      <style>{`
+        :root {
+          --brand-navy: #0A1837;
+          --brand-orange: #FF9800;
+          --brand-teal: #36D1C4;
+          --brand-red: #F42F3F;
+          --bg-light: #F8FAFC;
+        }
+
+        .blog-page { background-color: var(--bg-light); min-height: 100vh; }
+
+        .blog-hero {
+          background: linear-gradient(135deg, var(--brand-navy) 0%, #152C5B 100%);
+          padding: 120px 0 140px 0;
+          position: relative;
+        }
+
+        .badge-pill {
+          background: rgba(54, 209, 196, 0.2);
+          color: var(--brand-teal);
+          padding: 6px 16px;
+          border-radius: 50px;
+          font-weight: 700;
+          font-size: 0.8rem;
+          text-transform: uppercase;
+          display: inline-block;
+        }
+
+        .text-orange { color: var(--brand-orange); }
+
+        .blog-search-container .input-group {
+          border-radius: 15px;
+          overflow: hidden;
+          background: white;
+        }
+
+        .btn-search {
+          background-color: var(--brand-orange);
+          color: white;
+          font-weight: 600;
+        }
+
+        .blog-card {
+          background: white;
+          border-radius: 20px;
+          overflow: hidden;
+          transition: all 0.3s ease;
+          position: relative;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+          border: none;
+        }
+
+        .blog-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        .card-img-container { height: 220px; position: relative; overflow: hidden; }
+        .card-img-top { width: 100%; height: 100%; object-fit: cover; }
+
+        .date-tag {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          background: white;
+          padding: 5px 12px;
+          border-radius: 10px;
+          font-weight: 800;
+          font-size: 0.75rem;
+          color: var(--brand-navy);
+        }
+
+        .blog-title {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--brand-navy);
+        }
+
+        .author-name {
+          font-size: 0.8rem;
+          color: var(--brand-teal);
+          font-weight: 600;
+        }
+
+        .blog-footer-link {
+          color: var(--brand-orange);
+          font-weight: 700;
+        }
+
+        .btn-load-more {
+          background-color: var(--brand-navy);
+          color: white;
+          border: none;
+        }
+
+        .alert-custom {
+          background: white;
+          border-left: 5px solid var(--brand-red);
+        }
+      `}</style>
     </div>
   )
 }
 
 export default BlogsPage
-
