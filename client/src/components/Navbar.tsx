@@ -46,6 +46,7 @@ const Navbar = () => {
               { path: '/about', label: 'About', end: false },
               { path: '/ministries', label: 'Ministries', end: false },
               { path: '/events', label: 'Events', end: false },
+              { path: '/blogs', label: 'Blog', end: false },
               { path: '/resources', label: 'Resources', end: false },
               { path: '/gallery', label: 'Gallery', end: false },
               { path: '/contact', label: 'Contact', end: false },
@@ -90,7 +91,7 @@ const Navbar = () => {
 
         /* Scrolled state: Using high-contrast Navy/Dark theme */
         .navbar-scrolled {
-          background: rgba(7, 29, 61, 0.95) !important;
+          background: rgba(10, 24, 55, 0.95) !important;
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           padding: 0.6rem 0;
@@ -104,13 +105,24 @@ const Navbar = () => {
 
         /* Active Link Indicator */
         .active-link {
-          color: #ff9800 !important; /* Orange branding for visibility */
+          color: var(--brand-orange, #ff9800) !important; /* Orange branding for visibility */
           text-shadow: none;
+          position: relative;
+        }
+
+        .active-link::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -6px;
+          width: 100%;
+          height: 2px;
+          background: var(--brand-orange, #ff9800);
         }
 
         /* Admin Button Styling */
         .btn-admin {
-          background-color: #ff9800;
+          background-color: var(--brand-orange, #ff9800);
           color: #fff !important;
           border: none;
         }

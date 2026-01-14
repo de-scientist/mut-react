@@ -7,6 +7,7 @@ import {
   contactSubmissions,
   newsletterSubscriptions,
   members,
+  blogs,
 } from '../../db/schema.js'
 import { successResponse, errorResponse } from '../../utils/response.js'
 import { sql, eq } from 'drizzle-orm'
@@ -28,6 +29,8 @@ export const getDashboardStats = async (req: Request, res: Response) => {
       newContactsCount,
       membersCount,
       pendingMembersCount,
+      blogsCount,
+      publishedBlogsCount,
     ] = await Promise.all([
       db.select({ count: sql<number>`count(*)` }).from(users),
       db.select({ count: sql<number>`count(*)` }).from(events),
@@ -39,6 +42,8 @@ export const getDashboardStats = async (req: Request, res: Response) => {
       db.select({ count: sql<number>`count(*)` }).from(contactSubmissions).where(eq(contactSubmissions.status, 'NEW')),
       db.select({ count: sql<number>`count(*)` }).from(members),
       db.select({ count: sql<number>`count(*)` }).from(members).where(eq(members.status, 'PENDING')),
+      db.select({ count: sql<number>`count(*)` }).from(blogs),
+      db.select({ count: sql<number>`count(*)` }).from(blogs).where(eq(blogs.status, 'published')),
     ])
 
     return successResponse(
@@ -54,6 +59,8 @@ export const getDashboardStats = async (req: Request, res: Response) => {
         newContacts: Number(newContactsCount[0]?.count ?? 0),
         members: Number(membersCount[0]?.count ?? 0),
         pendingMembers: Number(pendingMembersCount[0]?.count ?? 0),
+        blogs: Number(blogsCount[0]?.count ?? 0),
+        publishedBlogs: Number(publishedBlogsCount[0]?.count ?? 0),
       },
       'Dashboard statistics retrieved successfully'
     )

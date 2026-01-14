@@ -18,6 +18,7 @@ import usersRoutes from './routes/usersRoutes.ts'
 import resourcesRoutes from './routes/resourcesRoutes.ts'
 import memberRoutes from './routes/memberRoutes.ts'
 import mediaRoutes from './routes/mediaRoutes.ts'
+import blogRoutes from './routes/blogRoutes.ts'
 
 const app = express()
 
@@ -66,6 +67,7 @@ app.use('/api/users', usersRoutes)
 app.use('/api/resources', resourcesRoutes)
 app.use('/api/media', mediaRoutes)
 app.use('/api/members', memberRoutes)
+app.use('/api/blogs', blogRoutes)
 
 // 404 handler
 app.use((req, res) => {

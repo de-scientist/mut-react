@@ -38,6 +38,7 @@ const Footer = () => {
                 { label: 'About Us', path: '/about' },
                 { label: 'Ministries', path: '/ministries' },
                 { label: 'Events', path: '/events' },
+                { label: 'Blog', path: '/blogs' },
                 { label: 'Resources', path: '/resources' },
                 { label: 'Gallery', path: '/gallery' },
               ].map((link) => (

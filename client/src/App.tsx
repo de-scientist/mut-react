@@ -10,6 +10,8 @@ import GalleryPage from './pages/GalleryPage'
 import AdminDashboard from './pages/AdminDashboard'
 import AdminLogin from './pages/AdminLogin'
 import Register from './pages/Register'
+import BlogsPage from './pages/BlogsPage'
+import BlogDetailPage from './pages/BlogDetailPage'
 
 // Admin management pages
 import EventsManagement from './pages/admin/EventsManagement'
@@ -21,6 +23,7 @@ import UsersManagement from './pages/admin/UsersManagement'
 import AdminMembersPage from './pages/admin/AdminMembersPage'
 import AdminResourcesManagement from './pages/admin/AdminResourcesManagement'
 import MediaManagement from './pages/admin/MediaManagement'
+import BlogsManagement from './pages/admin/BlogsManagement'
 
 // Ministry detail pages
 import MusicMinistryPage from './pages/ministries/MusicMinistryPage'
@@ -59,6 +62,8 @@ function App() {
         <Route path="contact" element={<ContactPage />} />
         <Route path="resources" element={<ResourcesPage />} />
         <Route path="gallery" element={<GalleryPage />} />
+        <Route path="blogs" element={<BlogsPage />} />
+        <Route path="blogs/:slug" element={<BlogDetailPage />} />
         <Route path="admin" element={<AdminDashboard />} />
         <Route path="admin/login" element={<AdminLogin />} />
         <Route path="admin/events" element={<EventsManagement />} />
@@ -70,6 +75,7 @@ function App() {
         <Route path="admin/members" element={<AdminMembersPage />} />
         <Route path="admin/resources" element={<AdminResourcesManagement />} />
         <Route path="admin/media" element={<MediaManagement />} />
+        <Route path="admin/blogs" element={<BlogsManagement />} />
         <Route path="register" element={<Register />} />
 
         {/* Ministry detail routes */}

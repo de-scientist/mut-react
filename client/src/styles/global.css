@@ -3,6 +3,75 @@
 
 body {
   font-family: 'Lato', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--surface-alt);
+  color: var(--brand-ink);
+}
+
+.app-root {
+  background-color: #fff;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', 'Lato', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--brand-ink);
+}
+
+p {
+  color: var(--brand-ink);
+}
+
+.btn-primary {
+  background-color: var(--brand-orange);
+  border-color: var(--brand-orange);
+  box-shadow: 0 8px 24px rgba(255, 151, 0, 0.25);
+}
+
+.btn-primary:hover {
+  background-color: #e68a00;
+  border-color: #e68a00;
+}
+
+.btn-outline-primary {
+  color: var(--brand-orange);
+  border-color: var(--brand-orange);
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: var(--brand-orange);
+  border-color: var(--brand-orange);
+}
+
+.text-primary {
+  color: var(--brand-navy) !important;
+}
+
+.bg-primary-dark {
+  background: #0a1837 !important;
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(255, 151, 0, 0.4);
+  outline-offset: 2px;
+}
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
+@import url('https://unpkg.com/aos@2.3.1/dist/aos.css');
+
+body {
+  font-family: 'Lato', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .app-root {

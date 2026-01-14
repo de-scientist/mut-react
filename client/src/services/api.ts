@@ -211,6 +211,49 @@ export const adminAPI = {
   getDashboardStats: () => apiRequest('/admin/dashboard'),
 }
 
+// Blogs API (public)
+export const blogsAPI = {
+  list: (params: Record<string, string | number> = {}) => {
+    const queryString = new URLSearchParams(
+      Object.entries(params).reduce((acc, [key, value]) => {
+        if (value === undefined || value === null || value === '') return acc
+        acc[key] = String(value)
+        return acc
+      }, {} as Record<string, string>)
+    ).toString()
+    return apiRequest(`/blogs${queryString ? `?${queryString}` : ''}`)
+  },
+  getBySlug: (slug: string) => apiRequest(`/blogs/${slug}`),
+}
+
+// Blogs API (admin)
+export const adminBlogsAPI = {
+  list: (params: Record<string, string | number> = {}) => {
+    const queryString = new URLSearchParams(
+      Object.entries(params).reduce((acc, [key, value]) => {
+        if (value === undefined || value === null || value === '') return acc
+        acc[key] = String(value)
+        return acc
+      }, {} as Record<string, string>)
+    ).toString()
+    return apiRequest(`/blogs/admin${queryString ? `?${queryString}` : ''}`)
+  },
+  create: (payload: any) =>
+    apiRequest('/blogs/admin', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+  update: (id: string, payload: any) =>
+    apiRequest(`/blogs/admin/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(payload),
+    }),
+  remove: (id: string) =>
+    apiRequest(`/blogs/admin/${id}`, {
+      method: 'DELETE',
+    }),
+}
+
 // Users API (Admin only)
 export const usersAPI = {
   getAll: (params: Record<string, string> = {}) => {
@@ -378,6 +421,8 @@ export default {
   users: usersAPI,
   resources: resourcesAPI,
   members: membersAPI,
+  blogs: blogsAPI,
+  adminBlogs: adminBlogsAPI,
 }
 
 

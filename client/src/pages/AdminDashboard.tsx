@@ -43,6 +43,8 @@ interface DashboardStats {
   pendingMembers: number
   resources?: number
   media?: number
+  blogs?: number
+  publishedBlogs?: number
 }
 
 const AdminDashboard = () => {
@@ -120,6 +122,7 @@ const AdminDashboard = () => {
     { name: 'Contacts', value: stats.contacts },
     { name: 'Subscribers', value: stats.subscriptions },
     { name: 'Members', value: stats.members },
+    ...(stats.blogs !== undefined ? [{ name: 'Blogs', value: stats.blogs }] : []),
     ...(stats.resources !== undefined
       ? [{ name: 'Resources', value: stats.resources }]
       : []),
@@ -186,6 +189,7 @@ const AdminDashboard = () => {
               { label: 'Contacts', icon: <Send />, link: '/admin/contacts', color: '#06b6d4' },
               { label: 'Newsletter', icon: <Mail />, link: '/admin/newsletter', color: '#10b981' },
               { label: 'Users', icon: <Users />, link: '/admin/users', color: '#4f46e5' },
+              { label: 'Blogs', icon: <FolderOpen />, link: '/admin/blogs', color: '#f97316' },
               { label: 'Members', icon: <UserPlus />, link: '/admin/members', color: '#f59e0b' },
               { label: 'Resources', icon: <FolderOpen />, link: '/admin/resources', color: '#0ea5e9' },
               { label: 'Media', icon: <Image />, link: '/admin/media', color: '#f97316' },
@@ -223,6 +227,15 @@ const AdminDashboard = () => {
           <StatCard label="New Contacts" value={stats.newContacts} icon={<Send />} isAlert link="/admin/contacts?status=NEW" />
           <StatCard label="Active Members" value={stats.members} icon={<UserPlus />} link="/admin/members" />
           <StatCard label="Pending Members" value={stats.pendingMembers} icon={<AlertCircle />} isAlert link="/admin/members?status=PENDING" />
+          {stats.blogs !== undefined && (
+            <StatCard
+              label="Blogs (total/published)"
+              value={stats.blogs}
+              icon={<FolderOpen />}
+              link="/admin/blogs"
+              helperValue={stats.publishedBlogs ?? 0}
+            />
+          )}
           {stats.resources !== undefined && (
             <StatCard
               label="Resources"
@@ -295,6 +308,7 @@ interface StatCardProps {
   icon?: any
   link?: string
   isAlert?: boolean
+  helperValue?: number
 }
 
 const StatCard: React.FC<StatCardProps> = ({
@@ -303,6 +317,7 @@ const StatCard: React.FC<StatCardProps> = ({
   icon,
   link,
   isAlert,
+  helperValue,
 }) => {
   const navigate = useNavigate()
 
@@ -318,6 +333,9 @@ const StatCard: React.FC<StatCardProps> = ({
               {label}
             </p>
             <h2 className="fw-black mb-1">{value.toLocaleString()}</h2>
+            {helperValue !== undefined && (
+              <p className="mb-0 text-muted small">Published: {helperValue.toLocaleString()}</p>
+            )}
             {link && (
               <span className="text-primary small fw-bold">
                 Manage <ArrowRight size={14} />

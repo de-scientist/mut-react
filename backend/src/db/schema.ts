@@ -8,6 +8,21 @@ import {
   integer,
 } from 'drizzle-orm/pg-core'
 
+export const blogs = pgTable('blogs', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  title: text('title').notNull(),
+  slug: text('slug').notNull(),
+  excerpt: text('excerpt'),
+  content: text('content').notNull(),
+  featuredImage: text('featuredImage'),
+  author: text('author'),
+  status: text('status').default('draft'), // draft | published
+  tags: text('tags'), // comma-separated tags
+  publishedAt: timestamp('publishedAt'),
+  createdAt: timestamp('createdAt').defaultNow().notNull(),
+  updatedAt: timestamp('updatedAt').defaultNow().notNull(),
+})
+
 export const users = pgTable('users', {
   id: uuid('id').defaultRandom().primaryKey(),
   email: text('email').notNull(),
