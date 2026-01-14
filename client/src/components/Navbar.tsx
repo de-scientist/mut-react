@@ -5,7 +5,6 @@ import logo from '../assets/mut/images/Full Logo.png'
 const Navbar = () => {
   const isScrolled = useNavbarScroll(50)
 
-  // Improved class logic for better visibility
   const navLinkClass = ({ isActive }: { isActive: boolean }) => 
     `nav-link px-3 fw-semibold transition-all ${isActive ? 'active-link' : 'text-nav-idle'}`
 
@@ -21,14 +20,14 @@ const Navbar = () => {
           <img 
             src={logo} 
             alt="MUTCU Logo" 
-            height={isScrolled ? 50 : 65} 
-            className="transition-all logo-filter" 
+            height={isScrolled ? 45 : 55} 
+            className="transition-all" 
+            style={{ filter: isScrolled ? 'none' : 'brightness(1.2)' }}
           />
         </NavLink>
 
-        {/* Improved Toggler for Mobile visibility */}
         <button
-          className="navbar-toggler custom-toggler border-0 shadow-none"
+          className="navbar-toggler border-0 shadow-none"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
@@ -75,83 +74,72 @@ const Navbar = () => {
       </div>
 
       <style>{`
-        /* Core Transitions */
-        .transition-all { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        :root {
+          --brand-navy: #0A1837;
+          --brand-orange: #FF9800;
+          --brand-teal: #36D1C4;
+          --brand-red: #F42F3F;
+        }
 
-        /* Transparent state: Text needs a soft shadow to be visible over bright images */
+        .transition-all { transition: all 0.3s ease-in-out; }
+
+        /* Transparent State */
         .navbar-at-top {
-          background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+          background: linear-gradient(to bottom, rgba(10, 24, 55, 0.8) 0%, rgba(10, 24, 55, 0) 100%);
           padding: 1.2rem 0;
         }
+        .navbar-at-top .text-nav-idle { color: #ffffff !important; text-shadow: 1px 1px 3px rgba(0,0,0,0.4); }
 
-        .navbar-at-top .text-nav-idle {
-          color: rgba(255, 255, 255, 0.9) !important;
-          text-shadow: 0px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        /* Scrolled state: Using high-contrast Navy/Dark theme */
+        /* Scrolled State */
         .navbar-scrolled {
           background: rgba(10, 24, 55, 0.95) !important;
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          padding: 0.6rem 0;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          padding: 0.7rem 0;
+          box-shadow: 0 4px 25px rgba(0,0,0,0.2);
+          border-bottom: 2px solid var(--brand-teal);
         }
+        .navbar-scrolled .text-nav-idle { color: rgba(255, 255, 255, 0.85) !important; }
 
-        .navbar-scrolled .text-nav-idle {
-          color: rgba(255, 255, 255, 0.8) !important;
-        }
-
-        /* Active Link Indicator */
+        /* Hover & Active States */
+        .nav-link:hover { color: var(--brand-teal) !important; }
+        
         .active-link {
-          color: var(--brand-orange, #ff9800) !important; /* Orange branding for visibility */
-          text-shadow: none;
+          color: var(--brand-orange) !important;
           position: relative;
         }
-
         .active-link::after {
           content: '';
           position: absolute;
-          left: 0;
-          bottom: -6px;
-          width: 100%;
-          height: 2px;
-          background: var(--brand-orange, #ff9800);
+          bottom: 0;
+          left: 1rem;
+          right: 1rem;
+          height: 3px;
+          background: var(--brand-orange);
+          border-radius: 2px;
         }
 
-        /* Admin Button Styling */
         .btn-admin {
-          background-color: var(--brand-orange, #ff9800);
-          color: #fff !important;
+          background: linear-gradient(45deg, var(--brand-orange), #ffb74d);
+          color: white !important;
           border: none;
+          transition: transform 0.2s;
         }
         .btn-admin:hover {
-          background-color: #e68a00;
           transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
         }
 
-        /* Mobile Fix: Ensure the menu is legible when expanded */
         @media (max-width: 991.98px) {
           .navbar-collapse {
-            background: #0a192f;
+            background: var(--brand-navy);
             padding: 2rem;
-            border-radius: 1.5rem;
             margin-top: 1rem;
+            border-radius: 1rem;
             border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
           }
-          
-          .nav-item {
-            margin-bottom: 0.5rem;
-          }
-
-          .nav-link::after { display: none !important; }
-        }
-
-        /* Custom Toggler Color */
-        .custom-toggler .navbar-toggler-icon {
-          background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3Base path fill='rgba(255, 255, 255, 0.8)' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+          .active-link::after { display: none; }
+          .active-link { background: rgba(255, 152, 0, 0.1); border-radius: 8px; }
         }
       `}</style>
     </nav>
