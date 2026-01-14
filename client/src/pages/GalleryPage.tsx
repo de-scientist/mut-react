@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from 'react'
-import '../assets/mut/css/about.css'
 
 type Img = { src: string; alt?: string }
 
@@ -20,6 +19,7 @@ const images: Img[] = [
 
 const GalleryPage = () => {
   const [index, setIndex] = useState<number | null>(null)
+  const [downloading, setDownloading] = useState(false)
 
   const openAt = (i: number) => setIndex(i)
   const close = () => setIndex(null)
@@ -44,7 +44,7 @@ const GalleryPage = () => {
   }, [index, showNext, showPrev])
 
   const downloadAll = async () => {
-    // sequentially trigger downloads to avoid popup blocking
+    setDownloading(true)
     for (let i = 0; i < images.length; i++) {
       const img = images[i]
       const a = document.createElement('a')
@@ -53,106 +53,270 @@ const GalleryPage = () => {
       document.body.appendChild(a)
       a.click()
       document.body.removeChild(a)
-      // small delay between downloads
-      await new Promise((r) => setTimeout(r, 300))
+      await new Promise((r) => setTimeout(r, 400))
     }
+    setDownloading(false)
   }
 
   return (
-    <div className="gallery-page container py-5">
-      <div className="d-flex align-items-center justify-content-between mb-4">
-        <div>
-          <h1 className="mb-0">Gallery</h1>
-          <p className="lead mb-0 text-muted">Images from MUTCU fellowships, events, and outreach activities.</p>
-        </div>
-        <div className="text-end">
-          {/* <a href="/admin/login" className="btn btn-outline-secondary me-2">Admin</a> */}
-          <button className="btn btn-primary" onClick={downloadAll} aria-label="Download all images">Download All</button>
-        </div>
-      </div>
-
-      <div className="row">
-        {images.map((img, i) => (
-          <div className="col-6 col-sm-4 col-md-3 mb-4" key={img.src}>
-            <div className="card p-0 border-0 shadow-sm">
-              <button
-                className="p-0 border-0 bg-transparent"
-                style={{ cursor: 'pointer', width: '100%' }}
-                onClick={() => openAt(i)}
-                aria-label={`Open image ${i + 1}`}
+    <div className="gallery-wrapper">
+      {/* HEADER SECTION */}
+      <section className="gallery-header py-5 mb-5">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-md-8">
+              <span className="badge-pill mb-2">Moments of Grace</span>
+              <h1 className="display-4 fw-bold text-navy">MUTCU <span className="text-teal">Gallery</span></h1>
+              <p className="lead text-muted">A visual journey of our fellowships, outreach, and ministry activities.</p>
+            </div>
+            <div className="col-md-4 text-md-end">
+              <button 
+                className={`btn btn-download-all btn-lg px-4 py-3 rounded-pill shadow-sm ${downloading ? 'disabled' : ''}`} 
+                onClick={downloadAll}
               >
-                <img src={img.src} alt={img.alt || `Image ${i + 1}`} className="img-fluid rounded-top" />
+                {downloading ? (
+                  <><span className="spinner-border spinner-border-sm me-2"></span>Downloading...</>
+                ) : (
+                  <><i className="fas fa-cloud-download-alt me-2"></i>Download All</>
+                )}
               </button>
-              <div className="card-body p-2 d-flex justify-content-between align-items-center">
-                <small className="text-muted">{img.alt}</small>
-                <a href={img.src} download={img.src.split('/').pop()} className="btn btn-sm btn-outline-primary">
-                  Download
-                </a>
-              </div>
             </div>
           </div>
-        ))}
+        </div>
+      </section>
+
+      {/* GRID SECTION */}
+      <div className="container mb-5">
+        <div className="row g-4">
+          {images.map((img, i) => (
+            <div className="col-6 col-md-4 col-lg-3" key={img.src}>
+              <div className="gallery-item" onClick={() => openAt(i)}>
+                <img src={img.src} alt={img.alt} className="gallery-img" loading="lazy" />
+                <div className="gallery-overlay">
+                  <div className="overlay-content">
+                    <span className="overlay-title">{img.alt}</span>
+                    <a 
+                      href={img.src} 
+                      download 
+                      onClick={(e) => e.stopPropagation()} 
+                      className="btn-item-download"
+                    >
+                      <i className="fas fa-arrow-down"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
+      {/* LIGHTBOX */}
       {index !== null && (
-        <div
-          className="gallery-lightbox"
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(0,0,0,0.85)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1050,
-            padding: 20,
-          }}
-          onClick={close}
-        >
-            <div style={{ maxWidth: '95%', maxHeight: '95%', position: 'relative' }} onClick={(e) => e.stopPropagation()}>
-            <img
-              src={images[index].src}
-              alt={images[index].alt}
-              style={{ maxWidth: '100%', maxHeight: '80vh', display: 'block', margin: '0 auto', borderRadius: 6 }}
-            />
+        <div className="lightbox-container" onClick={close}>
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <img src={images[index].src} alt={images[index].alt} className="lightbox-image" />
+            
+            <div className="lightbox-controls">
+              <button className="ctrl-btn" onClick={showPrev}><i className="fas fa-chevron-left"></i></button>
+              <button className="ctrl-btn" onClick={showNext}><i className="fas fa-chevron-right"></i></button>
+            </div>
 
-            <button
-              onClick={close}
-              aria-label="Close"
-              style={{ position: 'absolute', top: 10, right: 10, background: 'transparent', border: 'none', color: '#fff', fontSize: 28 }}
-            >
-              ×
-            </button>
+            <div className="lightbox-info">
+              <h5 className="mb-0 text-white">{images[index].alt}</h5>
+              <p className="text-white-50 small mb-0">Image {index + 1} of {images.length}</p>
+            </div>
 
-            <a
-              href={images[index].src}
-              download={images[index].src.split('/').pop()}
-              className="btn btn-sm btn-light"
-              style={{ position: 'absolute', right: 60, top: 10, color: '#000' }}
-            >
-              ⤓
-            </a>
-
-            <button
-              onClick={showPrev}
-              aria-label="Previous"
-              style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', background: 'transparent', border: 'none', color: '#fff', fontSize: 32 }}
-            >
-              ‹
-            </button>
-
-            <button
-              onClick={showNext}
-              aria-label="Next"
-              style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'transparent', border: 'none', color: '#fff', fontSize: 32 }}
-            >
-              ›
-            </button>
-
-            <div style={{ color: '#fff', marginTop: 8, textAlign: 'center' }}>{images[index].alt}</div>
+            <div className="lightbox-top-actions">
+               <a href={images[index].src} download className="action-btn me-3"><i className="fas fa-download"></i></a>
+               <button className="action-btn" onClick={close}><i className="fas fa-times"></i></button>
+            </div>
           </div>
         </div>
       )}
+
+      <style>{`
+        :root {
+          --brand-navy: #0A1837;
+          --brand-teal: #36D1C4;
+          --brand-orange: #FF9800;
+        }
+
+        .gallery-wrapper { background-color: #fcfcfc; min-height: 100vh; }
+        
+        .gallery-header { 
+          background: linear-gradient(to bottom, #eff6ff 0%, #ffffff 100%);
+          border-bottom: 1px solid #eef2f7;
+        }
+
+        .text-navy { color: var(--brand-navy); }
+        .text-teal { color: var(--brand-teal); }
+        
+        .badge-pill {
+          background: rgba(54, 209, 196, 0.1);
+          color: var(--brand-teal);
+          padding: 6px 14px;
+          border-radius: 50px;
+          font-weight: 700;
+          font-size: 0.75rem;
+          text-transform: uppercase;
+          display: inline-block;
+        }
+
+        .btn-download-all {
+          background-color: var(--brand-navy);
+          color: white;
+          border: none;
+          transition: all 0.3s ease;
+        }
+        .btn-download-all:hover {
+          background-color: var(--brand-teal);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(54, 209, 196, 0.3) !important;
+        }
+
+        /* Gallery Item Card */
+        .gallery-item {
+          position: relative;
+          border-radius: 16px;
+          overflow: hidden;
+          cursor: pointer;
+          aspect-ratio: 1/1;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .gallery-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .gallery-item:hover .gallery-img {
+          transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(10,24,55,0.8) 0%, transparent 60%);
+          display: flex;
+          align-items: flex-end;
+          padding: 1.5rem;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+          opacity: 1;
+        }
+
+        .overlay-content {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .overlay-title {
+          color: white;
+          font-weight: 600;
+          font-size: 0.95rem;
+        }
+
+        .btn-item-download {
+          width: 35px;
+          height: 35px;
+          background: var(--brand-teal);
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          transition: transform 0.2s;
+        }
+        .btn-item-download:hover { transform: scale(1.1); color: white; }
+
+        /* Lightbox Styles */
+        .lightbox-container {
+          position: fixed;
+          inset: 0;
+          background: rgba(10, 24, 55, 0.96);
+          z-index: 2000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          backdrop-filter: blur(10px);
+        }
+
+        .lightbox-content {
+          position: relative;
+          width: 90%;
+          max-width: 1000px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .lightbox-image {
+          max-width: 100%;
+          max-height: 80vh;
+          border-radius: 12px;
+          box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-controls {
+          position: absolute;
+          width: 110%;
+          display: flex;
+          justify-content: space-between;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        .ctrl-btn {
+          background: rgba(255,255,255,0.1);
+          border: none;
+          color: white;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: 0.3s;
+        }
+        .ctrl-btn:hover { background: var(--brand-teal); }
+
+        .lightbox-info {
+          margin-top: 1.5rem;
+          text-align: center;
+        }
+
+        .lightbox-top-actions {
+          position: absolute;
+          top: -50px;
+          right: 0;
+        }
+
+        .action-btn {
+          background: none;
+          border: none;
+          color: white;
+          font-size: 1.5rem;
+          cursor: pointer;
+          opacity: 0.7;
+          transition: 0.3s;
+          text-decoration: none;
+        }
+        .action-btn:hover { opacity: 1; color: var(--brand-teal); }
+
+        @media (max-width: 768px) {
+          .lightbox-controls { width: 100%; position: static; transform: none; margin-top: 1rem; }
+          .lightbox-top-actions { top: -40px; }
+        }
+      `}</style>
     </div>
   )
 }
