@@ -95,22 +95,22 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* --- OUR AIMS --- */}
-      <section className="py-5 bg-navy-gradient text-white">
+     {/* --- OUR AIMS --- */}
+      <section className="py-5 bg-navy-gradient">
         <div className="container py-4">
           <div className="text-center mb-5">
-            <h2 className="fw-bold h1">Our Core Aims</h2>
+            <h2 className="fw-bold h1 text-white">Our Core Aims</h2>
             <div className="mx-auto bg-orange rounded mt-2" style={{ height: '4px', width: '50px' }}></div>
           </div>
           <div className="row g-4">
             {aims.map((aim, idx) => (
               <div className="col-md-4" key={idx}>
-                <div className="aim-card p-4 rounded-4 h-100">
+                <div className="aim-card p-4 rounded-4 h-100 border border-white border-opacity-10">
                   <div className="d-flex align-items-start">
                     <i className={`fas ${aim.icon} text-teal fs-3 me-3 mt-1`}></i>
                     <div>
-                      <h5 className="fw-bold">{aim.title}</h5>
-                      <p className="small opacity-75 mb-0">{aim.description}</p>
+                      <h5 className="fw-bold text-white mb-2">{aim.title}</h5>
+                      <p className="small text-white opacity-75 mb-0">{aim.description}</p>
                     </div>
                   </div>
                 </div>
