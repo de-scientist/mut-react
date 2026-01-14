@@ -50,7 +50,7 @@ const AboutPage = () => {
       </section>
 
       {/* --- WHO WE ARE --- */}
-      <section className="py-5 mt-n5">
+      <section className="py-5 mt-n6">
         <div className="container">
           <div className="row g-0 rounded-5 shadow-lg overflow-hidden bg-white">
             <div className="col-lg-6 p-5 d-flex flex-column justify-content-center">
