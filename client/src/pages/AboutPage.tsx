@@ -1,123 +1,93 @@
 import { Link } from 'react-router-dom'
-import '../assets/mut/css/about.css'
 
 const executiveMembers = [
-  { name: 'Ezekiel Thaara', role: 'Chairman', image: '/assets/images/EZEKIEL.jpg', link: '/committees/chairman', borderColor: 'border-orange' },
-  { name: 'Jesca Kinya', role: '1st Vice Chair', image: '/assets/images/JES.jpg', link: '/committees/vice-chair1', borderColor: 'border-navy' },
-  { name: 'Martin Gitau', role: '2nd Vice Chair', image: '/assets/images/MARTIN.jpg', link: '/committees/vice-chair2', borderColor: 'border-orange' },
-  { name: 'Grace Kanyiri', role: 'Secretary', image: '/assets/images/GRACE.jpg', link: '/committees/secretary', borderColor: 'border-navy' },
-  { name: 'Daisy Mutheu', role: 'Vice Secretary', image: '/assets/images/DAISY.jpg', link: '/committees/vice-secretary', borderColor: 'border-orange' },
-  { name: 'Joy Karimi', role: 'Treasurer', image: '/assets/images/JOY.jpg', link: '/committees/treasurer', borderColor: 'border-navy' },
-  { name: 'Purity Njeri', role: 'Bible Study & Discipleship Coordinator', image: '/assets/images/PURITY.jpg', link: '/committees/bible-study', borderColor: 'border-orange' },
-  { name: 'Roy Ndege', role: 'Prayer Coordinator', image: '/assets/images/PRAYER.jpg', link: '/committees/prayer', borderColor: 'border-navy' },
-  { name: 'Yusuf Muchiri', role: 'Missions & Evangelism Coordinator', image: '/assets/images/YUSUF.jpg', link: '/committees/missions', borderColor: 'border-orange' },
-  { name: 'Jabez Ayugu', role: 'Music Coordinator', image: '/assets/images/JABEZ.jpg', link: '/committees/music', borderColor: 'border-navy' },
-  { name: 'Joseph Mbogo', role: 'Technical Coordinator', image: '/assets/images/JOSEPH.jpg', link: '/committees/technical', borderColor: 'border-orange' },
-  { name: 'Brian Ingwee', role: 'Creative Ministry Coordinator', image: '/assets/images/Ingwee.JPG', link: '/committees/creative', borderColor: 'border-navy' },
+  { name: 'Ezekiel Thaara', role: 'Chairman', image: '/assets/images/EZEKIEL.jpg', link: '/committees/chairman', accent: 'var(--brand-orange)' },
+  { name: 'Jesca Kinya', role: '1st Vice Chair', image: '/assets/images/JES.jpg', link: '/committees/vice-chair1', accent: 'var(--brand-navy)' },
+  { name: 'Martin Gitau', role: '2nd Vice Chair', image: '/assets/images/MARTIN.jpg', link: '/committees/vice-chair2', accent: 'var(--brand-orange)' },
+  { name: 'Grace Kanyiri', role: 'Secretary', image: '/assets/images/GRACE.jpg', link: '/committees/secretary', accent: 'var(--brand-navy)' },
+  { name: 'Daisy Mutheu', role: 'Vice Secretary', image: '/assets/images/DAISY.jpg', link: '/committees/vice-secretary', accent: 'var(--brand-orange)' },
+  { name: 'Joy Karimi', role: 'Treasurer', image: '/assets/images/JOY.jpg', link: '/committees/treasurer', accent: 'var(--brand-navy)' },
+  { name: 'Purity Njeri', role: 'Bible Study Coordinator', image: '/assets/images/PURITY.jpg', link: '/committees/bible-study', accent: 'var(--brand-orange)' },
+  { name: 'Roy Ndege', role: 'Prayer Coordinator', image: '/assets/images/PRAYER.jpg', link: '/committees/prayer', accent: 'var(--brand-navy)' },
+  { name: 'Yusuf Muchiri', role: 'Missions Coordinator', image: '/assets/images/YUSUF.jpg', link: '/committees/missions', accent: 'var(--brand-orange)' },
+  { name: 'Jabez Ayugu', role: 'Music Coordinator', image: '/assets/images/JABEZ.jpg', link: '/committees/music', accent: 'var(--brand-navy)' },
+  { name: 'Joseph Mbogo', role: 'Technical Coordinator', image: '/assets/images/JOSEPH.jpg', link: '/committees/technical', accent: 'var(--brand-orange)' },
+  { name: 'Brian Ingwee', role: 'Creative Ministry', image: '/assets/images/Ingwee.JPG', link: '/committees/creative', accent: 'var(--brand-navy)' },
 ]
 
 const aims = [
-  { icon: 'fa-book-bible', title: 'Biblical Discipleship', description: "To deepen members' understanding of the Bible and encourage practical application of its teachings in their daily lives.", delay: 100 },
-  { icon: 'fa-user-plus', title: 'Evangelism & Outreach', description: 'To reach out to non-believers within the university and beyond, sharing the Gospel through various initiatives.', delay: 200 },
-  { icon: 'fa-users-line', title: 'Fellowship & Unity', description: 'To foster a strong sense of community, encouraging members to live as one body of Christ, supporting each other.', delay: 300 },
-  { icon: 'fa-handshake', title: 'Leadership Development', description: 'To identify, train, and equip student leaders with spiritual and practical skills for effective service within and outside the Union.', delay: 400 },
-  { icon: 'fa-graduation-cap', title: 'Academic Excellence', description: "To encourage members to excel in their academic pursuits as a testimony to God's glory and a means of impacting society.", delay: 500 },
-  { icon: 'fa-hands-holding-circle', title: 'Social Responsibility', description: 'To engage in community service and social justice initiatives, reflecting Christ\'s love and compassion.', delay: 600 },
+  { icon: 'fa-book-open', title: 'Biblical Discipleship', description: "Deepening understanding of Scripture and encouraging practical application in daily life.", delay: 100 },
+  { icon: 'fa-cross', title: 'Evangelism & Outreach', description: 'Reaching out to non-believers within the university and beyond with the Gospel.', delay: 200 },
+  { icon: 'fa-hands-praying', title: 'Fellowship & Unity', description: 'Fostering a strong sense of community, living as one body in Christ.', delay: 300 },
+  { icon: 'fa-crown', title: 'Leadership Development', description: 'Equipping student leaders with spiritual and practical skills for effective service.', delay: 400 },
+  { icon: 'fa-user-graduate', title: 'Academic Excellence', description: "Excelling in academics as a testimony to God's glory and impacting society.", delay: 500 },
+  { icon: 'fa-heart-pulse', title: 'Social Responsibility', description: "Reflecting Christ's compassion through community service and social justice.", delay: 600 },
 ]
 
 const doctrinalPoints = [
-  'The unity of the Father, the Son and the Holy Spirit in the Godhead.',
-  'The sovereignty of God in creation, revelation, redemption and final judgment.',
-  'The divine inspiration and infallibility of the Holy Scripture as originally given, and its supreme authority in all matters of faith and conduct.',
-  'The universal sinfulness and guilt of all men since the fall, rendering them subject to God\'s wrath and condemnation.',
-  'Redemption from the guilt, penalty, dominion and pollution of sin, solely through the sacrificial death of the Lord Jesus Christ.',
-  'The bodily resurrection of the Lord Jesus Christ from the dead and His ascension to the right hand of God the Father.',
-  'The presence and power of the Holy Spirit in the work of regeneration.',
-  'The justification of the sinner by grace alone through faith alone.',
-  'The indwelling and work of the Holy Spirit in the believer.',
-  'The one Holy Universal Church which is the Body of Christ.',
-  'The expectation of the personal, visible return of the Lord Jesus Christ.',
-]
-
-const benefits = [
-  { icon: 'fa-hands-clapping', title: 'Lively Fellowship', description: 'Experience genuine Christian fellowship and build lasting friendships in a supportive environment.', delay: 100 },
-  { icon: 'fa-brain', title: 'Spiritual Growth', description: 'Deepen your faith through Bible studies, discipleship programs, and powerful worship experiences.', delay: 200 },
-  { icon: 'fa-person-digging', title: 'Service Opportunities', description: 'Engage in meaningful ministry and outreach, making a tangible difference in the university and beyond.', delay: 300 },
-  { icon: 'fa-user-graduate', title: 'Leadership Development', description: 'Develop essential leadership skills through various roles and mentorship opportunities.', delay: 400 },
-  { icon: 'fa-hand-holding-dollar', title: 'Welfare Support', description: 'Receive and offer support through our Welfare Committee, a tangible expression of community care.', delay: 500 },
-  { icon: 'fa-lightbulb', title: 'Impactful Presence', description: 'Contribute to a Christ-centered environment that impacts the entire university and wider society.', delay: 600 },
+  'Unity of the Father, Son, and Holy Spirit.',
+  'Divine inspiration and authority of Holy Scripture.',
+  'Universal sinfulness and guilt of all mankind.',
+  'Redemption solely through the death of Jesus Christ.',
+  'The bodily resurrection and ascension of Christ.',
+  'Justification of the sinner by grace through faith.',
+  'The indwelling and work of the Holy Spirit.',
+  'The personal, visible return of our Lord Jesus.',
 ]
 
 const AboutPage = () => {
   return (
     <div className="about-page">
-      {/* Page Hero Section */}
-      <section
-        className="page-hero-section d-flex align-items-center text-center text-white"
-        style={{ 
-          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/assets/images/church2.jpg')",
-          height: '60vh',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
-      >
-        <div className="container" data-aos="fade-up" data-aos-duration="1000">
-          <span className="badge bg-primary px-3 py-2 mb-3 text-uppercase">Establishment & Faith</span>
-          <h1 className="display-2 fw-bold mb-3">About MUTCU</h1>
-          <p className="lead fs-4 opacity-75">Inspiring Love, Hope & Godliness Since Inception</p>
+      {/* --- HERO SECTION --- */}
+      <section className="about-hero d-flex align-items-center">
+        <div className="container text-center text-white">
+          <div className="badge-pill mb-3">Since Inception</div>
+          <h1 className="display-3 fw-bold mb-3">Our <span className="text-teal">Identity</span> & Faith</h1>
+          <p className="lead opacity-90 mx-auto col-lg-7">
+            Inspiring Love, Hope, and Godliness within Murang'a University of Technology.
+          </p>
         </div>
       </section>
 
-      {/* Introduction Section */}
-      <section className="py-5 introduction-section">
-        <div className="container py-lg-4">
-          <div className="row align-items-center g-5">
-            <div className="col-lg-7" data-aos="fade-right">
-              <div className="pe-lg-5">
-                <h6 className="text-primary fw-bold text-uppercase mb-2">Our Identity</h6>
-                <h2 className="display-5 fw-bold mb-4">Who We Are</h2>
-                <p className="lead text-dark mb-4">
-                  The Murang'a University of Technology Christian Union (MUTCU) is a vibrant, student-led community dedicated to spiritual excellence and holistic growth.
-                </p>
-                <p className="text-muted">
-                  As a proud member of the{' '}
-                  <a href="https://focuskenya.org/" target="_blank" rel="noopener noreferrer" className="fw-bold text-decoration-none text-primary">
-                    Fellowship of Christian Unions - Kenya (FOCUS-KENYA)
-                  </a>
-                  , we operate under a national framework of support and accountability.
+      {/* --- WHO WE ARE --- */}
+      <section className="py-5 mt-n5">
+        <div className="container">
+          <div className="row g-0 rounded-5 shadow-lg overflow-hidden bg-white">
+            <div className="col-lg-6 p-5 d-flex flex-column justify-content-center">
+              <h6 className="text-orange fw-bold text-uppercase mb-2">Our Foundation</h6>
+              <h2 className="display-6 fw-bold text-navy mb-4">Who We Are</h2>
+              <p className="text-muted mb-4">
+                The Murang'a University of Technology Christian Union (MUTCU) is a vibrant, student-led community dedicated to spiritual excellence and holistic growth.
+              </p>
+              <div className="p-3 border-start border-4 border-teal bg-light rounded-end">
+                <p className="mb-0 small fw-medium text-navy">
+                  Proud member of the <a href="https://focuskenya.org/" className="text-teal text-decoration-none fw-bold">Fellowship of Christian Unions (FOCUS-KENYA)</a>.
                 </p>
               </div>
             </div>
-            <div className="col-lg-5 text-center" data-aos="fade-left">
-              <div className="p-4 bg-white shadow-lg rounded-4">
-                <img src="/assets/images/Full Logo.png" alt="MUTCU Logo" className="img-fluid" />
-              </div>
+            <div className="col-lg-6 bg-navy d-flex align-items-center justify-content-center p-5">
+              <img src="/assets/images/Full Logo.png" alt="MUTCU Logo" className="img-fluid logo-glow" style={{ maxHeight: '250px' }} />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Guiding Principles Section */}
-      <section className="py-5 bg-light principles-section border-top border-bottom">
-        <div className="container py-lg-4">
-          <div className="text-center mb-5">
-            <h2 className="fw-bold mb-3">Our Guiding Principles</h2>
-            <div className="mx-auto bg-primary rounded" style={{ height: '4px', width: '60px' }}></div>
-          </div>
-
-          <div className="row g-4">
+      {/* --- MISSION / VISION / MOTTO --- */}
+      <section className="py-5">
+        <div className="container">
+          <div className="row g-4 text-center">
             {[
-              { icon: 'fa-bullhorn', color: 'bg-primary-subtle text-primary', title: 'Our Motto', text: '"To Inspire Love, Hope, and Godliness."' },
-              { icon: 'fa-eye', color: 'bg-success-subtle text-success', title: 'Our Vision', text: '"To be a model Christian Union cultivating Christ-centeredness."' },
-              { icon: 'fa-hands-helping', color: 'bg-warning-subtle text-warning', title: 'Our Mission', text: '"To raise a family well-equipped in all aspects of life."' }
-            ].map((principle, idx) => (
-              <div className="col-md-4" key={idx} data-aos="zoom-in" data-aos-delay={idx * 100}>
-                <div className="card border-0 shadow-sm h-100 p-4 text-center rounded-4">
-                  <div className={`rounded-circle ${principle.color} d-inline-flex align-items-center justify-content-center mx-auto mb-4`} style={{ width: '70px', height: '70px' }}>
-                    <i className={`fas ${principle.icon} fs-3`} />
+              { title: 'Our Motto', text: 'To Inspire Love, Hope, and Godliness.', icon: 'fa-quote-left', bg: 'var(--brand-orange)' },
+              { title: 'Our Vision', text: 'To be a model Christian Union cultivating Christ-centeredness.', icon: 'fa-eye', bg: 'var(--brand-teal)' },
+              { title: 'Our Mission', text: 'To raise a family well-equipped in all aspects of life.', icon: 'fa-chess-king', bg: 'var(--brand-navy)' }
+            ].map((item, i) => (
+              <div className="col-md-4" key={i}>
+                <div className="principle-card p-5 h-100 rounded-4 shadow-sm">
+                  <div className="icon-circle mb-4 mx-auto" style={{ backgroundColor: item.bg }}>
+                    <i className={`fas ${item.icon} text-white fs-4`}></i>
                   </div>
-                  <h4 className="fw-bold">{principle.title}</h4>
-                  <p className="fw-semibold text-primary mb-0 small">{principle.text}</p>
+                  <h4 className="fw-bold text-navy">{item.title}</h4>
+                  <p className="text-muted mb-0">{item.text}</p>
                 </div>
               </div>
             ))}
@@ -125,77 +95,70 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* AIMS SECTION - NEWLY MAPPED */}
-      <section className="py-5 aims-section">
-        <div className="container py-lg-4">
-          <div className="text-center mb-5">
-            <h2 className="fw-bold mb-2">Our Aims</h2>
-            <p className="text-muted">The core objectives that drive our fellowship and activities.</p>
-            <div className="mx-auto bg-primary rounded" style={{ height: '4px', width: '60px' }}></div>
-          </div>
-          <div className="row g-4">
-            {aims.map((aim, index) => (
-              <div key={index} className="col-md-4" data-aos="fade-up" data-aos-delay={aim.delay}>
-                <div className="card border-0 shadow-sm h-100 p-4 rounded-4 transition-all shadow-hover">
-                  <div className="d-flex align-items-center mb-3">
-                    <div className="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '50px', height: '50px', flexShrink: 0 }}>
-                      <i className={`fas ${aim.icon}`} />
-                    </div>
-                    <h5 className="fw-bold mb-0">{aim.title}</h5>
-                  </div>
-                  <p className="text-muted small mb-0">{aim.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Doctrinal Basis Section */}
-      <section className="py-5 doctrinal-section bg-dark text-white position-relative overflow-hidden">
-        <div className="container position-relative z-1 py-4">
-          <h2 className="display-6 fw-bold text-center mb-5">Our Doctrinal Basis</h2>
-          <div className="row justify-content-center">
-            <div className="col-lg-10">
-              <div className="p-5 rounded-4" style={{ backgroundColor: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)' }}>
-                <div className="row g-4">
-                  {doctrinalPoints.map((point, index) => (
-                    <div className="col-md-6" key={index} data-aos="fade-up" data-aos-delay={index * 50}>
-                      <div className="d-flex align-items-start">
-                        <i className="fas fa-check-circle text-primary mt-1 me-3" />
-                        <p className="mb-0 opacity-75">{point}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Leadership Section */}
-      <section className="py-5 executive-committee-section">
+      {/* --- OUR AIMS --- */}
+      <section className="py-5 bg-navy-gradient text-white">
         <div className="container py-4">
           <div className="text-center mb-5">
-            <h2 className="fw-bold mb-2">The Executive Committee</h2>
-            <p className="text-muted">Leading MUTCU with dedication for the 2024/2025 Spiritual Year.</p>
+            <h2 className="fw-bold h1">Our Core Aims</h2>
+            <div className="mx-auto bg-orange rounded mt-2" style={{ height: '4px', width: '50px' }}></div>
           </div>
           <div className="row g-4">
-            {executiveMembers.map((member, index) => (
-              <div key={index} className="col-6 col-md-4 col-lg-3" data-aos="fade-up">
-                <Link to={member.link} className="text-decoration-none group">
-                  <div className="card border-0 text-center h-100 p-3 shadow-hover rounded-4 transition-all overflow-hidden">
-                    <div className="position-relative d-inline-block mx-auto mb-3">
-                       <img
-                        src={member.image}
-                        alt={member.name}
-                        className={`img-fluid rounded-circle border border-4 ${member.borderColor}`}
-                        style={{ width: '130px', height: '130px', objectFit: 'cover' }}
-                      />
+            {aims.map((aim, idx) => (
+              <div className="col-md-4" key={idx}>
+                <div className="aim-card p-4 rounded-4 h-100">
+                  <div className="d-flex align-items-start">
+                    <i className={`fas ${aim.icon} text-teal fs-3 me-3 mt-1`}></i>
+                    <div>
+                      <h5 className="fw-bold">{aim.title}</h5>
+                      <p className="small opacity-75 mb-0">{aim.description}</p>
                     </div>
-                    <h5 className="fw-bold text-dark mb-1">{member.name}</h5>
-                    <p className="small text-muted text-uppercase mb-0">{member.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- DOCTRINAL BASIS --- */}
+      <section className="py-5 bg-light">
+        <div className="container py-4">
+          <div className="row align-items-center">
+            <div className="col-lg-5 mb-4 mb-lg-0">
+              <h2 className="display-5 fw-bold text-navy mb-4">Our Doctrinal Basis</h2>
+              <p className="text-muted lead">The unchanging truths that form the foundation of our faith and fellowship.</p>
+              <div className="bg-orange p-1 rounded w-25"></div>
+            </div>
+            <div className="col-lg-7">
+              <div className="row g-3">
+                {doctrinalPoints.map((point, i) => (
+                  <div className="col-md-6" key={i}>
+                    <div className="bg-white p-3 rounded-3 shadow-sm d-flex align-items-center border-start border-3 border-orange h-100">
+                      <i className="fas fa-check-circle text-teal me-2"></i>
+                      <span className="small fw-medium text-navy">{point}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- EXECUTIVE COMMITTEE --- */}
+      <section className="py-5">
+        <div className="container py-4 text-center">
+          <h2 className="fw-bold text-navy h1 mb-5">The Executive Committee</h2>
+          <div className="row g-4">
+            {executiveMembers.map((member, i) => (
+              <div key={i} className="col-6 col-md-4 col-lg-3">
+                <Link to={member.link} className="text-decoration-none">
+                  <div className="leader-card">
+                    <div className="leader-img-box mb-3" style={{ borderColor: member.accent }}>
+                      <img src={member.image} alt={member.name} className="img-fluid rounded-circle" />
+                    </div>
+                    <h6 className="fw-bold text-navy mb-1">{member.name}</h6>
+                    <p className="text-teal x-small fw-bold text-uppercase mb-0">{member.role}</p>
                   </div>
                 </Link>
               </div>
@@ -204,39 +167,103 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Why Join Section */}
-      <section className="py-5 bg-primary text-white">
+      {/* --- CTA SECTION --- */}
+      <section className="py-5 bg-teal text-navy text-center">
         <div className="container py-4">
-          <h2 className="fw-bold text-center mb-5">Why Join MUTCU?</h2>
-          <div className="row g-4">
-            {benefits.map((benefit, idx) => (
-              <div className="col-md-4" key={idx} data-aos="fade-up" data-aos-delay={benefit.delay}>
-                <div className="h-100 p-4 rounded-4" style={{ backgroundColor: 'rgba(255,255,255,0.1)' }}>
-                  <i className={`fas ${benefit.icon} mb-3 fs-3 text-warning`} />
-                  <h5 className="fw-bold">{benefit.title}</h5>
-                  <p className="opacity-75 small mb-0">{benefit.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-5">
-            <Link to="/contact" className="btn btn-warning btn-lg px-5 py-3 rounded-pill fw-bold me-md-3 mb-3 mb-md-0 shadow">
-              Join MUTCU Today! <i className="fas fa-arrow-right ms-2" />
+          <h2 className="display-6 fw-bold mb-4">Become a Part of the Family</h2>
+          <div className="d-flex flex-wrap justify-content-center gap-3">
+            <Link to="/contact" className="btn btn-navy-action px-5 py-3 rounded-pill fw-bold">
+              Join MUTCU Now
             </Link>
-            <Link to="/ministries" className="btn btn-outline-light btn-lg px-5 py-3 rounded-pill fw-bold shadow">
+            <Link to="/ministries" className="btn btn-outline-navy px-5 py-3 rounded-pill fw-bold">
               Explore Ministries
             </Link>
           </div>
         </div>
       </section>
-      
+
       <style>{`
-        .shadow-hover:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 1rem 3rem rgba(0,0,0,0.175) !important;
+        :root {
+          --brand-navy: #0A1837;
+          --brand-orange: #FF9800;
+          --brand-teal: #36D1C4;
         }
-        .transition-all { transition: all 0.3s ease-in-out; }
-        .group:hover .rounded-circle { transform: scale(1.05); transition: all 0.3s ease; }
+
+        .text-navy { color: var(--brand-navy); }
+        .text-teal { color: var(--brand-teal); }
+        .text-orange { color: var(--brand-orange); }
+        .bg-navy { background-color: var(--brand-navy); }
+        .bg-teal { background-color: var(--brand-teal); }
+        .bg-orange { background-color: var(--brand-orange); }
+
+        .about-hero {
+          background: linear-gradient(rgba(10, 24, 55, 0.85), rgba(10, 24, 55, 0.85)), url('/assets/images/church2.jpg');
+          background-size: cover;
+          background-position: center;
+          height: 450px;
+        }
+
+        .mt-n5 { margin-top: -6rem !important; }
+
+        .badge-pill {
+          background: rgba(54, 209, 196, 0.2);
+          color: var(--brand-teal);
+          padding: 6px 16px;
+          border-radius: 50px;
+          font-weight: 700;
+          font-size: 0.8rem;
+          display: inline-block;
+        }
+
+        .principle-card {
+          background: white;
+          transition: 0.3s;
+          border: 1px solid #f0f0f0;
+        }
+        .principle-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important; }
+
+        .icon-circle {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .bg-navy-gradient { background: linear-gradient(135deg, var(--brand-navy) 0%, #1a2a4d 100%); }
+
+        .aim-card {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          transition: 0.3s;
+        }
+        .aim-card:hover { background: rgba(255, 255, 255, 0.1); }
+
+        .leader-img-box {
+          width: 130px;
+          height: 130px;
+          margin: 0 auto;
+          border-radius: 50%;
+          padding: 5px;
+          border: 3px solid;
+          transition: 0.3s;
+        }
+        .leader-card:hover .leader-img-box { transform: scale(1.08); }
+        .leader-img-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+        .btn-navy-action { background: var(--brand-navy); color: white; border: none; }
+        .btn-navy-action:hover { background: #152C5B; color: white; }
+        .btn-outline-navy { border: 2px solid var(--brand-navy); color: var(--brand-navy); }
+        .btn-outline-navy:hover { background: var(--brand-navy); color: white; }
+
+        .x-small { font-size: 0.7rem; letter-spacing: 1px; }
+        .logo-glow { filter: drop-shadow(0 0 15px rgba(54, 209, 196, 0.3)); }
+
+        @media (max-width: 991.98px) {
+          .mt-n5 { margin-top: -2rem !important; }
+          .about-hero { height: 350px; }
+        }
       `}</style>
     </div>
   )
