@@ -38,12 +38,12 @@ const doctrinalPoints = [
 const AboutPage = () => {
   return (
     <div className="about-page">
-      {/* --- HERO SECTION --- */}
+     {/* --- HERO SECTION --- */}
       <section className="about-hero d-flex align-items-center">
-        <div className="container text-center text-white">
+        <div className="container text-center hero-content">
           <div className="badge-pill mb-3">Since Inception</div>
-          <h1 className="display-3 fw-bold mb-3">Our <span className="text-teal">Identity</span> & Faith</h1>
-          <p className="lead opacity-90 mx-auto col-lg-7">
+          <h1 className="display-3 fw-bold mb-3 text-white">Our <span className="text-teal">Identity</span> & Faith</h1>
+          <p className="lead text-white opacity-90 mx-auto col-lg-7">
             Inspiring Love, Hope, and Godliness within Murang'a University of Technology.
           </p>
         </div>
