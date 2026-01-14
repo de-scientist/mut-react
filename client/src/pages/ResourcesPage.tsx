@@ -70,7 +70,7 @@ const ResourcesPage = () => {
       </section>
 
       {/* CONTENT SECTION */}
-      <section className="container py-5 mt-n5">
+      <section className="container py-5 mt-n6">
         {loading && (
           <div className="text-center py-5">
             <div className="spinner-border text-teal" role="status"></div>
