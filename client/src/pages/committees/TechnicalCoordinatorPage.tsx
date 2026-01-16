@@ -8,7 +8,7 @@ const TechnicalCoordinatorPage = () => {
       {/* Hero Section */}
       <section
         className="page-hero-section d-flex align-items-center text-center text-white"
-        style={{ backgroundImage: "url('/assets/images/JOSEPH.jpg')" }}
+        style={{ backgroundImage: "url('/assets/images/JOHN.jpeg')" }}
       >
         <div className="hero-overlay" />
         <div
@@ -36,11 +36,11 @@ const TechnicalCoordinatorPage = () => {
             >
               <div className="executive-member-card d-block text-center rounded-3 shadow-sm h-100">
                 <img
-                  src="/assets/images/JOSEPH.jpg"
-                  alt="Joseph Mbogo"
+                  src="/assets/images/JOHN.jpeg"
+                  alt="John Mwanthi"
                   className="img-fluid rounded-circle mb-3 border border-3 border-orange"
                 />
-                <h4 className="member-name">Joseph Mbogo</h4>
+                <h4 className="member-name">John Mwanthi</h4>
                 <p className="member-role">Technical Coordinator</p>
               </div>
             </div>
@@ -57,7 +57,7 @@ const TechnicalCoordinatorPage = () => {
                 The Technical Ministry oversees all technical, media, and logistical operations within MUTCU. It ensures that services, meetings, and official events run smoothly, efficiently, and without distraction.
               </p>
               <p>
-                Under the leadership of Joseph Mbogo, the ministry unites ushering, sound and audio-visual services, digital ministry, and publicity. Through disciplined stewardship of resources and skills, it supports worship, communication, and outreach in alignment with MUTCU’s mission and values.
+                Under the leadership of John Mwanthi, the ministry unites ushering, sound and audio-visual services, digital ministry, and publicity. Through disciplined stewardship of resources and skills, it supports worship, communication, and outreach in alignment with MUTCU’s mission and values.
               </p>
             </div>
           </div>
