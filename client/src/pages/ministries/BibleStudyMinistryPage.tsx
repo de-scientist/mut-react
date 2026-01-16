@@ -51,12 +51,12 @@ const BibleStudyMinistryPage = () => {
           <div className="row align-items-center">
             <div className="col-lg-5 text-center mb-4 mb-lg-0">
               <img
-                src="/assets/images/purity-njeri.jpg"
-                alt="Purity Njeri"
+                src="/assets/images/CALEB.jpg"
+                alt="Caleb Osere"
                 className="img-fluid rounded-circle"
                 data-aos="zoom-in"
               />
-              <h3 className="mt-3">Purity Njeri</h3>
+              <h3 className="mt-3">Caleb Osere</h3>
               <p className="text-muted">Bible Study &amp; Discipleship Coordinator</p>
             </div>
             <div className="col-lg-7">
@@ -233,11 +233,11 @@ const BibleStudyMinistryPage = () => {
             <div className="col-md-4 col-lg-3 mb-4" data-aos="zoom-in">
               <div className="executive-member-card">
                 <img
-                  src="/assets/images/purity-njeri.jpg"
-                  alt="Purity Njeri"
+                  src="/assets/images/CALEB.jpg"
+                  alt="Caleb Osere"
                   className="img-fluid rounded-circle mb-2 border-orange"
                 />
-                <h5 className="member-name">Purity Njeri</h5>
+                <h5 className="member-name">Caleb Osere</h5>
                 <p className="member-role">Bible Study &amp; Discipleship Coordinator</p>
                 <button className="btn btn-outline-light btn-sm" type="button">
                   View Profile
