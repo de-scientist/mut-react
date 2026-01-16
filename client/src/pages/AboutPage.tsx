@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 const executiveMembers = [
   { name: 'Purdri Kihika', role: 'Chairman', image: '/assets/images/EZEKIEL.jpg', link: '/committees/chairman', accent: 'var(--brand-orange)' },
   { name: 'Purity Njeri', role: '1st Vice Chair', image: '/assets/images/JES.jpg', link: '/committees/vice-chair1', accent: 'var(--brand-navy)' },
-  { name: 'Martin Gitau', role: '2nd Vice Chair', image: '/assets/images/MARTIN.jpg', link: '/committees/vice-chair2', accent: 'var(--brand-orange)' },
+  { name: 'David Kimani', role: '2nd Vice Chair', image: '/assets/images/MARTIN.jpg', link: '/committees/vice-chair2', accent: 'var(--brand-orange)' },
   { name: 'Grace Kanyiri', role: 'Secretary', image: '/assets/images/GRACE.jpg', link: '/committees/secretary', accent: 'var(--brand-navy)' },
   { name: 'Daisy Mutheu', role: 'Vice Secretary', image: '/assets/images/DAISY.jpg', link: '/committees/vice-secretary', accent: 'var(--brand-orange)' },
   { name: 'Joy Karimi', role: 'Treasurer', image: '/assets/images/JOY.jpg', link: '/committees/treasurer', accent: 'var(--brand-navy)' },
