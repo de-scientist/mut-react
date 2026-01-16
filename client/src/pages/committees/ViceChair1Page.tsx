@@ -8,7 +8,7 @@ const ViceChair1Page = () => {
       {/* Hero Section */}
       <section
         className="page-hero-section d-flex align-items-center text-center text-white"
-        style={{ backgroundImage: "url('/assets/images/JES.jpg')" }}
+        style={{ backgroundImage: "url('/assets/images/PURITY.jpeg')" }}
       >
         <div className="hero-overlay" />
         <div
@@ -36,11 +36,11 @@ const ViceChair1Page = () => {
             >
               <div className="executive-member-card d-block text-center rounded-3 shadow-sm h-100">
                 <img
-                  src="/assets/images/JES.jpg"
-                  alt="Jesca Kinya"
+                  src="/assets/images/PURITY.jpeg"
+                  alt="Purity Njeri"
                   className="img-fluid rounded-circle mb-3 border border-3 border-navy"
                 />
-                <h4 className="member-name">Jesca Kinya</h4>
+                <h4 className="member-name">Purity Njeri</h4>
                 <p className="member-role">1st Vice Chair</p>
               </div>
             </div>
@@ -57,7 +57,7 @@ const ViceChair1Page = () => {
                 The 1st Vice Chair's office plays a crucial supportive role to the Chairman, assisting in the overall leadership and administration of MUTCU.
               </p>
               <p>
-                Jesca Kinya, as 1st Vice Chair, is dedicated to upholding the Union's values and actively contributes to the strategic planning and implementation of activities that build spiritual growth among members. She is also in charge of the Hospitality ministry and Ladies committee, overseeing the nurturing and development of ladies in the Union.
+                Purity Njeri, as 1st Vice Chair, is dedicated to upholding the Union's values and actively contributes to the strategic planning and implementation of activities that build spiritual growth among members. She is also in charge of the Hospitality ministry and Ladies committee, overseeing the nurturing and development of ladies in the Union.
               </p>
             </div>
           </div>
