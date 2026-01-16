@@ -8,7 +8,7 @@ const TreasurerPage = () => {
       {/* Hero Section */}
       <section
         className="page-hero-section d-flex align-items-center text-center text-white"
-        style={{ backgroundImage: "url('/assets/images/JOY.jpg')" }}
+        style={{ backgroundImage: "url('/assets/images/MERCY.jpeg')" }}
       >
         <div className="hero-overlay" />
         <div
@@ -36,11 +36,11 @@ const TreasurerPage = () => {
             >
               <div className="executive-member-card d-block text-center rounded-3 shadow-sm h-100">
                 <img
-                  src="/assets/images/JOY.jpg"
-                  alt="Joy Karimi"
+                  src="/assets/images/MERCY.jpeg"
+                  alt="Mercy Mwaura"
                   className="img-fluid rounded-circle mb-3 border border-3 border-navy"
                 />
-                <h4 className="member-name">Joy Karimi</h4>
+                <h4 className="member-name">Mercy Mwaura</h4>
                 <p className="member-role">Treasurer</p>
               </div>
             </div>
@@ -57,7 +57,7 @@ const TreasurerPage = () => {
                 The Treasurer&apos;s office is central to MUTCU's financial integrity and sustainability. It is responsible for the diligent management of all Union funds, ensuring strict adherence to financial procedures and policies. This includes overseeing budgets, managing expenditures, and providing transparent financial reports to the Executive Council and members.
               </p>
               <p>
-                Joy Karimi, as Treasurer, ensures the responsible stewardship of members' offerings and Union resources. Her role is critical in maintaining accountability and transparency in all financial matters, enabling MUTCU to effectively fund its ministries and outreach programs.
+                Mercy Mwaura, as Treasurer, ensures the responsible stewardship of members' offerings and Union resources. Her role is critical in maintaining accountability and transparency in all financial matters, enabling MUTCU to effectively fund its ministries and outreach programs.
               </p>
             </div>
           </div>
