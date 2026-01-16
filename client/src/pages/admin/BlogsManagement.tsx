@@ -76,8 +76,8 @@ const BlogsManagement = () => {
       const response = await adminBlogsAPI.list({
         page,
         limit: 10,
-        search: filters.search || undefined,
-        status: filters.status || undefined,
+        search: filters.search || '',
+        status: filters.status || '',
       })
       const data = response.data || response
       const paginationMeta = response.pagination || data.pagination
