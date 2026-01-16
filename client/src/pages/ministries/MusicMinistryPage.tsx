@@ -253,11 +253,11 @@ const MusicMinistryPage = () => {
                 className="executive-member-card d-block text-center text-decoration-none rounded-3 shadow-sm h-100 p-4"
               >
                 <img
-                  src="/assets/images/JABEZ.jpg"
-                  alt="Jabez Ayugu"
+                  src="/assets/images/PETER.jpg"
+                  alt="Peter Vaati"
                   className="img-fluid rounded-circle mb-3 border border-3 border-navy"
                 />
-                <h4 className="member-name">Jabez Ayugu</h4>
+                <h4 className="member-name">Peter Vaati</h4>
                 <p className="member-role">Coordinator, Music Ministry</p>
                 <span className="btn btn-sm btn-outline-light mt-2">
                   View Profile <i className="fas fa-user-circle ms-2" />
