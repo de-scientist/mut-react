@@ -8,7 +8,7 @@ const BibleStudyCoordinatorPage = () => {
       {/* Hero Section */}
       <section
         className="page-hero-section d-flex align-items-center text-center text-white"
-        style={{ backgroundImage: "url('/assets/images/CALEB.jpeg')" }}
+        style={{ backgroundImage: "url('/assets/images/CALEB.jpg')" }}
       >
         <div className="hero-overlay" />
         <div
@@ -36,7 +36,7 @@ const BibleStudyCoordinatorPage = () => {
             >
               <div className="executive-member-card d-block text-center rounded-3 shadow-sm h-100">
                 <img
-                  src="/assets/images/CALEB.jpeg"
+                  src="/assets/images/CALEB.jpg"
                   alt="Caleb Esere"
                   className="img-fluid rounded-circle mb-3 border border-3 border-orange"
                 />
