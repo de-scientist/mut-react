@@ -7,7 +7,7 @@ const executiveMembers = [
   { name: 'Faith Wavinya', role: 'Secretary', image: '/assets/images/FAITH.jpeg', link: '/committees/secretary', accent: 'var(--brand-navy)' },
   { name: 'Natasha Amani', role: 'Vice Secretary', image: '/assets/images/AMANI.jpeg', link: '/committees/vice-secretary', accent: 'var(--brand-orange)' },
   { name: 'Mercy Mwaura', role: 'Treasurer', image: '/assets/images/MERCY.jpeg', link: '/committees/treasurer', accent: 'var(--brand-navy)' },
-  { name: 'Caleb Esere', role: 'Bible Study & Discipleship Coordinator', image: '/assets/images/CALEB.jpeg', link: '/committees/bible-study', accent: 'var(--brand-orange)' },
+  { name: 'Caleb Esere', role: 'Bible Study & Discipleship Coordinator', image: '/assets/images/CALEB.jpg', link: '/committees/bible-study', accent: 'var(--brand-orange)' },
   { name: 'Martha Thuku', role: 'Prayer Coordinator', image: '/assets/images/MARTHA.jpeg', link: '/committees/prayer', accent: 'var(--brand-navy)' },
   { name: 'Mercy Mutuku', role: 'Missions & Evangelism Coordinator', image: '/assets/images/MUTUKU.jpeg', link: '/committees/missions', accent: 'var(--brand-orange)' },
   { name: 'Peter Vaati', role: 'Music Coordinator', image: '/assets/images/PETER.jpg', link: '/committees/music', accent: 'var(--brand-navy)' },
