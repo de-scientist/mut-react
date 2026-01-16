@@ -33,7 +33,7 @@ const HospitalityMinistryPage = () => {
       {/* Hero */}
       <section
         className="page-hero-section"
-        style={{ backgroundImage: "url('/assets/images/hospitality-hero.jpg')" }}
+        style={{ backgroundImage: "url('/assets/images/tlp.jpg')" }}
         data-aos="fade-in"
       >
         <div className="hero-overlay" />
@@ -51,12 +51,12 @@ const HospitalityMinistryPage = () => {
           <div className="row align-items-center">
             <div className="col-lg-5 text-center mb-4 mb-lg-0">
               <img
-                src="/assets/images/grace-wanjiru.jpg"
-                alt="Grace Wanjiru"
+                src="/assets/images/Waci.jpg"
+                alt="Waci"
                 className="img-fluid rounded-circle"
                 data-aos="zoom-in"
               />
-              <h3 className="mt-3">Grace Wanjiru</h3>
+              <h3 className="mt-3">Waci</h3>
               <p className="text-muted">Hospitality Coordinator</p>
             </div>
             <div className="col-lg-7">
@@ -188,11 +188,11 @@ const HospitalityMinistryPage = () => {
             <div className="col-md-4 col-lg-3 mb-4" data-aos="zoom-in">
               <div className="executive-member-card">
                 <img
-                  src="/assets/images/grace-wanjiru.jpg"
-                  alt="Grace Wanjiru"
+                  src="/assets/images/Waci.jpg"
+                  alt="Waci"
                   className="img-fluid rounded-circle mb-2 border-orange"
                 />
-                <h5 className="member-name">Grace Wanjiru</h5>
+                <h5 className="member-name">Waci</h5>
                 <p className="member-role">Hospitality Coordinator</p>
                 <button className="btn btn-outline-light btn-sm" type="button">
                   View Profile
