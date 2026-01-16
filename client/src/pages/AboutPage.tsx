@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 const executiveMembers = [
-  { name: 'Ezekiel Thaara', role: 'Chairman', image: '/assets/images/EZEKIEL.jpg', link: '/committees/chairman', accent: 'var(--brand-orange)' },
+  { name: 'Purdri Kihika', role: 'Chairman', image: '/assets/images/EZEKIEL.jpg', link: '/committees/chairman', accent: 'var(--brand-orange)' },
   { name: 'Jesca Kinya', role: '1st Vice Chair', image: '/assets/images/JES.jpg', link: '/committees/vice-chair1', accent: 'var(--brand-navy)' },
   { name: 'Martin Gitau', role: '2nd Vice Chair', image: '/assets/images/MARTIN.jpg', link: '/committees/vice-chair2', accent: 'var(--brand-orange)' },
   { name: 'Grace Kanyiri', role: 'Secretary', image: '/assets/images/GRACE.jpg', link: '/committees/secretary', accent: 'var(--brand-navy)' },
