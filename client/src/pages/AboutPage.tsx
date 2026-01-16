@@ -12,7 +12,7 @@ const executiveMembers = [
   { name: 'Mercy Mutuku', role: 'Missions & Evangelism Coordinator', image: '/assets/images/MUTUKU.jpeg', link: '/committees/missions', accent: 'var(--brand-orange)' },
   { name: 'Peter Vaati', role: 'Music Coordinator', image: '/assets/images/PETER.jpeg', link: '/committees/music', accent: 'var(--brand-navy)' },
   { name: 'John Mwanthi', role: 'Technical Coordinator', image: '/assets/images/JOHN.jpeg', link: '/committees/technical', accent: 'var(--brand-orange)' },
-  { name: 'Brian Ingwee', role: 'Creative Ministry', image: '/assets/images/Ingwee.JPG', link: '/committees/creative', accent: 'var(--brand-navy)' },
+  { name: 'Esther Karimeri', role: 'Creative Ministry Coordinator', image: '/assets/images/ESTHER.jpeg', link: '/committees/creative', accent: 'var(--brand-navy)' },
 ]
 
 const aims = [
