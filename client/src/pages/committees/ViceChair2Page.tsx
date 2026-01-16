@@ -8,7 +8,7 @@ const ViceChair2Page = () => {
       {/* Hero Section */}
       <section
         className="page-hero-section d-flex align-items-center text-center text-white"
-        style={{ backgroundImage: "url('/assets/images/MARTIN.jpg')" }}
+        style={{ backgroundImage: "url('/assets/images/DAVID.jpeg')" }}
       >
         <div className="hero-overlay" />
         <div
@@ -36,11 +36,11 @@ const ViceChair2Page = () => {
             >
               <div className="executive-member-card d-block text-center rounded-3 shadow-sm h-100">
                 <img
-                  src="/assets/images/MARTIN.jpg"
-                  alt="Martin Gitau"
+                  src="/assets/images/DAVID.jpeg"
+                  alt="David Kimani"
                   className="img-fluid rounded-circle mb-3 border border-3 border-orange"
                 />
-                <h4 className="member-name">Martin Gitau</h4>
+                <h4 className="member-name">David Kimani</h4>
                 <p className="member-role">2nd Vice Chair</p>
               </div>
             </div>
@@ -57,7 +57,7 @@ const ViceChair2Page = () => {
                 The 2nd Vice Chair's office works in close collaboration with the Chairman and 1st Vice Chair, providing essential support in the overall administration and spiritual direction of MUTCU. This role is vital in ensuring that the Union's diverse activities are well-coordinated and effectively reach all members.
               </p>
               <p>
-                Martin Gitau, as 2nd Vice Chair, is committed to fostering an environment of unity and spiritual vibrancy. He assists in various capacities, contributing to the planning and execution of programs that align with MUTCU's mission to raise a well-equipped family in Christ.
+               David Kimani, as 2nd Vice Chair, is committed to fostering an environment of unity and spiritual vibrancy. He assists in various capacities, contributing to the planning and execution of programs that align with MUTCU's mission to raise a well-equipped family in Christ.
               </p>
             </div>
           </div>
