@@ -14,11 +14,11 @@ const PrayerMinistryPage = () => {
     e.preventDefault()
 
     if (!fullName || !email || !areaOfInterest) {
-      // Let browser validation messages handle UX; React just prevents submission
+      
       return
     }
 
-    // Placeholder for future backend integration
+    
     console.log('Prayer Ministry Join Interest:', {
       fullName,
       email,
@@ -38,7 +38,7 @@ const PrayerMinistryPage = () => {
       {/* Hero */}
       <section
         className="page-hero-section"
-        style={{ backgroundImage: "url('/assets/images/prayer-hero.jpg')" }}
+        style={{ backgroundImage: "url('/assets/images/prayer1.jpg')" }}
         data-aos="fade-in"
       >
         <div className="hero-overlay" />
@@ -56,12 +56,12 @@ const PrayerMinistryPage = () => {
           <div className="row align-items-center">
             <div className="col-lg-5 text-center mb-4 mb-lg-0">
               <img
-                src="/assets/images/roy-ndege.jpg"
-                alt="Roy Ndege"
+                src="/assets/images/MARTHA.jpeg"
+                alt="Martha Thuku"
                 className="img-fluid rounded-circle"
                 data-aos="zoom-in"
               />
-              <h3 className="mt-3">Roy Ndege</h3>
+              <h3 className="mt-3">Martha Thuku</h3>
               <p className="text-muted">Prayer Coordinator</p>
             </div>
             <div className="col-lg-7">
@@ -239,11 +239,11 @@ const PrayerMinistryPage = () => {
             <div className="col-md-4 col-lg-3 mb-4" data-aos="zoom-in">
               <div className="executive-member-card">
                 <img
-                  src="/assets/images/roy-ndege.jpg"
-                  alt="Roy Ndege"
+                  src="/assets/images/MARTHA.jpeg"
+                  alt="Martha Thuku"
                   className="img-fluid rounded-circle mb-2 border-orange"
                 />
-                <h5 className="member-name">Roy Ndege</h5>
+                <h5 className="member-name">Martha Thuku</h5>
                 <p className="member-role">Prayer Coordinator</p>
                 <button className="btn btn-outline-light btn-sm" type="button">
                   View Profile
