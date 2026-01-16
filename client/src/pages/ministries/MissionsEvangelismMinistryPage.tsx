@@ -33,7 +33,7 @@ const MissionsEvangelismMinistryPage = () => {
       {/* Hero */}
       <section
         className="page-hero-section"
-        style={{ backgroundImage: "url('/assets/images/missions-evangelism-hero.jpg')" }}
+        style={{ backgroundImage: "url('/assets/images/mission1.jpg')" }}
         data-aos="fade-in"
       >
         <div className="hero-overlay" />
@@ -51,12 +51,12 @@ const MissionsEvangelismMinistryPage = () => {
           <div className="row align-items-center">
             <div className="col-lg-5 text-center mb-4 mb-lg-0">
               <img
-                src="/assets/images/john-kimani.jpg"
-                alt="John Kimani"
+                src="/assets/images/MUTUKU.jpeg"
+                alt="Mercy Mutuku"
                 className="img-fluid rounded-circle"
                 data-aos="zoom-in"
               />
-              <h3 className="mt-3">John Kimani</h3>
+              <h3 className="mt-3">Mercy Mutuku</h3>
               <p className="text-muted">Missions &amp; Evangelism Coordinator</p>
             </div>
             <div className="col-lg-7">
@@ -233,11 +233,11 @@ const MissionsEvangelismMinistryPage = () => {
             <div className="col-md-4 col-lg-3 mb-4" data-aos="zoom-in">
               <div className="executive-member-card">
                 <img
-                  src="/assets/images/john-kimani.jpg"
-                  alt="John Kimani"
+                  src="/assets/images/MUTUKU.jpeg"
+                  alt="Mercy Mutuku"
                   className="img-fluid rounded-circle mb-2 border-orange"
                 />
-                <h5 className="member-name">John Kimani</h5>
+                <h5 className="member-name">Mercy Mutuku</h5>
                 <p className="member-role">Missions &amp; Evangelism Coordinator</p>
                 <button className="btn btn-outline-light btn-sm" type="button">
                   View Profile
