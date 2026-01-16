@@ -8,7 +8,7 @@ const PrayerCoordinatorPage = () => {
       {/* Hero Section */}
       <section
         className="page-hero-section d-flex align-items-center text-center text-white"
-        style={{ backgroundImage: "url('/assets/images/PRAYER.jpg')" }}
+        style={{ backgroundImage: "url('/assets/images/MARTHA.jpeg')" }}
       >
         <div className="hero-overlay" />
         <div
@@ -34,11 +34,11 @@ const PrayerCoordinatorPage = () => {
             >
               <div className="executive-member-card d-block text-center rounded-3 shadow-sm h-100">
                 <img
-                  src="/assets/images/PRAYER.jpg"
-                  alt="Roy Ndege"
+                  src="/assets/images/MARTHA.jpeg"
+                  alt="Martha Thuku"
                   className="img-fluid rounded-circle mb-3 border border-3 border-navy"
                 />
-                <h4 className="member-name">Roy Ndege</h4>
+                <h4 className="member-name">Martha Thuku</h4>
                 <p className="member-role">Prayer Coordinator</p>
               </div>
             </div>
@@ -57,7 +57,7 @@ const PrayerCoordinatorPage = () => {
                 dependence on God.
               </p>
               <p>
-                Under the leadership of Roy Ndege, the ministry organizes prayer
+                Under the leadership of Martha Thuku, the ministry organizes prayer
                 gatherings, keshas, chains, and special seasons of fasting and
                 intercession for the Union, the university, and the nation.
               </p>
