@@ -127,7 +127,7 @@ const HomePage = () => {
             </div>
 
             <div className="carousel-item">
-              <div className="hero-bg" style={{ backgroundImage: "url('/assets/images/church2.jpg')" }} />
+              <div className="hero-bg" style={{ backgroundImage: "url('/assets/images/exec.jpg')" }} />
               <div className="hero-overlay" />
               <div className="hero-content text-center text-white" data-aos="fade-up" data-aos-duration="1000">
                 <h1 className="display-3 mb-4" data-aos="zoom-in" data-aos-delay="200">
@@ -148,7 +148,7 @@ const HomePage = () => {
             </div>
 
             <div className="carousel-item">
-              <div className="hero-bg" style={{ backgroundImage: "url('/assets/images/exec.png')" }} />
+              <div className="hero-bg" style={{ backgroundImage: "url('/assets/images/church2.jpg')" }} />
               <div className="hero-overlay" />
               <div className="hero-content text-center text-white" data-aos="fade-up" data-aos-duration="1000">
                 <h1 className="display-3 mb-4" data-aos="zoom-in" data-aos-delay="200">
