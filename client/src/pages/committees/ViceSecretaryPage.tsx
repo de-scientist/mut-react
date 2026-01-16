@@ -8,7 +8,7 @@ const ViceSecretaryPage = () => {
       {/* Hero Section */}
       <section
         className="page-hero-section d-flex align-items-center text-center text-white"
-        style={{ backgroundImage: "url('/assets/images/DAISY.jpg')" }}
+        style={{ backgroundImage: "url('/assets/images/AMANI.jpeg')" }}
       >
         <div className="hero-overlay" />
         <div
@@ -32,11 +32,11 @@ const ViceSecretaryPage = () => {
             >
               <div className="executive-member-card d-block text-center rounded-3 shadow-sm h-100">
                 <img
-                  src="/assets/images/DAISY.jpg"
-                  alt="Daisy Mutheu"
+                  src="/assets/images/AMANI.jpeg"
+                  alt="Natasha Amani"
                   className="img-fluid rounded-circle mb-3 border border-3 border-orange"
                 />
-                <h4 className="member-name">Daisy Mutheu</h4>
+                <h4 className="member-name">Natasha Amani</h4>
                 <p className="member-role">Vice Secretary</p>
               </div>
             </div>
@@ -53,7 +53,7 @@ const ViceSecretaryPage = () => {
                 The Vice Secretary's office provides essential support to the Secretary in managing the administrative backbone of MUTCU. This role is crucial for maintaining organized records, facilitating internal and external communications, and ensuring that all administrative tasks are handled efficiently and accurately.
               </p>
               <p>
-                Daisy Mutheu, as Vice Secretary, works diligently to uphold the Union's commitment to transparency and effective communication. She assists in preparing meeting documents, managing correspondence, and ensuring that the Union's administrative processes support its spiritual and outreach goals.
+                Natasha Amani, as Vice Secretary, works diligently to uphold the Union's commitment to transparency and effective communication. She assists in preparing meeting documents, managing correspondence, and ensuring that the Union's administrative processes support its spiritual and outreach goals.
               </p>
             </div>
           </div>
