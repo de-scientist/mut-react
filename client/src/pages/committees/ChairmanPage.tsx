@@ -6,7 +6,7 @@ const ChairmanPage = () => {
     <div className="chairman-page">
       <section
         className="page-hero-section d-flex align-items-center text-center text-white"
-        style={{ backgroundImage: "url('/assets/images/EZEKIEL.jpg')" }}
+        style={{ backgroundImage: "url('/assets/images/PADRI.jpeg')" }}
       >
         <div className="hero-overlay" />
         <div className="container position-relative" data-aos="fade-up" data-aos-duration="1000">
@@ -21,11 +21,11 @@ const ChairmanPage = () => {
             <div className="col-6 col-md-4 col-lg-3 mb-4" data-aos="zoom-in" data-aos-delay="100">
               <div className="executive-member-card d-block text-center text-decoration-none rounded-3 shadow-sm h-100">
                 <img
-                  src="/assets/images/EZEKIEL.jpg"
-                  alt="Ezekiel Thaara"
+                  src="/assets/images/PADRI.jpeg"
+                  alt="Purdri Kihika"
                   className="img-fluid rounded-circle mb-3 border border-3 border-orange"
                 />
-                <h4 className="member-name">Ezekiel Thaara</h4>
+                <h4 className="member-name">Purdri Kihika</h4>
                 <p className="member-role">Chairman</p>
               </div>
             </div>
@@ -38,7 +38,7 @@ const ChairmanPage = () => {
                 environment for all members.
               </p>
               <p>
-                Ezekiel Thaara, as Chairman, embodies the Union&apos;s commitment to inspiring love, hope, and godliness. He presides
+                Purdri Kihika, as Chairman, embodies the Union&apos;s commitment to inspiring love, hope, and godliness. He presides
                 over Executive Council meetings, represents MUTCU in various forums like FOCUS Regional and National Meetings, and
                 works closely with all dockets and ministries to ensure the smooth and effective operation of the Union.
               </p>
