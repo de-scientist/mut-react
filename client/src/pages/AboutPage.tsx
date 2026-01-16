@@ -5,7 +5,7 @@ const executiveMembers = [
   { name: 'Purity Njeri', role: '1st Vice Chair', image: '/assets/images/PURITY.jpeg', link: '/committees/vice-chair1', accent: 'var(--brand-navy)' },
   { name: 'David Kimani', role: '2nd Vice Chair', image: '/assets/images/DAVID.jpeg', link: '/committees/vice-chair2', accent: 'var(--brand-orange)' },
   { name: 'Faith Wavinya', role: 'Secretary', image: '/assets/images/FAITH.jpeg', link: '/committees/secretary', accent: 'var(--brand-navy)' },
-  { name: 'Daisy Mutheu', role: 'Vice Secretary', image: '/assets/images/DAISY.jpg', link: '/committees/vice-secretary', accent: 'var(--brand-orange)' },
+  { name: 'Natasha Amani', role: 'Vice Secretary', image: '/assets/images/AMANI.jpeg', link: '/committees/vice-secretary', accent: 'var(--brand-orange)' },
   { name: 'Joy Karimi', role: 'Treasurer', image: '/assets/images/JOY.jpg', link: '/committees/treasurer', accent: 'var(--brand-navy)' },
   { name: 'Purity Njeri', role: 'Bible Study Coordinator', image: '/assets/images/PURITY.jpg', link: '/committees/bible-study', accent: 'var(--brand-orange)' },
   { name: 'Roy Ndege', role: 'Prayer Coordinator', image: '/assets/images/PRAYER.jpg', link: '/committees/prayer', accent: 'var(--brand-navy)' },
