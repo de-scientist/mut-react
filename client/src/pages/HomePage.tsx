@@ -148,6 +148,27 @@ const HomePage = () => {
             </div>
 
             <div className="carousel-item">
+              <div className="hero-bg" style={{ backgroundImage: "url('/assets/images/church2.jpg')" }} />
+              <div className="hero-overlay" />
+              <div className="hero-content text-center text-white" data-aos="fade-up" data-aos-duration="1000">
+                <h1 className="display-3 mb-4" data-aos="zoom-in" data-aos-delay="200">
+                  We Are One, We Are MUTCU
+                </h1>
+                <p className="lead mb-5" data-aos="zoom-in" data-aos-delay="400">
+                  A family united in Christ, reaching out to transform lives within and beyond.
+                </p>
+                <div data-aos="zoom-in" data-aos-delay="600">
+                  <Link to="/ministries" className="btn btn-primary btn-lg me-3">
+                    Explore Ministries <i className="fas fa-users-cog ms-2" />
+                  </Link>
+                  <Link to="/events" className="btn btn-secondary btn-lg">
+                    Join an Event <i className="fas fa-calendar-alt ms-2" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="carousel-item">
               <div className="hero-bg" style={{ backgroundImage: "url('/assets/images/church3.jpg')" }} />
               <div className="hero-overlay" />
               <div className="hero-content text-center text-white" data-aos="fade-up" data-aos-duration="1000">
