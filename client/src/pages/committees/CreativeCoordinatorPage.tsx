@@ -8,7 +8,7 @@ const CreativeCoordinatorPage = () => {
       {/* Hero Section */}
       <section
         className="page-hero-section d-flex align-items-center text-center text-white"
-        style={{ backgroundImage: "url('/assets/images/Ingwee.JPG')" }}
+        style={{ backgroundImage: "url('/assets/images/ESTHER.jpeg')" }}
       >
         <div className="hero-overlay" />
         <div
@@ -36,11 +36,11 @@ const CreativeCoordinatorPage = () => {
             >
               <div className="executive-member-card d-block text-center rounded-3 shadow-sm h-100">
                 <img
-                  src="/assets/images/Ingwee.JPG"
-                  alt="Brian Ingwee"
+                  src="/assets/images/ESTHER.jpeg"
+                  alt="Esther Karimeri"
                   className="img-fluid rounded-circle mb-3 border border-3 border-navy"
                 />
-                <h4 className="member-name">Brian Ingwee</h4>
+                <h4 className="member-name">Esther Karimeri</h4>
                 <p className="member-role">
                   Creative Ministry Coordinator
                 </p>
@@ -61,7 +61,7 @@ const CreativeCoordinatorPage = () => {
                 and edify the body of Christ.
               </p>
               <p>
-                Under the leadership of Brian Ingwee, the team explores
+                Under the leadership of Esther Karimeri, the team explores
                 innovative, Christ-centered expressions that complement
                 preaching, worship, and missions, engaging both the campus and
                 wider community.
