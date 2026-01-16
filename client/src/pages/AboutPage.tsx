@@ -10,7 +10,7 @@ const executiveMembers = [
   { name: 'Caleb Esere', role: 'Bible Study & Discipleship Coordinator', image: '/assets/images/CALEB.jpeg', link: '/committees/bible-study', accent: 'var(--brand-orange)' },
   { name: 'Martha Thuku', role: 'Prayer Coordinator', image: '/assets/images/MARTHA.jpeg', link: '/committees/prayer', accent: 'var(--brand-navy)' },
   { name: 'Mercy Mutuku', role: 'Missions & Evangelism Coordinator', image: '/assets/images/MUTUKU.jpeg', link: '/committees/missions', accent: 'var(--brand-orange)' },
-  { name: 'Peter Vaati', role: 'Music Coordinator', image: '/assets/images/PETER.jpeg', link: '/committees/music', accent: 'var(--brand-navy)' },
+  { name: 'Peter Vaati', role: 'Music Coordinator', image: '/assets/images/PETER.jpg', link: '/committees/music', accent: 'var(--brand-navy)' },
   { name: 'John Mwanthi', role: 'Technical Coordinator', image: '/assets/images/JOHN.jpeg', link: '/committees/technical', accent: 'var(--brand-orange)' },
   { name: 'Esther Karimeri', role: 'Creative Ministry Coordinator', image: '/assets/images/ESTHER.jpeg', link: '/committees/creative', accent: 'var(--brand-navy)' },
 ]
