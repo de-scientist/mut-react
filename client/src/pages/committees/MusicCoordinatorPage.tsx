@@ -8,7 +8,7 @@ const MusicCoordinatorPage = () => {
       {/* Hero Section */}
       <section
         className="page-hero-section d-flex align-items-center text-center text-white"
-        style={{ backgroundImage: "url('/assets/images/JABEZ.jpg')" }}
+        style={{ backgroundImage: "url('/assets/images/PETER.jpeg')" }}
       >
         <div className="hero-overlay" />
         <div
@@ -34,11 +34,11 @@ const MusicCoordinatorPage = () => {
             >
               <div className="executive-member-card d-block text-center rounded-3 shadow-sm h-100">
                 <img
-                  src="/assets/images/JABEZ.jpg"
-                  alt="Jabez Ayugu"
+                  src="/assets/images/PETER.jpeg"
+                  alt="Peter Vaati"
                   className="img-fluid rounded-circle mb-3 border border-3 border-navy"
                 />
-                <h4 className="member-name">Jabez Ayugu</h4>
+                <h4 className="member-name">Peter Vaati</h4>
                 <p className="member-role">Music Coordinator</p>
               </div>
             </div>
@@ -52,7 +52,7 @@ const MusicCoordinatorPage = () => {
                 About the Music Ministry
               </h3>
               <p>
-                The Music Ministry of MUTCU is dedicated to leading the Union in
+                The Music Ministry of MUTCU led by Peter Vaati is dedicated to leading the Union in
                 vibrant and spiritually uplifting worship experiences.
                 Comprising various teams including the choir, band,
                 instrumentalists, and praise and worship leaders, this ministry
