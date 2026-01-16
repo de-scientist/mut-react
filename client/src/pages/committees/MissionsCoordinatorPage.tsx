@@ -8,7 +8,7 @@ const MissionsCoordinatorPage = () => {
       {/* Hero Section */}
       <section
         className="page-hero-section d-flex align-items-center text-center text-white"
-        style={{ backgroundImage: "url('/assets/images/YUSUF.jpg')" }}
+        style={{ backgroundImage: "url('/assets/images/MUTUKU.jpeg')" }}
       >
         <div className="hero-overlay" />
         <div
@@ -36,11 +36,11 @@ const MissionsCoordinatorPage = () => {
             >
               <div className="executive-member-card d-block text-center rounded-3 shadow-sm h-100">
                 <img
-                  src="/assets/images/YUSUF.jpg"
-                  alt="Yusuf Muchiri"
+                  src="/assets/images/MUTUKU.jpeg"
+                  alt="Mercy Mutuku"
                   className="img-fluid rounded-circle mb-3 border border-3 border-orange"
                 />
-                <h4 className="member-name">Yusuf Muchiri</h4>
+                <h4 className="member-name">Mercy Mutuku</h4>
                 <p className="member-role">
                   Missions &amp; Evangelism Coordinator
                 </p>
@@ -65,7 +65,7 @@ const MissionsCoordinatorPage = () => {
                 support.
               </p>
               <p>
-                Yusuf Muchiri, as the coordinator, leads the strategic planning
+                Mercy Mutuku, as the coordinator, leads the strategic planning
                 and execution of these initiatives, ensuring that MUTCU actively
                 fulfills its mission of reaching out to non-believers. The
                 ministry is also responsible for the Kairos Course, enhancing
