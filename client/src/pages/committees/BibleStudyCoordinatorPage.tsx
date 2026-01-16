@@ -8,7 +8,7 @@ const BibleStudyCoordinatorPage = () => {
       {/* Hero Section */}
       <section
         className="page-hero-section d-flex align-items-center text-center text-white"
-        style={{ backgroundImage: "url('/assets/images/PURITY.jpg')" }}
+        style={{ backgroundImage: "url('/assets/images/CALEB.jpeg')" }}
       >
         <div className="hero-overlay" />
         <div
@@ -36,11 +36,11 @@ const BibleStudyCoordinatorPage = () => {
             >
               <div className="executive-member-card d-block text-center rounded-3 shadow-sm h-100">
                 <img
-                  src="/assets/images/PURITY.jpg"
-                  alt="Purity Njeri"
+                  src="/assets/images/CALEB.jpeg"
+                  alt="Caleb Esere"
                   className="img-fluid rounded-circle mb-3 border border-3 border-orange"
                 />
-                <h4 className="member-name">Purity Njeri</h4>
+                <h4 className="member-name">Caleb Esere</h4>
                 <p className="member-role">
                   Bible Study &amp; Discipleship Coordinator
                 </p>
@@ -64,7 +64,7 @@ const BibleStudyCoordinatorPage = () => {
                 for new believers, and intensive training programs.
               </p>
               <p>
-                Purity Njeri, as the coordinator, leads the efforts to ensure
+                Caleb Esere, as the coordinator, leads the efforts to ensure
                 members are grounded in biblical truths and encouraged to apply
                 these teachings in their daily lives. The ministry aims to raise
                 a family well-equipped in all aspects of life, exemplary to
