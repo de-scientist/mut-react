@@ -8,7 +8,7 @@ const SecretaryPage = () => {
       {/* Hero Section */}
       <section
         className="page-hero-section d-flex align-items-center text-center text-white"
-        style={{ backgroundImage: "url('/assets/images/GRACE.jpg')" }}
+        style={{ backgroundImage: "url('/assets/images/FAITH.jpeg')" }}
       >
         <div className="hero-overlay" />
         <div
@@ -36,11 +36,11 @@ const SecretaryPage = () => {
             >
               <div className="executive-member-card d-block text-center rounded-3 shadow-sm h-100">
                 <img
-                  src="/assets/images/GRACE.jpg"
-                  alt="Grace Kanyiri"
+                  src="/assets/images/FAITH.jpeg"
+                  alt="Faith Wavinya"
                   className="img-fluid rounded-circle mb-3 border border-3 border-navy"
                 />
-                <h4 className="member-name">Grace Kanyiri</h4>
+                <h4 className="member-name">Faith Wavinya</h4>
                 <p className="member-role">Secretary</p>
               </div>
             </div>
@@ -61,7 +61,7 @@ const SecretaryPage = () => {
                 membership are accurately documented and disseminated.
               </p>
               <p>
-                Grace Kanyiri, as Secretary, ensures transparency and efficiency
+                Faith Wavinya, as Secretary, ensures transparency and efficiency
                 in the Union&apos;s operations. Her role involves managing
                 meeting minutes, maintaining official records, and facilitating
                 effective communication channels within MUTCU and with external
