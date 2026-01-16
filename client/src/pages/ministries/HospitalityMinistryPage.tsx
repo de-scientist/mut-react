@@ -318,7 +318,7 @@ const HospitalityMinistryPage = () => {
             </div>
             <div className="col-md-3 mb-4" data-aos="zoom-in" data-aos-delay="100">
               <img
-                src="/assets/images/guest-welcome.jpg"
+                src="/assets/images/guest-welcome.jfif"
                 alt="Guest Welcome"
                 className="img-fluid rounded"
               />
