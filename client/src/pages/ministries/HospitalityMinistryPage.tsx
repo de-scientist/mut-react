@@ -310,7 +310,7 @@ const HospitalityMinistryPage = () => {
           <div className="row">
             <div className="col-md-3 mb-4" data-aos="zoom-in">
               <img
-                src="/assets/images/kitchen-prep.jpg"
+                src="/assets/images/kitchen-prep.jpeg"
                 alt="Kitchen Prep"
                 className="img-fluid rounded"
               />
