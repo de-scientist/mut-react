@@ -109,8 +109,20 @@ const MediaManagement = () => {
   }
 }
 
+  const handleDelete = async () => {
+    if (!selectedItem) return
+    try {
+      await mediaAPI.delete(selectedItem.id)
+      setGallery(gallery.filter((g) => g.id !== selectedItem.id))
+      setShowModal(false)
+      setSelectedItem(null)
+      setSuccessMessage('Gallery item deleted successfully')
+    } catch (err: any) {
+      setError(err.message || 'Failed to delete gallery item')
+    }
+  }
 
- async () => {
+  const handleToggle = async () => {
     if (!selectedItem) return
     try {
       await mediaAPI.toggle(selectedItem.id)
@@ -322,9 +334,12 @@ const MediaManagement = () => {
       <ConfirmationModal
         isOpen={showModal}
         onClose={() => { setShowModal(false); setSelectedItem(null); setAction(null) }}
-        // onConfirm={() => { if(action === 'delete') handleDelete(); else if(action === 'toggle') handleToggle(); }}
+        onConfirm={() => { if(action === 'delete') handleDelete(); else if(action === 'toggle') handleToggle(); }}
         title={action === 'delete' ? 'Confirm Deletion' : 'Update Visibility'}
         message={action === 'delete' ? `Are you sure you want to delete "${selectedItem?.title}"?` : `Do you want to ${selectedItem?.isActive ? 'hide' : 'show'} "${selectedItem?.title}"?`}
+        confirmText={action === 'delete' ? 'Delete' : 'Update'}
+        cancelText="Cancel"
+        confirmButtonClass={action === 'delete' ? 'btn-danger' : 'btn-warning'}
       />
     </div>
   )
