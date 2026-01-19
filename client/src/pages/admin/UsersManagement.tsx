@@ -204,10 +204,10 @@ const UsersManagement = () => {
 
         {/* Edit Form */}
         {showForm && editingUser && (
-          <div className="card border-0 shadow-lg mb-5 rounded-4 overflow-hidden animate__animated animate__fadeIn">
-            <div className="card-header bg-dark text-white p-4">
+          <div className="card border-0 shadow-lg mb-5 rounded-4 overflow-hidden animate__animated animate__fadeIn admin-form-container">
+            <div className="card-header">
               <h5 className="mb-0 d-flex align-items-center gap-2">
-                <Edit3 size={20} /> Updating Account: {editingUser.email}
+                <Edit3 size={18} />  Updating Account: {editingUser.email}
               </h5>
             </div>
             <div className="card-body p-4">
