@@ -95,7 +95,7 @@ const MinistriesManagement = () => {
     return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
   }
 
-  async () => {
+  const handleDelete = async () => {
     if (!selectedMinistry) return
     try {
       await ministriesAPI.delete(selectedMinistry.slug)
@@ -108,7 +108,7 @@ const MinistriesManagement = () => {
     }
   }
 
-  async () => {
+  const handleToggleActive = async () => {
     if (!selectedMinistry) return
     try {
       await ministriesAPI.update(selectedMinistry.slug, { isActive: !selectedMinistry.isActive })
@@ -424,16 +424,19 @@ const MinistriesManagement = () => {
           setSelectedMinistry(null)
           setAction(null)
         }}
-        // onConfirm={() => {
-        //   if (action === 'delete') handleDelete()
-        //   else if (action === 'toggle') handleToggleActive()
-        // }}
+        onConfirm={() => {
+          if (action === 'delete') handleDelete()
+          else if (action === 'toggle') handleToggleActive()
+        }}
         title={action === 'delete' ? 'Remove Ministry' : 'Change Visibility'}
         message={
           action === 'delete'
             ? `Warning: Deleting "${selectedMinistry?.name}" is permanent. All related data will be lost.`
             : `Are you sure you want to change the status of "${selectedMinistry?.name}"?`
         }
+        confirmText={action === 'delete' ? 'Delete' : 'Update'}
+        cancelText="Cancel"
+        confirmButtonClass={action === 'delete' ? 'btn-danger' : 'btn-primary'}
       />
     </div>
   )
