@@ -210,7 +210,7 @@ const EventsManagement = () => {
               <h5 className="mb-0 fw-bold">{editingEvent ? '📝 Edit Event' : '✨ Create New Event'}</h5>
             </div>
             <div className="card-body p-4">
-              <form onSubmit={handleSubmit}>
+              <form className="admin-event-form" onSubmit={handleSubmit}>
                 <div className="row g-4">
                   <div className="col-md-6">
                     <label htmlFor="eventTitle" className="form-label fw-bold small text-uppercase">Title *</label>
