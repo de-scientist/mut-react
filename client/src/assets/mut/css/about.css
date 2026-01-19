@@ -316,6 +316,7 @@ p {
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 15px;
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     padding: 40px;
 }
 
@@ -458,6 +459,7 @@ p {
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 15px;
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     transition: all 0.3s ease;
     padding: 30px;
 }
