@@ -116,6 +116,18 @@ const UsersManagement = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  const handleDeactivate = async () => {
+    if (!selectedUser) return
+    try {
+      await usersAPI.update(selectedUser.id, { isActive: false })
+      setUsers(users.map(u => u.id === selectedUser.id ? { ...u, isActive: false } : u))
+      setShowModal(false)
+      setSelectedUser(null)
+    } catch (err: any) {
+      setError(err.message || 'Failed to deactivate user')
+    }
+  }
+
   const stats = useMemo(() => ({
     total: users.length,
     admins: users.filter(u => u.role !== 'USER').length,
@@ -342,11 +354,14 @@ const UsersManagement = () => {
       </div>
 
       <ConfirmationModal
-        isOpen={showModal} // Updated to common prop name, or change to what your component expects
+        isOpen={showModal}
         onClose={() => { setShowModal(false); setSelectedUser(null); }}
-        // onConfirm={handleDeactivate}
+        onConfirm={handleDeactivate}
         title="Restrict Account Access"
         message={`Are you sure you want to deactivate the account for "${selectedUser?.email}"? This will prevent them from logging in.`}
+        confirmText="Deactivate"
+        cancelText="Cancel"
+        confirmButtonClass="btn-warning"
         // confirmText="Deactivate User"
         // type="warning"
       />
