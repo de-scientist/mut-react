@@ -77,7 +77,7 @@ const EventsManagement = () => {
     }
   }
 
-  async () => {
+  const handleDelete = async () => {
     if (!selectedEvent) return
     try {
       await eventsAPI.delete(selectedEvent.id)
@@ -90,7 +90,7 @@ const EventsManagement = () => {
     }
   }
 
-   async () => {
+  const handleToggleActive = async () => {
     if (!selectedEvent) return
     try {
       await eventsAPI.update(selectedEvent.id, { isActive: !selectedEvent.isActive })
@@ -402,23 +402,25 @@ const EventsManagement = () => {
       </div>
 
       <ConfirmationModal
-        // Fixed prop name based on typical Modal libraries, adjust to your specific library if it uses 'isOpen'
         isOpen={showModal} 
         onClose={() => {
           setShowModal(false)
           setSelectedEvent(null)
           setAction(null)
         }}
-        // onConfirm={() => {
-        //   if (action === 'delete') handleDelete()
-        //   else if (action === 'toggle') handleToggleActive()
-        // }}
+        onConfirm={() => {
+          if (action === 'delete') handleDelete()
+          else if (action === 'toggle') handleToggleActive()
+        }}
         title={action === 'delete' ? 'Confirm Deletion' : 'Update Visibility'}
         message={
           action === 'delete'
             ? `Are you absolutely sure you want to delete "${selectedEvent?.title}"? This cannot be undone.`
             : `Do you want to ${selectedEvent?.isActive ? 'hide' : 'show'} "${selectedEvent?.title}" to the public?`
         }
+        confirmText={action === 'delete' ? 'Delete' : 'Update'}
+        cancelText="Cancel"
+        confirmButtonClass={action === 'delete' ? 'btn-danger' : 'btn-warning'}
       />
     </div>
   )
