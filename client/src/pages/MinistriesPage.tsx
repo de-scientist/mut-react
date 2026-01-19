@@ -42,10 +42,42 @@ interface Ministry {
   isActive: boolean
 }
 
+// Legacy fallback ministries to show if API fails or returns empty
+const legacyMinistries: Ministry[] = [
+  {
+    id: 'legacy-music',
+    name: 'Music Ministry',
+    description: 'Leading worship through choir, band, and praise & worship teams.',
+    icon: 'fa-music',
+    imageUrl: '/assets/images/music1.jpg',
+    slug: 'music-ministry',
+    isActive: true,
+  },
+  {
+    id: 'legacy-bible',
+    name: 'Bible Study & Discipleship',
+    description: 'Deepening faith through small groups and discipleship classes.',
+    icon: 'fa-book-open',
+    imageUrl: '/assets/images/bs1.jpg',
+    slug: 'bible-study-discipleship',
+    isActive: true,
+  },
+  {
+    id: 'legacy-creative',
+    name: 'Creative Arts (CREAM)',
+    description: 'Drama, dance, spoken word, and visual arts for ministry.',
+    icon: 'fa-theater-masks',
+    imageUrl: '/assets/images/creative-arts.jpg',
+    slug: 'creative-arts',
+    isActive: true,
+  },
+]
+
 const MinistriesPage = () => {
   // State to store ministries fetched from API
   const [ministries, setMinistries] = useState<Ministry[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   // Fetch ministries from backend on component mount
   useEffect(() => {
@@ -54,9 +86,17 @@ const MinistriesPage = () => {
         setLoading(true)
         // API call - only fetches active ministries (isActive: true)
         const response = await ministriesAPI.getAll({ active: 'true' })
-        setMinistries(response.data || [])
-      } catch (error) {
+        const items = response.data || []
+        if (items.length === 0) {
+          setMinistries(legacyMinistries)
+          setError('Showing fallback ministries while we fetch live data.')
+        } else {
+          setMinistries(items)
+        }
+      } catch (error: any) {
         console.error('Failed to load ministries:', error)
+        setError(error?.message || 'Failed to load ministries; showing fallback list.')
+        setMinistries(legacyMinistries)
       } finally {
         setLoading(false)
       }
@@ -124,37 +164,47 @@ const MinistriesPage = () => {
               </div>
               <p className="mt-3 text-muted">Loading ministries...</p>
             </div>
-          ) : ministries.length === 0 ? (
-            <div className="text-center py-5">
-              <p className="text-muted">No ministries available at the moment.</p>
-            </div>
           ) : (
-            <div className="row justify-content-center">
-              {ministries.map((ministry, index) => (
-                <div
-                  key={ministry.id}
-                  className="col-md-6 col-lg-4 mb-4"
-                  data-aos="zoom-in"
-                  data-aos-delay={index * 100}
-                >
-                  <Link
-                    to={`/ministries/${ministry.slug}`}
-                    className="ministry-card d-block text-center text-decoration-none rounded-3 shadow-sm h-100"
-                  >
-                    {ministry.imageUrl && (
-                      <img src={ministry.imageUrl} alt={ministry.name} className="img-fluid rounded-top-3" />
-                    )}
-                    <div className="card-body">
-                      <h4 className="card-title">{ministry.name}</h4>
-                      <p className="card-text">{ministry.description || 'Learn more about this ministry'}</p>
-                      <span className="btn btn-sm btn-outline-primary mt-3">
-                        Learn More
-                      </span>
-                    </div>
-                  </Link>
+            <>
+              {error && (
+                <div className="alert alert-warning" role="alert">
+                  {error}
                 </div>
-              ))}
-            </div>
+              )}
+              {ministries.length === 0 && !error && (
+                <div className="text-center py-5">
+                  <p className="text-muted">No ministries available at the moment.</p>
+                </div>
+              )}
+              {ministries.length > 0 && (
+              <div className="row justify-content-center">
+                {ministries.map((ministry, index) => (
+                  <div
+                    key={ministry.id}
+                    className="col-md-6 col-lg-4 mb-4"
+                    data-aos="zoom-in"
+                    data-aos-delay={index * 100}
+                  >
+                    <Link
+                      to={`/ministries/${ministry.slug}`}
+                      className="ministry-card d-block text-center text-decoration-none rounded-3 shadow-sm h-100"
+                    >
+                      {ministry.imageUrl && (
+                        <img src={ministry.imageUrl} alt={ministry.name} className="img-fluid rounded-top-3" />
+                      )}
+                      <div className="card-body">
+                        <h4 className="card-title">{ministry.name}</h4>
+                        <p className="card-text">{ministry.description || 'Learn more about this ministry'}</p>
+                        <span className="btn btn-sm btn-outline-primary mt-3">
+                          Learn More
+                        </span>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+              )}
+            </>
           )}
         </div>
       </section>
