@@ -222,7 +222,7 @@ const HomePage = () => {
             mission work, and leadership development.
           </p>
           <div className="row align-items-center">
-            <div
+            <div 
               className="col-lg-6 mb-4 mb-lg-0 order-lg-1 order-2"
               data-aos="fade-right"
               data-aos-delay="100"
@@ -370,7 +370,7 @@ const HomePage = () => {
                   <i className="fas fa-music feature-icon mb-2" />
                   <h4 className="card-title">Music Ministry</h4>
                   <p className="card-text">
-                    Leading and ministering worship through Choir, Band, Instrumentalism and Praise &amp; Worship.
+                    Leading and ministering worship through Choir, Band, Music Outreach and Praise &amp; Worship.
                   </p>
                   <Link to="/ministries" className="btn btn-primary btn-sm mt-2">
                     Learn More
