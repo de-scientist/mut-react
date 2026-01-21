@@ -176,7 +176,8 @@ const HomePage = () => {
                   Cultivating Christ-Centeredness
                 </h1>
                 <p className="lead mb-5" data-aos="zoom-in" data-aos-delay="400">
-                  Our vision is to be a model Christian Union impacting society.
+                  Our vision is to be a model Christian union that cultivates Christ-centeredness among members to
+positively impact the society..
                 </p>
                 <div data-aos="zoom-in" data-aos-delay="600">
                   <Link to="/about" className="btn btn-primary btn-lg me-3">
@@ -229,13 +230,13 @@ const HomePage = () => {
             >
               <h3 className="section-subtitle">Our Mission</h3>
               <p>
-                To raise a family well-equipped in all aspects of life, exemplary to Jesus Christ, by encouraging unity as one
-                body of Christ and reaching out to non-believers within and beyond.
+                Raising a Christ-like family, equipped in all aspects of life, by encouraging unity as one body
+and reaching out to non-believers within our community and beyond. 
               </p>
               <h3 className="section-subtitle mt-4">Our Vision</h3>
               <p>
-                To be a model Christian Union cultivating Christ-centeredness among members to impact society.
-              </p>
+To be a model Christian union that cultivates Christ-centeredness among members to
+positively impact the society.              </p>
               <Link
                 to="/about"
                 className="btn btn-primary mt-3"
