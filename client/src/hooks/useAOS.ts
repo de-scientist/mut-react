@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export const useAOS = (options?: AOS.AosOptions) => {
   useEffect(() => {
@@ -9,6 +9,6 @@ export const useAOS = (options?: AOS.AosOptions) => {
       once: true,
       mirror: false,
       ...options,
-    })
-  }, [options])
-}
+    });
+  }, [options]);
+};

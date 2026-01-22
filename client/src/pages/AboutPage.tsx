@@ -1,50 +1,161 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const executiveMembers = [
-  { name: 'Purdri Kihika', role: 'Chairman', image: '/assets/images/PADRI.jpeg', link: '/committees/chairman', accent: 'var(--brand-orange)' },
-  { name: 'Purity Njeri', role: '1st Vice Chair', image: '/assets/images/PURITY.jpeg', link: '/committees/vice-chair1', accent: 'var(--brand-navy)' },
-  { name: 'David Kimani', role: '2nd Vice Chair', image: '/assets/images/DAVID.jpeg', link: '/committees/vice-chair2', accent: 'var(--brand-orange)' },
-  { name: 'Faith Wavinya', role: 'Secretary', image: '/assets/images/FAITH.jpeg', link: '/committees/secretary', accent: 'var(--brand-navy)' },
-  { name: 'Natasha Amani', role: 'Vice Secretary', image: '/assets/images/AMANI.jpeg', link: '/committees/vice-secretary', accent: 'var(--brand-orange)' },
-  { name: 'Mercy Mwaura', role: 'Treasurer', image: '/assets/images/MERCY.jpeg', link: '/committees/treasurer', accent: 'var(--brand-navy)' },
-  { name: 'Caleb Esere', role: 'Bible Study & Discipleship Coordinator', image: '/assets/images/CALEB.jpg', link: '/committees/bible-study', accent: 'var(--brand-orange)' },
-  { name: 'Martha Thuku', role: 'Prayer Coordinator', image: '/assets/images/MARTHA.jpeg', link: '/committees/prayer', accent: 'var(--brand-navy)' },
-  { name: 'Mercy Mutuku', role: 'Missions & Evangelism Coordinator', image: '/assets/images/MUTUKU.jpeg', link: '/committees/missions', accent: 'var(--brand-orange)' },
-  { name: 'Peter Vaati', role: 'Music Coordinator', image: '/assets/images/PETER.jpg', link: '/committees/music', accent: 'var(--brand-navy)' },
-  { name: 'John Mwanthi', role: 'Technical Coordinator', image: '/assets/images/JOHN.jpeg', link: '/committees/technical', accent: 'var(--brand-orange)' },
-  { name: 'Esther Karimeri', role: 'Creative Ministry Coordinator', image: '/assets/images/ESTHER.jpeg', link: '/committees/creative', accent: 'var(--brand-navy)' },
-]
+  {
+    name: "Purdri Kihika",
+    role: "Chairman",
+    image: "/assets/images/PADRI.jpeg",
+    link: "/committees/chairman",
+    accent: "var(--brand-orange)",
+  },
+  {
+    name: "Purity Njeri",
+    role: "1st Vice Chair",
+    image: "/assets/images/PURITY.jpeg",
+    link: "/committees/vice-chair1",
+    accent: "var(--brand-navy)",
+  },
+  {
+    name: "David Kimani",
+    role: "2nd Vice Chair",
+    image: "/assets/images/DAVID.jpeg",
+    link: "/committees/vice-chair2",
+    accent: "var(--brand-orange)",
+  },
+  {
+    name: "Faith Wavinya",
+    role: "Secretary",
+    image: "/assets/images/FAITH.jpeg",
+    link: "/committees/secretary",
+    accent: "var(--brand-navy)",
+  },
+  {
+    name: "Natasha Amani",
+    role: "Vice Secretary",
+    image: "/assets/images/AMANI.jpeg",
+    link: "/committees/vice-secretary",
+    accent: "var(--brand-orange)",
+  },
+  {
+    name: "Mercy Mwaura",
+    role: "Treasurer",
+    image: "/assets/images/MERCY.jpeg",
+    link: "/committees/treasurer",
+    accent: "var(--brand-navy)",
+  },
+  {
+    name: "Caleb Esere",
+    role: "Bible Study & Discipleship Coordinator",
+    image: "/assets/images/CALEB.jpg",
+    link: "/committees/bible-study",
+    accent: "var(--brand-orange)",
+  },
+  {
+    name: "Martha Thuku",
+    role: "Prayer Coordinator",
+    image: "/assets/images/MARTHA.jpeg",
+    link: "/committees/prayer",
+    accent: "var(--brand-navy)",
+  },
+  {
+    name: "Mercy Mutuku",
+    role: "Missions & Evangelism Coordinator",
+    image: "/assets/images/MUTUKU.jpeg",
+    link: "/committees/missions",
+    accent: "var(--brand-orange)",
+  },
+  {
+    name: "Peter Vaati",
+    role: "Music Coordinator",
+    image: "/assets/images/PETER.jpg",
+    link: "/committees/music",
+    accent: "var(--brand-navy)",
+  },
+  {
+    name: "John Mwanthi",
+    role: "Technical Coordinator",
+    image: "/assets/images/JOHN.jpeg",
+    link: "/committees/technical",
+    accent: "var(--brand-orange)",
+  },
+  {
+    name: "Esther Karimeri",
+    role: "Creative Ministry Coordinator",
+    image: "/assets/images/ESTHER.jpeg",
+    link: "/committees/creative",
+    accent: "var(--brand-navy)",
+  },
+];
 
 const aims = [
-  { icon: 'fa-book-open', title: 'Biblical Discipleship', description: "Deepening understanding of Scripture and encouraging practical application in daily life.", delay: 100 },
-  { icon: 'fa-cross', title: 'Evangelism & Outreach', description: 'Reaching out to non-believers within the university and beyond with the Gospel.', delay: 200 },
-  { icon: 'fa-hands-praying', title: 'Fellowship & Unity', description: 'Fostering a strong sense of community, living as one body in Christ.', delay: 300 },
-  { icon: 'fa-crown', title: 'Leadership Development', description: 'Equipping student leaders with spiritual and practical skills for effective service.', delay: 400 },
-  { icon: 'fa-user-graduate', title: 'Academic Excellence', description: "Excelling in academics as a testimony to God's glory and impacting society.", delay: 500 },
-  { icon: 'fa-heart-pulse', title: 'Social Responsibility', description: "Reflecting Christ's compassion through community service and social justice.", delay: 600 },
-]
+  {
+    icon: "fa-book-open",
+    title: "Biblical Discipleship",
+    description:
+      "Deepening understanding of Scripture and encouraging practical application in daily life.",
+    delay: 100,
+  },
+  {
+    icon: "fa-cross",
+    title: "Evangelism & Outreach",
+    description:
+      "Reaching out to non-believers within the university and beyond with the Gospel.",
+    delay: 200,
+  },
+  {
+    icon: "fa-hands-praying",
+    title: "Fellowship & Unity",
+    description:
+      "Fostering a strong sense of community, living as one body in Christ.",
+    delay: 300,
+  },
+  {
+    icon: "fa-crown",
+    title: "Leadership Development",
+    description:
+      "Equipping student leaders with spiritual and practical skills for effective service.",
+    delay: 400,
+  },
+  {
+    icon: "fa-user-graduate",
+    title: "Academic Excellence",
+    description:
+      "Excelling in academics as a testimony to God's glory and impacting society.",
+    delay: 500,
+  },
+  {
+    icon: "fa-heart-pulse",
+    title: "Social Responsibility",
+    description:
+      "Reflecting Christ's compassion through community service and social justice.",
+    delay: 600,
+  },
+];
 
 const doctrinalPoints = [
-  'Unity of the Father, Son, and Holy Spirit.',
-  'Divine inspiration and authority of Holy Scripture.',
-  'Universal sinfulness and guilt of all mankind.',
-  'Redemption solely through the death of Jesus Christ.',
-  'The bodily resurrection and ascension of Christ.',
-  'Justification of the sinner by grace through faith.',
-  'The indwelling and work of the Holy Spirit.',
-  'The personal, visible return of our Lord Jesus.',
-]
+  "Unity of the Father, Son, and Holy Spirit.",
+  "Divine inspiration and authority of Holy Scripture.",
+  "Universal sinfulness and guilt of all mankind.",
+  "Redemption solely through the death of Jesus Christ.",
+  "The bodily resurrection and ascension of Christ.",
+  "Justification of the sinner by grace through faith.",
+  "The indwelling and work of the Holy Spirit.",
+  "The personal, visible return of our Lord Jesus.",
+];
 
 const AboutPage = () => {
   return (
     <div className="about-page">
-     {/* --- HERO SECTION --- */}
+      {/* --- HERO SECTION --- */}
       <section className="about-hero d-flex align-items-center">
         <div className="container text-center hero-content">
           <div className="badge-pill mb-3">Since Inception</div>
-          <h1 className="display-3 fw-bold mb-3 text-white">Our <span className="text-teal">Identity</span> & Faith</h1>
+          <h1 className="display-3 fw-bold mb-3 text-white">
+            Our <span className="text-teal">Identity</span> & Faith
+          </h1>
           <p className="lead text-white opacity-90 mx-auto col-lg-7">
-            Inspiring Love, Hope, and Godliness within Murang'a University of Technology.
+            Inspiring Love, Hope, and Godliness within Murang'a University of
+            Technology.
           </p>
         </div>
       </section>
@@ -54,19 +165,35 @@ const AboutPage = () => {
         <div className="container">
           <div className="row g-0 rounded-5 shadow-lg overflow-hidden bg-white">
             <div className="col-lg-6 p-5 d-flex flex-column justify-content-center">
-              <h6 className="text-orange fw-bold text-uppercase mb-2">Our Foundation</h6>
+              <h6 className="text-orange fw-bold text-uppercase mb-2">
+                Our Foundation
+              </h6>
               <h2 className="display-6 fw-bold text-navy mb-4">Who We Are</h2>
               <p className="text-muted mb-4">
-                The Murang'a University of Technology Christian Union (MUTCU) is a vibrant, student-led community dedicated to spiritual excellence and holistic growth.
+                The Murang'a University of Technology Christian Union (MUTCU) is
+                a vibrant, student-led community dedicated to spiritual
+                excellence and holistic growth.
               </p>
               <div className="p-3 border-start border-4 border-teal bg-light rounded-end">
                 <p className="mb-0 small fw-medium text-navy">
-                  Proud member of the <a href="https://focuskenya.org/" className="text-teal text-decoration-none fw-bold">Fellowship of Christian Unions (FOCUS-KENYA)</a>.
+                  Proud member of the{" "}
+                  <a
+                    href="https://focuskenya.org/"
+                    className="text-teal text-decoration-none fw-bold"
+                  >
+                    Fellowship of Christian Unions (FOCUS-KENYA)
+                  </a>
+                  .
                 </p>
               </div>
             </div>
             <div className="col-lg-6 bg-navy d-flex align-items-center justify-content-center p-5">
-              <img src="/assets/images/best logo.png" alt="MUTCU Logo" className="img-fluid logo-glow" style={{ maxHeight: '250px' }} />
+              <img
+                src="/assets/images/best logo.png"
+                alt="MUTCU Logo"
+                className="img-fluid logo-glow"
+                style={{ maxHeight: "250px" }}
+              />
             </div>
           </div>
         </div>
@@ -77,13 +204,31 @@ const AboutPage = () => {
         <div className="container">
           <div className="row g-4 text-center">
             {[
-              { title: 'Our Motto', text: 'To Inspire Love, Hope, and Godliness.', icon: 'fa-quote-left', bg: 'var(--brand-orange)' },
-              { title: 'Our Vision', text: 'To be a model Christian Union cultivating Christ-centeredness.', icon: 'fa-eye', bg: 'var(--brand-teal)' },
-              { title: 'Our Mission', text: 'To raise a family well-equipped in all aspects of life.', icon: 'fa-chess-king', bg: 'var(--brand-navy)' }
+              {
+                title: "Our Motto",
+                text: "To Inspire Love, Hope, and Godliness.",
+                icon: "fa-quote-left",
+                bg: "var(--brand-orange)",
+              },
+              {
+                title: "Our Vision",
+                text: "To be a model Christian Union cultivating Christ-centeredness.",
+                icon: "fa-eye",
+                bg: "var(--brand-teal)",
+              },
+              {
+                title: "Our Mission",
+                text: "To raise a family well-equipped in all aspects of life.",
+                icon: "fa-chess-king",
+                bg: "var(--brand-navy)",
+              },
             ].map((item, i) => (
               <div className="col-md-4" key={i}>
                 <div className="principle-card p-5 h-100 rounded-4 shadow-sm">
-                  <div className="icon-circle mb-4 mx-auto" style={{ backgroundColor: item.bg }}>
+                  <div
+                    className="icon-circle mb-4 mx-auto"
+                    style={{ backgroundColor: item.bg }}
+                  >
                     <i className={`fas ${item.icon} text-white fs-4`}></i>
                   </div>
                   <h4 className="fw-bold text-navy">{item.title}</h4>
@@ -95,22 +240,29 @@ const AboutPage = () => {
         </div>
       </section>
 
-     {/* --- OUR AIMS --- */}
+      {/* --- OUR AIMS --- */}
       <section className="py-5 bg-navy-gradient">
         <div className="container py-4">
           <div className="text-center mb-5">
             <h2 className="fw-bold h1 text-white">Our Core Aims</h2>
-            <div className="mx-auto bg-orange rounded mt-2" style={{ height: '4px', width: '50px' }}></div>
+            <div
+              className="mx-auto bg-orange rounded mt-2"
+              style={{ height: "4px", width: "50px" }}
+            ></div>
           </div>
           <div className="row g-4">
             {aims.map((aim, idx) => (
               <div className="col-md-4" key={idx}>
                 <div className="aim-card p-4 rounded-4 h-100 border border-white border-opacity-10">
                   <div className="d-flex align-items-start">
-                    <i className={`fas ${aim.icon} text-teal fs-3 me-3 mt-1`}></i>
+                    <i
+                      className={`fas ${aim.icon} text-teal fs-3 me-3 mt-1`}
+                    ></i>
                     <div>
                       <h5 className="fw-bold text-white mb-2">{aim.title}</h5>
-                      <p className="small text-white opacity-75 mb-0">{aim.description}</p>
+                      <p className="small text-white opacity-75 mb-0">
+                        {aim.description}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -125,8 +277,13 @@ const AboutPage = () => {
         <div className="container py-4">
           <div className="row align-items-center">
             <div className="col-lg-5 mb-4 mb-lg-0">
-              <h2 className="display-5 fw-bold text-navy mb-4">Our Doctrinal Basis</h2>
-              <p className="text-muted lead">The unchanging truths that form the foundation of our faith and fellowship.</p>
+              <h2 className="display-5 fw-bold text-navy mb-4">
+                Our Doctrinal Basis
+              </h2>
+              <p className="text-muted lead">
+                The unchanging truths that form the foundation of our faith and
+                fellowship.
+              </p>
               <div className="bg-orange p-1 rounded w-25"></div>
             </div>
             <div className="col-lg-7">
@@ -154,11 +311,20 @@ const AboutPage = () => {
               <div key={i} className="col-6 col-md-4 col-lg-3">
                 <Link to={member.link} className="text-decoration-none">
                   <div className="leader-card">
-                    <div className="leader-img-box mb-3" style={{ borderColor: member.accent }}>
-                      <img src={member.image} alt={member.name} className="img-fluid rounded-circle" />
+                    <div
+                      className="leader-img-box mb-3"
+                      style={{ borderColor: member.accent }}
+                    >
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="img-fluid rounded-circle"
+                      />
                     </div>
                     <h6 className="fw-bold text-navy mb-1">{member.name}</h6>
-                    <p className="text-teal x-small fw-bold text-uppercase mb-0">{member.role}</p>
+                    <p className="text-teal x-small fw-bold text-uppercase mb-0">
+                      {member.role}
+                    </p>
                   </div>
                 </Link>
               </div>
@@ -170,12 +336,20 @@ const AboutPage = () => {
       {/* --- CTA SECTION --- */}
       <section className="py-5 bg-teal text-navy text-center">
         <div className="container py-4">
-          <h2 className="display-6 fw-bold mb-4">Become a Part of the Family</h2>
+          <h2 className="display-6 fw-bold mb-4">
+            Become a Part of the Family
+          </h2>
           <div className="d-flex flex-wrap justify-content-center gap-3">
-            <Link to="/contact" className="btn btn-navy-action px-5 py-3 rounded-pill fw-bold">
+            <Link
+              to="/contact"
+              className="btn btn-navy-action px-5 py-3 rounded-pill fw-bold"
+            >
               Join MUTCU Now
             </Link>
-            <Link to="/ministries" className="btn btn-outline-navy px-5 py-3 rounded-pill fw-bold">
+            <Link
+              to="/ministries"
+              className="btn btn-outline-navy px-5 py-3 rounded-pill fw-bold"
+            >
               Explore Ministries
             </Link>
           </div>
@@ -266,7 +440,7 @@ const AboutPage = () => {
         }
       `}</style>
     </div>
-  )
-}
+  );
+};
 
-export default AboutPage
+export default AboutPage;

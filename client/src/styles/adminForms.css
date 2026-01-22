@@ -4,8 +4,8 @@
   --mutcu-orange: #ff9700;
   --mutcu-red: #ff1229;
   --mutcu-teal: #30d5c8;
-  --font-heading: 'Montserrat', sans-serif;
-  --font-body: 'Lato', sans-serif;
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Lato", sans-serif;
 }
 
 /* Form Container */
@@ -65,7 +65,7 @@
 }
 
 .admin-form-container .form-label::after {
-  content: '';
+  content: "";
   display: inline-block;
   width: 3px;
   height: 12px;
@@ -143,7 +143,7 @@
   height: 1.25rem;
   margin-top: 0.25rem;
   border: 2px solid #e0e0e0;
-  cursor:default;
+  cursor: default;
   transition: all 0.3s ease;
 }
 
@@ -218,7 +218,7 @@
 /* Required Field Indicator */
 .admin-form-container .form-label:has(+ .form-control[required])::before,
 .admin-form-container .form-label:has(+ .form-select[required])::before {
-  content: '*';
+  content: "*";
   color: var(--mutcu-red);
   margin-right: 4px;
   font-weight: 700;
@@ -305,7 +305,8 @@
 
 .admin-form-container input[type="date"]::-webkit-calendar-picker-indicator,
 .admin-form-container input[type="time"]::-webkit-calendar-picker-indicator,
-.admin-form-container input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+.admin-form-container
+  input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   filter: invert(0.1);
 }
@@ -376,35 +377,41 @@
 
 /* Add these to your adminForms.css */
 .stat-item {
-    font-size: 10px;
+  font-size: 10px;
 }
 .ministry-icon-container {
-    width: 42px;
-    height: 42px;
+  width: 42px;
+  height: 42px;
 }
 .ministry-avatar {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
 .animate-fade-in {
-    animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.3s ease-in-out;
 }
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .prayer-request-text {
-    max-width: 400px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  max-width: 400px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .status-select-custom {
-    width: auto;
-    min-width: 140px;
+  width: auto;
+  min-width: 140px;
 }
 
 /* Event form readability improvements */
@@ -484,4 +491,3 @@
 .admin-event-form .btn {
   min-height: 44px;
 }
-

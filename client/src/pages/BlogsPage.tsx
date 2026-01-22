@@ -1,85 +1,85 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { blogsAPI } from '../services/api'
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { blogsAPI } from "../services/api";
 
 interface Blog {
-  id: string
-  title: string
-  slug: string
-  excerpt?: string | null
-  featuredImage?: string | null
-  author?: string | null
-  status: string
-  createdAt?: string
-  publishedAt?: string | null
+  id: string;
+  title: string;
+  slug: string;
+  excerpt?: string | null;
+  featuredImage?: string | null;
+  author?: string | null;
+  status: string;
+  createdAt?: string;
+  publishedAt?: string | null;
 }
 
 interface Pagination {
-  total: number
-  page: number
-  limit: number
-  totalPages: number
-  hasNext: boolean
-  hasPrev: boolean
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrev: boolean;
 }
 
 const BlogsPage = () => {
-  const [items, setItems] = useState<Blog[]>([])
-  const [pagination, setPagination] = useState<Pagination | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [searchInput, setSearchInput] = useState('')
-  const [activeSearch, setActiveSearch] = useState('')
-  const [page, setPage] = useState(1)
+  const [items, setItems] = useState<Blog[]>([]);
+  const [pagination, setPagination] = useState<Pagination | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [searchInput, setSearchInput] = useState("");
+  const [activeSearch, setActiveSearch] = useState("");
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    document.title = 'Blog | MUTCU'
-  }, [])
+    document.title = "Blog | MUTCU";
+  }, []);
 
   useEffect(() => {
-    fetchBlogs(page, page > 1)
-  }, [activeSearch, page])
+    fetchBlogs(page, page > 1);
+  }, [activeSearch, page]);
 
   const fetchBlogs = async (pageToLoad = 1, append = false) => {
     try {
-      setLoading(true)
-      setError(null)
+      setLoading(true);
+      setError(null);
 
       // FIX: Build query object conditionally to avoid passing 'undefined' to search
       const queryParams: { page: number; limit: number; search?: string } = {
         page: pageToLoad,
         limit: 6,
-      }
+      };
 
       if (activeSearch) {
-        queryParams.search = activeSearch
+        queryParams.search = activeSearch;
       }
 
-      const response = await blogsAPI.list(queryParams)
+      const response = await blogsAPI.list(queryParams);
 
-      const data = response.data || response
-      const paginationMeta = response.pagination || data.pagination
+      const data = response.data || response;
+      const paginationMeta = response.pagination || data.pagination;
 
-      setItems((prev) => (append ? [...prev, ...(data || [])] : data || []))
-      setPagination(paginationMeta || null)
+      setItems((prev) => (append ? [...prev, ...(data || [])] : data || []));
+      setPagination(paginationMeta || null);
     } catch (err: any) {
-      setError(err?.message || 'Failed to load blogs')
+      setError(err?.message || "Failed to load blogs");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
-    setPage(1)
-    setActiveSearch(searchInput.trim())
-  }
+    e.preventDefault();
+    setPage(1);
+    setActiveSearch(searchInput.trim());
+  };
 
   const handleLoadMore = () => {
     if (pagination?.hasNext) {
-      setPage((prev) => prev + 1)
+      setPage((prev) => prev + 1);
     }
-  }
+  };
 
   return (
     <div className="blog-page">
@@ -93,10 +93,11 @@ const BlogsPage = () => {
                 MUTCU <span className="text-orange">Blog</span>
               </h1>
               <p className="lead text-white-50 mb-4">
-                Explore reflections, ministry updates, and faith-building stories from the 
-                Murang’a University of Technology Christian Union.
+                Explore reflections, ministry updates, and faith-building
+                stories from the Murang’a University of Technology Christian
+                Union.
               </p>
-              
+
               <form className="blog-search-container" onSubmit={handleSearch}>
                 <div className="input-group shadow-lg">
                   <span className="input-group-text bg-white border-0 ps-4">
@@ -109,7 +110,9 @@ const BlogsPage = () => {
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
                   />
-                  <button type="submit" className="btn btn-search px-4">Search</button>
+                  <button type="submit" className="btn btn-search px-4">
+                    Search
+                  </button>
                 </div>
               </form>
             </div>
@@ -120,7 +123,10 @@ const BlogsPage = () => {
       {/* BLOG FEED */}
       <section className="container py-5 mt-n5">
         {error && (
-          <div className="alert alert-custom d-flex align-items-center" role="alert">
+          <div
+            className="alert alert-custom d-flex align-items-center"
+            role="alert"
+          >
             <i className="fas fa-exclamation-circle me-3"></i>
             <div>{error}</div>
           </div>
@@ -129,13 +135,17 @@ const BlogsPage = () => {
         {loading && items.length === 0 ? (
           <div className="text-center py-5">
             <div className="spinner-grow text-teal" role="status"></div>
-            <p className="text-muted mt-3 fw-medium">Preparing your reading list...</p>
+            <p className="text-muted mt-3 fw-medium">
+              Preparing your reading list...
+            </p>
           </div>
         ) : items.length === 0 ? (
           <div className="text-center py-5 no-results shadow-sm rounded-4 bg-white">
             <i className="fas fa-folder-open fa-3x mb-3 text-muted"></i>
             <h4 className="text-navy">No stories found</h4>
-            <p className="text-muted">Try adjusting your search or check back later.</p>
+            <p className="text-muted">
+              Try adjusting your search or check back later.
+            </p>
           </div>
         ) : (
           <>
@@ -145,7 +155,11 @@ const BlogsPage = () => {
                   <div className="blog-card h-100">
                     <div className="card-img-container">
                       {blog.featuredImage ? (
-                        <img src={blog.featuredImage} alt={blog.title} className="card-img-top" />
+                        <img
+                          src={blog.featuredImage}
+                          alt={blog.title}
+                          className="card-img-top"
+                        />
                       ) : (
                         <div className="placeholder-img">
                           <i className="fas fa-cross fa-2x"></i>
@@ -153,24 +167,35 @@ const BlogsPage = () => {
                       )}
                       <div className="date-tag">
                         {blog.publishedAt
-                          ? new Date(blog.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-                          : new Date(blog.createdAt || '').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                          ? new Date(blog.publishedAt).toLocaleDateString(
+                              "en-US",
+                              { month: "short", day: "numeric" },
+                            )
+                          : new Date(blog.createdAt || "").toLocaleDateString(
+                              "en-US",
+                              { month: "short", day: "numeric" },
+                            )}
                       </div>
                     </div>
-                    
+
                     <div className="card-body p-4">
                       <div className="d-flex align-items-center mb-2">
                         <span className="author-name">
-                          <i className="far fa-user me-2"></i>{blog.author || 'MUTCU Team'}
+                          <i className="far fa-user me-2"></i>
+                          {blog.author || "MUTCU Team"}
                         </span>
                       </div>
                       <h3 className="blog-title mb-3">
-                        <Link to={`/blogs/${blog.slug}`} className="stretched-link text-decoration-none">
+                        <Link
+                          to={`/blogs/${blog.slug}`}
+                          className="stretched-link text-decoration-none"
+                        >
                           {blog.title}
                         </Link>
                       </h3>
                       <p className="blog-excerpt text-muted mb-4">
-                        {blog.excerpt || 'Read more about this inspiring update from our community.'}
+                        {blog.excerpt ||
+                          "Read more about this inspiring update from our community."}
                       </p>
                       <div className="blog-footer-link">
                         <span>Read More</span>
@@ -189,7 +214,9 @@ const BlogsPage = () => {
                   onClick={handleLoadMore}
                   disabled={loading}
                 >
-                  {loading ? <span className="spinner-border spinner-border-sm me-2"></span> : null}
+                  {loading ? (
+                    <span className="spinner-border spinner-border-sm me-2"></span>
+                  ) : null}
                   Load More Stories
                 </button>
               </div>
@@ -299,7 +326,7 @@ const BlogsPage = () => {
         }
       `}</style>
     </div>
-  )
-}
+  );
+};
 
-export default BlogsPage
+export default BlogsPage;

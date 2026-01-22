@@ -1,63 +1,68 @@
-import { useState } from 'react'
-import type { FormEvent } from 'react'
-import '../assets/mut/css/contact.css'
-import '../styles/adminForms.css'
-import ConfirmationModal from '../components/ConfirmationModal'
-import { contactAPI } from '../services/api'
+import { useState } from "react";
+import type { FormEvent } from "react";
+import "../assets/mut/css/contact.css";
+import "../styles/adminForms.css";
+import ConfirmationModal from "../components/ConfirmationModal";
+import { contactAPI } from "../services/api";
 
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  })
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
   const [errors, setErrors] = useState({
     name: false,
     email: false,
     subject: false,
     message: false,
-  })
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [modalMessage, setModalMessage] = useState<React.ReactNode>(null)
+  });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState<React.ReactNode>(null);
 
   const openModal = (message: React.ReactNode) => {
-    setModalMessage(message)
-    setIsModalOpen(true)
-  }
+    setModalMessage(message);
+    setIsModalOpen(true);
+  };
 
   const closeModal = () => {
-    setIsModalOpen(false)
-    setModalMessage(null)
-  }
+    setIsModalOpen(false);
+    setModalMessage(null);
+  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
     // Clear error when user starts typing
     if (errors[name as keyof typeof errors]) {
-      setErrors((prev) => ({ ...prev, [name]: false }))
+      setErrors((prev) => ({ ...prev, [name]: false }));
     }
-  }
+  };
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     // Validation
     const newErrors = {
       name: !formData.name.trim(),
-      email: !formData.email.trim() || !emailPattern.test(formData.email.trim()),
+      email:
+        !formData.email.trim() || !emailPattern.test(formData.email.trim()),
       subject: !formData.subject.trim(),
       message: !formData.message.trim(),
-    }
+    };
 
-    setErrors(newErrors)
+    setErrors(newErrors);
 
     // Check if there are any errors
     if (Object.values(newErrors).some((error) => error)) {
-      return
+      return;
     }
 
     try {
@@ -67,37 +72,37 @@ const ContactPage = () => {
         email: formData.email.trim(),
         subject: formData.subject.trim(),
         message: formData.message.trim(),
-      })
+      });
 
       openModal(
         <p>
-          Thank you for contacting us! We&apos;ll get back to you soon. Have a blessed time ahead.
+          Thank you for contacting us! We&apos;ll get back to you soon. Have a
+          blessed time ahead.
         </p>,
-      )
+      );
 
       // Reset form
       setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      })
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
       setErrors({
         name: false,
         email: false,
         subject: false,
         message: false,
-      })
+      });
     } catch (error: any) {
-      console.error('Contact form error:', error)
-      const errorMessage = error?.message || error?.data?.message || 'Sorry, there was an error submitting your message. Please try again later.'
-      openModal(
-        <p>
-          {errorMessage}
-        </p>,
-      )
+      console.error("Contact form error:", error);
+      const errorMessage =
+        error?.message ||
+        error?.data?.message ||
+        "Sorry, there was an error submitting your message. Please try again later.";
+      openModal(<p>{errorMessage}</p>);
     }
-  }
+  };
 
   return (
     <div className="contact-page">
@@ -107,7 +112,11 @@ const ContactPage = () => {
         style={{ backgroundImage: "url('/assets/images/church3.jpg')" }}
       >
         <div className="hero-overlay" />
-        <div className="container position-relative" data-aos="fade-up" data-aos-duration="1000">
+        <div
+          className="container position-relative"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+        >
           <h1 className="display-3 mb-3">Contact Us</h1>
           <p className="lead">We&apos;d love to hear from you!</p>
         </div>
@@ -120,21 +129,36 @@ const ContactPage = () => {
             <div className="col-lg-8 mx-auto">
               <h2 className="section-title text-center mb-5">Get In Touch</h2>
               <div className="row mb-5">
-                <div className="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div
+                  className="col-md-4 mb-4"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                >
                   <div className="contact-info-card text-center p-4 rounded-3 shadow-sm h-100">
                     <i className="fas fa-map-marker-alt feature-icon mb-3" />
                     <h4>Location</h4>
-                    <p>Murang&apos;a University of Technology, Murang&apos;a, Kenya</p>
+                    <p>
+                      Murang&apos;a University of Technology, Murang&apos;a,
+                      Kenya
+                    </p>
                   </div>
                 </div>
-                <div className="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div
+                  className="col-md-4 mb-4"
+                  data-aos="fade-up"
+                  data-aos-delay="200"
+                >
                   <div className="contact-info-card text-center p-4 rounded-3 shadow-sm h-100">
                     <i className="fas fa-phone feature-icon mb-3" />
                     <h4>Phone</h4>
                     <p>+254 712 345 678</p>
                   </div>
                 </div>
-                <div className="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div
+                  className="col-md-4 mb-4"
+                  data-aos="fade-up"
+                  data-aos-delay="300"
+                >
                   <div className="contact-info-card text-center p-4 rounded-3 shadow-sm h-100">
                     <i className="fas fa-envelope feature-icon mb-3" />
                     <h4>Email</h4>
@@ -143,7 +167,11 @@ const ContactPage = () => {
                 </div>
               </div>
 
-              <div className="card border-0 shadow-lg admin-form-container" data-aos="fade-up" data-aos-delay="400">
+              <div
+                className="card border-0 shadow-lg admin-form-container"
+                data-aos="fade-up"
+                data-aos-delay="400"
+              >
                 <div className="card-header">
                   <h3 className="mb-0">Send Us a Message</h3>
                 </div>
@@ -156,7 +184,7 @@ const ContactPage = () => {
                         </label>
                         <input
                           type="text"
-                          className={`form-control${errors.name ? ' is-invalid' : ''}`}
+                          className={`form-control${errors.name ? " is-invalid" : ""}`}
                           id="name"
                           name="name"
                           placeholder="Enter your full name"
@@ -164,7 +192,11 @@ const ContactPage = () => {
                           onChange={handleChange}
                           required
                         />
-                        {errors.name && <div className="invalid-feedback">Please enter your name.</div>}
+                        {errors.name && (
+                          <div className="invalid-feedback">
+                            Please enter your name.
+                          </div>
+                        )}
                       </div>
 
                       <div className="col-md-6 mb-3">
@@ -173,7 +205,7 @@ const ContactPage = () => {
                         </label>
                         <input
                           type="email"
-                          className={`form-control${errors.email ? ' is-invalid' : ''}`}
+                          className={`form-control${errors.email ? " is-invalid" : ""}`}
                           id="email"
                           name="email"
                           placeholder="your.email@example.com"
@@ -181,7 +213,11 @@ const ContactPage = () => {
                           onChange={handleChange}
                           required
                         />
-                        {errors.email && <div className="invalid-feedback">Please enter a valid email address.</div>}
+                        {errors.email && (
+                          <div className="invalid-feedback">
+                            Please enter a valid email address.
+                          </div>
+                        )}
                       </div>
 
                       <div className="col-12 mb-3">
@@ -190,7 +226,7 @@ const ContactPage = () => {
                         </label>
                         <input
                           type="text"
-                          className={`form-control${errors.subject ? ' is-invalid' : ''}`}
+                          className={`form-control${errors.subject ? " is-invalid" : ""}`}
                           id="subject"
                           name="subject"
                           placeholder="What is this regarding?"
@@ -198,7 +234,11 @@ const ContactPage = () => {
                           onChange={handleChange}
                           required
                         />
-                        {errors.subject && <div className="invalid-feedback">Please enter a subject.</div>}
+                        {errors.subject && (
+                          <div className="invalid-feedback">
+                            Please enter a subject.
+                          </div>
+                        )}
                       </div>
 
                       <div className="col-12 mb-3">
@@ -206,7 +246,7 @@ const ContactPage = () => {
                           Message
                         </label>
                         <textarea
-                          className={`form-control${errors.message ? ' is-invalid' : ''}`}
+                          className={`form-control${errors.message ? " is-invalid" : ""}`}
                           id="message"
                           name="message"
                           rows={6}
@@ -215,7 +255,11 @@ const ContactPage = () => {
                           onChange={handleChange}
                           required
                         />
-                        {errors.message && <div className="invalid-feedback">Please enter your message.</div>}
+                        {errors.message && (
+                          <div className="invalid-feedback">
+                            Please enter your message.
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -239,9 +283,13 @@ const ContactPage = () => {
         </div>
       </section>
 
-      <ConfirmationModal isOpen={isModalOpen} message={modalMessage ?? ''} onClose={closeModal} />
+      <ConfirmationModal
+        isOpen={isModalOpen}
+        message={modalMessage ?? ""}
+        onClose={closeModal}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default ContactPage
+export default ContactPage;

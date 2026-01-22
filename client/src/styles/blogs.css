@@ -13,7 +13,12 @@
 }
 
 .gradient-hero {
-  background: radial-gradient(circle at 20% 20%, rgba(255, 151, 0, 0.18), transparent 35%),
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255, 151, 0, 0.18),
+      transparent 35%
+    ),
     radial-gradient(circle at 80% 0%, rgba(10, 24, 55, 0.4), transparent 40%),
     linear-gradient(120deg, #0a1837 0%, #0f1f46 55%, #0a1837 100%);
 }
@@ -67,7 +72,9 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .blog-card:hover {
@@ -79,7 +86,11 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16/10;
-  background: linear-gradient(135deg, rgba(10, 24, 55, 0.08), rgba(255, 151, 0, 0.08));
+  background: linear-gradient(
+    135deg,
+    rgba(10, 24, 55, 0.08),
+    rgba(255, 151, 0, 0.08)
+  );
 }
 
 .blog-card-image {
@@ -150,4 +161,3 @@
     min-height: 48px;
   }
 }
-

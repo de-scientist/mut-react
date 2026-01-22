@@ -43,18 +43,14 @@ const MusicCoordinatorPage = () => {
               </div>
             </div>
 
-            <div
-              className="col-lg-8"
-              data-aos="fade-left"
-              data-aos-delay="200"
-            >
+            <div className="col-lg-8" data-aos="fade-left" data-aos-delay="200">
               <h3 className="section-title text-start">
                 About the Music Ministry
               </h3>
               <p>
-                The Music Ministry of MUTCU led by Peter Vaati is dedicated to leading the Union in
-                vibrant and spiritually uplifting worship experiences.
-                Comprising various teams including the choir, band,
+                The Music Ministry of MUTCU led by Peter Vaati is dedicated to
+                leading the Union in vibrant and spiritually uplifting worship
+                experiences. Comprising various teams including the choir, band,
                 instrumentalists, and praise and worship leaders, this ministry
                 plays a crucial role in creating an atmosphere where members can
                 connect with God through music and song.
@@ -110,25 +106,17 @@ const MusicCoordinatorPage = () => {
       {/* CTA Section */}
       <section className="py-5 cta-section text-white">
         <div className="container text-center" data-aos="zoom-in">
-          <h2 className="section-title text-white">
-            Join Our Music Ministry!
-          </h2>
+          <h2 className="section-title text-white">Join Our Music Ministry!</h2>
           <p className="section-subtitle">
             If you have a passion for worship through music, we invite you to
             join the team.
           </p>
 
-          <Link
-            to="/ministries"
-            className="btn btn-primary btn-lg me-3"
-          >
+          <Link to="/ministries" className="btn btn-primary btn-lg me-3">
             Explore Ministries <i className="fas fa-users-cog ms-2" />
           </Link>
 
-          <Link
-            to="/events"
-            className="btn btn-secondary btn-lg"
-          >
+          <Link to="/events" className="btn btn-secondary btn-lg">
             View Events <i className="fas fa-calendar-alt ms-2" />
           </Link>
         </div>

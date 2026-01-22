@@ -1,52 +1,54 @@
-import { useState, type FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { authAPI } from '../services/api'
-import '../assets/mut/css/about.css'
-import '../styles/adminForms.css'
+import { useState, type FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { authAPI } from "../services/api";
+import "../assets/mut/css/about.css";
+import "../styles/adminForms.css";
 
 const AdminLogin = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    setError(null)
+    e.preventDefault();
+    setError(null);
 
     try {
-      setLoading(true)
-      const response = await authAPI.login({ email, password })
+      setLoading(true);
+      const response = await authAPI.login({ email, password });
 
       // Debug: log full response to inspect structure
-      console.log('Login response:', response)
+      console.log("Login response:", response);
 
       // Robust token extraction
       const token =
-        response.token || response.accessToken || response.data?.token
+        response.token || response.accessToken || response.data?.token;
 
-      if (!token) throw new Error('Login did not return a token')
+      if (!token) throw new Error("Login did not return a token");
 
       // Optional: check if the user is an admin
-      const userRole = response.data?.user?.role
-      if (userRole !== 'ADMIN' && userRole !== 'SUPER_ADMIN') {
-        throw new Error('Unauthorized. Admin access required.')
+      const userRole = response.data?.user?.role;
+      if (userRole !== "ADMIN" && userRole !== "SUPER_ADMIN") {
+        throw new Error("Unauthorized. Admin access required.");
       }
 
       // Store token
-      localStorage.setItem('token', token)
+      localStorage.setItem("token", token);
 
-      console.log('Login successful. Token stored. Redirecting to admin dashboard.')
-      navigate('/admin')
+      console.log(
+        "Login successful. Token stored. Redirecting to admin dashboard.",
+      );
+      navigate("/admin");
     } catch (err: any) {
-      console.error('Admin login error:', err) // Full error log for debugging
-      setError(err?.message || 'Login failed. Please check your credentials.')
+      console.error("Admin login error:", err); // Full error log for debugging
+      setError(err?.message || "Login failed. Please check your credentials.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="container py-5">
@@ -74,7 +76,7 @@ const AdminLogin = () => {
                   <label className="form-label">Password</label>
                   <div className="position-relative">
                     <input
-                      type={showPassword ? 'text' : 'password'}
+                      type={showPassword ? "text" : "password"}
                       className="form-control"
                       title="password"
                       value={password}
@@ -85,15 +87,23 @@ const AdminLogin = () => {
                       type="button"
                       className="btn btn-link position-absolute top-50 end-0 translate-middle-y me-2 text-secondary"
                       onClick={() => setShowPassword((prev) => !prev)}
-                      aria-label={showPassword ? 'Hide password' : 'Show password'}
+                      aria-label={
+                        showPassword ? "Hide password" : "Show password"
+                      }
                     >
-                      <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`} />
+                      <i
+                        className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`}
+                      />
                     </button>
                   </div>
                 </div>
                 <div className="d-flex gap-2">
-                  <button type="submit" className="btn btn-primary" disabled={loading}>
-                    {loading ? 'Signing in...' : 'Sign in'}
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={loading}
+                  >
+                    {loading ? "Signing in..." : "Sign in"}
                   </button>
                 </div>
               </form>
@@ -102,7 +112,7 @@ const AdminLogin = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AdminLogin
+export default AdminLogin;

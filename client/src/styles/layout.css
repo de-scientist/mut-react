@@ -1,7 +1,8 @@
 /* Layout Width Fixes - Ensure Full Width for Navbar, Main, and Footer */
 
 /* Root HTML and Body */
-html, body {
+html,
+body {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -9,7 +10,9 @@ html, body {
   overflow-x: hidden;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -117,4 +120,3 @@ footer.footer .container {
   padding-left: 15px;
   padding-right: 15px;
 }
-

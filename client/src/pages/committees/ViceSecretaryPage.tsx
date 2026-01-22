@@ -41,19 +41,23 @@ const ViceSecretaryPage = () => {
               </div>
             </div>
 
-            <div
-              className="col-lg-8"
-              data-aos="fade-left"
-              data-aos-delay="200"
-            >
+            <div className="col-lg-8" data-aos="fade-left" data-aos-delay="200">
               <h3 className="section-title text-start">
                 About the Vice Secretary&apos;s Office
               </h3>
               <p>
-                The Vice Secretary's office provides essential support to the Secretary in managing the administrative backbone of MUTCU. This role is crucial for maintaining organized records, facilitating internal and external communications, and ensuring that all administrative tasks are handled efficiently and accurately.
+                The Vice Secretary's office provides essential support to the
+                Secretary in managing the administrative backbone of MUTCU. This
+                role is crucial for maintaining organized records, facilitating
+                internal and external communications, and ensuring that all
+                administrative tasks are handled efficiently and accurately.
               </p>
               <p>
-                Natasha Amani, as Vice Secretary, works diligently to uphold the Union's commitment to transparency and effective communication. She assists in preparing meeting documents, managing correspondence, and ensuring that the Union's administrative processes support its spiritual and outreach goals.
+                Natasha Amani, as Vice Secretary, works diligently to uphold the
+                Union's commitment to transparency and effective communication.
+                She assists in preparing meeting documents, managing
+                correspondence, and ensuring that the Union's administrative
+                processes support its spiritual and outreach goals.
               </p>
             </div>
           </div>
@@ -67,7 +71,8 @@ const ViceSecretaryPage = () => {
             Key Roles &amp; Responsibilities
           </h2>
           <p className="text-center lead mb-5">
-            The Vice Secretary supports the Secretary in all administrative duties.
+            The Vice Secretary supports the Secretary in all administrative
+            duties.
           </p>
 
           <div className="row justify-content-center">
@@ -98,24 +103,16 @@ const ViceSecretaryPage = () => {
       {/* CTA Section */}
       <section className="py-5 cta-section text-white">
         <div className="container text-center" data-aos="zoom-in">
-          <h2 className="section-title text-white">
-            Explore Our Leadership!
-          </h2>
+          <h2 className="section-title text-white">Explore Our Leadership!</h2>
           <p className="section-subtitle">
             Learn more about the dedicated individuals guiding MUTCU.
           </p>
 
-          <Link
-            to="/about"
-            className="btn btn-primary btn-lg me-3"
-          >
+          <Link to="/about" className="btn btn-primary btn-lg me-3">
             Meet the Team <i className="fas fa-users ms-2" />
           </Link>
 
-          <Link
-            to="/contact"
-            className="btn btn-secondary btn-lg"
-          >
+          <Link to="/contact" className="btn btn-secondary btn-lg">
             Get in Touch <i className="fas fa-envelope ms-2" />
           </Link>
         </div>

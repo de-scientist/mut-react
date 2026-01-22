@@ -1,32 +1,33 @@
-import { type FormEvent, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useTimedSuccess } from '../../hooks/useTimedSuccess'
-import '../../assets/mut/css/hospitality.css'
+import { type FormEvent, useState } from "react";
+import { Link } from "react-router-dom";
+import { useTimedSuccess } from "../../hooks/useTimedSuccess";
+import "../../assets/mut/css/hospitality.css";
 
 const HospitalityMinistryPage = () => {
-  const [fullName, setFullName] = useState('')
-  const [email, setEmail] = useState('')
-  const [areaOfInterest, setAreaOfInterest] = useState('')
-  const [experience, setExperience] = useState('')
-  const { visible: showSuccess, trigger: showSuccessMessage } = useTimedSuccess(5000)
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [areaOfInterest, setAreaOfInterest] = useState("");
+  const [experience, setExperience] = useState("");
+  const { visible: showSuccess, trigger: showSuccessMessage } =
+    useTimedSuccess(5000);
 
   const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    if (!fullName || !email || !areaOfInterest) return
+    e.preventDefault();
+    if (!fullName || !email || !areaOfInterest) return;
 
-    console.log('Hospitality Ministry Join Interest:', {
+    console.log("Hospitality Ministry Join Interest:", {
       fullName,
       email,
       areaOfInterest,
       experience,
-    })
+    });
 
-    setFullName('')
-    setEmail('')
-    setAreaOfInterest('')
-    setExperience('')
-    showSuccessMessage()
-  }
+    setFullName("");
+    setEmail("");
+    setAreaOfInterest("");
+    setExperience("");
+    showSuccessMessage();
+  };
 
   return (
     <div className="hospitality-ministry-page">
@@ -64,12 +65,14 @@ const HospitalityMinistryPage = () => {
                 About the Hospitality Ministry
               </h2>
               <p data-aos="fade-right" data-aos-delay="100">
-                The Hospitality Ministry focuses on creating a welcoming environment for all MUTCU members and visitors. It
-                includes the Kitchen Ministry and works to foster fellowship through service.
+                The Hospitality Ministry focuses on creating a welcoming
+                environment for all MUTCU members and visitors. It includes the
+                Kitchen Ministry and works to foster fellowship through service.
               </p>
               <p data-aos="fade-right" data-aos-delay="200">
-                The ministry oversees Kitchen Ministry, Guest Relations, and Event Catering, ensuring food safety, resource
-                management, and a spirit of generosity and care in all activities.
+                The ministry oversees Kitchen Ministry, Guest Relations, and
+                Event Catering, ensuring food safety, resource management, and a
+                spirit of generosity and care in all activities.
               </p>
             </div>
           </div>
@@ -82,17 +85,27 @@ const HospitalityMinistryPage = () => {
           <h2 className="section-title text-center" data-aos="fade-up">
             Our Hospitality Teams
           </h2>
-          <p className="lead text-center" data-aos="fade-up" data-aos-delay="100">
+          <p
+            className="lead text-center"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             Explore the teams that bring warmth to our community.
           </p>
           <div className="row">
             {/* Kitchen Ministry */}
-            <div className="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <div className="sub-ministry-card">
                 <div className="card-body text-center">
                   <i className="fas fa-utensils choir-icon mb-3" />
                   <h4 className="card-title">Kitchen Ministry</h4>
-                  <p className="card-text">Prepares meals and manages food services for events.</p>
+                  <p className="card-text">
+                    Prepares meals and manages food services for events.
+                  </p>
                   <h6>Activities</h6>
                   <ul>
                     <li>Meal preparation and serving</li>
@@ -100,19 +113,26 @@ const HospitalityMinistryPage = () => {
                     <li>Resource inventory management</li>
                   </ul>
                   <p className="text-muted">
-                    <i className="fas fa-clock me-2" /> Meets before major events
+                    <i className="fas fa-clock me-2" /> Meets before major
+                    events
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Guest Relations */}
-            <div className="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
               <div className="sub-ministry-card">
                 <div className="card-body text-center">
                   <i className="fas fa-handshake band-icon mb-3" />
                   <h4 className="card-title">Guest Relations</h4>
-                  <p className="card-text">Welcomes and supports visitors and new members.</p>
+                  <p className="card-text">
+                    Welcomes and supports visitors and new members.
+                  </p>
                   <h6>Activities</h6>
                   <ul>
                     <li>Greeting and orientation</li>
@@ -127,12 +147,18 @@ const HospitalityMinistryPage = () => {
             </div>
 
             {/* Event Catering */}
-            <div className="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
               <div className="sub-ministry-card">
                 <div className="card-body text-center">
                   <i className="fas fa-concierge-bell praise-icon mb-3" />
                   <h4 className="card-title">Event Catering</h4>
-                  <p className="card-text">Coordinates food and refreshments for gatherings.</p>
+                  <p className="card-text">
+                    Coordinates food and refreshments for gatherings.
+                  </p>
                   <h6>Activities</h6>
                   <ul>
                     <li>Planning menus and catering</li>
@@ -155,16 +181,26 @@ const HospitalityMinistryPage = () => {
           <h2 className="section-title text-center" data-aos="fade-up">
             Featured Events
           </h2>
-          <p className="lead text-center" data-aos="fade-up" data-aos-delay="100">
+          <p
+            className="lead text-center"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             Join us for hospitality-focused events.
           </p>
           <div className="row">
-            <div className="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+            <div
+              className="col-md-4 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="200"
+            >
               <div className="event-highlight-card">
                 <div className="card-body text-center">
                   <i className="fas fa-utensils event-icon" />
                   <h5 className="card-title">Hospitality Day</h5>
-                  <p className="card-text">A day of fellowship and catering training.</p>
+                  <p className="card-text">
+                    A day of fellowship and catering training.
+                  </p>
                   <p className="text-muted">
                     <i className="fas fa-calendar-alt me-2" /> 19th October 2025
                   </p>
@@ -181,7 +217,11 @@ const HospitalityMinistryPage = () => {
           <h2 className="section-title text-center" data-aos="fade-up">
             Ministry Leadership
           </h2>
-          <p className="lead text-center" data-aos="fade-up" data-aos-delay="100">
+          <p
+            className="lead text-center"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             Led by compassionate leaders, our ministry shines.
           </p>
           <div className="row justify-content-center">
@@ -209,7 +249,11 @@ const HospitalityMinistryPage = () => {
           <h2 className="section-title text-center" data-aos="fade-up">
             Join Our Hospitality Ministry!
           </h2>
-          <p className="lead text-center" data-aos="fade-up" data-aos-delay="100">
+          <p
+            className="lead text-center"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             If you love serving and creating a welcoming environment, join us!
           </p>
           <div className="row justify-content-center">
@@ -281,18 +325,27 @@ const HospitalityMinistryPage = () => {
               </form>
               {showSuccess && (
                 <div className="mt-3 text-success animate-pop-in">
-                  Thank you for your interest in the Hospitality Ministry! We&apos;ll get in touch with you soon.
+                  Thank you for your interest in the Hospitality Ministry!
+                  We&apos;ll get in touch with you soon.
                 </div>
               )}
             </div>
           </div>
           <div className="row mt-4 justify-content-center">
-            <div className="col-md-4 text-center" data-aos="fade-up" data-aos-delay="300">
+            <div
+              className="col-md-4 text-center"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
               <Link to="/ministries" className="btn btn-primary">
                 Join a Team
               </Link>
             </div>
-            <div className="col-md-4 text-center" data-aos="fade-up" data-aos-delay="400">
+            <div
+              className="col-md-4 text-center"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
               <Link to="/events" className="btn btn-secondary">
                 View Hospitality Events
               </Link>
@@ -316,7 +369,11 @@ const HospitalityMinistryPage = () => {
               />
               <p className="text-center mt-2">Kitchen Ministry at Work</p>
             </div>
-            <div className="col-md-3 mb-4" data-aos="zoom-in" data-aos-delay="100">
+            <div
+              className="col-md-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
               <img
                 src="/assets/images/guest-welcome.jfif"
                 alt="Guest Welcome"
@@ -324,7 +381,11 @@ const HospitalityMinistryPage = () => {
               />
               <p className="text-center mt-2">Guest Relations Team</p>
             </div>
-            <div className="col-md-3 mb-4" data-aos="zoom-in" data-aos-delay="200">
+            <div
+              className="col-md-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="200"
+            >
               <img
                 src="/assets/images/event-catering.jfif"
                 alt="Event Catering"
@@ -336,7 +397,7 @@ const HospitalityMinistryPage = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default HospitalityMinistryPage
+export default HospitalityMinistryPage;

@@ -1,95 +1,96 @@
-import { useState } from 'react'
-import type { FormEvent } from 'react'
-import { Link } from 'react-router-dom'
-import '../assets/mut/css/index.css'
-import ConfirmationModal from '../components/ConfirmationModal'
-import { prayerAPI, newsletterAPI } from '../services/api'
+import { useState } from "react";
+import type { FormEvent } from "react";
+import { Link } from "react-router-dom";
+import "../assets/mut/css/index.css";
+import ConfirmationModal from "../components/ConfirmationModal";
+import { prayerAPI, newsletterAPI } from "../services/api";
 
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const HomePage = () => {
-  const [prayerName, setPrayerName] = useState('')
-  const [prayerRequest, setPrayerRequest] = useState('')
-  const [prayerError, setPrayerError] = useState(false)
+  const [prayerName, setPrayerName] = useState("");
+  const [prayerRequest, setPrayerRequest] = useState("");
+  const [prayerError, setPrayerError] = useState(false);
 
-  const [newsletterEmail, setNewsletterEmail] = useState('')
-  const [newsletterError, setNewsletterError] = useState(false)
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterError, setNewsletterError] = useState(false);
 
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [modalMessage, setModalMessage] = useState<React.ReactNode>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState<React.ReactNode>(null);
 
   const openModal = (message: React.ReactNode) => {
-    setModalMessage(message)
-    setIsModalOpen(true)
-  }
+    setModalMessage(message);
+    setIsModalOpen(true);
+  };
 
   const closeModal = () => {
-    setIsModalOpen(false)
-    setModalMessage(null)
-  }
+    setIsModalOpen(false);
+    setModalMessage(null);
+  };
 
   const handlePrayerSubmit = async (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!prayerRequest.trim()) {
-      setPrayerError(true)
-      return
+      setPrayerError(true);
+      return;
     }
 
-    setPrayerError(false)
+    setPrayerError(false);
 
     try {
       await prayerAPI.submit({
         name: prayerName || undefined,
         request: prayerRequest,
         isPublic: false,
-      })
+      });
 
       openModal(
         <p>
-          Thank you for your prayer request! Our Prayer Ministry will intercede for you.
+          Thank you for your prayer request! Our Prayer Ministry will intercede
+          for you.
         </p>,
-      )
+      );
 
-      setPrayerName('')
-      setPrayerRequest('')
+      setPrayerName("");
+      setPrayerRequest("");
     } catch (error) {
       openModal(
         <p>
-          Sorry, there was an error submitting your prayer request. Please try again later.
+          Sorry, there was an error submitting your prayer request. Please try
+          again later.
         </p>,
-      )
+      );
     }
-  }
+  };
 
   const handleNewsletterSubmit = async (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!emailPattern.test(newsletterEmail.trim())) {
-      setNewsletterError(true)
-      return
+      setNewsletterError(true);
+      return;
     }
 
-    setNewsletterError(false)
+    setNewsletterError(false);
 
     try {
-      await newsletterAPI.subscribe(newsletterEmail.trim())
+      await newsletterAPI.subscribe(newsletterEmail.trim());
 
       openModal(
         <p>
-          Thank you for subscribing to our newsletter! You&apos;ll receive our latest updates directly in your inbox.
+          Thank you for subscribing to our newsletter! You&apos;ll receive our
+          latest updates directly in your inbox.
         </p>,
-      )
+      );
 
-      setNewsletterEmail('')
+      setNewsletterEmail("");
     } catch (error) {
       openModal(
-        <p>
-          Sorry, there was an error subscribing. Please try again later.
-        </p>,
-      )
+        <p>Sorry, there was an error subscribing. Please try again later.</p>,
+      );
     }
-  }
+  };
 
   return (
     <div>
@@ -105,15 +106,31 @@ const HomePage = () => {
             <div className="carousel-item active">
               <div
                 className="hero-bg"
-                style={{ backgroundImage: "url('/assets/images/Lumii_20241023_192938507.jpg')" }}
+                style={{
+                  backgroundImage:
+                    "url('/assets/images/Lumii_20241023_192938507.jpg')",
+                }}
               />
               <div className="hero-overlay" />
-              <div className="hero-content text-center text-white" data-aos="fade-up" data-aos-duration="1000">
-                <h1 className="display-3 mb-4" data-aos="zoom-in" data-aos-delay="200">
+              <div
+                className="hero-content text-center text-white"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
+                <h1
+                  className="display-3 mb-4"
+                  data-aos="zoom-in"
+                  data-aos-delay="200"
+                >
                   Inspire Love, Hope &amp; Godliness
                 </h1>
-                <p className="lead mb-5" data-aos="zoom-in" data-aos-delay="400">
-                  Join MUTCU to grow in faith, fellowship, and service at Murang&apos;a University of Technology.
+                <p
+                  className="lead mb-5"
+                  data-aos="zoom-in"
+                  data-aos-delay="400"
+                >
+                  Join MUTCU to grow in faith, fellowship, and service at
+                  Murang&apos;a University of Technology.
                 </p>
                 <div data-aos="zoom-in" data-aos-delay="600">
                   <Link to="/contact" className="btn btn-primary btn-lg me-3">
@@ -127,17 +144,36 @@ const HomePage = () => {
             </div>
 
             <div className="carousel-item">
-              <div className="hero-bg" style={{ backgroundImage: "url('/assets/images/exec.jpg')" }} />
+              <div
+                className="hero-bg"
+                style={{ backgroundImage: "url('/assets/images/exec.jpg')" }}
+              />
               <div className="hero-overlay" />
-              <div className="hero-content text-center text-white" data-aos="fade-up" data-aos-duration="1000">
-                <h1 className="display-3 mb-4" data-aos="zoom-in" data-aos-delay="200">
+              <div
+                className="hero-content text-center text-white"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
+                <h1
+                  className="display-3 mb-4"
+                  data-aos="zoom-in"
+                  data-aos-delay="200"
+                >
                   We Are One, We Are MUTCU
                 </h1>
-                <p className="lead mb-5" data-aos="zoom-in" data-aos-delay="400">
-                  A family united in Christ, reaching out to transform lives within and beyond.
+                <p
+                  className="lead mb-5"
+                  data-aos="zoom-in"
+                  data-aos-delay="400"
+                >
+                  A family united in Christ, reaching out to transform lives
+                  within and beyond.
                 </p>
                 <div data-aos="zoom-in" data-aos-delay="600">
-                  <Link to="/ministries" className="btn btn-primary btn-lg me-3">
+                  <Link
+                    to="/ministries"
+                    className="btn btn-primary btn-lg me-3"
+                  >
                     Explore Ministries <i className="fas fa-users-cog ms-2" />
                   </Link>
                   <Link to="/events" className="btn btn-secondary btn-lg">
@@ -148,17 +184,36 @@ const HomePage = () => {
             </div>
 
             <div className="carousel-item">
-              <div className="hero-bg" style={{ backgroundImage: "url('/assets/images/church2.jpg')" }} />
+              <div
+                className="hero-bg"
+                style={{ backgroundImage: "url('/assets/images/church2.jpg')" }}
+              />
               <div className="hero-overlay" />
-              <div className="hero-content text-center text-white" data-aos="fade-up" data-aos-duration="1000">
-                <h1 className="display-3 mb-4" data-aos="zoom-in" data-aos-delay="200">
+              <div
+                className="hero-content text-center text-white"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
+                <h1
+                  className="display-3 mb-4"
+                  data-aos="zoom-in"
+                  data-aos-delay="200"
+                >
                   We Are One, We Are MUTCU
                 </h1>
-                <p className="lead mb-5" data-aos="zoom-in" data-aos-delay="400">
-                  A family united in Christ, reaching out to transform lives within and beyond.
+                <p
+                  className="lead mb-5"
+                  data-aos="zoom-in"
+                  data-aos-delay="400"
+                >
+                  A family united in Christ, reaching out to transform lives
+                  within and beyond.
                 </p>
                 <div data-aos="zoom-in" data-aos-delay="600">
-                  <Link to="/ministries" className="btn btn-primary btn-lg me-3">
+                  <Link
+                    to="/ministries"
+                    className="btn btn-primary btn-lg me-3"
+                  >
                     Explore Ministries <i className="fas fa-users-cog ms-2" />
                   </Link>
                   <Link to="/events" className="btn btn-secondary btn-lg">
@@ -169,13 +224,28 @@ const HomePage = () => {
             </div>
 
             <div className="carousel-item">
-              <div className="hero-bg" style={{ backgroundImage: "url('/assets/images/church3.jpg')" }} />
+              <div
+                className="hero-bg"
+                style={{ backgroundImage: "url('/assets/images/church3.jpg')" }}
+              />
               <div className="hero-overlay" />
-              <div className="hero-content text-center text-white" data-aos="fade-up" data-aos-duration="1000">
-                <h1 className="display-3 mb-4" data-aos="zoom-in" data-aos-delay="200">
+              <div
+                className="hero-content text-center text-white"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
+                <h1
+                  className="display-3 mb-4"
+                  data-aos="zoom-in"
+                  data-aos-delay="200"
+                >
                   Cultivating Christ-Centeredness
                 </h1>
-                <p className="lead mb-5" data-aos="zoom-in" data-aos-delay="400">
+                <p
+                  className="lead mb-5"
+                  data-aos="zoom-in"
+                  data-aos-delay="400"
+                >
                   Our vision is to be a model Christian Union impacting society.
                 </p>
                 <div data-aos="zoom-in" data-aos-delay="600">
@@ -217,9 +287,11 @@ const HomePage = () => {
         <div className="container">
           <h2 className="section-title text-center">About MUTCU</h2>
           <p className="text-center lead mb-5">
-            Murang&apos;a University of Technology Christian Union (MUTCU) is a lively, student-led society in MUT. We are
-            affiliated with FOCUS-Kenya, dedicated to inspiring love, hope, and godliness through discipleship, evangelism,
-            mission work, and leadership development.
+            Murang&apos;a University of Technology Christian Union (MUTCU) is a
+            lively, student-led society in MUT. We are affiliated with
+            FOCUS-Kenya, dedicated to inspiring love, hope, and godliness
+            through discipleship, evangelism, mission work, and leadership
+            development.
           </p>
           <div className="row align-items-center">
             <div
@@ -229,12 +301,14 @@ const HomePage = () => {
             >
               <h3 className="section-subtitle">Our Mission</h3>
               <p>
-                To raise a family well-equipped in all aspects of life, exemplary to Jesus Christ, by encouraging unity as one
-                body of Christ and reaching out to non-believers within and beyond.
+                To raise a family well-equipped in all aspects of life,
+                exemplary to Jesus Christ, by encouraging unity as one body of
+                Christ and reaching out to non-believers within and beyond.
               </p>
               <h3 className="section-subtitle mt-4">Our Vision</h3>
               <p>
-                To be a model Christian Union cultivating Christ-centeredness among members to impact society.
+                To be a model Christian Union cultivating Christ-centeredness
+                among members to impact society.
               </p>
               <Link
                 to="/about"
@@ -258,15 +332,23 @@ const HomePage = () => {
             </div>
           </div>
           <div className="row mt-5">
-            <div className="col-12 text-center" data-aos="fade-up" data-aos-delay="400">
+            <div
+              className="col-12 text-center"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
               <h3 className="section-subtitle">Doctrinal Basis</h3>
               <p className="text-muted">
-                The Union&apos;s beliefs are based on the fundamental truths of Christianity as outlined in its constitution. This
-                includes the unity of the Trinity, the sovereignty of God in creation and redemption, the divine inspiration and
-                supreme authority of the Holy Scripture, the universal sinfulness of man, redemption solely through the
-                sacrificial death of Jesus Christ, His bodily resurrection and ascension, and the sanctifying work of the Holy
-                Spirit in every believer. This shared doctrinal foundation ensures unity in belief and purpose across all of
-                MUTCU&apos;s diverse activities.
+                The Union&apos;s beliefs are based on the fundamental truths of
+                Christianity as outlined in its constitution. This includes the
+                unity of the Trinity, the sovereignty of God in creation and
+                redemption, the divine inspiration and supreme authority of the
+                Holy Scripture, the universal sinfulness of man, redemption
+                solely through the sacrificial death of Jesus Christ, His bodily
+                resurrection and ascension, and the sanctifying work of the Holy
+                Spirit in every believer. This shared doctrinal foundation
+                ensures unity in belief and purpose across all of MUTCU&apos;s
+                diverse activities.
               </p>
             </div>
           </div>
@@ -276,75 +358,107 @@ const HomePage = () => {
       {/* Core Values Section */}
       <section className="core-values-section py-5" data-aos="fade-up">
         <div className="container">
-          <h2 className="section-title text-center text-white">Our Core Values</h2>
+          <h2 className="section-title text-center text-white">
+            Our Core Values
+          </h2>
           <p className="text-center lead mb-5 text-white-50">
             Rooted in faith and community, our values guide everything we do.
           </p>
           <div className="row justify-content-center">
             {/* Cards replicated from original HTML */}
             {/* Faith */}
-            <div className="col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
+            <div
+              className="col-md-6 col-lg-4 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
               <div className="value-card text-center p-4 rounded-3 shadow-sm">
                 <i className="fas fa-cross feature-icon mb-3" />
                 <h4 className="value-title">Faith</h4>
                 <p>
-                  Rooted in the Bible and a personal relationship with Jesus Christ, expressed through prayer, worship, and
-                  in-depth Bible study.
+                  Rooted in the Bible and a personal relationship with Jesus
+                  Christ, expressed through prayer, worship, and in-depth Bible
+                  study.
                 </p>
               </div>
             </div>
             {/* Love */}
-            <div className="col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+            <div
+              className="col-md-6 col-lg-4 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="200"
+            >
               <div className="value-card text-center p-4 rounded-3 shadow-sm">
                 <i className="fas fa-heart feature-icon mb-3" />
                 <h4 className="value-title">Love</h4>
                 <p>
-                  Demonstrating God&apos;s unconditional love through genuine fellowship and a welcoming heart for all, as we are a
-                  "home away from home".
+                  Demonstrating God&apos;s unconditional love through genuine
+                  fellowship and a welcoming heart for all, as we are a "home
+                  away from home".
                 </p>
               </div>
             </div>
             {/* Hope */}
-            <div className="col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
+            <div
+              className="col-md-6 col-lg-4 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="300"
+            >
               <div className="value-card text-center p-4 rounded-3 shadow-sm">
                 <i className="fas fa-lightbulb feature-icon mb-3" />
                 <h4 className="value-title">Hope</h4>
                 <p>
-                  Inspiring our community through positive words, encouraging actions, and unwavering faith in a world crumbling
-                  with uncertainties.
+                  Inspiring our community through positive words, encouraging
+                  actions, and unwavering faith in a world crumbling with
+                  uncertainties.
                 </p>
               </div>
             </div>
             {/* Godliness */}
-            <div className="col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="400">
+            <div
+              className="col-md-6 col-lg-4 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="400"
+            >
               <div className="value-card text-center p-4 rounded-3 shadow-sm">
                 <i className="fas fa-church feature-icon mb-3" />
                 <h4 className="value-title">Godliness</h4>
                 <p>
-                  A commitment to striving for lives that honor and glorify God in all things, reflected in both personal
-                  conduct and collective activities.
+                  A commitment to striving for lives that honor and glorify God
+                  in all things, reflected in both personal conduct and
+                  collective activities.
                 </p>
               </div>
             </div>
             {/* Community */}
-            <div className="col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="500">
+            <div
+              className="col-md-6 col-lg-4 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="500"
+            >
               <div className="value-card text-center p-4 rounded-3 shadow-sm">
                 <i className="fas fa-users feature-icon mb-3" />
                 <h4 className="value-title">Community</h4>
                 <p>
-                  Dedicated to building a strong sense of belonging and mutual support among members, where everyone feels valued
-                  and connected.
+                  Dedicated to building a strong sense of belonging and mutual
+                  support among members, where everyone feels valued and
+                  connected.
                 </p>
               </div>
             </div>
             {/* Service */}
-            <div className="col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="600">
+            <div
+              className="col-md-6 col-lg-4 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="600"
+            >
               <div className="value-card text-center p-4 rounded-3 shadow-sm">
                 <i className="fas fa-hand-holding-heart feature-icon mb-3" />
                 <h4 className="value-title">Service</h4>
                 <p>
-                  A core belief in putting faith into action by actively reaching out to serve the practical and spiritual
-                  needs of others.
+                  A core belief in putting faith into action by actively
+                  reaching out to serve the practical and spiritual needs of
+                  others.
                 </p>
               </div>
             </div>
@@ -356,10 +470,16 @@ const HomePage = () => {
       <section className="ministries-section py-5" data-aos="fade-up">
         <div className="container">
           <h2 className="section-title text-center">Our Ministries</h2>
-          <p className="text-center lead mb-5">Join a ministry to grow in faith and serve others.</p>
+          <p className="text-center lead mb-5">
+            Join a ministry to grow in faith and serve others.
+          </p>
           <div className="row justify-content-center">
             {/* Music Ministry */}
-            <div className="col-md-6 col-lg-3 mb-4" data-aos="zoom-in" data-aos-delay="100">
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
               <div className="card ministry-card h-100 shadow-sm">
                 <img
                   src="/assets/images/music1.jpg"
@@ -370,16 +490,24 @@ const HomePage = () => {
                   <i className="fas fa-music feature-icon mb-2" />
                   <h4 className="card-title">Music Ministry</h4>
                   <p className="card-text">
-                    Leading and ministering worship through Choir, Band, Instrumentalism and Praise &amp; Worship.
+                    Leading and ministering worship through Choir, Band,
+                    Instrumentalism and Praise &amp; Worship.
                   </p>
-                  <Link to="/ministries" className="btn btn-primary btn-sm mt-2">
+                  <Link
+                    to="/ministries"
+                    className="btn btn-primary btn-sm mt-2"
+                  >
                     Learn More
                   </Link>
                 </div>
               </div>
             </div>
             {/* Bible Study */}
-            <div className="col-md-6 col-lg-3 mb-4" data-aos="zoom-in" data-aos-delay="200">
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="200"
+            >
               <div className="card ministry-card h-100 shadow-sm">
                 <img
                   src="/assets/images/bs1.jpg"
@@ -390,16 +518,24 @@ const HomePage = () => {
                   <i className="fas fa-book-open feature-icon mb-2" />
                   <h4 className="card-title">Bible Study &amp; Discipleship</h4>
                   <p className="card-text">
-                    Deepening faith through small groups, nurturing classes for new believers, and resourceful training programs.
+                    Deepening faith through small groups, nurturing classes for
+                    new believers, and resourceful training programs.
                   </p>
-                  <Link to="/ministries" className="btn btn-primary btn-sm mt-2">
+                  <Link
+                    to="/ministries"
+                    className="btn btn-primary btn-sm mt-2"
+                  >
                     Learn More
                   </Link>
                 </div>
               </div>
             </div>
             {/* Missions & Evangelism */}
-            <div className="col-md-6 col-lg-3 mb-4" data-aos="zoom-in" data-aos-delay="300">
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="300"
+            >
               <div className="card ministry-card h-100 shadow-sm">
                 <img
                   src="/assets/images/mission1.jpg"
@@ -410,17 +546,25 @@ const HomePage = () => {
                   <i className="fas fa-globe feature-icon mb-2" />
                   <h4 className="card-title">Missions &amp; Evangelism</h4>
                   <p className="card-text">
-                    Sharing the Gospel through campus outreach, annual missions, and hope ministry visits to children&apos;s homes,
-                    prisons and hospitals.
+                    Sharing the Gospel through campus outreach, annual missions,
+                    and hope ministry visits to children&apos;s homes, prisons
+                    and hospitals.
                   </p>
-                  <Link to="/ministries" className="btn btn-primary btn-sm mt-2">
+                  <Link
+                    to="/ministries"
+                    className="btn btn-primary btn-sm mt-2"
+                  >
                     Learn More
                   </Link>
                 </div>
               </div>
             </div>
             {/* Creative Ministry */}
-            <div className="col-md-6 col-lg-3 mb-4" data-aos="zoom-in" data-aos-delay="400">
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="400"
+            >
               <div className="card ministry-card h-100 shadow-sm">
                 <img
                   src="/assets/images/dance3.jpg"
@@ -431,16 +575,24 @@ const HomePage = () => {
                   <i className="fas fa-paint-brush feature-icon mb-2" />
                   <h4 className="card-title">Creative Ministry</h4>
                   <p className="card-text">
-                    Expressing faith through drama, dance, spoken word, modelling and other artistic talents.
+                    Expressing faith through drama, dance, spoken word,
+                    modelling and other artistic talents.
                   </p>
-                  <Link to="/ministries" className="btn btn-primary btn-sm mt-2">
+                  <Link
+                    to="/ministries"
+                    className="btn btn-primary btn-sm mt-2"
+                  >
                     Learn More
                   </Link>
                 </div>
               </div>
             </div>
           </div>
-          <div className="text-center mt-4" data-aos="zoom-in" data-aos-delay="500">
+          <div
+            className="text-center mt-4"
+            data-aos="zoom-in"
+            data-aos-delay="500"
+          >
             <Link to="/ministries" className="btn btn-secondary btn-lg">
               View All Ministries <i className="fas fa-arrow-right ms-2" />
             </Link>
@@ -452,10 +604,16 @@ const HomePage = () => {
       <section className="events-section py-5 bg-light" data-aos="fade-up">
         <div className="container">
           <h2 className="section-title text-center">Upcoming Events</h2>
-          <p className="text-center lead mb-5">Join us for worship, fellowship, and outreach!</p>
+          <p className="text-center lead mb-5">
+            Join us for worship, fellowship, and outreach!
+          </p>
           <div className="row justify-content-center">
             {/* Event cards replicated from original HTML; links now go to /events */}
-            <div className="col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
+            <div
+              className="col-md-6 col-lg-4 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
               <div className="card event-card h-100 shadow-sm">
                 <img
                   src="/assets/images/church1.jpg"
@@ -472,7 +630,9 @@ const HomePage = () => {
                     <i className="far fa-clock me-2" />
                     <strong>Time:</strong> 7:00 PM - 9:30 PM
                   </p>
-                  <p className="card-text">Join us for a night of intercession and spiritual revival.</p>
+                  <p className="card-text">
+                    Join us for a night of intercession and spiritual revival.
+                  </p>
                   <Link to="/events" className="btn btn-primary btn-sm mt-2">
                     Details &amp; RSVP
                   </Link>
@@ -480,7 +640,11 @@ const HomePage = () => {
               </div>
             </div>
 
-            <div className="col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+            <div
+              className="col-md-6 col-lg-4 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="200"
+            >
               <div className="card event-card h-100 shadow-sm">
                 <img
                   src="/assets/images/Dance1.jpg"
@@ -498,7 +662,8 @@ const HomePage = () => {
                     <strong>Time:</strong> 7:00 PM - 9:30 PM
                   </p>
                   <p className="card-text">
-                    Celebrate our God through our Music Ministry in a lively evening of praise and worship.
+                    Celebrate our God through our Music Ministry in a lively
+                    evening of praise and worship.
                   </p>
                   <Link to="/events" className="btn btn-primary btn-sm mt-2">
                     Details &amp; RSVP
@@ -507,7 +672,11 @@ const HomePage = () => {
               </div>
             </div>
 
-            <div className="col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
+            <div
+              className="col-md-6 col-lg-4 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="300"
+            >
               <div className="card event-card h-100 shadow-sm">
                 <img
                   src="/assets/images/final poster.png"
@@ -525,8 +694,9 @@ const HomePage = () => {
                     <strong>Time:</strong> 8:00 PM - 5:30 AM
                   </p>
                   <p className="card-text">
-                    Experience a night full of creativity on the theme Ashes to Beauty though special ministrations and
-                    performance by our Creative Arts Ministry (CREAM).
+                    Experience a night full of creativity on the theme Ashes to
+                    Beauty though special ministrations and performance by our
+                    Creative Arts Ministry (CREAM).
                   </p>
                   <Link to="/events" className="btn btn-primary btn-sm mt-2">
                     Details &amp; RSVP
@@ -535,7 +705,11 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-          <div className="text-center mt-4" data-aos="zoom-in" data-aos-delay="400">
+          <div
+            className="text-center mt-4"
+            data-aos="zoom-in"
+            data-aos-delay="400"
+          >
             <Link to="/events" className="btn btn-secondary btn-lg">
               View All Events <i className="fas fa-arrow-right ms-2" />
             </Link>
@@ -548,10 +722,15 @@ const HomePage = () => {
         <div className="container">
           <h2 className="section-title text-center">Need Prayers?</h2>
           <p className="text-center lead mb-5">
-            Our Prayer Ministry is here to support you in faith and intercession. Submit your requests confidentially.
+            Our Prayer Ministry is here to support you in faith and
+            intercession. Submit your requests confidentially.
           </p>
           <div className="row justify-content-center">
-            <div className="col-md-8 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div
+              className="col-md-8 col-lg-6"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
               <form
                 className="p-4 rounded-3 shadow-lg"
                 onSubmit={handlePrayerSubmit}
@@ -578,7 +757,7 @@ const HomePage = () => {
                     Prayer Request <span className="text-danger">*</span>
                   </label>
                   <textarea
-                    className={`form-control${prayerError ? ' is-invalid' : ''}`}
+                    className={`form-control${prayerError ? " is-invalid" : ""}`}
                     id="prayerRequest"
                     rows={6}
                     placeholder="Share your prayer request here..."
@@ -618,35 +797,51 @@ const HomePage = () => {
           >
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <div className="testimonial-card mx-auto text-center p-4 rounded-3 shadow-sm" data-aos="zoom-in">
+                <div
+                  className="testimonial-card mx-auto text-center p-4 rounded-3 shadow-sm"
+                  data-aos="zoom-in"
+                >
                   <i className="fas fa-quote-left fa-2x mb-3 text-orange" />
                   <p className="lead">
-                    “MUTCU has been my family away from home. The fellowship and discipleship have deepened my faith and helped
-                    me navigate university life.”
+                    “MUTCU has been my family away from home. The fellowship and
+                    discipleship have deepened my faith and helped me navigate
+                    university life.”
                   </p>
                   <p className="mt-4">
-                    <strong>– Prudence Chepkurui, Computer Science, 4th Year</strong>
+                    <strong>
+                      – Prudence Chepkurui, Computer Science, 4th Year
+                    </strong>
                   </p>
                 </div>
               </div>
               <div className="carousel-item">
-                <div className="testimonial-card mx-auto text-center p-4 rounded-3 shadow-sm" data-aos="zoom-in">
+                <div
+                  className="testimonial-card mx-auto text-center p-4 rounded-3 shadow-sm"
+                  data-aos="zoom-in"
+                >
                   <i className="fas fa-quote-left fa-2x mb-3 text-orange" />
                   <p className="lead">
-                    “The Music Ministry has transformed my worship, teaching me to serve with excellence and passion. It&apos;s truly
+                    “The Music Ministry has transformed my worship, teaching me
+                    to serve with excellence and passion. It&apos;s truly
                     inspiring.”
                   </p>
                   <p className="mt-4">
-                    <strong>– Joseph Mbogo, Electrical Engineering, 2nd Year</strong>
+                    <strong>
+                      – Joseph Mbogo, Electrical Engineering, 2nd Year
+                    </strong>
                   </p>
                 </div>
               </div>
               <div className="carousel-item">
-                <div className="testimonial-card mx-auto text-center p-4 rounded-3 shadow-sm" data-aos="zoom-in">
+                <div
+                  className="testimonial-card mx-auto text-center p-4 rounded-3 shadow-sm"
+                  data-aos="zoom-in"
+                >
                   <i className="fas fa-quote-left fa-2x mb-3 text-orange" />
                   <p className="lead">
-                    “The Missions and Evangelism docket showed me how God uses ordinary students to bring hope and transformation
-                    to communities. It was a life-changing experience.”
+                    “The Missions and Evangelism docket showed me how God uses
+                    ordinary students to bring hope and transformation to
+                    communities. It was a life-changing experience.”
                   </p>
                   <p className="mt-4">
                     <strong>– Grace Akinyi, Medical Lab, 2nd Year</strong>
@@ -686,7 +881,11 @@ const HomePage = () => {
             Moments from our fellowship, events, and outreach activities.
           </p>
           <div className="row justify-content-center">
-            <div className="col-md-6 col-lg-3 mb-4" data-aos="zoom-in" data-aos-delay="100">
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
               <Link
                 to="/gallery"
                 className="gallery-item d-block rounded shadow-sm overflow-hidden"
@@ -703,7 +902,11 @@ const HomePage = () => {
                 </div>
               </Link>
             </div>
-            <div className="col-md-6 col-lg-3 mb-4" data-aos="zoom-in" data-aos-delay="200">
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="200"
+            >
               <Link
                 to="/gallery"
                 className="gallery-item d-block rounded shadow-sm overflow-hidden"
@@ -720,7 +923,11 @@ const HomePage = () => {
                 </div>
               </Link>
             </div>
-            <div className="col-md-6 col-lg-3 mb-4" data-aos="zoom-in" data-aos-delay="300">
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="300"
+            >
               <Link
                 to="/gallery"
                 className="gallery-item d-block rounded shadow-sm overflow-hidden"
@@ -737,7 +944,11 @@ const HomePage = () => {
                 </div>
               </Link>
             </div>
-            <div className="col-md-6 col-lg-3 mb-4" data-aos="zoom-in" data-aos-delay="400">
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="400"
+            >
               <Link
                 to="/gallery"
                 className="gallery-item d-block rounded shadow-sm overflow-hidden"
@@ -755,7 +966,11 @@ const HomePage = () => {
               </Link>
             </div>
           </div>
-          <div className="text-center mt-4" data-aos="zoom-in" data-aos-delay="500">
+          <div
+            className="text-center mt-4"
+            data-aos="zoom-in"
+            data-aos-delay="500"
+          >
             <Link to="/gallery" className="btn btn-secondary btn-lg">
               View Full Gallery <i className="fas fa-images ms-2" />
             </Link>
@@ -764,14 +979,22 @@ const HomePage = () => {
       </section>
 
       {/* Newsletter Signup */}
-      <section className="newsletter-section py-5 bg-gradient" data-aos="fade-up">
+      <section
+        className="newsletter-section py-5 bg-gradient"
+        data-aos="fade-up"
+      >
         <div className="container">
           <h2 className="section-title text-center text">Stay Connected</h2>
           <p className="text-center lead mb-5 text-50">
-            Subscribe to our newsletter for updates on events, devotionals, and ministry opportunities.
+            Subscribe to our newsletter for updates on events, devotionals, and
+            ministry opportunities.
           </p>
           <div className="row justify-content-center">
-            <div className="col-md-8 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div
+              className="col-md-8 col-lg-6"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
               <form
                 className="p-4 rounded-3 shadow-lg"
                 onSubmit={handleNewsletterSubmit}
@@ -783,7 +1006,7 @@ const HomePage = () => {
                   </label>
                   <input
                     type="email"
-                    className={`form-control${newsletterError ? ' is-invalid' : ''}`}
+                    className={`form-control${newsletterError ? " is-invalid" : ""}`}
                     id="newsletterEmail"
                     placeholder="your.email@example.com"
                     required
@@ -807,9 +1030,13 @@ const HomePage = () => {
         </div>
       </section>
 
-      <ConfirmationModal isOpen={isModalOpen} message={modalMessage ?? ''} onClose={closeModal} />
+      <ConfirmationModal
+        isOpen={isModalOpen}
+        message={modalMessage ?? ""}
+        onClose={closeModal}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

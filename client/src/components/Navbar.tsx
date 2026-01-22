@@ -1,30 +1,34 @@
-import { NavLink } from 'react-router-dom'
-import { useNavbarScroll } from '../hooks/useNavbarScroll'
-import logo from '../assets/mut/images/best logo.png'
+import { NavLink } from "react-router-dom";
+import { useNavbarScroll } from "../hooks/useNavbarScroll";
+import logo from "../assets/mut/images/best logo.png";
 
 const Navbar = () => {
-  const isScrolled = useNavbarScroll(50)
+  const isScrolled = useNavbarScroll(50);
 
-  const navLinkClass = ({ isActive }: { isActive: boolean }) => 
-    `nav-link px-2 fw-semibold transition-all ${isActive ? 'active-link' : 'text-nav-idle'}`
+  const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+    `nav-link px-2 fw-semibold transition-all ${isActive ? "active-link" : "text-nav-idle"}`;
 
   return (
-    <nav 
+    <nav
       className={`navbar navbar-expand-lg fixed-top transition-all ${
-        isScrolled ? 'navbar-scrolled' : 'navbar-at-top'
-      }`} 
+        isScrolled ? "navbar-scrolled" : "navbar-at-top"
+      }`}
       aria-label="Main navigation"
     >
-      <div className="container-fluid px-lg-5"> {/* Using container-fluid for more horizontal room */}
-        <NavLink className="navbar-brand d-flex align-items-center me-auto" to="/">
-          <img 
-            src={logo} 
-            alt="MUTCU Logo" 
-            height={isScrolled ? 40 : 50} 
-            className="transition-all" 
+      <div className="container-fluid px-lg-5">
+        {" "}
+        {/* Using container-fluid for more horizontal room */}
+        <NavLink
+          className="navbar-brand d-flex align-items-center me-auto"
+          to="/"
+        >
+          <img
+            src={logo}
+            alt="MUTCU Logo"
+            height={isScrolled ? 40 : 50}
+            className="transition-all"
           />
         </NavLink>
-
         <button
           className="navbar-toggler border-0 shadow-none custom-toggler"
           type="button"
@@ -36,36 +40,35 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon" />
         </button>
-
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto align-items-lg-center">
             {[
-              { path: '/', label: 'Home', end: true },
-              { path: '/about', label: 'About', end: false },
-              { path: '/ministries', label: 'Ministries', end: false },
-              { path: '/events', label: 'Events', end: false },
-              { path: '/blogs', label: 'Blog', end: false },
-              { path: '/resources', label: 'Resources', end: false },
-              { path: '/gallery', label: 'Gallery', end: false },
-              { path: '/contact', label: 'Contact', end: false },
+              { path: "/", label: "Home", end: true },
+              { path: "/about", label: "About", end: false },
+              { path: "/ministries", label: "Ministries", end: false },
+              { path: "/events", label: "Events", end: false },
+              { path: "/blogs", label: "Blog", end: false },
+              { path: "/resources", label: "Resources", end: false },
+              { path: "/gallery", label: "Gallery", end: false },
+              { path: "/contact", label: "Contact", end: false },
             ].map((link) => (
               <li className="nav-item" key={link.path}>
-                <NavLink 
-                  end={link.end} 
-                  to={link.path} 
+                <NavLink
+                  end={link.end}
+                  to={link.path}
                   className={navLinkClass}
-                  style={{ fontSize: '0.92rem' }} // Slightly smaller font for better fit
+                  style={{ fontSize: "0.92rem" }} // Slightly smaller font for better fit
                 >
                   {link.label}
                 </NavLink>
               </li>
             ))}
-            
+
             <li className="nav-item ms-lg-2 mt-3 mt-lg-0">
-              <NavLink 
-                to="/admin/login" 
+              <NavLink
+                to="/admin/login"
                 className="btn btn-admin px-3 py-1.5 rounded-pill shadow-sm fw-bold d-inline-flex align-items-center"
-                style={{ fontSize: '0.85rem' }}
+                style={{ fontSize: "0.85rem" }}
               >
                 <i className="fas fa-user-shield me-1"></i>
                 <span>CU Portal</span>
@@ -132,7 +135,7 @@ const Navbar = () => {
         }
       `}</style>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

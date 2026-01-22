@@ -17,9 +17,7 @@ const PrayerCoordinatorPage = () => {
           data-aos-duration="1000"
         >
           <h1 className="display-3 mb-3">Prayer Ministry</h1>
-          <p className="lead">
-            Cultivating a Deep Culture of Prayer
-          </p>
+          <p className="lead">Cultivating a Deep Culture of Prayer</p>
         </div>
       </section>
 
@@ -43,23 +41,20 @@ const PrayerCoordinatorPage = () => {
               </div>
             </div>
 
-            <div
-              className="col-lg-8"
-              data-aos="fade-left"
-              data-aos-delay="200"
-            >
+            <div className="col-lg-8" data-aos="fade-left" data-aos-delay="200">
               <h3 className="section-title text-start">
                 About the Prayer Ministry
               </h3>
               <p>
-                The Prayer Ministry is the spiritual backbone of MUTCU, dedicated
-                to building a strong culture of intercession, worship, and
-                dependence on God.
+                The Prayer Ministry is the spiritual backbone of MUTCU,
+                dedicated to building a strong culture of intercession, worship,
+                and dependence on God.
               </p>
               <p>
-                Under the leadership of Martha Thuku, the ministry organizes prayer
-                gatherings, keshas, chains, and special seasons of fasting and
-                intercession for the Union, the university, and the nation.
+                Under the leadership of Martha Thuku, the ministry organizes
+                prayer gatherings, keshas, chains, and special seasons of
+                fasting and intercession for the Union, the university, and the
+                nation.
               </p>
             </div>
           </div>
@@ -104,24 +99,16 @@ const PrayerCoordinatorPage = () => {
       {/* CTA Section */}
       <section className="py-5 cta-section text-white">
         <div className="container text-center" data-aos="zoom-in">
-          <h2 className="section-title text-white">
-            Stand in the Gap!
-          </h2>
+          <h2 className="section-title text-white">Stand in the Gap!</h2>
           <p className="section-subtitle">
             Join the Prayer Ministry and help cover MUTCU in intercession.
           </p>
 
-          <Link
-            to="/ministries"
-            className="btn btn-primary btn-lg me-3"
-          >
+          <Link to="/ministries" className="btn btn-primary btn-lg me-3">
             Explore Ministries <i className="fas fa-users-cog ms-2" />
           </Link>
 
-          <Link
-            to="/contact"
-            className="btn btn-secondary btn-lg"
-          >
+          <Link to="/contact" className="btn btn-secondary btn-lg">
             Contact Us <i className="fas fa-envelope ms-2" />
           </Link>
         </div>

@@ -6,7 +6,8 @@
 
 **Problem**: Images showing as broken or 404 errors in console
 
-**Solution**: 
+**Solution**:
+
 - Images should be in `public/assets/images/`
 - Reference them as `/assets/images/filename.jpg` in components
 - ✅ Images have been copied to `public/assets/images/`
@@ -16,6 +17,7 @@
 **Problem**: Styles not loading
 
 **Solution**:
+
 - CSS files are imported from `src/assets/mut/css/`
 - These are processed by Vite and should work
 - If issues persist, check import paths in components
@@ -25,6 +27,7 @@
 **Problem**: API calls returning 404
 
 **Causes**:
+
 - Backend server not running
 - Wrong API URL in `.env`
 - CORS issues
@@ -32,10 +35,12 @@
 **Solutions**:
 
 1. **Check Backend is Running**:
+
    ```bash
    cd mut-backend
    npm run dev
    ```
+
    Should see: `Server running on port 5000`
 
 2. **Verify API URL**:
@@ -55,6 +60,7 @@
 **Problem**: React Router showing 404 for routes
 
 **Solution**:
+
 - Check `App.tsx` has all routes defined
 - Verify route paths match navigation links
 - Check for typos in route paths
@@ -64,6 +70,7 @@
 **Problem**: Custom fonts not displaying
 
 **Solution**:
+
 - Fonts are in `src/assets/mut/fonts/`
 - CSS should reference them correctly
 - Check browser console for specific font file 404s
@@ -88,12 +95,14 @@
 ## Common Fixes
 
 ### Fix Image 404s:
+
 ```bash
 # Images should be in public folder
 # Already done: public/assets/images/ contains all images
 ```
 
 ### Fix API 404s:
+
 ```bash
 # 1. Start backend
 cd mut-backend
@@ -109,6 +118,7 @@ npm run dev
 ```
 
 ### Fix CSS 404s:
+
 - CSS files are imported correctly
 - If issues persist, check import statements in components
 
@@ -117,8 +127,6 @@ npm run dev
 1. **Clear Browser Cache**: Hard refresh (Ctrl+Shift+R)
 2. **Restart Dev Servers**: Stop and restart both frontend and backend
 3. **Check File Permissions**: Ensure files are readable
-4. **Verify Ports**: 
+4. **Verify Ports**:
    - Frontend: 5173 (Vite default)
    - Backend: 5000 (check .env)
-
-

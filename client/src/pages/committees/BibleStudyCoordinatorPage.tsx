@@ -19,9 +19,7 @@ const BibleStudyCoordinatorPage = () => {
           <h1 className="display-3 mb-3">
             Bible Study, Discipleship &amp; BEST
           </h1>
-          <p className="lead">
-            Deepening Faith Through God&apos;s Word
-          </p>
+          <p className="lead">Deepening Faith Through God&apos;s Word</p>
         </div>
       </section>
 
@@ -47,11 +45,7 @@ const BibleStudyCoordinatorPage = () => {
               </div>
             </div>
 
-            <div
-              className="col-lg-8"
-              data-aos="fade-left"
-              data-aos-delay="200"
-            >
+            <div className="col-lg-8" data-aos="fade-left" data-aos-delay="200">
               <h3 className="section-title text-start">
                 About the Bible Study, Discipleship &amp; BEST Ministry
               </h3>
@@ -114,25 +108,17 @@ const BibleStudyCoordinatorPage = () => {
       {/* CTA Section */}
       <section className="py-5 cta-section text-white">
         <div className="container text-center" data-aos="zoom-in">
-          <h2 className="section-title text-white">
-            Grow in the Word!
-          </h2>
+          <h2 className="section-title text-white">Grow in the Word!</h2>
           <p className="section-subtitle">
             Join our Bible Study and Discipleship programs and deepen your walk
             with Christ.
           </p>
 
-          <Link
-            to="/ministries"
-            className="btn btn-primary btn-lg me-3"
-          >
+          <Link to="/ministries" className="btn btn-primary btn-lg me-3">
             Explore Ministries <i className="fas fa-users-cog ms-2" />
           </Link>
 
-          <Link
-            to="/contact"
-            className="btn btn-secondary btn-lg"
-          >
+          <Link to="/contact" className="btn btn-secondary btn-lg">
             Contact Us <i className="fas fa-envelope ms-2" />
           </Link>
         </div>

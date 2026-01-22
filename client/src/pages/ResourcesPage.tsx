@@ -1,60 +1,80 @@
-import { useEffect, useState } from 'react'
-import { resourcesAPI } from '../services/api'
+import { useEffect, useState } from "react";
+import { resourcesAPI } from "../services/api";
 
 type ResourceItem = {
-  id?: string
-  title: string
-  description?: string
-  url?: string
-  type?: 'audio' | 'pdf' | 'video' | 'link' // Added for better UX icons
-}
+  id?: string;
+  title: string;
+  description?: string;
+  url?: string;
+  type?: "audio" | "pdf" | "video" | "link"; // Added for better UX icons
+};
 
 const fallbackResources: ResourceItem[] = [
-  { id: '1', title: 'Weekly Sermon 2025-01-01', description: 'Audio download of last Sunday sermon regarding stewardship.', url: '#', type: 'audio' },
-  { id: '2', title: 'Daily Devotional - January', description: 'A month of devotionals to keep you grounded in the Word.', url: '#', type: 'pdf' },
-]
+  {
+    id: "1",
+    title: "Weekly Sermon 2025-01-01",
+    description: "Audio download of last Sunday sermon regarding stewardship.",
+    url: "#",
+    type: "audio",
+  },
+  {
+    id: "2",
+    title: "Daily Devotional - January",
+    description: "A month of devotionals to keep you grounded in the Word.",
+    url: "#",
+    type: "pdf",
+  },
+];
 
 const ResourcesPage = () => {
-  const [resources, setResources] = useState<ResourceItem[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [resources, setResources] = useState<ResourceItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    document.title = 'Resources | MUTCU'
-    let mounted = true
+    document.title = "Resources | MUTCU";
+    let mounted = true;
 
     const load = async () => {
       try {
-        setLoading(true)
-        const res = await resourcesAPI.getAll()
-        const data = res.data || res
+        setLoading(true);
+        const res = await resourcesAPI.getAll();
+        const data = res.data || res;
         if (mounted && Array.isArray(data)) {
-          setResources(data)
+          setResources(data);
         } else if (mounted && data && data.items) {
-          setResources(data.items)
+          setResources(data.items);
         } else if (mounted) {
-          setResources(fallbackResources)
+          setResources(fallbackResources);
         }
       } catch (err: any) {
-        console.error('Resources fetch failed, using fallback:', err)
-        setResources(fallbackResources)
-        setError(null)
+        console.error("Resources fetch failed, using fallback:", err);
+        setResources(fallbackResources);
+        setError(null);
       } finally {
-        if (mounted) setLoading(false)
+        if (mounted) setLoading(false);
       }
-    }
+    };
 
-    load()
-    return () => { mounted = false }
-  }, [])
+    load();
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   // Helper to determine icon based on title or type
   const getResourceIcon = (item: ResourceItem) => {
-    const title = item.title.toLowerCase()
-    if (title.includes('sermon') || title.includes('audio')) return 'fa-headphones'
-    if (title.includes('devotional') || title.includes('pdf') || title.includes('guide')) return 'fa-file-pdf'
-    return 'fa-cloud-download-alt'
-  }
+    const title = item.title.toLowerCase();
+    if (title.includes("sermon") || title.includes("audio"))
+      return "fa-headphones";
+    if (
+      title.includes("devotional") ||
+      title.includes("pdf") ||
+      title.includes("guide")
+    )
+      return "fa-file-pdf";
+    return "fa-cloud-download-alt";
+  };
 
   return (
     <div className="resources-page-wrapper">
@@ -62,9 +82,12 @@ const ResourcesPage = () => {
       <section className="resources-hero">
         <div className="container py-5 text-center">
           <span className="badge-pill mb-3">Library & Media</span>
-          <h1 className="display-4 fw-bold text-white mb-3">Spiritual <span className="text-orange">Resources</span></h1>
+          <h1 className="display-4 fw-bold text-white mb-3">
+            Spiritual <span className="text-orange">Resources</span>
+          </h1>
           <p className="lead text-white-50 mx-auto col-lg-7">
-            Equipping the saints with sermons, devotionals, and study materials to foster growth in Christ.
+            Equipping the saints with sermons, devotionals, and study materials
+            to foster growth in Christ.
           </p>
         </div>
       </section>
@@ -79,7 +102,10 @@ const ResourcesPage = () => {
         )}
 
         {error && (
-          <div className="alert alert-custom d-flex align-items-center mb-5" role="alert">
+          <div
+            className="alert alert-custom d-flex align-items-center mb-5"
+            role="alert"
+          >
             <i className="fas fa-exclamation-circle me-3"></i>
             <div>{error}</div>
           </div>
@@ -90,7 +116,9 @@ const ResourcesPage = () => {
             {resources.length === 0 ? (
               <div className="col-12 text-center py-5 shadow-sm bg-white rounded-4">
                 <i className="fas fa-box-open fa-3x text-muted mb-3"></i>
-                <p className="text-muted fw-medium">No resources are currently available. Check back later!</p>
+                <p className="text-muted fw-medium">
+                  No resources are currently available. Check back later!
+                </p>
               </div>
             ) : (
               resources.map((r) => (
@@ -103,25 +131,29 @@ const ResourcesPage = () => {
                         </div>
                         <h5 className="resource-title mb-0 ms-3">{r.title}</h5>
                       </div>
-                      
+
                       {r.description && (
                         <p className="resource-desc text-muted small flex-grow-1">
                           {r.description}
                         </p>
                       )}
-                      
+
                       <div className="mt-4">
                         {r.url ? (
-                          <a 
-                            className="btn btn-resource w-100 py-2 fw-bold" 
-                            href={r.url} 
-                            target="_blank" 
+                          <a
+                            className="btn btn-resource w-100 py-2 fw-bold"
+                            href={r.url}
+                            target="_blank"
                             rel="noreferrer"
                           >
-                            <i className="fas fa-download me-2"></i> Access Resource
+                            <i className="fas fa-download me-2"></i> Access
+                            Resource
                           </a>
                         ) : (
-                          <button className="btn btn-disabled w-100 py-2" disabled>
+                          <button
+                            className="btn btn-disabled w-100 py-2"
+                            disabled
+                          >
                             Not Available
                           </button>
                         )}
@@ -240,7 +272,7 @@ const ResourcesPage = () => {
         }
       `}</style>
     </div>
-  )
-}
+  );
+};
 
-export default ResourcesPage
+export default ResourcesPage;

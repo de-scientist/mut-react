@@ -1,107 +1,115 @@
-import { useState, useRef, useEffect } from 'react'
-import type { ChangeEvent } from 'react'
-import { uploadImageToCloudinary, getImageUrl } from '../services/cloudinary'
-import '../styles/imageUpload.css'
+import { useState, useRef, useEffect } from "react";
+import type { ChangeEvent } from "react";
+import { uploadImageToCloudinary, getImageUrl } from "../services/cloudinary";
+import "../styles/imageUpload.css";
 
 interface ImageUploadProps {
-  value?: string
-  onChange: (imageUrl: string) => void
-  label?: string
-  required?: boolean
-  className?: string
-  previewClassName?: string
-  maxSizeMB?: number
-  acceptedFormats?: string[]
+  value?: string;
+  onChange: (imageUrl: string) => void;
+  label?: string;
+  required?: boolean;
+  className?: string;
+  previewClassName?: string;
+  maxSizeMB?: number;
+  acceptedFormats?: string[];
 }
 
 const ImageUpload = ({
   value,
   onChange,
-  label = 'Image',
+  label = "Image",
   required = false,
-  className = '',
-  previewClassName = '',
+  className = "",
+  previewClassName = "",
   maxSizeMB = 10,
-  acceptedFormats = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'],
+  acceptedFormats = [
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "image/webp",
+    "image/gif",
+  ],
 }: ImageUploadProps) => {
-  const [uploading, setUploading] = useState(false)
-  const [uploadProgress, setUploadProgress] = useState(0)
-  const [error, setError] = useState<string | null>(null)
-  const [preview, setPreview] = useState<string | null>(value || null)
-  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [error, setError] = useState<string | null>(null);
+  const [preview, setPreview] = useState<string | null>(value || null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Update preview when value changes externally
   useEffect(() => {
     if (value) {
-      setPreview(value)
+      setPreview(value);
     } else {
-      setPreview(null)
+      setPreview(null);
     }
-  }, [value])
+  }, [value]);
 
   const handleFileSelect = async (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
+    const file = e.target.files?.[0];
+    if (!file) return;
 
     // Validate file type
     if (!acceptedFormats.includes(file.type)) {
-      setError(`Invalid file type. Accepted formats: ${acceptedFormats.join(', ')}`)
-      return
+      setError(
+        `Invalid file type. Accepted formats: ${acceptedFormats.join(", ")}`,
+      );
+      return;
     }
 
     // Validate file size
-    const maxSize = maxSizeMB * 1024 * 1024
+    const maxSize = maxSizeMB * 1024 * 1024;
     if (file.size > maxSize) {
-      setError(`File size must be less than ${maxSizeMB}MB`)
-      return
+      setError(`File size must be less than ${maxSizeMB}MB`);
+      return;
     }
 
     // Clear previous error
-    setError(null)
-    setUploading(true)
-    setUploadProgress(0)
+    setError(null);
+    setUploading(true);
+    setUploadProgress(0);
 
     // Create local preview
-    const reader = new FileReader()
+    const reader = new FileReader();
     reader.onloadend = () => {
-      setPreview(reader.result as string)
-    }
-    reader.readAsDataURL(file)
+      setPreview(reader.result as string);
+    };
+    reader.readAsDataURL(file);
 
     try {
       const response = await uploadImageToCloudinary(file, (progress) => {
-        setUploadProgress(progress)
-      })
+        setUploadProgress(progress);
+      });
 
-      const imageUrl = getImageUrl(response)
-      onChange(imageUrl)
-      setPreview(imageUrl)
-      setError(null)
+      const imageUrl = getImageUrl(response);
+      onChange(imageUrl);
+      setPreview(imageUrl);
+      setError(null);
     } catch (err: any) {
-      setError(err.message || 'Failed to upload image')
-      setPreview(null)
+      setError(err.message || "Failed to upload image");
+      setPreview(null);
       // Reset file input
       if (fileInputRef.current) {
-        fileInputRef.current.value = ''
+        fileInputRef.current.value = "";
       }
     } finally {
-      setUploading(false)
-      setUploadProgress(0)
+      setUploading(false);
+      setUploadProgress(0);
     }
-  }
+  };
 
   const handleRemove = () => {
-    onChange('')
-    setPreview(null)
-    setError(null)
+    onChange("");
+    setPreview(null);
+    setError(null);
     if (fileInputRef.current) {
-      fileInputRef.current.value = ''
+      fileInputRef.current.value = "";
     }
-  }
+  };
 
   const handleClick = () => {
-    fileInputRef.current?.click()
-  }
+    fileInputRef.current?.click();
+  };
 
   return (
     <div className={`image-upload-container ${className}`}>
@@ -120,8 +128,8 @@ const ImageUpload = ({
                 alt="Preview"
                 className={`image-preview ${previewClassName}`}
                 onError={() => {
-                  setError('Failed to load image preview')
-                  setPreview(null)
+                  setError("Failed to load image preview");
+                  setPreview(null);
                 }}
               />
               {uploading && (
@@ -160,34 +168,32 @@ const ImageUpload = ({
               <i className="fas fa-cloud-upload-alt fa-3x text-muted" />
             </div>
             <p className="text-muted mb-2">
-              {uploading ? `Uploading... ${uploadProgress}%` : 'Click to upload image'}
+              {uploading
+                ? `Uploading... ${uploadProgress}%`
+                : "Click to upload image"}
             </p>
             <p className="text-muted small">
               Accepted: JPEG, PNG, WebP, GIF (Max {maxSizeMB}MB)
             </p>
             {uploading && (
-  <div className="mt-2" style={{ width: '100%' }}>
-    <progress
-      className="w-100"
-      value={uploadProgress}
-      max={100}
-      aria-label="Image upload progress"
-    />
-    <div className="text-center small mt-1">
-      {uploadProgress}%
-    </div>
-  </div>
-)}
-
-
+              <div className="mt-2" style={{ width: "100%" }}>
+                <progress
+                  className="w-100"
+                  value={uploadProgress}
+                  max={100}
+                  aria-label="Image upload progress"
+                />
+                <div className="text-center small mt-1">{uploadProgress}%</div>
+              </div>
+            )}
           </div>
         )}
 
         <input
           ref={fileInputRef}
           type="file"
-          title='upload'
-          accept={acceptedFormats.join(',')}
+          title="upload"
+          accept={acceptedFormats.join(",")}
           onChange={handleFileSelect}
           className="d-none"
           disabled={uploading}
@@ -213,8 +219,7 @@ const ImageUpload = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ImageUpload
-
+export default ImageUpload;

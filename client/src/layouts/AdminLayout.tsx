@@ -30,7 +30,10 @@ export const AdminLayout: React.FC<Props> = ({ children }) => {
           <Link to="/admin/events" className="block hover:text-mutcu-orange">
             Events
           </Link>
-          <Link to="/admin/ministry-applications" className="block hover:text-mutcu-orange">
+          <Link
+            to="/admin/ministry-applications"
+            className="block hover:text-mutcu-orange"
+          >
             Ministry Applications
           </Link>
           <Link to="/admin/members" className="block hover:text-mutcu-orange">
@@ -42,10 +45,16 @@ export const AdminLayout: React.FC<Props> = ({ children }) => {
           <Link to="/admin/programs" className="block hover:text-mutcu-orange">
             Programs
           </Link>
-          <Link to="/admin/evaluations" className="block hover:text-mutcu-orange">
+          <Link
+            to="/admin/evaluations"
+            className="block hover:text-mutcu-orange"
+          >
             Evaluations
           </Link>
-          <Link to="/admin/nominations" className="block hover:text-mutcu-orange">
+          <Link
+            to="/admin/nominations"
+            className="block hover:text-mutcu-orange"
+          >
             Nominations
           </Link>
           <Link to="/admin/reports" className="block hover:text-mutcu-orange">

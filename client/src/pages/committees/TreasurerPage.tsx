@@ -16,9 +16,7 @@ const TreasurerPage = () => {
           data-aos="fade-up"
           data-aos-duration="1000"
         >
-          <h1 className="display-3 mb-3">
-            The Treasurer&apos;s Office
-          </h1>
+          <h1 className="display-3 mb-3">The Treasurer&apos;s Office</h1>
           <p className="lead">
             Ensuring Financial Stewardship and Accountability
           </p>
@@ -45,19 +43,24 @@ const TreasurerPage = () => {
               </div>
             </div>
 
-            <div
-              className="col-lg-8"
-              data-aos="fade-left"
-              data-aos-delay="200"
-            >
+            <div className="col-lg-8" data-aos="fade-left" data-aos-delay="200">
               <h3 className="section-title text-start">
                 About the Treasurer&apos;s Office
               </h3>
               <p>
-                The Treasurer&apos;s office is central to MUTCU's financial integrity and sustainability. It is responsible for the diligent management of all Union funds, ensuring strict adherence to financial procedures and policies. This includes overseeing budgets, managing expenditures, and providing transparent financial reports to the Executive Council and members.
+                The Treasurer&apos;s office is central to MUTCU's financial
+                integrity and sustainability. It is responsible for the diligent
+                management of all Union funds, ensuring strict adherence to
+                financial procedures and policies. This includes overseeing
+                budgets, managing expenditures, and providing transparent
+                financial reports to the Executive Council and members.
               </p>
               <p>
-                Mercy Mwaura, as Treasurer, ensures the responsible stewardship of members' offerings and Union resources. Her role is critical in maintaining accountability and transparency in all financial matters, enabling MUTCU to effectively fund its ministries and outreach programs.
+                Mercy Mwaura, as Treasurer, ensures the responsible stewardship
+                of members' offerings and Union resources. Her role is critical
+                in maintaining accountability and transparency in all financial
+                matters, enabling MUTCU to effectively fund its ministries and
+                outreach programs.
               </p>
             </div>
           </div>
@@ -102,24 +105,16 @@ const TreasurerPage = () => {
       {/* CTA Section */}
       <section className="py-5 cta-section text-white">
         <div className="container text-center" data-aos="zoom-in">
-          <h2 className="section-title text-white">
-            Explore Our Leadership!
-          </h2>
+          <h2 className="section-title text-white">Explore Our Leadership!</h2>
           <p className="section-subtitle">
             Learn more about the dedicated individuals guiding MUTCU.
           </p>
 
-          <Link
-            to="/about"
-            className="btn btn-primary btn-lg me-3"
-          >
+          <Link to="/about" className="btn btn-primary btn-lg me-3">
             Meet the Team <i className="fas fa-users ms-2" />
           </Link>
 
-          <Link
-            to="/contact"
-            className="btn btn-secondary btn-lg"
-          >
+          <Link to="/contact" className="btn btn-secondary btn-lg">
             Get in Touch <i className="fas fa-envelope ms-2" />
           </Link>
         </div>

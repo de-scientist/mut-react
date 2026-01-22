@@ -16,12 +16,8 @@ const ViceChair1Page = () => {
           data-aos="fade-up"
           data-aos-duration="1000"
         >
-          <h1 className="display-3 mb-3">
-            Office of the 1st Vice Chair
-          </h1>
-          <p className="lead">
-            Supporting Leadership and Union Initiatives
-          </p>
+          <h1 className="display-3 mb-3">Office of the 1st Vice Chair</h1>
+          <p className="lead">Supporting Leadership and Union Initiatives</p>
         </div>
       </section>
 
@@ -45,19 +41,22 @@ const ViceChair1Page = () => {
               </div>
             </div>
 
-            <div
-              className="col-lg-8"
-              data-aos="fade-left"
-              data-aos-delay="200"
-            >
+            <div className="col-lg-8" data-aos="fade-left" data-aos-delay="200">
               <h3 className="section-title text-start">
                 About the 1st Vice Chair&apos;s Office
               </h3>
               <p>
-                The 1st Vice Chair's office plays a crucial supportive role to the Chairman, assisting in the overall leadership and administration of MUTCU.
+                The 1st Vice Chair's office plays a crucial supportive role to
+                the Chairman, assisting in the overall leadership and
+                administration of MUTCU.
               </p>
               <p>
-                Purity Njeri, as 1st Vice Chair, is dedicated to upholding the Union's values and actively contributes to the strategic planning and implementation of activities that build spiritual growth among members. She is also in charge of the Hospitality ministry and Ladies committee, overseeing the nurturing and development of ladies in the Union.
+                Purity Njeri, as 1st Vice Chair, is dedicated to upholding the
+                Union's values and actively contributes to the strategic
+                planning and implementation of activities that build spiritual
+                growth among members. She is also in charge of the Hospitality
+                ministry and Ladies committee, overseeing the nurturing and
+                development of ladies in the Union.
               </p>
             </div>
           </div>
@@ -71,7 +70,8 @@ const ViceChair1Page = () => {
             Key Roles &amp; Responsibilities
           </h2>
           <p className="text-center lead mb-5">
-            The 1st Vice Chair supports the Chairman and oversees key Union functions.
+            The 1st Vice Chair supports the Chairman and oversees key Union
+            functions.
           </p>
 
           <div className="row justify-content-center">
@@ -102,24 +102,16 @@ const ViceChair1Page = () => {
       {/* CTA Section */}
       <section className="py-5 cta-section text-white">
         <div className="container text-center" data-aos="zoom-in">
-          <h2 className="section-title text-white">
-            Explore Our Leadership!
-          </h2>
+          <h2 className="section-title text-white">Explore Our Leadership!</h2>
           <p className="section-subtitle">
             Learn more about the dedicated individuals guiding MUTCU.
           </p>
 
-          <Link
-            to="/about"
-            className="btn btn-primary btn-lg me-3"
-          >
+          <Link to="/about" className="btn btn-primary btn-lg me-3">
             Meet the Team <i className="fas fa-users ms-2" />
           </Link>
 
-          <Link
-            to="/contact"
-            className="btn btn-secondary btn-lg"
-          >
+          <Link to="/contact" className="btn btn-secondary btn-lg">
             Get in Touch <i className="fas fa-envelope ms-2" />
           </Link>
         </div>

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { adminAPI } from '../services/api'
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { adminAPI } from "../services/api";
 import {
   Users,
   Calendar,
@@ -15,7 +15,7 @@ import {
   AlertCircle,
   FolderOpen,
   Image,
-} from 'lucide-react'
+} from "lucide-react";
 import {
   BarChart,
   Bar,
@@ -27,62 +27,62 @@ import {
   Pie,
   Cell,
   CartesianGrid,
-} from 'recharts'
-import '../assets/mut/css/about.css'
+} from "recharts";
+import "../assets/mut/css/about.css";
 
 interface DashboardStats {
-  users: number
-  events: number
-  ministries: number
-  prayerRequests: number
-  pendingPrayerRequests: number
-  contacts: number
-  newContacts: number
-  subscriptions: number
-  members: number
-  pendingMembers: number
-  resources?: number
-  media?: number
-  blogs?: number
-  publishedBlogs?: number
+  users: number;
+  events: number;
+  ministries: number;
+  prayerRequests: number;
+  pendingPrayerRequests: number;
+  contacts: number;
+  newContacts: number;
+  subscriptions: number;
+  members: number;
+  pendingMembers: number;
+  resources?: number;
+  media?: number;
+  blogs?: number;
+  publishedBlogs?: number;
 }
 
 const AdminDashboard = () => {
-  const [stats, setStats] = useState<DashboardStats | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const navigate = useNavigate()
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     if (!token) {
-      navigate('/admin/login')
-      return
+      navigate("/admin/login");
+      return;
     }
-    fetchStats()
-  }, [navigate])
+    fetchStats();
+  }, [navigate]);
 
   const fetchStats = async () => {
     try {
-      setLoading(true)
-      const response = await adminAPI.getDashboardStats()
-      setStats(response.data || response)
+      setLoading(true);
+      const response = await adminAPI.getDashboardStats();
+      setStats(response.data || response);
     } catch (err: any) {
       if (err.status === 401 || err.status === 403) {
-        localStorage.removeItem('token')
-        navigate('/admin/login')
-        return
+        localStorage.removeItem("token");
+        navigate("/admin/login");
+        return;
       }
-      setError(err.message || 'Failed to load dashboard')
+      setError(err.message || "Failed to load dashboard");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
-    navigate('/')
-  }
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
   if (loading) {
     return (
@@ -90,12 +90,12 @@ const AdminDashboard = () => {
         <div className="text-center">
           <div
             className="spinner-grow text-primary mb-3"
-            style={{ width: '3rem', height: '3rem' }}
+            style={{ width: "3rem", height: "3rem" }}
           />
           <p className="text-muted fw-bold">Synchronizing Data...</p>
         </div>
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -109,33 +109,37 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
-  if (!stats) return null
+  if (!stats) return null;
 
   const barData = [
-    { name: 'Users', value: stats.users },
-    { name: 'Events', value: stats.events },
-    { name: 'Ministries', value: stats.ministries },
-    { name: 'Prayers', value: stats.prayerRequests },
-    { name: 'Contacts', value: stats.contacts },
-    { name: 'Subscribers', value: stats.subscriptions },
-    { name: 'Members', value: stats.members },
-    ...(stats.blogs !== undefined ? [{ name: 'Blogs', value: stats.blogs }] : []),
-    ...(stats.resources !== undefined
-      ? [{ name: 'Resources', value: stats.resources }]
+    { name: "Users", value: stats.users },
+    { name: "Events", value: stats.events },
+    { name: "Ministries", value: stats.ministries },
+    { name: "Prayers", value: stats.prayerRequests },
+    { name: "Contacts", value: stats.contacts },
+    { name: "Subscribers", value: stats.subscriptions },
+    { name: "Members", value: stats.members },
+    ...(stats.blogs !== undefined
+      ? [{ name: "Blogs", value: stats.blogs }]
       : []),
-    ...(stats.media !== undefined ? [{ name: 'Media', value: stats.media }] : []),
-  ]
+    ...(stats.resources !== undefined
+      ? [{ name: "Resources", value: stats.resources }]
+      : []),
+    ...(stats.media !== undefined
+      ? [{ name: "Media", value: stats.media }]
+      : []),
+  ];
 
   const pieData = [
-    { name: 'Pending Prayers', value: stats.pendingPrayerRequests },
-    { name: 'New Contacts', value: stats.newContacts },
-    { name: 'Pending Members', value: stats.pendingMembers },
-  ]
+    { name: "Pending Prayers", value: stats.pendingPrayerRequests },
+    { name: "New Contacts", value: stats.newContacts },
+    { name: "Pending Members", value: stats.pendingMembers },
+  ];
 
-  const COLORS = ['#6366f1', '#f59e0b', '#ef4444']
+  const COLORS = ["#6366f1", "#f59e0b", "#ef4444"];
 
   return (
     <div className="admin-dashboard bg-light min-vh-100 pb-5">
@@ -183,16 +187,66 @@ const AdminDashboard = () => {
         <section className="mb-5">
           <div className="row g-3">
             {[
-              { label: 'Events', icon: <Calendar />, link: '/admin/events', color: '#6366f1' },
-              { label: 'Ministries', icon: <Church />, link: '/admin/ministries', color: '#8b5cf6' },
-              { label: 'Prayers', icon: <Heart />, link: '/admin/prayer-requests', color: '#ec4899' },
-              { label: 'Contacts', icon: <Send />, link: '/admin/contacts', color: '#06b6d4' },
-              { label: 'Newsletter', icon: <Mail />, link: '/admin/newsletter', color: '#10b981' },
-              { label: 'Users', icon: <Users />, link: '/admin/users', color: '#4f46e5' },
-              { label: 'Blogs', icon: <FolderOpen />, link: '/admin/blogs', color: '#f97316' },
-              { label: 'Members', icon: <UserPlus />, link: '/admin/members', color: '#f59e0b' },
-              { label: 'Resources', icon: <FolderOpen />, link: '/admin/resources', color: '#0ea5e9' },
-              { label: 'Media', icon: <Image />, link: '/admin/media', color: '#f97316' },
+              {
+                label: "Events",
+                icon: <Calendar />,
+                link: "/admin/events",
+                color: "#6366f1",
+              },
+              {
+                label: "Ministries",
+                icon: <Church />,
+                link: "/admin/ministries",
+                color: "#8b5cf6",
+              },
+              {
+                label: "Prayers",
+                icon: <Heart />,
+                link: "/admin/prayer-requests",
+                color: "#ec4899",
+              },
+              {
+                label: "Contacts",
+                icon: <Send />,
+                link: "/admin/contacts",
+                color: "#06b6d4",
+              },
+              {
+                label: "Newsletter",
+                icon: <Mail />,
+                link: "/admin/newsletter",
+                color: "#10b981",
+              },
+              {
+                label: "Users",
+                icon: <Users />,
+                link: "/admin/users",
+                color: "#4f46e5",
+              },
+              {
+                label: "Blogs",
+                icon: <FolderOpen />,
+                link: "/admin/blogs",
+                color: "#f97316",
+              },
+              {
+                label: "Members",
+                icon: <UserPlus />,
+                link: "/admin/members",
+                color: "#f59e0b",
+              },
+              {
+                label: "Resources",
+                icon: <FolderOpen />,
+                link: "/admin/resources",
+                color: "#0ea5e9",
+              },
+              {
+                label: "Media",
+                icon: <Image />,
+                link: "/admin/media",
+                color: "#f97316",
+              },
             ].map((item, index) => (
               <div key={index} className="col-4 col-md-3 col-lg">
                 <button
@@ -219,14 +273,57 @@ const AdminDashboard = () => {
 
         {/* STAT CARDS */}
         <section className="row g-4 mb-5">
-          <StatCard label="Total Users" value={stats.users} icon={<Users />} link="/admin/users" />
-          <StatCard label="Live Events" value={stats.events} icon={<Calendar />} link="/admin/events" />
-          <StatCard label="Active Ministries" value={stats.ministries} icon={<Church />} link="/admin/ministries" />
-          <StatCard label="Prayer Requests" value={stats.prayerRequests} icon={<Heart />} link="/admin/prayer-requests" />
-          <StatCard label="Pending Prayers" value={stats.pendingPrayerRequests} icon={<Clock />} isAlert link="/admin/prayer-requests?status=PENDING" />
-          <StatCard label="New Contacts" value={stats.newContacts} icon={<Send />} isAlert link="/admin/contacts?status=NEW" />
-          <StatCard label="Active Members" value={stats.members} icon={<UserPlus />} link="/admin/members" />
-          <StatCard label="Pending Members" value={stats.pendingMembers} icon={<AlertCircle />} isAlert link="/admin/members?status=PENDING" />
+          <StatCard
+            label="Total Users"
+            value={stats.users}
+            icon={<Users />}
+            link="/admin/users"
+          />
+          <StatCard
+            label="Live Events"
+            value={stats.events}
+            icon={<Calendar />}
+            link="/admin/events"
+          />
+          <StatCard
+            label="Active Ministries"
+            value={stats.ministries}
+            icon={<Church />}
+            link="/admin/ministries"
+          />
+          <StatCard
+            label="Prayer Requests"
+            value={stats.prayerRequests}
+            icon={<Heart />}
+            link="/admin/prayer-requests"
+          />
+          <StatCard
+            label="Pending Prayers"
+            value={stats.pendingPrayerRequests}
+            icon={<Clock />}
+            isAlert
+            link="/admin/prayer-requests?status=PENDING"
+          />
+          <StatCard
+            label="New Contacts"
+            value={stats.newContacts}
+            icon={<Send />}
+            isAlert
+            link="/admin/contacts?status=NEW"
+          />
+          <StatCard
+            label="Active Members"
+            value={stats.members}
+            icon={<UserPlus />}
+            link="/admin/members"
+          />
+          <StatCard
+            label="Pending Members"
+            value={stats.pendingMembers}
+            icon={<AlertCircle />}
+            isAlert
+            link="/admin/members?status=PENDING"
+          />
           {stats.blogs !== undefined && (
             <StatCard
               label="Blogs (total/published)"
@@ -285,10 +382,7 @@ const AdminDashboard = () => {
                     paddingAngle={8}
                   >
                     {pieData.map((_, index) => (
-                      <Cell
-                        key={index}
-                        fill={COLORS[index % COLORS.length]}
-                      />
+                      <Cell key={index} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
                   <Tooltip />
@@ -299,16 +393,16 @@ const AdminDashboard = () => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};
 
 interface StatCardProps {
-  label: string
-  value: number
-  icon?: any
-  link?: string
-  isAlert?: boolean
-  helperValue?: number
+  label: string;
+  value: number;
+  icon?: any;
+  link?: string;
+  isAlert?: boolean;
+  helperValue?: number;
 }
 
 const StatCard: React.FC<StatCardProps> = ({
@@ -319,7 +413,7 @@ const StatCard: React.FC<StatCardProps> = ({
   isAlert,
   helperValue,
 }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div
@@ -334,7 +428,9 @@ const StatCard: React.FC<StatCardProps> = ({
             </p>
             <h2 className="fw-black mb-1">{value.toLocaleString()}</h2>
             {helperValue !== undefined && (
-              <p className="mb-0 text-muted small">Published: {helperValue.toLocaleString()}</p>
+              <p className="mb-0 text-muted small">
+                Published: {helperValue.toLocaleString()}
+              </p>
             )}
             {link && (
               <span className="text-primary small fw-bold">
@@ -344,7 +440,7 @@ const StatCard: React.FC<StatCardProps> = ({
           </div>
           <div
             className={`p-3 rounded-4 ${
-              isAlert ? 'bg-light-subtle' : 'bg-light'
+              isAlert ? "bg-light-subtle" : "bg-light"
             }`}
           >
             {icon}
@@ -352,7 +448,7 @@ const StatCard: React.FC<StatCardProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AdminDashboard
+export default AdminDashboard;
