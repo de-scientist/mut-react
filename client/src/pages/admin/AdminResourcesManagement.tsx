@@ -249,14 +249,7 @@ ${r.url ? `Link: ${r.url}` : ''}
             </p>
           </div>
           <div className="d-flex gap-2">
-            <button
-              onClick={() => navigate('/admin')}
-              className="btn btn-white border shadow-sm d-flex align-items-center gap-2"
-            >
-              <ArrowLeft size={18} /> Dashboard
-            </button>
-
-<button
+  <button
     onClick={() => navigate('/admin')}
     className="btn btn-white border shadow-sm d-flex align-items-center gap-2"
   >
@@ -277,18 +270,18 @@ ${r.url ? `Link: ${r.url}` : ''}
     <Share2 size={18} /> Share
   </button>
 
+  <button
+    onClick={() => {
+      resetForm()
+      setEditingResource(null)
+      setShowForm(true)
+    }}
+    className="btn btn-primary shadow-sm d-flex align-items-center gap-2"
+  >
+    <Plus size={18} /> Add Resource
+  </button>
+</div>
 
-            <button
-              onClick={() => {
-                resetForm()
-                setEditingResource(null)
-                setShowForm(true)
-              }}
-              className="btn btn-primary shadow-sm d-flex align-items-center gap-2"
-            >
-              <Plus size={18} /> Add Resource
-            </button>
-          </div>
         </div>
 
         {error && (
