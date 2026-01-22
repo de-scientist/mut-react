@@ -180,20 +180,37 @@ const shareContacts = async () => {
             <p className="text-muted mb-0">Manage and respond to platform communications</p>
           </div>
           
-          <div className="d-flex gap-2">
-            <div className="input-group shadow-sm">
-              <span className="input-group-text bg-white border-end-0">
-                <Search size={18} className="text-muted" />
-              </span>
-              <input 
-                type="text" 
-                className="form-control border-start-0 shadow-none" 
-                placeholder="Search inquiries..." 
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-          </div>
+          <div className="d-flex gap-2 flex-wrap">
+  <button
+    className="btn btn-outline-primary btn-sm rounded-pill shadow-sm"
+    onClick={exportContactsCSV}
+    title="Export all contact submissions"
+  >
+    Export CSV
+  </button>
+
+  <button
+    className="btn btn-outline-secondary btn-sm rounded-pill shadow-sm"
+    onClick={shareContacts}
+    title="Share contact submissions"
+  >
+    Share
+  </button>
+
+  <div className="input-group shadow-sm">
+    <span className="input-group-text bg-white border-end-0">
+      <Search size={18} className="text-muted" />
+    </span>
+    <input 
+      type="text" 
+      className="form-control border-start-0 shadow-none" 
+      placeholder="Search inquiries..." 
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+    />
+  </div>
+</div>
+
         </div>
 
         {error && (
