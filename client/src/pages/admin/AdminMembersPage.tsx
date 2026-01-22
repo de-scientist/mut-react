@@ -132,6 +132,23 @@ const exportMembersCSV = () => {
   URL.revokeObjectURL(url)
 }
 
+// Share members data
+const shareMembers = async () => {
+  const text = members
+    .map(m => `${m.name} (${m.email}) - ${m.status}`)
+    .join('\n')
+
+  if (navigator.share) {
+    await navigator.share({
+      title: 'Members List',
+      text
+    })
+  } else {
+    await navigator.clipboard.writeText(text)
+    alert('Members list copied to clipboard')
+  }
+}
+
   return (
     <div className="min-vh-100 bg-light py-4 px-lg-5">
       <div className="container-fluid">
