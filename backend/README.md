@@ -16,12 +16,15 @@ A production-ready Node.js/Express backend with TypeScript and ES modules.
 ## Quick Start
 
 ### 1. Install Dependencies
+
 ```bash
 npm install
 ```
 
 ### 2. Setup Environment
+
 Create a `.env` file:
+
 ```env
 DATABASE_URL="postgresql://user:password@localhost:5432/mutcu_db?schema=public"
 PORT=5000
@@ -34,6 +37,7 @@ ADMIN_PASSWORD=admin123
 ```
 
 ### 3. Setup Database
+
 ```bash
 # Generate Prisma Client
 npm run prisma:generate
@@ -46,6 +50,7 @@ npm run prisma:seed
 ```
 
 ### 4. Start Server
+
 ```bash
 # Development (with auto-reload)
 npm run dev
@@ -57,6 +62,7 @@ npm start
 ## API Endpoints
 
 ### Public Endpoints
+
 - `POST /api/auth/register` - Register user
 - `POST /api/auth/login` - Login
 - `GET /api/events` - Get events
@@ -66,6 +72,7 @@ npm start
 - `POST /api/newsletter/subscribe` - Subscribe to newsletter
 
 ### Protected Endpoints (Require JWT)
+
 - `GET /api/auth/profile` - Get user profile
 - `GET /api/admin/dashboard` - Admin dashboard stats
 - `POST /api/events` - Create event (admin)
@@ -108,6 +115,7 @@ src/
 ## Development
 
 The project uses:
+
 - **tsx** for running TypeScript files directly
 - **nodemon** for auto-reload in development
 - **Prisma** for database management

@@ -1,5 +1,5 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 const {
   getEvents,
   getEvent,
@@ -8,19 +8,29 @@ const {
   deleteEvent,
   createEventSchema,
   updateEventSchema,
-} = require('../modules/events/eventController')
-const { authenticate, requireAdmin } = require('../middlewares/auth')
-const validate = require('../middlewares/validation')
+} = require("../modules/events/eventController");
+const { authenticate, requireAdmin } = require("../middlewares/auth");
+const validate = require("../middlewares/validation");
 
 // Public routes
-router.get('/', getEvents)
-router.get('/:id', getEvent)
+router.get("/", getEvents);
+router.get("/:id", getEvent);
 
 // Admin routes
-router.post('/', authenticate, requireAdmin, validate(createEventSchema), createEvent)
-router.put('/:id', authenticate, requireAdmin, validate(updateEventSchema), updateEvent)
-router.delete('/:id', authenticate, requireAdmin, deleteEvent)
+router.post(
+  "/",
+  authenticate,
+  requireAdmin,
+  validate(createEventSchema),
+  createEvent,
+);
+router.put(
+  "/:id",
+  authenticate,
+  requireAdmin,
+  validate(updateEventSchema),
+  updateEvent,
+);
+router.delete("/:id", authenticate, requireAdmin, deleteEvent);
 
-module.exports = router
-
-
+module.exports = router;

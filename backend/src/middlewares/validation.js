@@ -8,17 +8,15 @@ const validate = (schema) => {
         body: req.body,
         query: req.query,
         params: req.params,
-      })
-      next()
+      });
+      next();
     } catch (error) {
       return res.status(400).json({
-        error: 'Validation error',
+        error: "Validation error",
         details: error.errors,
-      })
+      });
     }
-  }
-}
+  };
+};
 
-module.exports = validate
-
-
+module.exports = validate;

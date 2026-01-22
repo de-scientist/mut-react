@@ -126,6 +126,7 @@ The frontend will run on `http://localhost:5173`
 ## API Endpoints Summary
 
 ### Public Endpoints
+
 - `POST /api/auth/register` - Register user
 - `POST /api/auth/login` - Login
 - `GET /api/events` - Get events
@@ -135,6 +136,7 @@ The frontend will run on `http://localhost:5173`
 - `POST /api/newsletter/subscribe` - Subscribe to newsletter
 
 ### Protected Endpoints (Require Authentication)
+
 - `GET /api/auth/profile` - Get user profile
 - `GET /api/admin/dashboard` - Admin dashboard stats
 - `POST /api/events` - Create event (admin)
@@ -145,15 +147,18 @@ The frontend will run on `http://localhost:5173`
 ## Troubleshooting
 
 ### Database Connection Issues
+
 - Verify PostgreSQL is running
 - Check DATABASE_URL in `.env`
 - Ensure database exists
 
 ### CORS Errors
+
 - Verify FRONTEND_URL in backend `.env` matches frontend URL
 - Check that frontend `.env` has correct VITE_API_URL
 
 ### Port Already in Use
+
 - Change PORT in backend `.env`
 - Update VITE_API_URL in frontend `.env` accordingly
 
@@ -174,5 +179,3 @@ The frontend will run on `http://localhost:5173`
 ## Support
 
 For issues or questions, refer to the README files in each project directory.
-
-

@@ -1,17 +1,16 @@
-import dotenv from 'dotenv'
-import pg from 'pg'
-import { drizzle } from 'drizzle-orm/node-postgres'
+import dotenv from "dotenv";
+import pg from "pg";
+import { drizzle } from "drizzle-orm/node-postgres";
 
-dotenv.config()
+dotenv.config();
 
+const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 
-const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL })
+export const db = drizzle(pool);
+export { pool };
 
-export const db = drizzle(pool)
-export { pool }
+process.on("beforeExit", async () => {
+  await pool.end();
+});
 
-process.on('beforeExit', async () => {
-  await pool.end()
-})
-
-export default db
+export default db;
