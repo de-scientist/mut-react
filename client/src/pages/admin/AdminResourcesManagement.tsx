@@ -11,7 +11,8 @@ import {
   Trash2,
   Power,
   Link as LinkIcon,
-//   FileText,
+  FileText,
+  Share2,
 } from 'lucide-react'
 import '../../styles/adminForms.css'
 
