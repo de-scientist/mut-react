@@ -92,6 +92,46 @@ const AdminMembersPage = () => {
     </div>
   )
 
+  // Export members as CSV
+const exportMembersCSV = () => {
+  if (!members.length) return
+
+  const headers = [
+    'Name',
+    'Email',
+    'Course',
+    'Year',
+    'Ministry 1',
+    'Ministry 2',
+    'Status'
+  ]
+
+  const rows = members.map(m => [
+    m.name,
+    m.email,
+    m.course,
+    m.yearOfStudy,
+    m.ministry1 || '',
+    m.ministry2 || '',
+    m.status
+  ])
+
+  const csvContent =
+    [headers, ...rows]
+      .map(row => row.map(field => `"${String(field).replace(/"/g, '""')}"`).join(','))
+      .join('\n')
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+  const url = URL.createObjectURL(blob)
+
+  const link = document.createElement('a')
+  link.href = url
+  link.download = `members_${new Date().toISOString().split('T')[0]}.csv`
+  link.click()
+
+  URL.revokeObjectURL(url)
+}
+
   return (
     <div className="min-vh-100 bg-light py-4 px-lg-5">
       <div className="container-fluid">
