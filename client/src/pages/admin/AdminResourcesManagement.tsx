@@ -255,6 +255,29 @@ ${r.url ? `Link: ${r.url}` : ''}
             >
               <ArrowLeft size={18} /> Dashboard
             </button>
+
+<button
+    onClick={() => navigate('/admin')}
+    className="btn btn-white border shadow-sm d-flex align-items-center gap-2"
+  >
+    <ArrowLeft size={18} /> Dashboard
+  </button>
+
+  <button
+    onClick={exportResourcesCSV}
+    className="btn btn-outline-secondary shadow-sm d-flex align-items-center gap-2"
+  >
+    <FileText size={18} /> Export
+  </button>
+
+  <button
+    onClick={shareResources}
+    className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2"
+  >
+    <Share2 size={18} /> Share
+  </button>
+
+
             <button
               onClick={() => {
                 resetForm()
