@@ -120,7 +120,7 @@ const AdminResourcesManagement = () => {
     }
   }
 
-  async () => {
+  const handleDelete = async () => {
     if (!selectedResource) return
     try {
       await resourcesAPI.delete(selectedResource.id)
@@ -135,7 +135,7 @@ const AdminResourcesManagement = () => {
     }
   }
 
-   async () => {
+  const handleToggle = async () => {
     if (!selectedResource) return
     try {
       await resourcesAPI.toggle(selectedResource.id)
@@ -425,7 +425,7 @@ const AdminResourcesManagement = () => {
           setSelectedResource(null)
           setAction(null)
         }}
-        // onConfirm={action === 'delete' ? handleDelete : handleToggle}
+        onConfirm={action === 'delete' ? handleDelete : handleToggle}
         title={action === 'delete' ? 'Delete Resource' : 'Change Visibility'}
         message={
           action === 'delete'
@@ -434,6 +434,9 @@ const AdminResourcesManagement = () => {
                 selectedResource?.isActive ? 'hidden' : 'visible'
               } to the public?`
         }
+        confirmText={action === 'delete' ? 'Delete' : 'Update'}
+        cancelText="Cancel"
+        confirmButtonClass={action === 'delete' ? 'btn-danger' : 'btn-warning'}
       />
     </div>
   )

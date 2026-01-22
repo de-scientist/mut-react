@@ -7,6 +7,7 @@ import '../styles/adminForms.css'
 const AdminLogin = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -51,9 +52,9 @@ const AdminLogin = () => {
     <div className="container py-5">
       <div className="row justify-content-center">
         <div className="col-md-6">
-          <div className="card border-0 shadow-sm admin-form-container">
+          <div className="card border-0 shadow-lg admin-form-container">
             <div className="card-header">
-              <h2 className="mb-0">Admin Login</h2>
+              <h3 className="mb-0">🔐 Admin Login</h3>
             </div>
             <div className="card-body">
               {error && <div className="alert alert-danger">{error}</div>}
@@ -71,14 +72,24 @@ const AdminLogin = () => {
                 </div>
                 <div className="mb-3">
                   <label className="form-label">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    title="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
+                  <div className="position-relative">
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      className="form-control"
+                      title="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <button
+                      type="button"
+                      className="btn btn-link position-absolute top-50 end-0 translate-middle-y me-2 text-secondary"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    >
+                      <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`} />
+                    </button>
+                  </div>
                 </div>
                 <div className="d-flex gap-2">
                   <button type="submit" className="btn btn-primary" disabled={loading}>

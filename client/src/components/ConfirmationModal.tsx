@@ -5,10 +5,31 @@ interface ConfirmationModalProps {
   title?: string
   message: ReactNode
   onClose: () => void
+  onConfirm?: () => void
+  confirmText?: string
+  cancelText?: string
+  confirmButtonClass?: string
 }
 
-const ConfirmationModal = ({ isOpen, title = 'Thank You!', message, onClose }: ConfirmationModalProps) => {
+const ConfirmationModal = ({ 
+  isOpen, 
+  title = 'Confirm Action', 
+  message, 
+  onClose,
+  onConfirm,
+  confirmText = 'Confirm',
+  cancelText = 'Cancel',
+  confirmButtonClass = 'btn-danger'
+}: ConfirmationModalProps) => {
   if (!isOpen) return null
+
+  const handleConfirm = () => {
+    if (onConfirm) {
+      onConfirm()
+    } else {
+      onClose()
+    }
+  }
 
   return (
     <>
@@ -20,17 +41,19 @@ const ConfirmationModal = ({ isOpen, title = 'Thank You!', message, onClose }: C
       >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content rounded-3 shadow-lg">
-            <div className="modal-header bg-primary-dark text-white border-0 rounded-top-3">
-              <h5 className="modal-title">{title}</h5>
-              <button type="button" className="btn-close btn-close-white" aria-label="Close" onClick={onClose} />
+            <div className="modal-header bg-white border-0 rounded-top-3">
+              <h5 className="modal-title fw-bold text-dark">{title}</h5>
+              <button type="button" className="btn-close" aria-label="Close" onClick={onClose} />
             </div>
-            <div className="modal-body p-4 text-center">
-              <i className="fas fa-check-circle text-success fa-4x mb-3 animate-pop-in" />
-              <div className="lead">{message}</div>
+            <div className="modal-body p-4">
+              <div className="text-muted">{message}</div>
             </div>
             <div className="modal-footer border-0 rounded-bottom-3">
-              <button type="button" className="btn btn-primary" onClick={onClose}>
-                Close
+              <button type="button" className="btn btn-secondary" onClick={onClose}>
+                {cancelText}
+              </button>
+              <button type="button" className={`btn ${confirmButtonClass}`} onClick={handleConfirm}>
+                {confirmText}
               </button>
             </div>
           </div>

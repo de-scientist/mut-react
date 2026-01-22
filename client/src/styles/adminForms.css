@@ -34,6 +34,20 @@
   letter-spacing: 0.5px;
 }
 
+/* Ensure all headings in card headers are visible */
+.admin-form-container .card-header h1,
+.admin-form-container .card-header h2,
+.admin-form-container .card-header h3,
+.admin-form-container .card-header h4,
+.admin-form-container .card-header h5,
+.admin-form-container .card-header h6 {
+  color: #ffffff !important;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
 .admin-form-container .card-body {
   padding: 2rem;
   background: #ffffff;
@@ -129,7 +143,7 @@
   height: 1.25rem;
   margin-top: 0.25rem;
   border: 2px solid #e0e0e0;
-  cursor: pointer;
+  cursor:default;
   transition: all 0.3s ease;
 }
 
@@ -392,3 +406,82 @@
     width: auto;
     min-width: 140px;
 }
+
+/* Event form readability improvements */
+.admin-event-form {
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+.admin-event-form .form-label {
+  color: var(--mutcu-navy-blue);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.admin-event-form .form-control,
+.admin-event-form .form-select,
+.admin-event-form textarea {
+  background: #ffffff !important;
+  border: 1px solid #dfe3e8 !important;
+  box-shadow: 0 1px 2px rgba(4, 0, 61, 0.06);
+  min-height: 48px;
+  color: var(--mutcu-navy-blue) !important;
+}
+
+.admin-event-form textarea {
+  min-height: 140px;
+}
+
+/* Keep text visible when focusing/unfocusing fields */
+.admin-event-form .form-control:focus,
+.admin-event-form .form-select:focus,
+.admin-event-form textarea:focus {
+  background-color: #ffffff !important;
+  border-color: var(--mutcu-orange) !important;
+  color: var(--mutcu-navy-blue) !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 151, 0, 0.15);
+  outline: none;
+}
+
+/* Ensure autofill text stays readable */
+.admin-event-form .form-control:-webkit-autofill,
+.admin-event-form .form-control:-webkit-autofill:hover,
+.admin-event-form .form-control:-webkit-autofill:focus,
+.admin-event-form .form-control:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+  -webkit-text-fill-color: var(--mutcu-navy-blue) !important;
+  background-color: #ffffff !important;
+  color: var(--mutcu-navy-blue) !important;
+}
+
+/* Softer placeholder for clarity */
+.admin-event-form .form-control::placeholder,
+.admin-event-form textarea::placeholder {
+  color: #adb5bd;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.admin-event-form .form-check-input {
+  width: 3rem;
+  height: 1.6rem;
+  border-radius: 50px;
+  border: 1px solid #cbd5e1;
+  background-color: #e2e8f0;
+}
+
+.admin-event-form .form-check-input:checked {
+  background-color: var(--mutcu-orange);
+  border-color: var(--mutcu-orange);
+}
+
+.admin-event-form .form-check-label {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.admin-event-form .btn {
+  min-height: 44px;
+}
+

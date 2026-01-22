@@ -77,7 +77,7 @@ const EventsManagement = () => {
     }
   }
 
-  async () => {
+  const handleDelete = async () => {
     if (!selectedEvent) return
     try {
       await eventsAPI.delete(selectedEvent.id)
@@ -90,7 +90,7 @@ const EventsManagement = () => {
     }
   }
 
-   async () => {
+  const handleToggleActive = async () => {
     if (!selectedEvent) return
     try {
       await eventsAPI.update(selectedEvent.id, { isActive: !selectedEvent.isActive })
@@ -210,7 +210,7 @@ const EventsManagement = () => {
               <h5 className="mb-0 fw-bold">{editingEvent ? '📝 Edit Event' : '✨ Create New Event'}</h5>
             </div>
             <div className="card-body p-4">
-              <form onSubmit={handleSubmit}>
+              <form className="admin-event-form" onSubmit={handleSubmit}>
                 <div className="row g-4">
                   <div className="col-md-6">
                     <label htmlFor="eventTitle" className="form-label fw-bold small text-uppercase">Title *</label>
@@ -402,23 +402,25 @@ const EventsManagement = () => {
       </div>
 
       <ConfirmationModal
-        // Fixed prop name based on typical Modal libraries, adjust to your specific library if it uses 'isOpen'
         isOpen={showModal} 
         onClose={() => {
           setShowModal(false)
           setSelectedEvent(null)
           setAction(null)
         }}
-        // onConfirm={() => {
-        //   if (action === 'delete') handleDelete()
-        //   else if (action === 'toggle') handleToggleActive()
-        // }}
+        onConfirm={() => {
+          if (action === 'delete') handleDelete()
+          else if (action === 'toggle') handleToggleActive()
+        }}
         title={action === 'delete' ? 'Confirm Deletion' : 'Update Visibility'}
         message={
           action === 'delete'
             ? `Are you absolutely sure you want to delete "${selectedEvent?.title}"? This cannot be undone.`
             : `Do you want to ${selectedEvent?.isActive ? 'hide' : 'show'} "${selectedEvent?.title}" to the public?`
         }
+        confirmText={action === 'delete' ? 'Delete' : 'Update'}
+        cancelText="Cancel"
+        confirmButtonClass={action === 'delete' ? 'btn-danger' : 'btn-warning'}
       />
     </div>
   )

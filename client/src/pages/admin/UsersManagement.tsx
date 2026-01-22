@@ -116,6 +116,18 @@ const UsersManagement = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  const handleDeactivate = async () => {
+    if (!selectedUser) return
+    try {
+      await usersAPI.update(selectedUser.id, { isActive: false })
+      setUsers(users.map(u => u.id === selectedUser.id ? { ...u, isActive: false } : u))
+      setShowModal(false)
+      setSelectedUser(null)
+    } catch (err: any) {
+      setError(err.message || 'Failed to deactivate user')
+    }
+  }
+
   const stats = useMemo(() => ({
     total: users.length,
     admins: users.filter(u => u.role !== 'USER').length,
@@ -192,10 +204,10 @@ const UsersManagement = () => {
 
         {/* Edit Form */}
         {showForm && editingUser && (
-          <div className="card border-0 shadow-lg mb-5 rounded-4 overflow-hidden animate__animated animate__fadeIn">
-            <div className="card-header bg-dark text-white p-4">
+          <div className="card border-0 shadow-lg mb-5 rounded-4 overflow-hidden animate__animated animate__fadeIn admin-form-container">
+            <div className="card-header">
               <h5 className="mb-0 d-flex align-items-center gap-2">
-                <Edit3 size={20} /> Updating Account: {editingUser.email}
+                <Edit3 size={18} />  Updating Account: {editingUser.email}
               </h5>
             </div>
             <div className="card-body p-4">
@@ -342,11 +354,14 @@ const UsersManagement = () => {
       </div>
 
       <ConfirmationModal
-        isOpen={showModal} // Updated to common prop name, or change to what your component expects
+        isOpen={showModal}
         onClose={() => { setShowModal(false); setSelectedUser(null); }}
-        // onConfirm={handleDeactivate}
+        onConfirm={handleDeactivate}
         title="Restrict Account Access"
         message={`Are you sure you want to deactivate the account for "${selectedUser?.email}"? This will prevent them from logging in.`}
+        confirmText="Deactivate"
+        cancelText="Cancel"
+        confirmButtonClass="btn-warning"
         // confirmText="Deactivate User"
         // type="warning"
       />

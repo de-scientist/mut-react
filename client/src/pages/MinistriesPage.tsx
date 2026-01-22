@@ -1,82 +1,109 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ministriesAPI } from '../services/api'
 import '../assets/mut/css/ministries.css'
 
-const ministries = [
+/* OLD APPROACH - HARDCODED DATA (Commented out for developer reference)
+ * This was the original implementation that used a static array.
+ * The problem: Any ministries added through the admin panel wouldn't show up here.
+ * Solution: Fetch data dynamically from the backend API instead.
+ */
+// const ministries = [
+//   {
+//     name: 'Music Ministry',
+//     description: 'Leading and ministering worship through Choir, Band, Instrumentalism and Praise & Worship.',
+//     image: '/assets/images/music1.jpg',
+//     icon: 'fa-music',
+//     link: '/ministries/music-ministry',
+//     delay: 100,
+//   },
+//   {
+//     name: 'Bible Study & Discipleship',
+//     description: 'Deepening faith through small groups, nurturing classes for new believers, and intensive training programs.',
+//     image: '/assets/images/bs1.jpg',
+//     icon: 'fa-book-open',
+//     link: '/ministries/bible-study-discipleship',
+//     delay: 200,
+//   },
+//   ... (and so on for all ministries)
+// ]
+
+/* NEW APPROACH - DYNAMIC DATA FROM DATABASE
+ * Interface matching the Ministry model from the backend database schema.
+ * This ensures type safety when working with API responses.
+ */
+interface Ministry {
+  id: string
+  name: string
+  description?: string
+  icon?: string
+  imageUrl?: string
+  slug: string
+  isActive: boolean
+}
+
+// Legacy fallback ministries to show if API fails or returns empty
+const legacyMinistries: Ministry[] = [
   {
+    id: 'legacy-music',
     name: 'Music Ministry',
-    description: 'Leading and ministering worship through Choir, Band, Instrumentalism and Praise & Worship.',
-    image: '/assets/images/music1.jpg',
+    description: 'Leading worship through choir, band, and praise & worship teams.',
     icon: 'fa-music',
-    link: '/ministries/music-ministry',
-    delay: 100,
+    imageUrl: '/assets/images/music1.jpg',
+    slug: 'music-ministry',
+    isActive: true,
   },
   {
+    id: 'legacy-bible',
     name: 'Bible Study & Discipleship',
-    description: 'Deepening faith through small groups, nurturing classes for new believers, and intensive training programs.',
-    image: '/assets/images/bs1.jpg',
+    description: 'Deepening faith through small groups and discipleship classes.',
     icon: 'fa-book-open',
-    link: '/ministries/bible-study-discipleship',
-    delay: 200,
+    imageUrl: '/assets/images/bs1.jpg',
+    slug: 'bible-study-discipleship',
+    isActive: true,
   },
   {
-    name: 'Missions & Evangelism',
-    description: 'Sharing the Gospel through campus outreach, annual missions, and hope ministry visits to prisons and hospitals.',
-    image: '/assets/images/mission1.jpg',
-    icon: 'fa-globe',
-    link: '/ministries/missions-evangelism',
-    delay: 300,
-  },
-  {
-    name: 'Creative Arts Ministry (CREAM)',
-    description: 'Expressing faith through drama, dance, spoken word, and other artistic talents.',
-    image: '/assets/images/dance3.jpg',
-    icon: 'fa-paint-brush',
-    link: '/ministries/creative-arts',
-    delay: 400,
-  },
-  {
-    name: 'Prayer Ministry',
-    description: 'Cultivating a deep culture of prayer and intercession for the Union, university, and wider community.',
-    image: '/assets/images/church2.jpg',
-    icon: 'fa-pray',
-    link: '/ministries/prayer-ministry',
-    delay: 500,
-  },
-  {
-    name: 'Welfare Committee',
-    description: 'Actively raising funds and providing support to members facing financial and personal difficulties.',
-    image: '/assets/images/prayer1.jpg',
-    icon: 'fa-hand-holding-heart',
-    link: '/ministries/welfare-committee',
-    delay: 600,
-  },
-  {
-    name: 'Hospitality Ministry',
-    description: 'Ensuring a welcoming environment for all members and visitors, managing amenities and visitor care.',
-    image: '/assets/images/tlp.jpg',
-    icon: 'fa-handshake-angle',
-    link: '/ministries/hospitality-ministry',
-    delay: 700,
-  },
-  {
-    name: 'Technical Department',
-    description: 'Providing essential technical support for all Union activities, including sound, Publicity, Ushering and live streaming.',
-    image: '/assets/images/mbbc1.jpg',
-    icon: 'fa-laptop-code',
-    link: '/ministries/technical-department',
-    delay: 800,
-  },
-  {
-    name: 'Resource Mobilisation Committee (RMC)',
-    description: 'Working in conjunction with all other ministries to enhance the transformative gospel through creative and innovative ways of acquiring resources.',
-    image: '/assets/images/prayer1.jpg',
-    icon: 'fa-lightbulb',
-    link: '/ministries/RMC',
-    delay: 900,
+    id: 'legacy-creative',
+    name: 'Creative Arts (CREAM)',
+    description: 'Drama, dance, spoken word, and visual arts for ministry.',
+    icon: 'fa-theater-masks',
+    imageUrl: '/assets/images/creative-arts.jpg',
+    slug: 'creative-arts',
+    isActive: true,
   },
 ]
 
 const MinistriesPage = () => {
+  // State to store ministries fetched from API
+  const [ministries, setMinistries] = useState<Ministry[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  // Fetch ministries from backend on component mount
+  useEffect(() => {
+    const fetchMinistries = async () => {
+      try {
+        setLoading(true)
+        // API call - only fetches active ministries (isActive: true)
+        const response = await ministriesAPI.getAll({ active: 'true' })
+        const items = response.data || []
+        if (items.length === 0) {
+          setMinistries(legacyMinistries)
+          setError('Showing fallback ministries while we fetch live data.')
+        } else {
+          setMinistries(items)
+        }
+      } catch (error: any) {
+        console.error('Failed to load ministries:', error)
+        setError(error?.message || 'Failed to load ministries; showing fallback list.')
+        setMinistries(legacyMinistries)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchMinistries()
+  }, [])
   return (
     <div className="ministries-page">
       {/* Page Hero Section */}
@@ -101,18 +128,14 @@ const MinistriesPage = () => {
             vision, and mission.
           </p>
 
-          <div className="row justify-content-center">
+          {/* OLD RENDERING APPROACH (Commented out for reference)
+            * This used the hardcoded ministries array and mapped over it directly
+            * Problem: Static data didn't reflect database changes
+            */}
+          {/* <div className="row justify-content-center">
             {ministries.map((ministry, index) => (
-              <div
-                key={index}
-                className="col-md-6 col-lg-4 mb-4"
-                data-aos="zoom-in"
-                data-aos-delay={ministry.delay}
-              >
-                <Link
-                  to={ministry.link}
-                  className="ministry-card d-block text-center text-decoration-none rounded-3 shadow-sm h-100"
-                >
+              <div key={index} className="col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay={ministry.delay}>
+                <Link to={ministry.link} className="ministry-card d-block text-center text-decoration-none rounded-3 shadow-sm h-100">
                   <img src={ministry.image} alt={ministry.name} className="img-fluid rounded-top-3" />
                   <div className="card-body">
                     <i className={`fas ${ministry.icon} feature-icon mb-3`} />
@@ -125,7 +148,64 @@ const MinistriesPage = () => {
                 </Link>
               </div>
             ))}
-          </div>
+          </div> */}
+
+          {/* NEW APPROACH - DYNAMIC RENDERING WITH LOADING & ERROR STATES
+            * Shows loading spinner while fetching data
+            * Shows empty state if no ministries found
+            * Dynamically renders ministries from database
+            * Uses ministry.id as key (better than index)
+            * Uses ministry.slug for routing (matches backend)
+            */}
+          {loading ? (
+            <div className="text-center py-5">
+              <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+              <p className="mt-3 text-muted">Loading ministries...</p>
+            </div>
+          ) : (
+            <>
+              {error && (
+                <div className="alert alert-warning" role="alert">
+                  {error}
+                </div>
+              )}
+              {ministries.length === 0 && !error && (
+                <div className="text-center py-5">
+                  <p className="text-muted">No ministries available at the moment.</p>
+                </div>
+              )}
+              {ministries.length > 0 && (
+              <div className="row justify-content-center">
+                {ministries.map((ministry, index) => (
+                  <div
+                    key={ministry.id}
+                    className="col-md-6 col-lg-4 mb-4"
+                    data-aos="zoom-in"
+                    data-aos-delay={index * 100}
+                  >
+                    <Link
+                      to={`/ministries/${ministry.slug}`}
+                      className="ministry-card d-block text-center text-decoration-none rounded-3 shadow-sm h-100"
+                    >
+                      {ministry.imageUrl && (
+                        <img src={ministry.imageUrl} alt={ministry.name} className="img-fluid rounded-top-3" />
+                      )}
+                      <div className="card-body">
+                        <h4 className="card-title">{ministry.name}</h4>
+                        <p className="card-text">{ministry.description || 'Learn more about this ministry'}</p>
+                        <span className="btn btn-sm btn-outline-primary mt-3">
+                          Learn More
+                        </span>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+              )}
+            </>
+          )}
         </div>
       </section>
 
@@ -135,10 +215,10 @@ const MinistriesPage = () => {
           <h2 className="section-title text-white">Find Your Place to Serve!</h2>
           <p className="lead mb-4 text-white-50">There&apos;s a ministry for every passion and gift. Join us in making a difference.</p>
           <Link to="/contact" className="btn btn-primary btn-lg me-3">
-            Get Involved <i className="fas fa-hand-fist ms-2" />
+            Get Involved
           </Link>
           <Link to="/about" className="btn btn-secondary btn-lg">
-            Learn About Leadership <i className="fas fa-users-gear ms-2" />
+            Learn About Leadership
           </Link>
         </div>
       </section>
