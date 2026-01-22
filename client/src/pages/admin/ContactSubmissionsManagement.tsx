@@ -140,7 +140,25 @@ const exportContactsCSV = () => {
   URL.revokeObjectURL(url)
 }
 
+// Share contact submissions
+const shareContacts = async () => {
+  const text = submissions
+    .map(
+      s =>
+        `${s.name} (${s.email})\nSubject: ${s.subject}\nStatus: ${s.status}\n---`
+    )
+    .join('\n')
 
+  if (navigator.share) {
+    await navigator.share({
+      title: 'Contact Submissions',
+      text
+    })
+  } else {
+    await navigator.clipboard.writeText(text)
+    alert('Contact submissions copied to clipboard')
+  }
+}
 
   return (
     <div className="admin-management bg-light min-vh-100 py-4">
