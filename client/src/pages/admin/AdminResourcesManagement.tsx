@@ -211,6 +211,30 @@ const exportResourcesCSV = () => {
   URL.revokeObjectURL(url)
 }
 
+const shareResources = async () => {
+  if (!resources.length) return
+
+  const text = resources
+    .map(r =>
+      `${r.title}
+Type: ${r.type}
+Status: ${r.isActive ? 'Active' : 'Hidden'}
+${r.url ? `Link: ${r.url}` : ''}
+---`
+    )
+    .join('\n')
+
+  if (navigator.share) {
+    await navigator.share({
+      title: 'Resources List',
+      text,
+    })
+  } else {
+    await navigator.clipboard.writeText(text)
+    alert('Resources copied to clipboard')
+  }
+}
+
 
   return (
     <div className="admin-management bg-light min-vh-100 py-5">
