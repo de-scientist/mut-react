@@ -170,6 +170,48 @@ const AdminResourcesManagement = () => {
     )
   }
 
+const exportResourcesCSV = () => {
+  if (!resources.length) return
+
+  const headers = [
+    'Title',
+    'Description',
+    'Type',
+    'URL',
+    'Status',
+    'Created At',
+    'Updated At',
+  ]
+
+  const rows = resources.map(r => [
+    r.title,
+    r.description || '',
+    r.type || '',
+    r.url || '',
+    r.isActive ? 'Active' : 'Hidden',
+    new Date(r.createdAt).toLocaleString(),
+    new Date(r.updatedAt).toLocaleString(),
+  ])
+
+  const csv =
+    [headers, ...rows]
+      .map(row =>
+        row.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')
+      )
+      .join('\n')
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+  const url = URL.createObjectURL(blob)
+
+  const link = document.createElement('a')
+  link.href = url
+  link.download = `resources_${new Date().toISOString().split('T')[0]}.csv`
+  link.click()
+
+  URL.revokeObjectURL(url)
+}
+
+
   return (
     <div className="admin-management bg-light min-vh-100 py-5">
       <div className="container">
