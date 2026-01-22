@@ -167,22 +167,39 @@ const shareMembers = async () => {
             <p className="text-muted mb-0">Review and approve new organization applications</p>
           </div>
           
-          <div className="d-flex gap-3">
-            <div className="input-group shadow-sm" style={{ maxWidth: '300px' }}>
-              <span className="input-group-text bg-white border-end-0">
-                <Search size={18} className="text-muted" />
-              </span>
-              <input 
-                type="text" 
-                className="form-control border-start-0 shadow-none" 
-                placeholder="Search members..."
-                title="Search by name or email"
-                aria-label="Search members"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-          </div>
+          <div className="d-flex gap-2 flex-wrap">
+  <button
+    className="btn btn-outline-primary btn-sm rounded-pill shadow-sm"
+    onClick={exportMembersCSV}
+    title="Export all members"
+  >
+    Export CSV
+  </button>
+
+  <button
+    className="btn btn-outline-secondary btn-sm rounded-pill shadow-sm"
+    onClick={shareMembers}
+    title="Share members list"
+  >
+    Share
+  </button>
+
+  <div className="input-group shadow-sm" style={{ maxWidth: '300px' }}>
+    <span className="input-group-text bg-white border-end-0">
+      <Search size={18} className="text-muted" />
+    </span>
+    <input 
+      type="text" 
+      className="form-control border-start-0 shadow-none" 
+      placeholder="Search members..."
+      title="Search by name or email"
+      aria-label="Search members"
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+    />
+  </div>
+</div>
+
         </div>
 
         {/* Stats Grid */}
