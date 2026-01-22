@@ -301,14 +301,13 @@ const HomePage = () => {
             >
               <h3 className="section-subtitle">Our Mission</h3>
               <p>
-                To raise a family well-equipped in all aspects of life,
-                exemplary to Jesus Christ, by encouraging unity as one body of
-                Christ and reaching out to non-believers within and beyond.
+                Raising a Christ-like family, equipped in all aspects of life, by encouraging unity as one body
+and reaching out to non-believers within our community and beyond.
               </p>
               <h3 className="section-subtitle mt-4">Our Vision</h3>
               <p>
-                To be a model Christian Union cultivating Christ-centeredness
-                among members to impact society.
+                To be a model Christian union that cultivates Christ-centeredness among members to
+positively impact the society.
               </p>
               <Link
                 to="/about"
