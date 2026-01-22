@@ -100,6 +100,48 @@ const ContactSubmissionsManagement = () => {
     )
   }
 
+  // Export contact submissions as CSV
+const exportContactsCSV = () => {
+  if (!submissions.length) return
+
+  const headers = [
+    'Name',
+    'Email',
+    'Subject',
+    'Message',
+    'Status',
+    'Created At'
+  ]
+
+  const rows = submissions.map(s => [
+    s.name,
+    s.email,
+    s.subject,
+    s.message,
+    s.status,
+    new Date(s.createdAt).toLocaleString()
+  ])
+
+  const csvContent =
+    [headers, ...rows]
+      .map(row =>
+        row.map(field => `"${String(field).replace(/"/g, '""')}"`).join(',')
+      )
+      .join('\n')
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+  const url = URL.createObjectURL(blob)
+
+  const link = document.createElement('a')
+  link.href = url
+  link.download = `contact_submissions_${new Date().toISOString().split('T')[0]}.csv`
+  link.click()
+
+  URL.revokeObjectURL(url)
+}
+
+
+
   return (
     <div className="admin-management bg-light min-vh-100 py-4">
       <div className="container">
