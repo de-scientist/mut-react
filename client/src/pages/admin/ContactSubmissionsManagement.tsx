@@ -120,7 +120,22 @@ const ContactSubmissionsManagement = () => {
             <p className="text-muted mb-0">Manage and respond to platform communications</p>
           </div>
           
-          <div className="d-flex gap-2">
+          <div className="d-flex gap-2 flex-wrap">
+  <button
+    className="btn btn-outline-primary btn-sm rounded-pill shadow-sm"
+    onClick={exportMembersCSV}
+    title="Export all members"
+  >
+    Export CSV
+  </button>
+
+  <button
+    className="btn btn-outline-secondary btn-sm rounded-pill shadow-sm"
+    onClick={shareMembers}
+    title="Share members list"
+  >
+    Share
+  </button>
             <div className="input-group shadow-sm">
               <span className="input-group-text bg-white border-end-0">
                 <Search size={18} className="text-muted" />
