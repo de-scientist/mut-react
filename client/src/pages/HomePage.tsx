@@ -17,6 +17,8 @@ const HomePage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState<React.ReactNode>(null);
+  const [pendingPrayerSubmission, setPendingPrayerSubmission] = useState(false);
+
 
   const openModal = (message: React.ReactNode) => {
     setModalMessage(message);
@@ -26,6 +28,7 @@ const HomePage = () => {
   const closeModal = () => {
     setIsModalOpen(false);
     setModalMessage(null);
+    setPendingPrayerSubmission(false);
   };
 
   const handlePrayerSubmit = async (e: FormEvent) => {
@@ -37,6 +40,14 @@ const HomePage = () => {
     }
 
     setPrayerError(false);
+
+    setPendingPrayerSubmission(true);
+    openModal(
+      <p>Are you sure you want to submit this prayer request?</p>
+    );
+  };
+
+  const confirmPrayerSubmit = async () => {
 
     try {
       await prayerAPI.submit({
@@ -54,6 +65,7 @@ const HomePage = () => {
 
       setPrayerName("");
       setPrayerRequest("");
+      setPendingPrayerSubmission(false);
     } catch (error) {
       openModal(
         <p>
@@ -61,6 +73,7 @@ const HomePage = () => {
           again later.
         </p>,
       );
+      setPendingPrayerSubmission(false);
     }
   };
 
@@ -1033,6 +1046,7 @@ positively impact the society.
         isOpen={isModalOpen}
         message={modalMessage ?? ""}
         onClose={closeModal}
+        onConfirm={pendingPrayerSubmission ? confirmPrayerSubmit : undefined}
       />
     </div>
   );
