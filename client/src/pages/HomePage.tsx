@@ -1,1053 +1,307 @@
-import { useState } from "react";
-import type { FormEvent } from "react";
-import { Link } from "react-router-dom";
-import "../assets/mut/css/index.css";
-import ConfirmationModal from "../components/ConfirmationModal";
-import { prayerAPI, newsletterAPI } from "../services/api";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { 
+  Calendar, 
+  Users, 
+  BookOpen, 
+  ArrowRight, 
+  Heart, 
+  ShieldCheck, 
+  Star,
+  Clock,
+  MapPin,
+  Sparkles
+} from 'lucide-react';
 
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Inlined simple AOS-like hook to ensure the file is self-contained and resolves the build error
+const useAnimation = () => {
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
 
-const HomePage = () => {
-  const [prayerName, setPrayerName] = useState("");
-  const [prayerRequest, setPrayerRequest] = useState("");
-  const [prayerError, setPrayerError] = useState(false);
-
-  const [newsletterEmail, setNewsletterEmail] = useState("");
-  const [newsletterError, setNewsletterError] = useState(false);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalMessage, setModalMessage] = useState<React.ReactNode>(null);
-  const [pendingPrayerSubmission, setPendingPrayerSubmission] = useState(false);
-
-
-  const openModal = (message: React.ReactNode) => {
-    setModalMessage(message);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setModalMessage(null);
-    setPendingPrayerSubmission(false);
-  };
-
-  const handlePrayerSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    if (!prayerRequest.trim()) {
-      setPrayerError(true);
-      return;
-    }
-
-    setPrayerError(false);
-
-    setPendingPrayerSubmission(true);
-    openModal(
-      <p>Are you sure you want to submit this prayer request?</p>
-    );
-  };
-
-  const confirmPrayerSubmit = async () => {
-
-    try {
-      await prayerAPI.submit({
-        name: prayerName || undefined,
-        request: prayerRequest,
-        isPublic: false,
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+          entry.target.classList.remove('opacity-0');
+          entry.target.classList.remove('translate-y-10');
+        }
       });
+    }, observerOptions);
 
-      openModal(
-        <p>
-          Thank you for your prayer request! Our Prayer Ministry will intercede
-          for you.
-        </p>,
-      );
+    document.querySelectorAll('[data-animate]').forEach(el => {
+      el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+      observer.observe(el);
+    });
 
-      setPrayerName("");
-      setPrayerRequest("");
-      setPendingPrayerSubmission(false);
-    } catch (error) {
-      openModal(
-        <p>
-          Sorry, there was an error submitting your prayer request. Please try
-          again later.
-        </p>,
-      );
-      setPendingPrayerSubmission(false);
+    return () => observer.disconnect();
+  }, []);
+};
+
+const HomePage: React.FC = () => {
+  useAnimation();
+
+  const features = [
+    {
+      icon: <Users className="w-8 h-8 text-blue-600" />,
+      title: "Vibrant Fellowship",
+      description: "Join a community of believers dedicated to walking the Christian journey together, as outlined in our 2025 Constitution."
+    },
+    {
+      icon: <BookOpen className="w-8 h-8 text-green-600" />,
+      title: "Bible Study",
+      description: "Deepen your understanding of God's Word through our structured discipleship programs every Sunday morning."
+    },
+    {
+      icon: <Heart className="w-8 h-8 text-red-600" />,
+      title: "Passionate Worship",
+      description: "Experience God's presence through our Friday Worship Experiences and Sunday services."
     }
-  };
+  ];
 
-  const handleNewsletterSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    if (!emailPattern.test(newsletterEmail.trim())) {
-      setNewsletterError(true);
-      return;
+  // Updated with exact Jan/Feb 2026 Program Events from uploaded docs
+  const upcomingEvents = [
+    {
+      title: "Theme Launch",
+      date: "Jan 11, 2026",
+      time: "8:00 AM - 11:30 AM",
+      location: "Main Hall (Sunday Service)",
+      speaker: "Chairperson Padri Kihika"
+    },
+    {
+      title: "Worship Experience",
+      date: "Jan 23, 2026",
+      time: "6:30 PM - 9:00 PM",
+      location: "Multipurpose Hall (Friday Service)",
+      speaker: "Music Ministry"
+    },
+    {
+      title: "Defending our Faith",
+      date: "Jan 25, 2026",
+      time: "8:00 AM - 11:30 AM",
+      location: "Main Hall (Sunday Service)",
+      speaker: "Mr. Mwangi Chege"
     }
-
-    setNewsletterError(false);
-
-    try {
-      await newsletterAPI.subscribe(newsletterEmail.trim());
-
-      openModal(
-        <p>
-          Thank you for subscribing to our newsletter! You&apos;ll receive our
-          latest updates directly in your inbox.
-        </p>,
-      );
-
-      setNewsletterEmail("");
-    } catch (error) {
-      openModal(
-        <p>Sorry, there was an error subscribing. Please try again later.</p>,
-      );
-    }
-  };
+  ];
 
   return (
-    <div>
-      {/* Hero Section with Slideshow */}
-      <section className="hero-section">
-        <div
-          id="heroCarousel"
-          className="carousel slide carousel-fade"
-          data-bs-ride="carousel"
-          data-bs-interval="5000"
-        >
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <div
-                className="hero-bg"
-                style={{
-                  backgroundImage:
-                    "url('/assets/images/Lumii_20241023_192938507.jpg')",
-                }}
-              />
-              <div className="hero-overlay" />
-              <div
-                className="hero-content text-center text-white"
-                data-aos="fade-up"
-                data-aos-duration="1000"
-              >
-                <h1
-                  className="display-3 mb-4"
-                  data-aos="zoom-in"
-                  data-aos-delay="200"
-                >
-                  Inspire Love, Hope &amp; Godliness
-                </h1>
-                <p
-                  className="lead mb-5"
-                  data-aos="zoom-in"
-                  data-aos-delay="400"
-                >
-                  Join MUTCU to grow in faith, fellowship, and service at
-                  Murang&apos;a University of Technology.
-                </p>
-                <div data-aos="zoom-in" data-aos-delay="600">
-                  <Link to="/contact" className="btn btn-primary btn-lg me-3">
-                    Join Us <i className="fas fa-hand-point-right ms-2" />
-                  </Link>
-                  <Link to="/resources" className="btn btn-secondary btn-lg">
-                    Watch Live <i className="fas fa-play-circle ms-2" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="carousel-item">
-              <div
-                className="hero-bg"
-                style={{ backgroundImage: "url('/assets/images/exec.jpg')" }}
-              />
-              <div className="hero-overlay" />
-              <div
-                className="hero-content text-center text-white"
-                data-aos="fade-up"
-                data-aos-duration="1000"
-              >
-                <h1
-                  className="display-3 mb-4"
-                  data-aos="zoom-in"
-                  data-aos-delay="200"
-                >
-                  We Are One, We Are MUTCU
-                </h1>
-                <p
-                  className="lead mb-5"
-                  data-aos="zoom-in"
-                  data-aos-delay="400"
-                >
-                  A family united in Christ, reaching out to transform lives
-                  within and beyond.
-                </p>
-                <div data-aos="zoom-in" data-aos-delay="600">
-                  <Link
-                    to="/ministries"
-                    className="btn btn-primary btn-lg me-3"
-                  >
-                    Explore Ministries <i className="fas fa-users-cog ms-2" />
-                  </Link>
-                  <Link to="/events" className="btn btn-secondary btn-lg">
-                    Join an Event <i className="fas fa-calendar-alt ms-2" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="carousel-item">
-              <div
-                className="hero-bg"
-                style={{ backgroundImage: "url('/assets/images/church2.jpg')" }}
-              />
-              <div className="hero-overlay" />
-              <div
-                className="hero-content text-center text-white"
-                data-aos="fade-up"
-                data-aos-duration="1000"
-              >
-                <h1
-                  className="display-3 mb-4"
-                  data-aos="zoom-in"
-                  data-aos-delay="200"
-                >
-                  We Are One, We Are MUTCU
-                </h1>
-                <p
-                  className="lead mb-5"
-                  data-aos="zoom-in"
-                  data-aos-delay="400"
-                >
-                  A family united in Christ, reaching out to transform lives
-                  within and beyond.
-                </p>
-                <div data-aos="zoom-in" data-aos-delay="600">
-                  <Link
-                    to="/ministries"
-                    className="btn btn-primary btn-lg me-3"
-                  >
-                    Explore Ministries <i className="fas fa-users-cog ms-2" />
-                  </Link>
-                  <Link to="/events" className="btn btn-secondary btn-lg">
-                    Join an Event <i className="fas fa-calendar-alt ms-2" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="carousel-item">
-              <div
-                className="hero-bg"
-                style={{ backgroundImage: "url('/assets/images/church3.jpg')" }}
-              />
-              <div className="hero-overlay" />
-              <div
-                className="hero-content text-center text-white"
-                data-aos="fade-up"
-                data-aos-duration="1000"
-              >
-                <h1
-                  className="display-3 mb-4"
-                  data-aos="zoom-in"
-                  data-aos-delay="200"
-                >
-                  Cultivating Christ-Centeredness
-                </h1>
-                <p
-                  className="lead mb-5"
-                  data-aos="zoom-in"
-                  data-aos-delay="400"
-                >
-                  Our vision is to be a model Christian Union impacting society.
-                </p>
-                <div data-aos="zoom-in" data-aos-delay="600">
-                  <Link to="/about" className="btn btn-primary btn-lg me-3">
-                    Our Vision <i className="fas fa-eye ms-2" />
-                  </Link>
-                  <Link to="/gallery" className="btn btn-secondary btn-lg">
-                    View Gallery <i className="fas fa-images ms-2" />
-                  </Link>
-                </div>
-              </div>
-            </div>
+    <div className="overflow-x-hidden font-sans">
+      <style>{`
+        .animate-in {
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+        }
+      `}</style>
+      
+      {/* Hero Section */}
+      <section className="relative h-[90vh] flex items-center justify-center text-white overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-10000 hover:scale-110"
+          style={{ 
+            backgroundImage: "url('/assets/images/church1.jpg')",
+            filter: "brightness(0.35)"
+          }}
+        />
+        <div className="relative z-10 text-center px-4 max-w-4xl" data-animate>
+          <div className="inline-flex items-center gap-2 bg-blue-600/30 backdrop-blur-md px-4 py-1.5 rounded-full border border-blue-400/30 mb-6 text-blue-200 text-sm font-medium">
+            <Sparkles className="w-4 h-4" />
+            2026 Semester Theme Launch
           </div>
-          <button
-            className="carousel-control-prev"
-            type="button"
-            data-bs-target="#heroCarousel"
-            data-bs-slide="prev"
-            aria-label="Previous slide"
-          >
-            <span className="carousel-control-prev-icon" aria-hidden="true" />
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button
-            className="carousel-control-next"
-            type="button"
-            data-bs-target="#heroCarousel"
-            data-bs-slide="next"
-            aria-label="Next slide"
-          >
-            <span className="carousel-control-next-icon" aria-hidden="true" />
-            <span className="visually-hidden">Next</span>
-          </button>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section className="about-section py-5" data-aos="fade-up">
-        <div className="container">
-          <h2 className="section-title text-center">About MUTCU</h2>
-          <p className="text-center lead mb-5">
-            Murang&apos;a University of Technology Christian Union (MUTCU) is a
-            lively, student-led society in MUT. We are affiliated with
-            FOCUS-Kenya, dedicated to inspiring love, hope, and godliness
-            through discipleship, evangelism, mission work, and leadership
-            development.
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+            Murang'a University <br /> 
+            <span className="text-blue-400">Christian Union</span>
+          </h1>
+          <p className="text-xl md:text-2xl mb-8 font-light italic text-gray-200">
+            "Inspire Love, Hope & Godliness"
           </p>
-          <div className="row align-items-center">
-            <div
-              className="col-lg-6 mb-4 mb-lg-0 order-lg-1 order-2"
-              data-aos="fade-right"
-              data-aos-delay="100"
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              to="/register" 
+              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold transition-all transform hover:scale-105 shadow-xl flex items-center justify-center gap-2"
             >
-              <h3 className="section-subtitle">Our Mission</h3>
-              <p>
-                Raising a Christ-like family, equipped in all aspects of life, by encouraging unity as one body
-and reaching out to non-believers within our community and beyond.
-              </p>
-              <h3 className="section-subtitle mt-4">Our Vision</h3>
-              <p>
-                To be a model Christian union that cultivates Christ-centeredness among members to
-positively impact the society.
-              </p>
-              <Link
-                to="/about"
-                className="btn btn-primary mt-3"
-                data-aos="zoom-in"
-                data-aos-delay="300"
-              >
-                Learn More About Us <i className="fas fa-info-circle ms-2" />
-              </Link>
-            </div>
-            <div
-              className="col-lg-6 order-lg-2 order-1 text-center"
-              data-aos="fade-left"
-              data-aos-delay="200"
+              Join the Union <ArrowRight className="w-5 h-5" />
+            </Link>
+            <Link 
+              to="/about" 
+              className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full font-semibold transition-all flex items-center justify-center"
             >
-              <img
-                src="/assets/images/prayer1.jpg"
-                alt="MUTCU Community"
-                className="img-fluid rounded-3 shadow-lg"
-              />
-            </div>
-          </div>
-          <div className="row mt-5">
-            <div
-              className="col-12 text-center"
-              data-aos="fade-up"
-              data-aos-delay="400"
-            >
-              <h3 className="section-subtitle">Doctrinal Basis</h3>
-              <p className="text-muted">
-                The Union&apos;s beliefs are based on the fundamental truths of
-                Christianity as outlined in its constitution. This includes the
-                unity of the Trinity, the sovereignty of God in creation and
-                redemption, the divine inspiration and supreme authority of the
-                Holy Scripture, the universal sinfulness of man, redemption
-                solely through the sacrificial death of Jesus Christ, His bodily
-                resurrection and ascension, and the sanctifying work of the Holy
-                Spirit in every believer. This shared doctrinal foundation
-                ensures unity in belief and purpose across all of MUTCU&apos;s
-                diverse activities.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Core Values Section */}
-      <section className="core-values-section py-5" data-aos="fade-up">
-        <div className="container">
-          <h2 className="section-title text-center text-white">
-            Our Core Values
-          </h2>
-          <p className="text-center lead mb-5 text-white-50">
-            Rooted in faith and community, our values guide everything we do.
-          </p>
-          <div className="row justify-content-center">
-            {/* Cards replicated from original HTML */}
-            {/* Faith */}
-            <div
-              className="col-md-6 col-lg-4 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="100"
-            >
-              <div className="value-card text-center p-4 rounded-3 shadow-sm">
-                <i className="fas fa-cross feature-icon mb-3" />
-                <h4 className="value-title">Faith</h4>
-                <p>
-                  Rooted in the Bible and a personal relationship with Jesus
-                  Christ, expressed through prayer, worship, and in-depth Bible
-                  study.
-                </p>
-              </div>
-            </div>
-            {/* Love */}
-            <div
-              className="col-md-6 col-lg-4 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <div className="value-card text-center p-4 rounded-3 shadow-sm">
-                <i className="fas fa-heart feature-icon mb-3" />
-                <h4 className="value-title">Love</h4>
-                <p>
-                  Demonstrating God&apos;s unconditional love through genuine
-                  fellowship and a welcoming heart for all, as we are a "home
-                  away from home".
-                </p>
-              </div>
-            </div>
-            {/* Hope */}
-            <div
-              className="col-md-6 col-lg-4 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="300"
-            >
-              <div className="value-card text-center p-4 rounded-3 shadow-sm">
-                <i className="fas fa-lightbulb feature-icon mb-3" />
-                <h4 className="value-title">Hope</h4>
-                <p>
-                  Inspiring our community through positive words, encouraging
-                  actions, and unwavering faith in a world crumbling with
-                  uncertainties.
-                </p>
-              </div>
-            </div>
-            {/* Godliness */}
-            <div
-              className="col-md-6 col-lg-4 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="400"
-            >
-              <div className="value-card text-center p-4 rounded-3 shadow-sm">
-                <i className="fas fa-church feature-icon mb-3" />
-                <h4 className="value-title">Godliness</h4>
-                <p>
-                  A commitment to striving for lives that honor and glorify God
-                  in all things, reflected in both personal conduct and
-                  collective activities.
-                </p>
-              </div>
-            </div>
-            {/* Community */}
-            <div
-              className="col-md-6 col-lg-4 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="500"
-            >
-              <div className="value-card text-center p-4 rounded-3 shadow-sm">
-                <i className="fas fa-users feature-icon mb-3" />
-                <h4 className="value-title">Community</h4>
-                <p>
-                  Dedicated to building a strong sense of belonging and mutual
-                  support among members, where everyone feels valued and
-                  connected.
-                </p>
-              </div>
-            </div>
-            {/* Service */}
-            <div
-              className="col-md-6 col-lg-4 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="600"
-            >
-              <div className="value-card text-center p-4 rounded-3 shadow-sm">
-                <i className="fas fa-hand-holding-heart feature-icon mb-3" />
-                <h4 className="value-title">Service</h4>
-                <p>
-                  A core belief in putting faith into action by actively
-                  reaching out to serve the practical and spiritual needs of
-                  others.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Ministries Preview */}
-      <section className="ministries-section py-5" data-aos="fade-up">
-        <div className="container">
-          <h2 className="section-title text-center">Our Ministries</h2>
-          <p className="text-center lead mb-5">
-            Join a ministry to grow in faith and serve others.
-          </p>
-          <div className="row justify-content-center">
-            {/* Music Ministry */}
-            <div
-              className="col-md-6 col-lg-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="100"
-            >
-              <div className="card ministry-card h-100 shadow-sm">
-                <img
-                  src="/assets/images/music1.jpg"
-                  className="card-img-top"
-                  alt="Music Ministry"
-                />
-                <div className="card-body text-center">
-                  <i className="fas fa-music feature-icon mb-2" />
-                  <h4 className="card-title">Music Ministry</h4>
-                  <p className="card-text">
-                    Leading and ministering worship through Choir, Band,
-                    Instrumentalism and Praise &amp; Worship.
-                  </p>
-                  <Link
-                    to="/ministries"
-                    className="btn btn-primary btn-sm mt-2"
-                  >
-                    Learn More
-                  </Link>
-                </div>
-              </div>
-            </div>
-            {/* Bible Study */}
-            <div
-              className="col-md-6 col-lg-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <div className="card ministry-card h-100 shadow-sm">
-                <img
-                  src="/assets/images/bs1.jpg"
-                  className="card-img-top"
-                  alt="Bible Study &amp; Discipleship"
-                />
-                <div className="card-body text-center">
-                  <i className="fas fa-book-open feature-icon mb-2" />
-                  <h4 className="card-title">Bible Study &amp; Discipleship</h4>
-                  <p className="card-text">
-                    Deepening faith through small groups, nurturing classes for
-                    new believers, and resourceful training programs.
-                  </p>
-                  <Link
-                    to="/ministries"
-                    className="btn btn-primary btn-sm mt-2"
-                  >
-                    Learn More
-                  </Link>
-                </div>
-              </div>
-            </div>
-            {/* Missions & Evangelism */}
-            <div
-              className="col-md-6 col-lg-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="300"
-            >
-              <div className="card ministry-card h-100 shadow-sm">
-                <img
-                  src="/assets/images/mission1.jpg"
-                  className="card-img-top"
-                  alt="Missions &amp; Evangelism"
-                />
-                <div className="card-body text-center">
-                  <i className="fas fa-globe feature-icon mb-2" />
-                  <h4 className="card-title">Missions &amp; Evangelism</h4>
-                  <p className="card-text">
-                    Sharing the Gospel through campus outreach, annual missions,
-                    and hope ministry visits to children&apos;s homes, prisons
-                    and hospitals.
-                  </p>
-                  <Link
-                    to="/ministries"
-                    className="btn btn-primary btn-sm mt-2"
-                  >
-                    Learn More
-                  </Link>
-                </div>
-              </div>
-            </div>
-            {/* Creative Ministry */}
-            <div
-              className="col-md-6 col-lg-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="400"
-            >
-              <div className="card ministry-card h-100 shadow-sm">
-                <img
-                  src="/assets/images/dance3.jpg"
-                  className="card-img-top"
-                  alt="Creative Ministry"
-                />
-                <div className="card-body text-center">
-                  <i className="fas fa-paint-brush feature-icon mb-2" />
-                  <h4 className="card-title">Creative Ministry</h4>
-                  <p className="card-text">
-                    Expressing faith through drama, dance, spoken word,
-                    modelling and other artistic talents.
-                  </p>
-                  <Link
-                    to="/ministries"
-                    className="btn btn-primary btn-sm mt-2"
-                  >
-                    Learn More
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            className="text-center mt-4"
-            data-aos="zoom-in"
-            data-aos-delay="500"
-          >
-            <Link to="/ministries" className="btn btn-secondary btn-lg">
-              View All Ministries <i className="fas fa-arrow-right ms-2" />
+              Our Vision
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Upcoming Events */}
-      <section className="events-section py-5 bg-light" data-aos="fade-up">
-        <div className="container">
-          <h2 className="section-title text-center">Upcoming Events</h2>
-          <p className="text-center lead mb-5">
-            Join us for worship, fellowship, and outreach!
-          </p>
-          <div className="row justify-content-center">
-            {/* Event cards replicated from original HTML; links now go to /events */}
-            <div
-              className="col-md-6 col-lg-4 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="100"
-            >
-              <div className="card event-card h-100 shadow-sm">
-                <img
-                  src="/assets/images/church1.jpg"
-                  className="card-img-top"
-                  alt="Prayer Kesha"
-                />
-                <div className="card-body">
-                  <h4 className="card-title">Prayer Kesha</h4>
-                  <p className="card-text">
-                    <i className="far fa-calendar-alt me-2" />
-                    <strong>Date:</strong> September 26, 2025
-                  </p>
-                  <p className="card-text">
-                    <i className="far fa-clock me-2" />
-                    <strong>Time:</strong> 7:00 PM - 9:30 PM
-                  </p>
-                  <p className="card-text">
-                    Join us for a night of intercession and spiritual revival.
-                  </p>
-                  <Link to="/events" className="btn btn-primary btn-sm mt-2">
-                    Details &amp; RSVP
-                  </Link>
-                </div>
-              </div>
+      {/* Identity Banner (Constitution 2025 Values) */}
+      <section className="py-12 bg-blue-900 text-white shadow-inner">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap justify-around items-center gap-8 text-center">
+            <div data-animate>
+              <ShieldCheck className="w-10 h-10 mx-auto mb-2 text-blue-300" />
+              <span className="block text-2xl font-bold tracking-wide">HOLINESS</span>
+              <p className="text-xs text-blue-200 uppercase tracking-widest opacity-70">Life for Christ</p>
             </div>
-
-            <div
-              className="col-md-6 col-lg-4 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <div className="card event-card h-100 shadow-sm">
-                <img
-                  src="/assets/images/Dance1.jpg"
-                  className="card-img-top"
-                  alt="Praise Fest"
-                />
-                <div className="card-body">
-                  <h4 className="card-title">Praise Fest</h4>
-                  <p className="card-text">
-                    <i className="far fa-calendar-alt me-2" />
-                    <strong>Date:</strong> November 7, 2025
-                  </p>
-                  <p className="card-text">
-                    <i className="far fa-clock me-2" />
-                    <strong>Time:</strong> 7:00 PM - 9:30 PM
-                  </p>
-                  <p className="card-text">
-                    Celebrate our God through our Music Ministry in a lively
-                    evening of praise and worship.
-                  </p>
-                  <Link to="/events" className="btn btn-primary btn-sm mt-2">
-                    Details &amp; RSVP
-                  </Link>
-                </div>
-              </div>
+            <div data-animate>
+              <Star className="w-10 h-10 mx-auto mb-2 text-yellow-400" />
+              <span className="block text-2xl font-bold tracking-wide">EXCELLENCE</span>
+              <p className="text-xs text-blue-200 uppercase tracking-widest opacity-70">Service with Honor</p>
             </div>
-
-            <div
-              className="col-md-6 col-lg-4 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="300"
-            >
-              <div className="card event-card h-100 shadow-sm">
-                <img
-                  src="/assets/images/final poster.png"
-                  className="card-img-top"
-                  alt="Creative Night"
-                />
-                <div className="card-body">
-                  <h4 className="card-title">Creative Night</h4>
-                  <p className="card-text">
-                    <i className="far fa-calendar-alt me-2" />
-                    <strong>Date:</strong> October 10, 2025
-                  </p>
-                  <p className="card-text">
-                    <i className="far fa-clock me-2" />
-                    <strong>Time:</strong> 8:00 PM - 5:30 AM
-                  </p>
-                  <p className="card-text">
-                    Experience a night full of creativity on the theme Ashes to
-                    Beauty though special ministrations and performance by our
-                    Creative Arts Ministry (CREAM).
-                  </p>
-                  <Link to="/events" className="btn btn-primary btn-sm mt-2">
-                    Details &amp; RSVP
-                  </Link>
-                </div>
-              </div>
+            <div data-animate>
+              <Heart className="w-10 h-10 mx-auto mb-2 text-red-400" />
+              <span className="block text-2xl font-bold tracking-wide">UNITY</span>
+              <p className="text-xs text-blue-200 uppercase tracking-widest opacity-70">One Body, One Spirit</p>
             </div>
-          </div>
-          <div
-            className="text-center mt-4"
-            data-aos="zoom-in"
-            data-aos-delay="400"
-          >
-            <Link to="/events" className="btn btn-secondary btn-lg">
-              View All Events <i className="fas fa-arrow-right ms-2" />
-            </Link>
           </div>
         </div>
       </section>
 
-      {/* Prayer Request Section */}
-      <section className="prayer-section py-5" data-aos="fade-up">
-        <div className="container">
-          <h2 className="section-title text-center">Need Prayers?</h2>
-          <p className="text-center lead mb-5">
-            Our Prayer Ministry is here to support you in faith and
-            intercession. Submit your requests confidentially.
-          </p>
-          <div className="row justify-content-center">
-            <div
-              className="col-md-8 col-lg-6"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
-              <form
-                className="p-4 rounded-3 shadow-lg"
-                onSubmit={handlePrayerSubmit}
-                noValidate
+      {/* Features Section */}
+      <section className="py-24 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16" data-animate>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Core Pillars</h2>
+            <div className="w-20 h-1.5 bg-blue-600 mx-auto mb-6 rounded-full"></div>
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+              Rooted in the 2025 MUTCU Constitution, our mission is to witness for Christ and grow in godliness.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-10">
+            {features.map((feature, index) => (
+              <div 
+                key={index} 
+                className="bg-white p-10 rounded-3xl shadow-sm hover:shadow-2xl transition-all border border-gray-100 group"
+                data-animate
               >
-                <div className="mb-4">
-                  <label htmlFor="prayerName" className="form-label">
-                    Your Name (Optional)
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="prayerName"
-                    placeholder="Enter your name"
-                    value={prayerName}
-                    onChange={(e) => setPrayerName(e.target.value)}
-                  />
-                  <div id="prayerNameHelp" className="form-text">
-                    You may submit anonymously if preferred.
+                <div className="mb-6 inline-block p-5 rounded-2xl bg-blue-50 group-hover:bg-blue-600 group-hover:text-white transition-colors text-blue-600">
+                  {feature.icon}
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{feature.title}</h3>
+                <p className="text-gray-600 leading-relaxed text-base">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Upcoming Events (2026 Program Highlights) */}
+      <section className="py-24">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16" data-animate>
+            <div>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">Jan–April 2026 Highlights</h2>
+              <p className="text-gray-600 text-lg">Theme: <span className="text-blue-600 font-semibold italic">"Inspire Love, Hope & Godliness"</span></p>
+            </div>
+            <Link to="/events" className="text-blue-600 font-bold flex items-center gap-2 hover:gap-3 transition-all mt-6 md:mt-0 group">
+              View Full Semester Program <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {upcomingEvents.map((event, index) => (
+              <div 
+                key={index}
+                className="group relative bg-white border border-gray-200 rounded-3xl overflow-hidden hover:border-blue-500 transition-all shadow-sm hover:shadow-xl p-8"
+                data-animate
+              >
+                <div className="flex items-center gap-2 text-blue-600 font-bold mb-6 text-sm uppercase tracking-wider">
+                  <div className="bg-blue-100 p-2 rounded-lg">
+                    <Calendar className="w-4 h-4" />
+                  </div>
+                  {event.date}
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 group-hover:text-blue-600 transition-colors">
+                  {event.title}
+                </h3>
+                <div className="space-y-4 text-gray-600">
+                  <div className="flex items-center gap-3">
+                    <Clock className="w-5 h-5 text-gray-400" />
+                    <span className="text-base">{event.time}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <MapPin className="w-5 h-5 text-gray-400" />
+                    <span className="text-base">{event.location}</span>
+                  </div>
+                  <div className="flex items-center gap-3 pt-2 border-t border-gray-100 mt-4">
+                    <Users className="w-5 h-5 text-blue-500" />
+                    <span className="text-base font-medium text-gray-900">Speaker: {event.speaker}</span>
                   </div>
                 </div>
-                <div className="mb-4">
-                  <label htmlFor="prayerRequest" className="form-label">
-                    Prayer Request <span className="text-danger">*</span>
-                  </label>
-                  <textarea
-                    className={`form-control${prayerError ? " is-invalid" : ""}`}
-                    id="prayerRequest"
-                    rows={6}
-                    placeholder="Share your prayer request here..."
-                    required
-                    value={prayerRequest}
-                    onChange={(e) => setPrayerRequest(e.target.value)}
-                  />
-                  {prayerError && (
-                    <div id="prayerRequestError" className="invalid-feedback">
-                      Please enter your prayer request.
-                    </div>
-                  )}
+                <div className="absolute top-0 left-0 w-1.5 h-full bg-blue-600 scale-y-0 group-hover:scale-y-100 transition-transform origin-top"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Service Times Quick Access */}
+      <section className="py-20 bg-gray-900 text-white">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div data-animate>
+              <h2 className="text-4xl font-bold mb-6">Join Our Weekly Services</h2>
+              <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+                Whether you are a first-year student or a finishing student, there is a place for you to serve and grow in MUTCU.
+              </p>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="bg-blue-600 p-3 rounded-2xl">
+                    <Calendar className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold">Sunday Main Service</h4>
+                    <p className="text-gray-400">8:00 AM – 11:30 AM | Main Hall</p>
+                  </div>
                 </div>
-                <div className="d-grid">
-                  <button type="submit" className="btn btn-primary btn-lg">
-                    Submit Request <i className="fas fa-paper-plane ms-2" />
-                  </button>
+                <div className="flex items-start gap-4">
+                  <div className="bg-green-600 p-3 rounded-2xl">
+                    <Calendar className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold">Friday Fellowship</h4>
+                    <p className="text-gray-400">6:30 PM – 9:00 PM | Multipurpose Hall</p>
+                  </div>
                 </div>
-              </form>
+              </div>
+            </div>
+            <div className="relative" data-animate>
+              <img 
+                src="/assets/images/church3.jpg" 
+                alt="Worship at MUTCU" 
+                className="rounded-3xl shadow-2xl relative z-10 brightness-75"
+              />
+              <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-blue-600 rounded-3xl -z-0"></div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="testimonials-section py-5" data-aos="fade-up">
-        <div className="container">
-          <h2 className="section-title text-center">What Our Members Say</h2>
-          <p className="text-center lead mb-5 text-50">
-            Hear from our Members about their MUTCU experience.
+      {/* Call to Action */}
+      <section className="py-24 bg-blue-600 relative overflow-hidden">
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-50"></div>
+        <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-blue-700 rounded-full blur-3xl opacity-50"></div>
+        
+        <div className="container mx-auto px-4 text-center relative z-10" data-animate>
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tight">Ready to grow with us?</h2>
+          <p className="text-blue-100 text-xl mb-12 max-w-2xl mx-auto font-light">
+            Register today to receive updates on Bible Study groups, missions, and special events during the Jan-April 2026 semester.
           </p>
-          <div
-            id="testimonialCarousel"
-            className="carousel slide"
-            data-bs-ride="carousel"
-            data-bs-interval="7000"
-          >
-            <div className="carousel-inner">
-              <div className="carousel-item active">
-                <div
-                  className="testimonial-card mx-auto text-center p-4 rounded-3 shadow-sm"
-                  data-aos="zoom-in"
-                >
-                  <i className="fas fa-quote-left fa-2x mb-3 text-orange" />
-                  <p className="lead">
-                    “MUTCU has been my family away from home. The fellowship and
-                    discipleship have deepened my faith and helped me navigate
-                    university life.”
-                  </p>
-                  <p className="mt-4">
-                    <strong>
-                      – Prudence Chepkurui, Computer Science, 4th Year
-                    </strong>
-                  </p>
-                </div>
-              </div>
-              <div className="carousel-item">
-                <div
-                  className="testimonial-card mx-auto text-center p-4 rounded-3 shadow-sm"
-                  data-aos="zoom-in"
-                >
-                  <i className="fas fa-quote-left fa-2x mb-3 text-orange" />
-                  <p className="lead">
-                    “The Music Ministry has transformed my worship, teaching me
-                    to serve with excellence and passion. It&apos;s truly
-                    inspiring.”
-                  </p>
-                  <p className="mt-4">
-                    <strong>
-                      – Joseph Mbogo, Electrical Engineering, 2nd Year
-                    </strong>
-                  </p>
-                </div>
-              </div>
-              <div className="carousel-item">
-                <div
-                  className="testimonial-card mx-auto text-center p-4 rounded-3 shadow-sm"
-                  data-aos="zoom-in"
-                >
-                  <i className="fas fa-quote-left fa-2x mb-3 text-orange" />
-                  <p className="lead">
-                    “The Missions and Evangelism docket showed me how God uses
-                    ordinary students to bring hope and transformation to
-                    communities. It was a life-changing experience.”
-                  </p>
-                  <p className="mt-4">
-                    <strong>– Grace Akinyi, Medical Lab, 2nd Year</strong>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <button
-              className="carousel-control-prev"
-              type="button"
-              data-bs-target="#testimonialCarousel"
-              data-bs-slide="prev"
-              aria-label="Previous testimonial"
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <Link 
+              to="/register" 
+              className="bg-white text-blue-600 hover:bg-gray-100 px-12 py-5 rounded-full font-bold shadow-2xl transition-all hover:scale-105"
             >
-              <span className="carousel-control-prev-icon" aria-hidden="true" />
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button
-              className="carousel-control-next"
-              type="button"
-              data-bs-target="#testimonialCarousel"
-              data-bs-slide="next"
-              aria-label="Next testimonial"
+              Register as a Member
+            </Link>
+            <Link 
+              to="/contact" 
+              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 px-12 py-5 rounded-full font-bold transition-all"
             >
-              <span className="carousel-control-next-icon" aria-hidden="true" />
-              <span className="visually-hidden">Next</span>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery Preview */}
-      <section className="gallery-section py-5" data-aos="fade-up">
-        <div className="container">
-          <h2 className="section-title text-center">Our Gallery</h2>
-          <p className="text-center lead mb-5">
-            Moments from our fellowship, events, and outreach activities.
-          </p>
-          <div className="row justify-content-center">
-            <div
-              className="col-md-6 col-lg-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="100"
-            >
-              <Link
-                to="/gallery"
-                className="gallery-item d-block rounded shadow-sm overflow-hidden"
-              >
-                <img
-                  src="/assets/images/music1.jpg"
-                  className="img-fluid"
-                  alt="Worship Service"
-                />
-                <div className="gallery-overlay">
-                  <span className="gallery-text">
-                    <i className="fas fa-search-plus" /> Worship Service
-                  </span>
-                </div>
-              </Link>
-            </div>
-            <div
-              className="col-md-6 col-lg-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <Link
-                to="/gallery"
-                className="gallery-item d-block rounded shadow-sm overflow-hidden"
-              >
-                <img
-                  src="/assets/images/mission1.jpg"
-                  className="img-fluid"
-                  alt="Evangelism"
-                />
-                <div className="gallery-overlay">
-                  <span className="gallery-text">
-                    <i className="fas fa-search-plus" /> Evangelism
-                  </span>
-                </div>
-              </Link>
-            </div>
-            <div
-              className="col-md-6 col-lg-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="300"
-            >
-              <Link
-                to="/gallery"
-                className="gallery-item d-block rounded shadow-sm overflow-hidden"
-              >
-                <img
-                  src="/assets/images/film1.jpg"
-                  className="img-fluid"
-                  alt="Creative Night"
-                />
-                <div className="gallery-overlay">
-                  <span className="gallery-text">
-                    <i className="fas fa-search-plus" /> Creative Night
-                  </span>
-                </div>
-              </Link>
-            </div>
-            <div
-              className="col-md-6 col-lg-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="400"
-            >
-              <Link
-                to="/gallery"
-                className="gallery-item d-block rounded shadow-sm overflow-hidden"
-              >
-                <img
-                  src="/assets/images/bs1.jpg"
-                  className="img-fluid"
-                  alt="Bible Study"
-                />
-                <div className="gallery-overlay">
-                  <span className="gallery-text">
-                    <i className="fas fa-search-plus" /> Bible Study
-                  </span>
-                </div>
-              </Link>
-            </div>
-          </div>
-          <div
-            className="text-center mt-4"
-            data-aos="zoom-in"
-            data-aos-delay="500"
-          >
-            <Link to="/gallery" className="btn btn-secondary btn-lg">
-              View Full Gallery <i className="fas fa-images ms-2" />
+              Get in Touch
             </Link>
           </div>
         </div>
       </section>
-
-      {/* Newsletter Signup */}
-      <section
-        className="newsletter-section py-5 bg-gradient"
-        data-aos="fade-up"
-      >
-        <div className="container">
-          <h2 className="section-title text-center text">Stay Connected</h2>
-          <p className="text-center lead mb-5 text-50">
-            Subscribe to our newsletter for updates on events, devotionals, and
-            ministry opportunities.
-          </p>
-          <div className="row justify-content-center">
-            <div
-              className="col-md-8 col-lg-6"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
-              <form
-                className="p-4 rounded-3 shadow-lg"
-                onSubmit={handleNewsletterSubmit}
-                noValidate
-              >
-                <div className="mb-4">
-                  <label htmlFor="newsletterEmail" className="form-label text">
-                    Email Address <span className="text-warning">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    className={`form-control${newsletterError ? " is-invalid" : ""}`}
-                    id="newsletterEmail"
-                    placeholder="your.email@example.com"
-                    required
-                    value={newsletterEmail}
-                    onChange={(e) => setNewsletterEmail(e.target.value)}
-                  />
-                  {newsletterError && (
-                    <div id="newsletterEmailError" className="invalid-feedback">
-                      Please enter a valid email address.
-                    </div>
-                  )}
-                </div>
-                <div className="d-grid">
-                  <button type="submit" className="btn btn-primary btn-lg">
-                    Subscribe <i className="fas fa-envelope-open-text ms-2" />
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <ConfirmationModal
-        isOpen={isModalOpen}
-        message={modalMessage ?? ""}
-        onClose={closeModal}
-        onConfirm={pendingPrayerSubmission ? confirmPrayerSubmit : undefined}
-      />
     </div>
   );
 };
