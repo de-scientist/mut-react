@@ -357,6 +357,7 @@ const ContactSubmissionsManagement = () => {
       {selectedSubmission && (
         <div
           className="modal fade show d-block"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
           tabIndex={-1}
           onClick={() => setSelectedSubmission(null)}
         >
@@ -365,13 +366,13 @@ const ContactSubmissionsManagement = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-content border-0 shadow-lg rounded-4">
-              <div className="modal-header border-0 pb-0">
-                <h5 className="fw-black text-dark mt-2 ms-2">
-                  Inquiry Details
+              <div className="modal-header" style={{ backgroundColor: '#04003d', color: 'white', borderRadius: '1rem 1rem 0 0' }}>
+                <h5 className="modal-title d-flex align-items-center gap-2 fw-bold">
+                  <Mail size={20} /> Contact Inquiry Details
                 </h5>
                 <button
                   type="button"
-                  className="btn-close"
+                  className="btn-close btn-close-white"
                   onClick={() => setSelectedSubmission(null)}
                   aria-label="Close"
                 ></button>
@@ -379,65 +380,70 @@ const ContactSubmissionsManagement = () => {
               <div className="modal-body p-4">
                 <div className="row g-4">
                   <div className="col-md-6">
-                    <label className="text-muted small fw-bold text-uppercase">
+                    <label className="text-uppercase fw-bold mb-2" style={{ fontSize: '0.75rem', color: '#04003d', opacity: 0.7, letterSpacing: '0.5px' }}>
                       From
                     </label>
-                    <div className="fw-bold fs-5">
+                    <div className="fw-bold fs-5" style={{ color: '#04003d' }}>
                       {selectedSubmission.name}
                     </div>
                     <a
                       href={`mailto:${selectedSubmission.email}`}
-                      className="text-primary text-decoration-none"
+                      className="text-decoration-none d-flex align-items-center gap-1 mt-1"
+                      style={{ color: '#30d5c8', fontWeight: '500' }}
                     >
+                      <Mail size={14} />
                       {selectedSubmission.email}
                     </a>
                   </div>
-                  <div className="col-md-6 text-md-end">
-                    <label className="text-muted small fw-bold text-uppercase">
+                  <div className="col-md-6">
+                    <label className="text-uppercase fw-bold mb-2" style={{ fontSize: '0.75rem', color: '#04003d', opacity: 0.7, letterSpacing: '0.5px' }}>
                       Status
                     </label>
                     <div>
                       <span
                         className={getStatusBadge(selectedSubmission.status)}
                       >
-                        {selectedSubmission.status}
+                        {selectedSubmission.status.replace('_', ' ')}
                       </span>
                     </div>
                   </div>
                   <div className="col-12">
-                    <label className="text-muted small fw-bold text-uppercase">
+                    <label className="text-uppercase fw-bold mb-2" style={{ fontSize: '0.75rem', color: '#04003d', opacity: 0.7, letterSpacing: '0.5px' }}>
                       Subject
                     </label>
-                    <div className="p-3 bg-light rounded-3 fw-medium">
+                    <div className="p-3 rounded-3" style={{ backgroundColor: '#ff9700', color: 'white', fontWeight: '600' }}>
                       {selectedSubmission.subject}
                     </div>
                   </div>
                   <div className="col-12">
-                    <label className="text-muted small fw-bold text-uppercase">
-                      Message Body
+                    <label className="text-uppercase fw-bold mb-2" style={{ fontSize: '0.75rem', color: '#04003d', opacity: 0.7, letterSpacing: '0.5px' }}>
+                      Message
                     </label>
-                    <div className="p-4 border rounded-3 text-secondary white-space-pre">
+                    <div className="p-4 rounded-3" style={{ backgroundColor: '#f8f9fa', border: '2px solid #30d5c8', color: '#04003d', whiteSpace: 'pre-wrap', lineHeight: '1.8' }}>
                       {selectedSubmission.message}
                     </div>
                   </div>
-                  <div className="col-12 text-muted small">
+                  <div className="col-12" style={{ color: '#04003d', opacity: 0.6, fontSize: '0.875rem' }}>
                     Received on{" "}
                     {new Date(selectedSubmission.createdAt).toLocaleString()}
                   </div>
                 </div>
               </div>
-              <div className="modal-footer border-0">
+              <div className="modal-footer border-0 pt-0">
                 <button
                   type="button"
-                  className="btn btn-light rounded-pill px-4"
+                  className="btn rounded-pill px-4"
+                  style={{ backgroundColor: '#e9ecef', color: '#04003d', border: 'none', fontWeight: '500' }}
                   onClick={() => setSelectedSubmission(null)}
                 >
-                  Dismiss
+                  Close
                 </button>
                 <a
                   href={`mailto:${selectedSubmission.email}`}
-                  className="btn btn-primary rounded-pill px-4 shadow-sm"
+                  className="btn rounded-pill px-4 shadow-sm d-flex align-items-center gap-2"
+                  style={{ backgroundColor: '#ff9700', color: 'white', border: 'none', fontWeight: '600' }}
                 >
+                  <Mail size={16} />
                   Reply via Email
                 </a>
               </div>
