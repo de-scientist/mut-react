@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { eventsAPI } from "../../services/api";
 import ConfirmationModal from "../../components/ConfirmationModal";
@@ -604,41 +604,54 @@ ${event.description || ""}`;
                         </span>
                       </td>
                       <td className="px-4 text-end">
-                        <div className="d-flex justify-content-end gap-2">
-                          <button
-                            className="btn btn-sm btn-light-primary rounded-circle p-2"
-                            onClick={() => openEditForm(event)}
-                            title="Edit Event"
-                            aria-label="Edit Event"
-                          >
-                            <Edit3 size={16} />
-                          </button>
-                          <button
-                            className={`btn btn-sm rounded-circle p-2 ${event.isActive ? "btn-light-warning" : "btn-light-success"}`}
-                            onClick={() => {
-                              setSelectedEvent(event);
-                              setAction("toggle");
-                              setShowModal(true);
-                            }}
-                            title={event.isActive ? "Deactivate" : "Activate"}
-                            aria-label="Toggle Event Status"
-                          >
-                            <Power size={16} />
-                          </button>
-                          <button
-                            className="btn btn-sm btn-light-danger rounded-circle p-2"
-                            onClick={() => {
-                              setSelectedEvent(event);
-                              setAction("delete");
-                              setShowModal(true);
-                            }}
-                            title="Delete Event"
-                            aria-label="Delete Event"
-                          >
-                            <Trash2 size={16} />
-                          </button>
-                        </div>
-                      </td>
+  <div className="d-flex justify-content-end gap-2">
+
+    {/* NEW SHARE BUTTON */}
+    <button
+      className="btn btn-sm btn-light rounded-circle p-2"
+      onClick={() => shareSingleEvent(event)}
+      title="Share Event"
+    >
+      <Share2 size={16} />
+    </button>
+
+    <button
+    title="edit"
+      className="btn btn-sm btn-light-primary rounded-circle p-2"
+      onClick={() => openEditForm(event)}
+    >
+      <Edit3 size={16} />
+    </button>
+
+    <button
+    title={event.isActive ? "Deactivate Event" : "Activate Event"}
+      className={`btn btn-sm rounded-circle p-2 ${
+        event.isActive ? "btn-light-warning" : "btn-light-success"
+      }`}
+      onClick={() => {
+        setSelectedEvent(event);
+        setAction("toggle");
+        setShowModal(true);
+      }}
+    >
+      <Power size={16} />
+    </button>
+
+    <button
+    title="delete"
+      className="btn btn-sm btn-light-danger rounded-circle p-2"
+      onClick={() => {
+        setSelectedEvent(event);
+        setAction("delete");
+        setShowModal(true);
+      }}
+    >
+      <Trash2 size={16} />
+    </button>
+
+  </div>
+</td>
+
                     </tr>
                   ))
                 )}
