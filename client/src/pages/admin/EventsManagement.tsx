@@ -15,7 +15,6 @@ import {
   Clock,
 } from "lucide-react";
 import { Share2, Download } from "lucide-react";
-
 import "../../styles/adminForms.css";
 
 interface Event {
@@ -157,6 +156,75 @@ const EventsManagement = () => {
     });
     setShowForm(true);
   };
+
+  const exportEventsAsCSV = () => {
+  if (!events.length) return;
+
+  const headers = [
+    "Title",
+    "Description",
+    "Date",
+    "Time",
+    "Location",
+    "Active",
+  ];
+
+  const rows = events.map((e) => [
+    e.title,
+    e.description || "",
+    e.date,
+    e.time || "",
+    e.location || "",
+    e.isActive ? "Yes" : "No",
+  ]);
+
+  const csvContent =
+    [headers, ...rows].map((row) => row.join(",")).join("\n");
+
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "events.csv";
+  link.click();
+
+  URL.revokeObjectURL(url);
+};
+
+const exportEventsAsJSON = () => {
+  const blob = new Blob([JSON.stringify(events, null, 2)], {
+    type: "application/json",
+  });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "events.json";
+  link.click();
+
+  URL.revokeObjectURL(url);
+};
+
+const shareEvent = async (event: Event) => {
+  const shareData = {
+    title: event.title,
+    text: event.description || "Check out this event!",
+    url: `${window.location.origin}/events/${event.id}`,
+  };
+
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData);
+    } else {
+      await navigator.clipboard.writeText(shareData.url);
+      setSuccessMessage("Event link copied to clipboard");
+    }
+  } catch {
+    setError("Unable to share event");
+  }
+};
+
 
   if (loading) {
     return (
