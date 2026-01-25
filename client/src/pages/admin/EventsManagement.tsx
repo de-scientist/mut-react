@@ -240,6 +240,32 @@ const shareAllEvents = async () => {
   }
 };
 
+const shareSingleEvent = async (event: Event) => {
+  const shareText = `${event.title}
+📅 ${new Date(event.date).toLocaleDateString()} ${event.time || ""}
+📍 ${event.location || "Location TBA"}
+
+${event.description || ""}`;
+
+  const shareUrl = `${window.location.origin}/events/${event.id}`;
+
+  try {
+    if (navigator.share) {
+      await navigator.share({
+        title: event.title,
+        text: shareText,
+        url: shareUrl,
+      });
+    } else {
+      await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+      setSuccessMessage("Event link copied to clipboard!");
+    }
+  } catch {
+    setError("Unable to share event");
+  }
+};
+
+
   if (loading) {
     return (
       <div className="d-flex align-items-center justify-content-center vh-100 bg-white">
@@ -300,13 +326,11 @@ const shareAllEvents = async () => {
       <button className="dropdown-item" onClick={exportEventsAsJSON}>
         Export as JSON
       </button>
-    </li>
-    <li>
-      <button className="dropdown-item" onClick={shareAllEvents}>
+    </li>    
+  </ul>
+  <button className="dropdown-item" onClick={shareAllEvents}>
         Share All Events
       </button>
-    </li>
-  </ul>
 </div>
 
 
