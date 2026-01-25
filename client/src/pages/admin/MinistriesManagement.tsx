@@ -179,6 +179,29 @@ const shareAllMinistries = async () => {
   }
 };
 
+const shareSingleMinistry = async (ministry: Ministry) => {
+  const shareText = `${ministry.name}
+🔗 ${ministry.slug}
+${ministry.description || ""}`;
+
+  const shareUrl = `${window.location.origin}/ministries/${ministry.slug}`;
+
+  try {
+    if (navigator.share) {
+      await navigator.share({
+        title: ministry.name,
+        text: shareText,
+        url: shareUrl,
+      });
+    } else {
+      await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+      setSuccessMessage("Ministry link copied to clipboard!");
+    }
+  } catch {
+    setError("Unable to share ministry");
+  }
+};
+
 
   const handleDelete = async () => {
     if (!selectedMinistry) return;
