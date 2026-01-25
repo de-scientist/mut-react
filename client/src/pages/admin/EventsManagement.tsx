@@ -206,25 +206,39 @@ const exportEventsAsJSON = () => {
   URL.revokeObjectURL(url);
 };
 
-const shareEvent = async (event: Event) => {
-  const shareData = {
-    title: event.title,
-    text: event.description || "Check out this event!",
-    url: `${window.location.origin}/events/${event.id}`,
-  };
+const shareAllEvents = async () => {
+  if (!events.length) {
+    setError("No events to share");
+    return;
+  }
+
+  // Create a shareable message with all events
+  const shareText = events
+    .map(
+      (e) =>
+        `${e.title} - ${e.date}${e.time ? ` at ${e.time}` : ""} - ${
+          e.location || "No location"
+        }`
+    )
+    .join("\n");
+
+  const shareUrl = `${window.location.origin}/events`;
 
   try {
     if (navigator.share) {
-      await navigator.share(shareData);
+      await navigator.share({
+        title: "Community Events",
+        text: shareText,
+        url: shareUrl,
+      });
     } else {
-      await navigator.clipboard.writeText(shareData.url);
-      setSuccessMessage("Event link copied to clipboard");
+      await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+      setSuccessMessage("All events copied to clipboard!");
     }
   } catch {
-    setError("Unable to share event");
+    setError("Unable to share events");
   }
 };
-
 
   if (loading) {
     return (
@@ -268,6 +282,35 @@ const shareEvent = async (event: Event) => {
             >
               <Plus size={18} /> Add New Event
             </button>
+           <div className="dropdown">
+  <button
+    className="btn btn-outline-secondary shadow-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    <Download size={16} className="me-1" /> Export
+  </button>
+  <ul className="dropdown-menu">
+    <li>
+      <button className="dropdown-item" onClick={exportEventsAsCSV}>
+        Export as CSV
+      </button>
+    </li>
+    <li>
+      <button className="dropdown-item" onClick={exportEventsAsJSON}>
+        Export as JSON
+      </button>
+    </li>
+    <li>
+      <button className="dropdown-item" onClick={shareAllEvents}>
+        Share All Events
+      </button>
+    </li>
+  </ul>
+</div>
+
+
+
           </div>
         </div>
 
@@ -445,6 +488,8 @@ const shareEvent = async (event: Event) => {
                   >
                     {editingEvent ? "Save Changes" : "Publish Event"}
                   </button>
+                  
+
                   <button
                     type="button"
                     className="btn btn-light px-4 py-2 rounded-pill"
