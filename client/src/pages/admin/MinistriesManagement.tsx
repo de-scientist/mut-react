@@ -106,6 +106,32 @@ const MinistriesManagement = () => {
       .replace(/(^-|-$)/g, "");
   };
 
+const exportMinistriesAsCSV = () => {
+  if (!ministries.length) return;
+
+  const headers = ["Name", "Slug", "Description", "Active"];
+  const rows = ministries.map((m) => [
+    m.name,
+    m.slug,
+    m.description || "",
+    m.isActive ? "Yes" : "No",
+  ]);
+
+  const csvContent =
+    [headers, ...rows].map((row) => row.join(",")).join("\n");
+
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "ministries.csv";
+  link.click();
+
+  URL.revokeObjectURL(url);
+};
+
+
   const handleDelete = async () => {
     if (!selectedMinistry) return;
     try {
