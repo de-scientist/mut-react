@@ -367,7 +367,7 @@ const ContactSubmissionsManagement = () => {
           >
             <div className="modal-content border-0 shadow-lg rounded-4">
               <div className="modal-header" style={{ backgroundColor: '#04003d', color: 'white', borderRadius: '1rem 1rem 0 0' }}>
-                <h5 className="modal-title d-flex align-items-center gap-2 fw-bold">
+                <h5 className="modal-title d-flex align-items-center gap-2 fw-bold" style={{ color: '#e8e8e8' }}>
                   <Mail size={20} /> Contact Inquiry Details
                 </h5>
                 <button
@@ -380,23 +380,23 @@ const ContactSubmissionsManagement = () => {
               <div className="modal-body p-4">
                 <div className="row g-4">
                   <div className="col-md-6">
-                    <label className="text-uppercase fw-bold mb-2" style={{ fontSize: '0.75rem', color: '#04003d', opacity: 0.7, letterSpacing: '0.5px' }}>
+                    <label className="text-uppercase mb-2" style={{ fontSize: '0.7rem', color: '#6c757d', fontWeight: '600', letterSpacing: '1px' }}>
                       From
                     </label>
-                    <div className="fw-bold fs-5" style={{ color: '#04003d' }}>
+                    <div style={{ color: '#04003d', fontSize: '1.1rem', fontWeight: '600' }}>
                       {selectedSubmission.name}
                     </div>
                     <a
                       href={`mailto:${selectedSubmission.email}`}
                       className="text-decoration-none d-flex align-items-center gap-1 mt-1"
-                      style={{ color: '#30d5c8', fontWeight: '500' }}
+                      style={{ color: '#30d5c8', fontWeight: '500', fontSize: '0.9rem' }}
                     >
                       <Mail size={14} />
                       {selectedSubmission.email}
                     </a>
                   </div>
                   <div className="col-md-6">
-                    <label className="text-uppercase fw-bold mb-2" style={{ fontSize: '0.75rem', color: '#04003d', opacity: 0.7, letterSpacing: '0.5px' }}>
+                    <label className="text-uppercase mb-2" style={{ fontSize: '0.7rem', color: '#6c757d', fontWeight: '600', letterSpacing: '1px' }}>
                       Status
                     </label>
                     <div>
@@ -408,22 +408,22 @@ const ContactSubmissionsManagement = () => {
                     </div>
                   </div>
                   <div className="col-12">
-                    <label className="text-uppercase fw-bold mb-2" style={{ fontSize: '0.75rem', color: '#04003d', opacity: 0.7, letterSpacing: '0.5px' }}>
+                    <label className="text-uppercase mb-2" style={{ fontSize: '0.7rem', color: '#6c757d', fontWeight: '600', letterSpacing: '1px' }}>
                       Subject
                     </label>
-                    <div className="p-3 rounded-3" style={{ backgroundColor: '#ff9700', color: 'white', fontWeight: '600' }}>
+                    <div className="p-3 rounded-3" style={{ backgroundColor: '#ffffff', color: '#04003d', fontWeight: '500', border: '2px solid #e0e0e0', fontSize: '1rem' }}>
                       {selectedSubmission.subject}
                     </div>
                   </div>
                   <div className="col-12">
-                    <label className="text-uppercase fw-bold mb-2" style={{ fontSize: '0.75rem', color: '#04003d', opacity: 0.7, letterSpacing: '0.5px' }}>
+                    <label className="text-uppercase mb-2" style={{ fontSize: '0.7rem', color: '#6c757d', fontWeight: '600', letterSpacing: '1px' }}>
                       Message
                     </label>
-                    <div className="p-4 rounded-3" style={{ backgroundColor: '#f8f9fa', border: '2px solid #30d5c8', color: '#04003d', whiteSpace: 'pre-wrap', lineHeight: '1.8' }}>
+                    <div className="p-4 rounded-3" style={{ backgroundColor: '#ffffff', border: '2px solid #30d5c8', color: '#212529', whiteSpace: 'pre-wrap', lineHeight: '1.8', fontSize: '0.95rem' }}>
                       {selectedSubmission.message}
                     </div>
                   </div>
-                  <div className="col-12" style={{ color: '#04003d', opacity: 0.6, fontSize: '0.875rem' }}>
+                  <div className="col-12" style={{ color: '#6c757d', fontSize: '0.85rem', fontWeight: '500' }}>
                     Received on{" "}
                     {new Date(selectedSubmission.createdAt).toLocaleString()}
                   </div>
