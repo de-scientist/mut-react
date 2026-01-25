@@ -146,6 +146,39 @@ const exportMinistriesAsJSON = () => {
   URL.revokeObjectURL(url);
 };
 
+const shareAllMinistries = async () => {
+  if (!ministries.length) {
+    setError("No ministries to share");
+    return;
+  }
+
+  const shareText = ministries
+    .map(
+      (m) =>
+        `${m.name} (${m.slug}) - ${
+          m.isActive ? "Active" : "Inactive"
+        }`
+    )
+    .join("\n");
+
+  const shareUrl = `${window.location.origin}/ministries`;
+
+  try {
+    if (navigator.share) {
+      await navigator.share({
+        title: "Church Ministries",
+        text: shareText,
+        url: shareUrl,
+      });
+    } else {
+      await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+      setSuccessMessage("Ministries copied to clipboard!");
+    }
+  } catch {
+    setError("Unable to share ministries");
+  }
+};
+
 
   const handleDelete = async () => {
     if (!selectedMinistry) return;
