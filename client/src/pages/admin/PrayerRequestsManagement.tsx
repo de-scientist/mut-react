@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { prayerAPI } from "../../services/api";
 import Toast from "../../components/Toast";
-import ConfirmationModal from "../../components/ConfirmationModal";
+//import ConfirmationModal from "../../components/ConfirmationModal";
 import {
   ArrowLeft,
   MessageSquare,
@@ -15,7 +15,6 @@ import {
   User,
   Calendar,
   Download,
-  X,
 } from "lucide-react";
 
 interface PrayerRequest {
