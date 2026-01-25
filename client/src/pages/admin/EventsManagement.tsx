@@ -14,6 +14,8 @@ import {
   MapPin,
   Clock,
 } from "lucide-react";
+import { Share2, Download } from "lucide-react";
+
 import "../../styles/adminForms.css";
 
 interface Event {
