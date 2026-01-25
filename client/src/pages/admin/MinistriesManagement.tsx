@@ -325,6 +325,36 @@ ${ministry.description || ""}`;
           </div>
         </div>
 
+<div className="dropdown">
+  <button
+    className="btn btn-outline-secondary dropdown-toggle rounded-pill"
+    data-bs-toggle="dropdown"
+  >
+    <Download size={16} className="me-1" /> Export
+  </button>
+
+  <ul className="dropdown-menu">
+    <li>
+      <button className="dropdown-item" onClick={exportMinistriesAsCSV}>
+        Export as CSV
+      </button>
+    </li>
+    <li>
+      <button className="dropdown-item" onClick={exportMinistriesAsJSON}>
+        Export as JSON
+      </button>
+    </li>
+  </ul>
+  <button
+    className="btn btn-outline-secondary dropdown-toggle rounded-pill"
+    data-bs-toggle="dropdown"
+  >
+    <Download size={16} className="me-1" /> Share All Ministries
+        
+      </button>
+</div>
+
+
         <div className="card border-0 shadow-sm mb-4 rounded-4">
           <div className="card-body p-3">
             <div className="row g-3 align-items-center">
