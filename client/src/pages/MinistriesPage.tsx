@@ -146,10 +146,6 @@ export default function MinistriesPage() {
       try {
         setLoading(true);
 
-        // IMPORTANT:
-        // If your backend filter expects `active=true` or `isActive=true` differently,
-        // this can cause "Failed to retrieve ministries" / partial returns.
-        // We fetch WITHOUT filters first (more reliable), then filter client-side.
         const res = await ministriesAPI.getAll();
         const items = extractMinistries(res);
 
@@ -268,9 +264,9 @@ export default function MinistriesPage() {
                   onChange={(e) => setQuery(e.target.value)}
                 />
               </div>
-              <div className="form-text">
+              {/* <div className="form-text">
                 Tip: Even if the API is down, these 10 committees will still display.
-              </div>
+              </div> */}
             </div>
           </div>
 
