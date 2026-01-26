@@ -485,6 +485,35 @@ form .form-select:focus {
   border-bottom-color: var(--mutcu-orange);
 }
 
+/* Join form card */
+.join-form-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(6px);
+}
+
+.join-form-card .form-control,
+.join-form-card .form-select {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.join-form-card .form-control:focus,
+.join-form-card .form-select:focus {
+  border-color: var(--mutcu-orange);
+  box-shadow: 0 0 0 0.25rem rgba(255, 151, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.join-form-card .form-label {
+  font-weight: 600;
+}
+
 /* Gallery */
 .sub-ministries-section img {
   border-radius: 10px;
