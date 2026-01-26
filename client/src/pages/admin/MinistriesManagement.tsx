@@ -581,7 +581,7 @@ ${ministry.description || ""}`;
                       <td className="px-4">
                         <div className="d-flex align-items-center gap-3 py-1">
                           <div className="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold icon-box">
-                            {ministry.icon || <Layout size={18} />}
+                            {ministry.icon && !ministry.icon.startsWith('fa-') ? ministry.icon : <Layout size={18} />}
                           </div>
                           <div>
                             <div className="fw-bold text-dark">
