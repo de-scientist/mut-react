@@ -330,7 +330,7 @@ export default function MinistriesPage() {
                           {renderIcon(c.icon)}
                           <h4 className="card-title">{c.name}</h4>
                           <p className="card-text">{c.description}</p>
-                          <span className="btn btn-sm btn-outline-primary mt-3">
+                          <span className="btn btn-sm btn-learn-more mt-3">
                             Learn More <i className="fas fa-arrow-right ms-2" />
                           </span>
                         </div>
