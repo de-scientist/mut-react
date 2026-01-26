@@ -10,7 +10,10 @@ const MainLayout = () => {
   useAOS();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Use requestAnimationFrame to scroll after the browser has painted
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+    });
   }, [location.pathname]);
 
   return (
