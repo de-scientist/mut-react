@@ -41,7 +41,7 @@ const COMMITTEES: CommitteeCard[] = [
     description:
       "Mentorship, accountability, and practical Christian living to nurture believers into maturity.",
     icon: "fa-user-friends",
-    imageUrl: "/assets/images/bs1.jpg",
+    imageUrl: "https://picsum.photos/400/300?random=2",
     route: "/ministries/discipleship",
   },
   {
@@ -91,7 +91,7 @@ const COMMITTEES: CommitteeCard[] = [
     description:
       "Sound, livestream, projection, photography/video, and technical support for services and events.",
     icon: "fa-sliders-h",
-    imageUrl: "/assets/images/tech.jpg",
+    imageUrl: "/assets/images/film1.jpg",
     route: "/ministries/technical",
   },
   {
@@ -101,7 +101,7 @@ const COMMITTEES: CommitteeCard[] = [
     description:
       "Welcoming guests, coordinating seating/hosting, and ensuring visitors and members feel at home.",
     icon: "fa-mug-hot",
-    imageUrl: "/assets/images/hospitality.jpg",
+    imageUrl: "/assets/images/guest-welcome.jfif",
     route: "/ministries/hospitality",
   },
   {
@@ -111,7 +111,7 @@ const COMMITTEES: CommitteeCard[] = [
     description:
       "Member care, encouragement, support in times of need, and strengthening fellowship as a family.",
     icon: "fa-hand-holding-heart",
-    imageUrl: "/assets/images/welfare.jpg",
+    imageUrl: "/assets/images/placeholder2.jpg",
     route: "/ministries/welfare",
   },
   {
@@ -121,7 +121,7 @@ const COMMITTEES: CommitteeCard[] = [
     description:
       "Stewardship and mobilization of financial/material resources to support ministry work and programs.",
     icon: "fa-donate",
-    imageUrl: "/assets/images/rmc.jpg",
+    imageUrl: "/assets/images/placeholder3.jpg",
     route: "/ministries/rmc",
   },
 ];
