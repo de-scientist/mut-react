@@ -91,7 +91,7 @@ const COMMITTEES: CommitteeCard[] = [
     description:
       "Sound, livestream, projection, photography/video, and technical support for services and events.",
     icon: "fa-sliders-h",
-    imageUrl: "/assets/images/film1.jpg",
+    imageUrl: "/assets/images/technicalDpt.jpg",
     route: "/ministries/technical-department",
   },
   {
@@ -111,7 +111,7 @@ const COMMITTEES: CommitteeCard[] = [
     description:
       "Member care, encouragement, support in times of need, and strengthening fellowship as a family.",
     icon: "fa-hand-holding-heart",
-    imageUrl: "/assets/images/placeholder2.jpg",
+    imageUrl: "/assets/images/welfare11.jpg",
     route: "/ministries/welfare-committee",
   },
   {
@@ -309,11 +309,11 @@ export default function MinistriesPage() {
                           </div>
                         )}
 
-                        <div className="card-body">
+                        <div className="card-body text-center">
                           {renderIcon(c.icon)}
                           <h4 className="card-title">{c.name}</h4>
                           <p className="card-text">{c.description}</p>
-                          <span className="btn btn-sm btn-learn-more mt-3">
+                          <span className="btn btn-primary btn-sm mt-2">
                             Learn More <i className="fas fa-arrow-right ms-2" />
                           </span>
                         </div>
