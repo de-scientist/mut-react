@@ -121,14 +121,14 @@ const WelfareCommitteePage = () => {
                   <h3 className="card-title mb-0">Financial Support</h3>
                 </div>
                 <p>
-                  Providing assistance with tuition fees, emergency funds, medical expenses, and other critical financial needs to ensure members can continue their education and focus on spiritual growth.
+                  MUTCU mobilizes for financial support by engaging students in community fundraising initiatives to assist members facing critical financial needs. The Union provides direct support according to set policies, supplementing efforts by students to raise funds for tuition fees, emergency situations, and medical expenses.
                 </p>
                 <h6 className="text-secondary mb-2">Support Services:</h6>
                 <ul>
-                  <li>Emergency financial assistance programs</li>
-                  <li>Tuition fee support for students in difficulty</li>
-                  <li>Medical and health-related fund support</li>
-                  <li>Community fundraising initiatives</li>
+                  <li>Community-driven fundraising initiatives</li>
+                  <li>Student engagement in financial mobilization</li>
+                  <li>Direct Union support as per organizational policies</li>
+                  <li>Coordination of tuition fee and emergency financial assistance</li>
                 </ul>
               </div>
             </div>
