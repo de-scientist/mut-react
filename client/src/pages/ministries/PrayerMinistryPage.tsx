@@ -57,7 +57,7 @@ const PrayerMinistryPage = () => {
         <div className="container">
           <h1 data-aos="fade-up">MUTCU Prayer Ministry</h1>
           <p className="lead" data-aos="fade-up" data-aos-delay="100">
-            Fostering a Culture of Intercession and Spiritual Dependence
+            Fostering a Culture of Intercession and Prayer life maturity.
           </p>
         </div>
       </section>
@@ -131,18 +131,23 @@ const PrayerMinistryPage = () => {
               <div className="sub-ministry-card">
                 <div className="card-body">
                   <i className="fas fa-sun choir-icon mb-3" />
-                  <h4 className="card-title">Corporate Prayer Meetings</h4>
+                  <h4 className="card-title">Daily Corporate Prayer</h4>
                   <p className="card-text">
                     Regular gatherings for united intercession and petition.
                   </p>
-                  <h6>Activities</h6>
+                  <h6 className="text-secondary mb-2">Prayer Times</h6>
+                  <ul className="small mb-3">
+                    <li><strong>Morning Prayer:</strong> 6:00 AM - 6:50 AM</li>
+                    <li><strong>Evening Prayer:</strong> 9:00 PM - 9:30 PM</li>
+                  </ul>
+                  <h6 className="text-secondary mb-2">Activities</h6>
                   <ul>
-                    <li>Daily prayer meetings</li>
                     <li>Guided intercession</li>
                     <li>Scripture reading and worship</li>
+                    <li>Prayer requests and prayer reports</li>
                   </ul>
                   <p className="text-muted small">
-                    <i className="fas fa-calendar-alt me-2" /> Regular schedule
+                    <i className="fas fa-calendar-alt me-2" /> Daily
                   </p>
                 </div>
               </div>
@@ -160,11 +165,16 @@ const PrayerMinistryPage = () => {
                   <p className="card-text">
                     Intensive periods of prayer, fasting, and intercession.
                   </p>
-                  <h6>Activities</h6>
+                  <h6 className="text-secondary mb-2">Fasting Schedule</h6>
+                  <p className="small mb-3">
+                    <strong>Every Fortnight</strong><br/>
+                    <i className="fas fa-calendar-day me-2" />Wednesdays
+                  </p>
+                  <h6 className="text-secondary mb-2">Activities</h6>
                   <ul>
                     <li>Special prayer weeks</li>
                     <li>Corporate fasting</li>
-                    <li>Intensive intercession periods</li>
+                    <li>Intercession moments</li>
                   </ul>
                   <p className="text-muted small">
                     <i className="fas fa-calendar-alt me-2" /> Scheduled throughout the year
@@ -181,13 +191,13 @@ const PrayerMinistryPage = () => {
               <div className="sub-ministry-card">
                 <div className="card-body">
                   <i className="fas fa-mountain praise-icon mb-3" />
-                  <h4 className="card-title">Prayer Retreats &amp; Keshas</h4>
+                  <h4 className="card-title">Prayer stretches &amp; Keshas</h4>
                   <p className="card-text">
-                    Extended prayer events and all-night intercession sessions.
+                    Extended prayer times and all-night intercession sessions.
                   </p>
                   <h6>Activities</h6>
                   <ul>
-                    <li>Off-campus prayer retreats</li>
+                    <li>Church prayer stretches</li>
                     <li>All-night prayer keshas</li>
                     <li>Deep intercession and worship</li>
                   </ul>
@@ -214,7 +224,7 @@ const PrayerMinistryPage = () => {
                   <ul>
                     <li>Year-based prayer meetings</li>
                     <li>Prayer request collection</li>
-                    <li>Praise report sharing</li>
+                    <li>Prayer report sharing</li>
                   </ul>
                   <p className="text-muted small">
                     <i className="fas fa-calendar-alt me-2" /> During fellowship meetings
@@ -237,7 +247,7 @@ const PrayerMinistryPage = () => {
                   </p>
                   <h6>Activities</h6>
                   <ul>
-                    <li>Prayer pairs and triads</li>
+                    <li>Prayer partners</li>
                     <li>Mutual intercession</li>
                     <li>Accountability partnerships</li>
                   </ul>
@@ -258,12 +268,12 @@ const PrayerMinistryPage = () => {
                   <i className="fas fa-bullhorn instrumentalists-icon mb-3" />
                   <h4 className="card-title">Prayer Requests &amp; Updates</h4>
                   <p className="card-text">
-                    Communication of prayer points and praise reports for the CU.
+                    Communication of prayer points and prayer reports for the CU.
                   </p>
                   <h6>Activities</h6>
                   <ul>
                     <li>Prayer request dissemination</li>
-                    <li>Praise report sharing</li>
+                    <li>Prayer report sharing</li>
                     <li>CU prayer focus updates</li>
                   </ul>
                   <p className="text-muted small">
