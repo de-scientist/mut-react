@@ -1,5 +1,4 @@
 import { type FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
 import { useTimedSuccess } from "../../hooks/useTimedSuccess";
 import "../../assets/mut/css/music-ministry.css";
 
@@ -47,7 +46,7 @@ const MusicMinistryPage = () => {
         >
           <h1 className="display-3 mb-3">MUTCU Music Ministry</h1>
           <p className="lead">
-            Leading Worship and Glorifying God Through Song
+            Leading Worship and Glorifying God Through Songs
           </p>
         </div>
       </section>
@@ -146,7 +145,7 @@ const MusicMinistryPage = () => {
                 </ul>
                 <p className="mb-0 text-muted">
                   <i className="fas fa-clock me-2" />
-                  <b>Meeting Times:</b> Sundays, 2:00 PM - 4:00 PM (Room 7) -
+                  <b>Meeting Times:</b> Saturdays , 2:00 PM - 4:00 PM (Room 7) -
                   Other times confirmed weekly.
                 </p>
               </div>
@@ -229,8 +228,8 @@ const MusicMinistryPage = () => {
                 </ul>
                 <p className="mb-0 text-muted">
                   <i className="fas fa-clock me-2" />
-                  <b>Meeting Times:</b> Thursday, 7:00 PM - 9:00 PM (Music
-                  Room).
+                  <b>Meeting Times:</b> Wednesday, 7:00 PM - 9:00 PM (Confirmed
+                  weekly).
                 </p>
               </div>
             </div>
@@ -245,27 +244,30 @@ const MusicMinistryPage = () => {
                 <div className="card-image-container mb-4">
                   <img
                     src="/assets/images/music1.jpg"
-                    alt="Instrumentalists"
+                    alt="Music Outreach and Production"
                     className="img-fluid rounded-3"
                   />
                 </div>
                 <div className="d-flex align-items-center mb-3">
-                  <i className="fas fa-guitar instrumentalist-icon me-3" />
-                  <h3 className="card-title mb-0">Instrumentalists</h3>
+                  <i className="fas fa-microphone band-icon me-3" />
+                  <h3 className="card-title mb-0">Outreach &amp; Production</h3>
                 </div>
                 <p>
-                  This group includes individuals who play various instruments
-                  to support different ministry activities and events.
+                  This ministry supervises music-related responsibilities outside
+                  the main music ministry, handles recording and production of
+                  music content, and nurtures emerging musical talents through
+                  auditions and mentorship.
                 </p>
                 <h6>Activities:</h6>
                 <ul>
-                  <li>Providing music for fellowships or special occasions.</li>
-                  <li>Collaborating with other ministries for events.</li>
+                  <li>Conducting singing auditions to identify and train talent.</li>
+                  <li>Recording and producing music content in collaboration with Technical &amp; Media Ministry.</li>
                   <li>Mentoring aspiring musicians in the Union.</li>
+                  <li>Managing music-related outreach activities.</li>
                 </ul>
                 <p className="mb-0 text-muted">
                   <i className="fas fa-clock me-2" />
-                  <b>Meeting Times:</b> Wednesdays, 7:00 PM - 9:00 PM (Room 15).
+                  <b>Meeting Times:</b> As scheduled with Technical &amp; Media Ministry.
                 </p>
               </div>
             </div>
@@ -297,8 +299,7 @@ const MusicMinistryPage = () => {
                   featuring ministrations from all Music Ministry teams.
                 </p>
                 <p className="mb-0 text-muted">
-                  <i className="fas fa-calendar-alt me-2" /> Next Date: 7th
-                  November.
+                  <i className="fas fa-calendar-alt me-2" /> Friday services
                 </p>
               </div>
             </div>
@@ -316,7 +317,7 @@ const MusicMinistryPage = () => {
                   music and drama.
                 </p>
                 <p className="mb-0 text-muted">
-                  <i className="fas fa-calendar-alt me-2" /> Next Date: 12th
+                  <i className="fas fa-calendar-alt me-2" /> Next Date:
                   December.
                 </p>
               </div>
