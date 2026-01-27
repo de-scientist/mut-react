@@ -1,38 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ministriesAPI } from "../services/api";
 import "../assets/mut/css/ministries.css";
 
-/* OLD APPROACH - HARDCODED DATA (Commented out for developer reference)
- * This was the original implementation that used a static array.
- * The problem: Any ministries added through the admin panel wouldn't show up here.
- * Solution: Fetch data dynamically from the backend API instead.
- */
-// const ministries = [
-//   {
-//     name: 'Music Ministry',
-//     description: 'Leading and ministering worship through Choir, Band, Instrumentalism and Praise & Worship.',
-//     image: '/assets/images/music1.jpg',
-//     icon: 'fa-music',
-//     link: '/ministries/music-ministry',
-//     delay: 100,
-//   },
-//   {
-//     name: 'Bible Study & Discipleship',
-//     description: 'Deepening faith through small groups, nurturing classes for new believers, and intensive training programs.',
-//     image: '/assets/images/bs1.jpg',
-//     icon: 'fa-book-open',
-//     link: '/ministries/bible-study-discipleship',
-//     delay: 200,
-//   },
-//   ... (and so on for all ministries)
-// ]
-
-/* NEW APPROACH - DYNAMIC DATA FROM DATABASE
- * Interface matching the Ministry model from the backend database schema.
- * This ensures type safety when working with API responses.
- */
-interface Ministry {
+interface MinistryFromAPI {
   id: string;
   name: string;
   description?: string;
@@ -42,65 +13,167 @@ interface Ministry {
   isActive: boolean;
 }
 
-// Legacy fallback ministries to show if API fails or returns empty
-const legacyMinistries: Ministry[] = [
+interface CommitteeCard {
+  key: string; // internal key
+  name: string;
+  slug: string; // route slug
+  description: string;
+  icon: string; // fontawesome class e.g. "fa-music"
+  imageUrl: string; // fallback image
+  route: string; // page route
+}
+
+const COMMITTEES: CommitteeCard[] = [
   {
-    id: "legacy-music",
-    name: "Music Ministry",
+    key: "bible-study-training",
+    name: "Bible Study & Training",
+    slug: "bible-study",
     description:
-      "Leading worship through choir, band, and praise & worship teams.",
-    icon: "fa-music",
-    imageUrl: "/assets/images/music1.jpg",
-    slug: "music-ministry",
-    isActive: true,
-  },
-  {
-    id: "legacy-bible",
-    name: "Bible Study & Discipleship",
-    description:
-      "Deepening faith through small groups and discipleship classes.",
+      "Bible-based teaching, exposition, study sessions, and training to ground believers in Scripture.",
     icon: "fa-book-open",
     imageUrl: "/assets/images/bs1.jpg",
-    slug: "bible-study-discipleship",
-    isActive: true,
+    route: "/ministries/bible-study",
   },
   {
-    id: "legacy-creative",
+    key: "discipleship",
+    name: "Discipleship",
+    slug: "discipleship",
+    description:
+      "Mentorship, accountability, and practical Christian living to nurture believers into maturity.",
+    icon: "fa-user-friends",
+    imageUrl: "/assets/images/bs1.jpg",
+    route: "/ministries/discipleship",
+  },
+  {
+    key: "prayer",
+    name: "Prayer Committee",
+    slug: "prayer-ministry",
+    description:
+      "Intercession, prayer gatherings, prayer chains, keshas, retreats, and revival-focused programs.",
+    icon: "fa-hands-praying",
+    imageUrl: "/assets/images/prayer1.jpg",
+    route: "/ministries/prayer-ministry",
+  },
+  {
+    key: "missions-evangelism",
+    name: "Missions & Evangelism",
+    slug: "missions-evangelism",
+    description:
+      "Campus outreach, missions, evangelism, and hope ministry visits within and beyond the university.",
+    icon: "fa-globe",
+    imageUrl: "/assets/images/mission1.jpg",
+    route: "/ministries/missions-evangelism",
+  },
+  {
+    key: "music",
+    name: "Music Ministry",
+    slug: "music-ministry",
+    description:
+      "Choir, band, instrumentalists and Praise & Worship teams leading the Union in worship with excellence.",
+    icon: "fa-music",
+    imageUrl: "/assets/images/music1.jpg",
+    route: "/ministries/music-ministry",
+  },
+  {
+    key: "creative-arts",
     name: "Creative Arts (CREAM)",
-    description: "Drama, dance, spoken word, and visual arts for ministry.",
-    icon: "fa-theater-masks",
-    imageUrl: "/assets/images/creative-arts.jpg",
     slug: "creative-arts",
-    isActive: true,
+    description:
+      "Drama, dance, spoken word, modelling, film/media and creative expressions that point people to Christ.",
+    icon: "fa-theater-masks",
+    imageUrl: "/assets/images/dance3.jpg",
+    route: "/ministries/creative-arts",
+  },
+  {
+    key: "technical",
+    name: "Technical Department",
+    slug: "technical",
+    description:
+      "Sound, livestream, projection, photography/video, and technical support for services and events.",
+    icon: "fa-sliders-h",
+    imageUrl: "/assets/images/tech.jpg",
+    route: "/ministries/technical",
+  },
+  {
+    key: "hospitality",
+    name: "Hospitality Committee",
+    slug: "hospitality",
+    description:
+      "Welcoming guests, coordinating seating/hosting, and ensuring visitors and members feel at home.",
+    icon: "fa-mug-hot",
+    imageUrl: "/assets/images/hospitality.jpg",
+    route: "/ministries/hospitality",
+  },
+  {
+    key: "welfare",
+    name: "Welfare Committee",
+    slug: "welfare",
+    description:
+      "Member care, encouragement, support in times of need, and strengthening fellowship as a family.",
+    icon: "fa-hand-holding-heart",
+    imageUrl: "/assets/images/welfare.jpg",
+    route: "/ministries/welfare",
+  },
+  {
+    key: "rmc",
+    name: "Resource Mobilization Committee (RMC)",
+    slug: "rmc",
+    description:
+      "Stewardship and mobilization of financial/material resources to support ministry work and programs.",
+    icon: "fa-donate",
+    imageUrl: "/assets/images/rmc.jpg",
+    route: "/ministries/rmc",
   },
 ];
 
-const MinistriesPage = () => {
-  // State to store ministries fetched from API
-  const [ministries, setMinistries] = useState<Ministry[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+// Robust extractor for different backend response shapes
+function extractMinistries(payload: any): MinistryFromAPI[] {
+  if (!payload) return [];
+  if (Array.isArray(payload)) return payload as MinistryFromAPI[];
+  if (Array.isArray(payload.data)) return payload.data as MinistryFromAPI[];
+  if (Array.isArray(payload.items)) return payload.items as MinistryFromAPI[];
+  return [];
+}
 
-  // Fetch ministries from backend on component mount
+export default function MinistriesPage() {
+  const [apiMinistries, setApiMinistries] = useState<MinistryFromAPI[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [notice, setNotice] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
+
   useEffect(() => {
     const fetchMinistries = async () => {
       try {
         setLoading(true);
-        // API call - only fetches active ministries (isActive: true)
-        const response = await ministriesAPI.getAll({ active: "true" });
-        const items = response.data || [];
-        if (items.length === 0) {
-          setMinistries(legacyMinistries);
-          setError("Showing fallback ministries while we fetch live data.");
+
+        const res = await ministriesAPI.getAll();
+        const items = extractMinistries(res);
+
+        // Only keep active ones (if field exists)
+        const activeItems = items.filter((m) => m.isActive !== false);
+
+        setApiMinistries(activeItems);
+
+        // If backend has few items, still okay — our UI will show all 10 committees anyway.
+        if (activeItems.length === 0) {
+          setNotice(
+            "Heads up: no ministries were returned from the server. Showing the official committee list from the Leadership Manual.",
+          );
+        } else if (activeItems.length < 10) {
+          setNotice(
+            "Some committees are not yet available in the database. Showing the official committee list; missing ones will use default content for now.",
+          );
         } else {
-          setMinistries(items);
+          setNotice(null);
         }
-      } catch (error: any) {
-        console.error("Failed to load ministries:", error);
-        setError(
-          error?.message || "Failed to load ministries; showing fallback list.",
+      } catch (err: any) {
+        console.error("Ministries fetch failed:", err);
+        setNotice(
+          err?.data?.message ||
+            err?.message ||
+            "Failed to retrieve ministries from the server. Showing the official committee list from the Leadership Manual.",
         );
-        setMinistries(legacyMinistries);
+        setApiMinistries([]);
       } finally {
         setLoading(false);
       }
@@ -108,9 +181,47 @@ const MinistriesPage = () => {
 
     fetchMinistries();
   }, []);
+
+  // Merge API data onto our official committee list (never remove committees)
+  const mergedCommittees = useMemo(() => {
+    const map = new Map<string, MinistryFromAPI>();
+    apiMinistries.forEach((m) => map.set((m.slug || "").toLowerCase(), m));
+
+    return COMMITTEES.map((c) => {
+      const api = map.get(c.slug.toLowerCase());
+      return {
+        ...c,
+        // Prefer API content if present (lets admin updates reflect), otherwise keep manual content
+        name: api?.name?.trim() || c.name,
+        description: api?.description?.trim() || c.description,
+        imageUrl: api?.imageUrl?.trim() || c.imageUrl,
+        icon: api?.icon?.trim() || c.icon,
+      };
+    });
+  }, [apiMinistries]);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return mergedCommittees;
+    return mergedCommittees.filter((c) => {
+      const n = (c.name || "").toLowerCase();
+      const d = (c.description || "").toLowerCase();
+      return n.includes(q) || d.includes(q);
+    });
+  }, [mergedCommittees, query]);
+
+  const renderIcon = (icon: string) => {
+    // supports "fa-music" or "fas fa-music"
+    const cls =
+      icon.includes("fa-") && !icon.includes("fa ")
+        ? `fas ${icon}`
+        : icon || "fas fa-star";
+    return <i className={`${cls} feature-icon mb-3`} />;
+  };
+
   return (
     <div className="ministries-page">
-      {/* Page Hero Section */}
+      {/* Page Hero */}
       <section
         className="page-hero-section d-flex align-items-center text-center text-white"
         style={{ backgroundImage: "url('/assets/images/mbbc1.jpg')" }}
@@ -121,104 +232,106 @@ const MinistriesPage = () => {
           data-aos="fade-up"
           data-aos-duration="1000"
         >
-          <h1 className="display-3 mb-3">Our Ministries</h1>
+          <h1 className="display-3 mb-3">Our Committees</h1>
           <p className="lead">
-            Where Faith Becomes Action: Serve, Grow, Impact
+            Explore the 10 core committees of MUTCU — then view sub-ministries inside each one.
           </p>
         </div>
       </section>
 
-      {/* Ministries Overview Section */}
+      {/* Overview */}
       <section className="py-5 ministries-overview-section">
         <div className="container">
           <h2 className="section-title text-center">
-            Explore Our Diverse Ministries
+            MUTCU’s 10 Core Committees
           </h2>
-          <p className="text-center lead mb-5">
-            MUTCU&apos;s ministries are the heartbeat of our Union, providing
-            avenues for spiritual growth, service, and community impact. Each
-            ministry operates under a dedicated committee, ensuring focused and
-            effective work in alignment with our motto, vision, and mission.
+          <p className="text-center lead mb-4">
+            This page highlights the official committees (as structured in the Leadership Manual).
+            Each committee page contains its sub-ministries and how to get involved.
           </p>
 
-          {/* OLD RENDERING APPROACH (Commented out for reference)
-           * This used the hardcoded ministries array and mapped over it directly
-           * Problem: Static data didn't reflect database changes
-           */}
-          {/* <div className="row justify-content-center">
-            {ministries.map((ministry, index) => (
-              <div key={index} className="col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay={ministry.delay}>
-                <Link to={ministry.link} className="ministry-card d-block text-center text-decoration-none rounded-3 shadow-sm h-100">
-                  <img src={ministry.image} alt={ministry.name} className="img-fluid rounded-top-3" />
-                  <div className="card-body">
-                    <i className={`fas ${ministry.icon} feature-icon mb-3`} />
-                    <h4 className="card-title">{ministry.name}</h4>
-                    <p className="card-text">{ministry.description}</p>
-                    <span className="btn btn-sm btn-outline-primary mt-3">
-                      Learn More <i className="fas fa-arrow-right ms-2" />
-                    </span>
-                  </div>
-                </Link>
+          {/* Search */}
+          <div className="row justify-content-center mb-4">
+            <div className="col-md-10 col-lg-8">
+              <div className="input-group shadow-sm">
+                <span className="input-group-text bg-white">
+                  <i className="fas fa-search" />
+                </span>
+                <input
+                  className="form-control"
+                  placeholder="Search committees (e.g., Prayer, Technical, Discipleship...)"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                />
               </div>
-            ))}
-          </div> */}
+              {/* <div className="form-text">
+                Tip: Even if the API is down, these 10 committees will still display.
+              </div> */}
+            </div>
+          </div>
 
-          {/* NEW APPROACH - DYNAMIC RENDERING WITH LOADING & ERROR STATES
-           * Shows loading spinner while fetching data
-           * Shows empty state if no ministries found
-           * Dynamically renders ministries from database
-           * Uses ministry.id as key (better than index)
-           * Uses ministry.slug for routing (matches backend)
-           */}
           {loading ? (
             <div className="text-center py-5">
               <div className="spinner-border text-primary" role="status">
                 <span className="visually-hidden">Loading...</span>
               </div>
-              <p className="mt-3 text-muted">Loading ministries...</p>
+              <p className="mt-3 text-muted">Loading committees...</p>
             </div>
           ) : (
             <>
-              {error && (
+              {notice && (
                 <div className="alert alert-warning" role="alert">
-                  {error}
+                  {notice}
                 </div>
               )}
-              {ministries.length === 0 && !error && (
+
+              {filtered.length === 0 ? (
                 <div className="text-center py-5">
+                  <div className="opacity-50 mb-2">🔎</div>
                   <p className="text-muted">
-                    No ministries available at the moment.
+                    No committees match your search. Try a different keyword.
                   </p>
+                  <button
+                    className="btn btn-sm btn-outline-primary"
+                    onClick={() => setQuery("")}
+                  >
+                    Clear Search
+                  </button>
                 </div>
-              )}
-              {ministries.length > 0 && (
+              ) : (
                 <div className="row justify-content-center">
-                  {ministries.map((ministry, index) => (
+                  {filtered.map((c, index) => (
                     <div
-                      key={ministry.id}
+                      key={c.key}
                       className="col-md-6 col-lg-4 mb-4"
                       data-aos="zoom-in"
-                      data-aos-delay={index * 100}
+                      data-aos-delay={index * 70}
                     >
                       <Link
-                        to={`/ministries/${ministry.slug}`}
+                        to={c.route}
                         className="ministry-card d-block text-center text-decoration-none rounded-3 shadow-sm h-100"
                       >
-                        {ministry.imageUrl && (
+                        {c.imageUrl ? (
                           <img
-                            src={ministry.imageUrl}
-                            alt={ministry.name}
+                            src={c.imageUrl}
+                            alt={c.name}
                             className="img-fluid rounded-top-3"
                           />
+                        ) : (
+                          <div
+                            className="d-flex align-items-center justify-content-center bg-light rounded-top-3"
+                            style={{ height: 220 }}
+                          >
+                            <div className="opacity-50">✨</div>
+                          </div>
                         )}
+
                         <div className="card-body">
-                          <h4 className="card-title">{ministry.name}</h4>
-                          <p className="card-text">
-                            {ministry.description ||
-                              "Learn more about this ministry"}
-                          </p>
-                          <span className="btn btn-sm btn-outline-primary mt-3">
-                            Learn More
+                          {renderIcon(c.icon)}
+                          <h4 className="card-title">{c.name}</h4>
+                          <p className="card-text">{c.description}</p>
+                          <span className="btn btn-sm btn-learn-more mt-3">
+                            Learn More <i className="fas fa-arrow-right ms-2" />
                           </span>
                         </div>
                       </Link>
@@ -226,20 +339,24 @@ const MinistriesPage = () => {
                   ))}
                 </div>
               )}
+
+              {/* Optional link to special committees page */}
+              <div className="text-center mt-4">
+                <Link to="/ministries/special-committees" className="btn btn-secondary btn-lg">
+                  View Special Committees <i className="fas fa-users ms-2" />
+                </Link>
+              </div>
             </>
           )}
         </div>
       </section>
 
-      {/* Call to Action Section */}
+      {/* CTA */}
       <section className="py-5 cta-section text-white">
         <div className="container text-center" data-aos="zoom-in">
-          <h2 className="section-title text-white">
-            Find Your Place to Serve!
-          </h2>
+          <h2 className="section-title text-white">Find Your Place to Serve!</h2>
           <p className="lead mb-4 text-white-50">
-            There&apos;s a ministry for every passion and gift. Join us in
-            making a difference.
+            There’s a committee for every passion and gift. Join us in making a difference.
           </p>
           <Link to="/contact" className="btn btn-primary btn-lg me-3">
             Get Involved
@@ -251,6 +368,4 @@ const MinistriesPage = () => {
       </section>
     </div>
   );
-};
-
-export default MinistriesPage;
+}

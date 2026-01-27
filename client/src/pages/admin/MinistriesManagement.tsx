@@ -15,6 +15,8 @@ import {
   Search,
   CheckCircle,
   XCircle,
+  Share2, 
+  Download,
 } from "lucide-react";
 import "../../styles/adminForms.css";
 
@@ -103,6 +105,103 @@ const MinistriesManagement = () => {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
   };
+
+const exportMinistriesAsCSV = () => {
+  if (!ministries.length) return;
+
+  const headers = ["Name", "Slug", "Description", "Active"];
+  const rows = ministries.map((m) => [
+    m.name,
+    m.slug,
+    m.description || "",
+    m.isActive ? "Yes" : "No",
+  ]);
+
+  const csvContent =
+    [headers, ...rows].map((row) => row.join(",")).join("\n");
+
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "ministries.csv";
+  link.click();
+
+  URL.revokeObjectURL(url);
+};
+
+const exportMinistriesAsJSON = () => {
+  const blob = new Blob([JSON.stringify(ministries, null, 2)], {
+    type: "application/json",
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = "ministries.json";
+  link.click();
+
+  URL.revokeObjectURL(url);
+};
+
+const shareAllMinistries = async () => {
+  if (!ministries.length) {
+    setError("No ministries to share");
+    return;
+  }
+
+  const shareText = ministries
+    .map(
+      (m) =>
+        `${m.name} (${m.slug}) - ${
+          m.isActive ? "Active" : "Inactive"
+        }`
+    )
+    .join("\n");
+
+  const shareUrl = `${window.location.origin}/ministries`;
+
+  try {
+    if (navigator.share) {
+      await navigator.share({
+        title: "Church Ministries",
+        text: shareText,
+        url: shareUrl,
+      });
+    } else {
+      await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+      setSuccessMessage("Ministries copied to clipboard!");
+    }
+  } catch {
+    setError("Unable to share ministries");
+  }
+};
+
+const shareSingleMinistry = async (ministry: Ministry) => {
+  const shareText = `${ministry.name}
+🔗 ${ministry.slug}
+${ministry.description || ""}`;
+
+  const shareUrl = `${window.location.origin}/ministries/${ministry.slug}`;
+
+  try {
+    if (navigator.share) {
+      await navigator.share({
+        title: ministry.name,
+        text: shareText,
+        url: shareUrl,
+      });
+    } else {
+      await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+      setSuccessMessage("Ministry link copied to clipboard!");
+    }
+  } catch {
+    setError("Unable to share ministry");
+  }
+};
+
 
   const handleDelete = async () => {
     if (!selectedMinistry) return;
@@ -225,6 +324,36 @@ const MinistriesManagement = () => {
             </div>
           </div>
         </div>
+
+<div className="dropdown">
+  <button
+    className="btn btn-outline-secondary dropdown-toggle rounded-pill"
+    data-bs-toggle="dropdown"
+  >
+    <Download size={16} className="me-1" /> Export
+  </button>
+
+  <ul className="dropdown-menu">
+    <li>
+      <button className="dropdown-item" onClick={exportMinistriesAsCSV}>
+        Export as CSV
+      </button>
+    </li>
+    <li>
+      <button className="dropdown-item" onClick={exportMinistriesAsJSON}>
+        Export as JSON
+      </button>
+    </li>
+  </ul>
+  <button
+    className="btn btn-outline-secondary dropdown-toggle rounded-pill"
+    data-bs-toggle="dropdown"
+  >
+    <Download size={16} className="me-1" /> Share All Ministries
+        
+      </button>
+</div>
+
 
         <div className="card border-0 shadow-sm mb-4 rounded-4">
           <div className="card-body p-3">
@@ -452,7 +581,7 @@ const MinistriesManagement = () => {
                       <td className="px-4">
                         <div className="d-flex align-items-center gap-3 py-1">
                           <div className="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold icon-box">
-                            {ministry.icon || <Layout size={18} />}
+                            {ministry.icon && !ministry.icon.startsWith('fa-') ? ministry.icon : <Layout size={18} />}
                           </div>
                           <div>
                             <div className="fw-bold text-dark">

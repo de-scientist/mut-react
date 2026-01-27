@@ -58,7 +58,7 @@
   font-family: var(--font-heading);
   font-weight: 600;
   color: var(--mutcu-navy-blue);
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.3px;
@@ -82,7 +82,7 @@
   border-radius: 8px;
   padding: 0.75rem 1rem;
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   color: var(--mutcu-navy-blue) !important;
   transition: all 0.3s ease;
   min-height: 44px;
@@ -490,4 +490,33 @@
 
 .admin-event-form .btn {
   min-height: 44px;
+}
+
+/* Admin Dashboard Page Styling */
+.admin-dashboard {
+  font-size: 1.1rem;
+}
+
+.admin-dashboard h2 {
+  font-size: 2.5rem;
+}
+
+.admin-dashboard h5 {
+  font-size: 1.3rem;
+}
+
+.admin-dashboard .text-muted {
+  font-size: 1.1rem;
+}
+
+.admin-dashboard .small {
+  font-size: 1rem;
+}
+
+.admin-dashboard .fw-black {
+  font-size: 2rem;
+}
+
+.admin-dashboard .btn {
+  font-size: 1.05rem;
 }

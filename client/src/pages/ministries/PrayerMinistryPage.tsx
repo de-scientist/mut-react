@@ -1,5 +1,6 @@
 import { type FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import { prayerAPI } from "../../services/api";
 import { useTimedSuccess } from "../../hooks/useTimedSuccess";
 import "../../assets/mut/css/prayer.css";
 
@@ -8,28 +9,40 @@ const PrayerMinistryPage = () => {
   const [email, setEmail] = useState("");
   const [areaOfInterest, setAreaOfInterest] = useState("");
   const [experience, setExperience] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { visible: showSuccess, trigger: showSuccessMessage } =
     useTimedSuccess(5000);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!fullName || !email || !areaOfInterest) {
+      setError("Please fill in your name, email, and area of interest.");
       return;
     }
 
-    console.log("Prayer Ministry Join Interest:", {
-      fullName,
-      email,
-      areaOfInterest,
-      experience,
-    });
+    setError(null);
+    setSubmitting(true);
 
-    setFullName("");
-    setEmail("");
-    setAreaOfInterest("");
-    setExperience("");
-    showSuccessMessage();
+    try {
+      await prayerAPI.submit({
+        name: fullName,
+        request: `Join Prayer Ministry - Area: ${areaOfInterest}. Experience: ${experience || "N/A"}. Email: ${email}`,
+        isPublic: false,
+      });
+
+      setFullName("");
+      setEmail("");
+      setAreaOfInterest("");
+      setExperience("");
+      showSuccessMessage();
+    } catch (apiError: any) {
+      const message = apiError?.message || "Unable to submit right now. Please try again.";
+      setError(message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -342,78 +355,89 @@ const PrayerMinistryPage = () => {
           </p>
           <div className="row justify-content-center">
             <div className="col-md-8" data-aos="fade-up" data-aos-delay="200">
-              <form onSubmit={handleSubmit} noValidate>
-                <div className="mb-3">
-                  <label htmlFor="fullName" className="form-label">
-                    Your Full Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="fullName"
-                    placeholder="Please enter your full name."
-                    required
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Your Email
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    placeholder="Please enter a valid university email address."
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="areaOfInterest" className="form-label">
-                    Area of Interest
-                  </label>
-                  <select
-                    className="form-select"
-                    id="areaOfInterest"
-                    required
-                    value={areaOfInterest}
-                    onChange={(e) => setAreaOfInterest(e.target.value)}
+              <div className="join-form-card">
+                <form onSubmit={handleSubmit} noValidate>
+                  {error && (
+                    <div className="alert alert-warning mb-3" role="alert">
+                      {error}
+                    </div>
+                  )}
+                  <div className="mb-3">
+                    <label htmlFor="fullName" className="form-label">
+                      Your Full Name
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="fullName"
+                      placeholder="Please enter your full name."
+                      required
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="email" className="form-label">
+                      Your Email
+                    </label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      placeholder="Please enter a valid university email address."
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="areaOfInterest" className="form-label">
+                      Area of Interest
+                    </label>
+                    <select
+                      className="form-select"
+                      id="areaOfInterest"
+                      required
+                      value={areaOfInterest}
+                      onChange={(e) => setAreaOfInterest(e.target.value)}
+                    >
+                      <option value="" disabled>
+                        Select an area
+                      </option>
+                      <option>Morning Prayers</option>
+                      <option>Lunch Hour Prayers</option>
+                      <option>Evening Prayers</option>
+                      <option>Intercession Group</option>
+                      <option>General Interest</option>
+                    </select>
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="experience" className="form-label">
+                      Tell us about your prayer experience or passion (Optional)
+                    </label>
+                    <textarea
+                      className="form-control"
+                      id="experience"
+                      rows={3}
+                      value={experience}
+                      onChange={(e) => setExperience(e.target.value)}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="btn btn-primary w-100"
+                    disabled={submitting}
                   >
-                    <option value="" disabled>
-                      Select an area
-                    </option>
-                    <option>Morning Prayers</option>
-                    <option>Lunch Hour Prayers</option>
-                    <option>Evening Prayers</option>
-                    <option>Intercession Group</option>
-                    <option>General Interest</option>
-                  </select>
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="experience" className="form-label">
-                    Tell us about your prayer experience or passion (Optional)
-                  </label>
-                  <textarea
-                    className="form-control"
-                    id="experience"
-                    rows={3}
-                    value={experience}
-                    onChange={(e) => setExperience(e.target.value)}
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary w-100">
-                  Submit Interest
-                </button>
-              </form>
-              {showSuccess && (
-                <div className="mt-3 text-success animate-pop-in">
-                  Thank you for your interest in the Prayer Ministry! We&apos;ve
-                  received your submission and will get in touch with you soon.
-                </div>
-              )}
+                    {submitting ? "Submitting..." : "Submit Interest"}
+                  </button>
+                </form>
+                {showSuccess && (
+                  <div className="mt-3 text-success animate-pop-in">
+                    Thank you for your interest in the Prayer Ministry! We&apos;ve
+                    received your submission and will get in touch with you soon.
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           <div className="row mt-4 justify-content-center">

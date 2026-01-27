@@ -151,7 +151,7 @@ const ContactPage = () => {
                   <div className="contact-info-card text-center p-4 rounded-3 shadow-sm h-100">
                     <i className="fas fa-phone feature-icon mb-3" />
                     <h4>Phone</h4>
-                    <p>+254 712 345 678</p>
+                    <p>+254 707 223626/ +254 757 883073</p>
                   </div>
                 </div>
                 <div

@@ -259,6 +259,42 @@ p {
   color: #fff;
 }
 
+.learn-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border: 2px solid var(--mutcu-orange);
+  color: var(--mutcu-orange);
+  background: rgba(255, 151, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(255, 151, 0, 0.15);
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.learn-more-btn i {
+  transition: transform 0.2s ease;
+}
+
+.learn-more-btn:hover {
+  background-color: var(--mutcu-orange);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 151, 0, 0.25);
+}
+
+.learn-more-btn:hover i {
+  transform: translateX(4px);
+}
+
+.learn-more-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.25rem rgba(255, 151, 0, 0.35);
+}
+
 /* Call to Action Section (Consistent with Homepage) */
 .cta-section {
   background: linear-gradient(
