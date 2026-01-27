@@ -38,7 +38,7 @@ import RMCPage from "./pages/ministries/RMCPage";
 import TreasuryCommitteePage from "./pages/ministries/TreasuryCommitteePage";
 import BibleStudyTrainingCommitteePage from "./pages/ministries/BibleStudyTrainingCommitteePage";
 import DiscipleshipCommitteePage from "./pages/ministries/DiscipleshipCommitteePage";
-import SpecialCommitteesPage from "./pages/ministries/SpecialCommitteesPage";
+import SpecialCommitteesPage from "./pages/ministries/Special-Committees";
 import AdvisoryBoardPage from "./pages/ministries/AdvisoryBoardPage";
 import AuditingCommitteePage from "./pages/ministries/AuditingCommitteePage";
 import AssociatesCommitteePage from "./pages/ministries/AssociatesCommitteePage";

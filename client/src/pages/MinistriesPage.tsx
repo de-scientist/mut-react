@@ -325,7 +325,7 @@ export default function MinistriesPage() {
 
               {/* Optional link to special committees page */}
               <div className="text-center mt-4">
-                <Link to="/ministries/special-committees" className="btn btn-secondary btn-lg">
+                <Link to="/special-committees" className="btn btn-secondary btn-lg">
                   View Special Committees <i className="fas fa-users ms-2" />
                 </Link>
               </div>
