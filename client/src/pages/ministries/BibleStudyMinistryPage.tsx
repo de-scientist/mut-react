@@ -7,25 +7,28 @@ const BibleStudyMinistryPage = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [areaOfInterest, setAreaOfInterest] = useState("");
-  const [experience, setExperience] = useState("");
-  const { visible: showSuccess, trigger: showSuccessMessage } =
-    useTimedSuccess(5000);
+  const [joinMessage, setJoinMessage] = useState("");
+  const {
+    visible: showSuccess,
+    trigger: showSuccessMessage,
+    hide,
+  } = useTimedSuccess(0);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!fullName || !email || !areaOfInterest) return;
 
-    console.log("Bible Study & Discipleship Join Interest:", {
-      fullName,
+    console.log("Bible Study & Training Ministry Join Request Submitted:", {
+      name: fullName,
       email,
-      areaOfInterest,
-      experience,
+      interest: areaOfInterest,
+      message: joinMessage,
     });
 
     setFullName("");
     setEmail("");
     setAreaOfInterest("");
-    setExperience("");
+    setJoinMessage("");
     showSuccessMessage();
   };
 
@@ -33,323 +36,258 @@ const BibleStudyMinistryPage = () => {
     <div className="bible-study-ministry-page">
       {/* Hero */}
       <section
-        className="page-hero-section"
-        style={{
-          backgroundImage: "url('/assets/images/bible-study-hero.jpg')",
-        }}
-        data-aos="fade-in"
+        className="page-hero-section d-flex align-items-center text-center text-white"
+        style={{ backgroundImage: "url('/assets/images/bible-study-hero.jpg')" }}
       >
         <div className="hero-overlay" />
-        <div className="container">
-          <h1 data-aos="fade-up">
-            MUTCU Bible Study &amp; Discipleship Ministry
-          </h1>
-          <p className="lead" data-aos="fade-up" data-aos-delay="100">
-            Deepening Faith Through God&apos;s Word and Nurturing Growth
+        <div
+          className="container position-relative"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+        >
+          <h1 className="display-3 mb-3">MUTCU Bible Study &amp; Training Ministry</h1>
+          <p className="lead">
+            Grounding Believers in God&apos;s Word and Building Spiritual Maturity
           </p>
         </div>
       </section>
 
       {/* Intro */}
-      <section className="ministry-intro-section">
+      <section className="py-5 ministry-intro-section">
         <div className="container">
           <div className="row align-items-center">
-            <div className="col-lg-7">
-              <h2 className="section-title" data-aos="fade-right">
+            <div
+              className="col-lg-7 mb-4 mb-lg-0"
+              data-aos="fade-right"
+              data-aos-delay="100"
+            >
+              <h2 className="section-title text-start">
                 About the Bible Study &amp; Training Ministry
               </h2>
-              <div data-aos="fade-right" data-aos-delay="100">
+              <div className="mb-4">
                 <h5 className="text-secondary mb-3">Mandate</h5>
                 <p>
                   To facilitate the systematic spiritual growth of members through the in-depth study of God&apos;s Word in small groups and structured self-training programs.
                 </p>
               </div>
-              <div data-aos="fade-right" data-aos-delay="200">
+              <div className="mb-4">
                 <h5 className="text-secondary mb-3">Our Mission</h5>
-                <p>
-                  This ministry equips MUTCU members with a deeper understanding of the Holy Scripture and builds spiritual maturity through small group Bible studies, nurturing classes for new believers, and intensive training through programs like BEST-P (Bible Exposition Self Training Program).
+                <p className="lead">
+                  The Bible Study &amp; Training Ministry is dedicated to deepening the faith of MUTCU members through rigorous engagement with Scripture. We provide multiple pathways for spiritual growth: small group Bible studies for community learning, nurturing classes for new believers, the BEST-P program for those wanting to develop Bible exposition skills, and consistent Bible reading initiatives to foster a culture of personal devotion.
                 </p>
               </div>
-              <div data-aos="fade-right" data-aos-delay="300">
-                <h5 className="text-secondary mb-3">Our Focus</h5>
+              <div>
+                <h5 className="text-secondary mb-3">Our Commitment</h5>
                 <ul>
-                  <li>Fostering consistent, personal Bible reading across the CU</li>
-                  <li>Facilitating in-depth Bible study in small groups</li>
-                  <li>Training members in Bible exposition through BEST-P</li>
-                  <li>Ensuring members are grounded in biblical truths and apply them in daily life</li>
+                  <li>Providing quality Bible study guides and teaching materials</li>
+                  <li>Training and mentoring effective Bible study group leaders</li>
+                  <li>Promoting consistent personal Bible reading across the CU</li>
+                  <li>Equipping members with skills in biblical exposition and interpretation</li>
                 </ul>
               </div>
             </div>
-            <div className="col-lg-5 text-center mb-4 mb-lg-0">
+            <div
+              className="col-lg-5 text-center"
+              data-aos="fade-left"
+              data-aos-delay="200"
+            >
               <img
-                src="/assets/images/CALEB.jpg"
-                alt="Bible Study Coordinator"
-                className="img-fluid rounded-circle"
-                data-aos="zoom-in"
+                src="/assets/images/bible-study-group.jpg"
+                alt="Bible Study Ministry"
+                className="img-fluid rounded-3 shadow-lg"
               />
-              <h3 className="mt-3">Bible Study &amp; Training Coordinator</h3>
-              <p className="text-muted">
-                Provides oversight and educational leadership for the ministry
-              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Discipleship programs */}
-      <section className="sub-ministries-section">
+      {/* Sub-Ministries */}
+      <section className="py-5 bg-light sub-ministries-section">
         <div className="container">
-          <h2 className="section-title text-center" data-aos="fade-up">
-            Our Core Programs
-          </h2>
-          <p
-            className="lead text-center"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            The ministry offers multiple programs designed to foster comprehensive spiritual growth and biblical grounding.
+          <h2 className="section-title text-center">Our Ministry Programs</h2>
+          <p className="text-center lead mb-5">
+            Four core programs designed for comprehensive spiritual growth through God&apos;s Word.
           </p>
+
           <div className="row">
             {/* Small Bible Study Groups */}
             <div
-              className="col-md-6 col-lg-4 mb-4"
+              className="col-lg-6 mb-4"
               data-aos="fade-up"
-              data-aos-delay="200"
+              data-aos-delay="100"
             >
-              <div className="sub-ministry-card">
-                <div className="card-body">
-                  <i className="fas fa-book-open choir-icon mb-3" />
-                  <h4 className="card-title">Small Bible Study Groups</h4>
-                  <p className="card-text">
-                    In-depth exploration of God&apos;s Word in intimate settings
-                  </p>
-                  <h6>Key Features</h6>
-                  <ul>
-                    <li>Weekly discussions using official guides</li>
-                    <li>Interactive biblical exploration</li>
-                    <li>Personal application of scripture</li>
-                    <li>Community fellowship and prayer</li>
-                  </ul>
-                  <p className="text-muted small">
-                    <i className="fas fa-calendar-alt me-2" /> Mondays &amp; other set days
-                  </p>
+              <div className="sub-ministry-card p-4 rounded-3 shadow-sm h-100">
+                <div className="card-image-container mb-4">
+                  <img
+                    src="/assets/images/bible-study-group.jpg"
+                    alt="Small Bible Study Groups"
+                    className="img-fluid rounded-3"
+                  />
                 </div>
-              </div>
-            </div>
-
-            {/* Nurturing Classes */}
-            <div
-              className="col-md-6 col-lg-4 mb-4"
-              data-aos="fade-up"
-              data-aos-delay="300"
-            >
-              <div className="sub-ministry-card">
-                <div className="card-body">
-                  <i className="fas fa-seedling band-icon mb-3" />
-                  <h4 className="card-title">Nurturing Classes</h4>
-                  <p className="card-text">
-                    Grounding new believers in fundamental Christian faith
-                  </p>
-                  <h6>Key Features</h6>
-                  <ul>
-                    <li>Teachings on basic Christian principles</li>
-                    <li>Introduction to biblical foundations</li>
-                    <li>Spiritual mentorship and guidance</li>
-                    <li>Questions and discussions</li>
-                  </ul>
-                  <p className="text-muted small">
-                    <i className="fas fa-calendar-alt me-2" /> Structured schedule
-                  </p>
+                <div className="d-flex align-items-center mb-3">
+                  <i className="fas fa-book-open choir-icon me-3" />
+                  <h3 className="card-title mb-0">Small Bible Study Groups</h3>
                 </div>
+                <p>
+                  Intimate settings for in-depth exploration of God&apos;s Word. Our small groups provide weekly discussions using official guides, enabling members to understand Scripture deeply and apply it to their lives.
+                </p>
+                <h6>Key Features:</h6>
+                <ul>
+                  <li>Weekly meetings in accessible locations</li>
+                  <li>Interactive biblical exploration and discussion</li>
+                  <li>Personal application and accountability</li>
+                  <li>Community fellowship and prayer</li>
+                </ul>
+                <p className="mb-0 text-muted">
+                  <i className="fas fa-calendar-alt me-2" />
+                  <b>Meeting Times:</b> Mondays and other designated days
+                </p>
               </div>
             </div>
 
             {/* BEST-P Program */}
             <div
-              className="col-md-6 col-lg-4 mb-4"
+              className="col-lg-6 mb-4"
               data-aos="fade-up"
-              data-aos-delay="400"
+              data-aos-delay="200"
             >
-              <div className="sub-ministry-card">
-                <div className="card-body">
-                  <i className="fas fa-graduation-cap praise-icon mb-3" />
-                  <h4 className="card-title">BEST-P Program</h4>
-                  <p className="card-text">
-                    Bible Exposition Self Training Program for deeper scriptural understanding
-                  </p>
-                  <h6>Key Features</h6>
-                  <ul>
-                    <li>Comprehensive curriculum on scripture exposition</li>
-                    <li>Practical assignments and exercises</li>
-                    <li>Training for potential Bible study leaders</li>
-                    <li>Graduation recognition and advancement</li>
-                  </ul>
-                  <p className="text-muted small">
-                    <i className="fas fa-calendar-alt me-2" /> Scheduled sessions
-                  </p>
+              <div className="sub-ministry-card p-4 rounded-3 shadow-sm h-100">
+                <div className="card-image-container mb-4">
+                  <img
+                    src="/assets/images/best-p.jpg"
+                    alt="BEST-P Program"
+                    className="img-fluid rounded-3"
+                  />
                 </div>
+                <div className="d-flex align-items-center mb-3">
+                  <i className="fas fa-graduation-cap praise-icon me-3" />
+                  <h3 className="card-title mb-0">BEST-P Program</h3>
+                </div>
+                <p>
+                  Bible Exposition Self Training Program for those desiring deeper skills in biblical interpretation and teaching. This structured program trains potential leaders in expositive preaching and teaching methodologies.
+                </p>
+                <h6>Key Features:</h6>
+                <ul>
+                  <li>Comprehensive curriculum on scripture exposition</li>
+                  <li>Practical assignments and exercises</li>
+                  <li>Leadership development and mentorship</li>
+                  <li>Graduation recognition and advancement</li>
+                </ul>
+                <p className="mb-0 text-muted">
+                  <i className="fas fa-calendar-alt me-2" />
+                  <b>Duration:</b> Structured sessions throughout the year
+                </p>
               </div>
             </div>
 
             {/* Consistent Bible Reading */}
             <div
-              className="col-md-6 col-lg-4 mb-4"
+              className="col-lg-6 mb-4"
               data-aos="fade-up"
-              data-aos-delay="500"
-            >
-              <div className="sub-ministry-card">
-                <div className="card-body">
-                  <i className="fas fa-bookmark band-icon mb-3" />
-                  <h4 className="card-title">Consistent Bible Reading</h4>
-                  <p className="card-text">
-                    Cultivating a daily personal Bible reading habit
-                  </p>
-                  <h6>Key Features</h6>
-                  <ul>
-                    <li>Reading-plan groups</li>
-                    <li>Devotional resources</li>
-                    <li>Accountability partnerships</li>
-                    <li>Progress tracking and encouragement</li>
-                  </ul>
-                  <p className="text-muted small">
-                    <i className="fas fa-calendar-alt me-2" /> Daily engagement
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Bible Study Review */}
-            <div
-              className="col-md-6 col-lg-4 mb-4"
-              data-aos="fade-up"
-              data-aos-delay="600"
-            >
-              <div className="sub-ministry-card">
-                <div className="card-body">
-                  <i className="fas fa-comments choir-icon mb-3" />
-                  <h4 className="card-title">Bible Study Review</h4>
-                  <p className="card-text">
-                    Consolidated discussion and reflection on weekly Bible studies
-                  </p>
-                  <h6>Key Features</h6>
-                  <ul>
-                    <li>Group reflection sessions</li>
-                    <li>Questions and clarifications</li>
-                    <li>Application discussions</li>
-                    <li>Shared insights and takeaways</li>
-                  </ul>
-                  <p className="text-muted small">
-                    <i className="fas fa-calendar-alt me-2" /> Mondays, 4:00 PM
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Baptism Preparation */}
-            <div
-              className="col-md-6 col-lg-4 mb-4"
-              data-aos="fade-up"
-              data-aos-delay="700"
-            >
-              <div className="sub-ministry-card">
-                <div className="card-body">
-                  <i className="fas fa-water instrumentalists-icon mb-3" />
-                  <h4 className="card-title">Baptism Preparation</h4>
-                  <p className="card-text">
-                    Training and celebration of new believers&apos; public faith commitment
-                  </p>
-                  <h6>Key Features</h6>
-                  <ul>
-                    <li>Pre-baptism training classes</li>
-                    <li>Biblical understanding of baptism</li>
-                    <li>Baptism ceremony planning</li>
-                    <li>Post-baptism follow-up discipleship</li>
-                  </ul>
-                  <p className="text-muted small">
-                    <i className="fas fa-calendar-alt me-2" /> Once per spiritual year
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Events */}
-      <section className="key-events-section">
-        <div className="container">
-          <h2 className="section-title text-center" data-aos="fade-up">
-            Committee Structure
-          </h2>
-          <p
-            className="lead text-center"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            The ministry is led by a dedicated committee with specialized roles to ensure effective administration and spiritual oversight.
-          </p>
-          <div className="row">
-            <div
-              className="col-md-6 col-lg-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <div className="event-highlight-card">
-                <div className="card-body text-center">
-                  <i className="fas fa-user-tie event-icon" />
-                  <h5 className="card-title">Chairperson</h5>
-                  <p className="card-text">
-                    Bible Study &amp; Training Coordinator
-                  </p>
-                  <small className="text-muted">Provides oversight and educational leadership</small>
-                </div>
-              </div>
-            </div>
-            <div
-              className="col-md-6 col-lg-3 mb-4"
-              data-aos="zoom-in"
               data-aos-delay="300"
             >
-              <div className="event-highlight-card">
-                <div className="card-body text-center">
-                  <i className="fas fa-book event-icon" />
-                  <h5 className="card-title">Bible Study Coordinator</h5>
-                  <p className="card-text">
-                    Small Groups &amp; Follow-up
+              <div className="sub-ministry-card p-4 rounded-3 shadow-sm h-100">
+                <div className="card-image-container mb-4">
+                  <img
+                    src="/assets/images/bible-study-group.jpg"
+                    alt="Consistent Bible Reading"
+                    className="img-fluid rounded-3"
+                  />
+                </div>
+                <div className="d-flex align-items-center mb-3">
+                  <i className="fas fa-bookmark band-icon me-3" />
+                  <h3 className="card-title mb-0">Consistent Bible Reading</h3>
+                </div>
+                <p>
+                  A program dedicated to fostering daily personal Bible reading habits among members. We provide structured reading plans, devotional resources, and accountability partnerships to sustain a culture of personal devotion.
+                </p>
+                <h6>Key Features:</h6>
+                <ul>
+                  <li>Curated reading-plan groups</li>
+                  <li>Devotional resources and guides</li>
+                  <li>Accountability partnerships for motivation</li>
+                  <li>Progress tracking and encouragement</li>
+                </ul>
+                <p className="mb-0 text-muted">
+                  <i className="fas fa-calendar-alt me-2" />
+                  <b>Engagement:</b> Daily personal practice
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Committee Structure */}
+      <section className="py-5 bg-white roles-responsibilities-section">
+        <div className="container">
+          <h2 className="section-title text-center">Committee Structure &amp; Leadership</h2>
+          <p className="text-center lead mb-5">
+            The Bible Study &amp; Training Committee comprises dedicated leaders responsible for oversight of each program.
+          </p>
+          <div className="row g-4 justify-content-center">
+            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
+              <div className="card h-100 border-0 shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title text-secondary">
+                    <i className="fas fa-chair me-2 text-primary" />
+                    Bible Study &amp; Training Coordinator (Chairperson)
+                  </h5>
+                  <p className="card-text small">
+                    Provides oversight and educational leadership for the entire committee. Responsible for the overall strategy and health of small group Bible studies, oversight of BEST-P administration, and championing a culture of consistent personal Bible reading.
                   </p>
-                  <small className="text-muted">Oversees small Bible study groups</small>
                 </div>
               </div>
             </div>
-            <div
-              className="col-md-6 col-lg-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="400"
-            >
-              <div className="event-highlight-card">
-                <div className="card-body text-center">
-                  <i className="fas fa-graduation-cap event-icon" />
-                  <h5 className="card-title">BEST-P Coordinator</h5>
-                  <p className="card-text">
-                    Bible Exposition Training
+            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div className="card h-100 border-0 shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title text-secondary">
+                    <i className="fas fa-users me-2 text-primary" />
+                    Secretary/Treasurer
+                  </h5>
+                  <p className="card-text small">
+                    Handles all administrative tasks including minutes, communication, and financial management. Custodian of all committee funds, documents, and assets. Serves as financial advisor to the committee.
                   </p>
-                  <small className="text-muted">Ensures BEST-P classes are running effectively</small>
                 </div>
               </div>
             </div>
-            <div
-              className="col-md-6 col-lg-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="500"
-            >
-              <div className="event-highlight-card">
-                <div className="card-body text-center">
-                  <i className="fas fa-bookmark event-icon" />
-                  <h5 className="card-title">CBR Coordinator</h5>
-                  <p className="card-text">
-                    Consistent Bible Reading
+            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <div className="card h-100 border-0 shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title text-secondary">
+                    <i className="fas fa-book me-2 text-primary" />
+                    Bible Study Coordinator &amp; Assistant
+                  </h5>
+                  <p className="card-text small">
+                    Oversees small Bible study groups, issues study guides, collects contributions, and tracks group meetings. Ensures Bible study leaders are effective and well-trained. Oversees the Monday Bible Study Review at 4:00 PM.
                   </p>
-                  <small className="text-muted">Promotes personal daily Bible reading</small>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="400">
+              <div className="card h-100 border-0 shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title text-secondary">
+                    <i className="fas fa-graduation-cap me-2 text-primary" />
+                    BEST-P Coordinator &amp; Assistant
+                  </h5>
+                  <p className="card-text small">
+                    Ensures BEST-P classes run smoothly, selects quality facilitators, manages group formations and assignments, and coordinates the annual BEST-P graduation. Oversees proper record-keeping and attendance.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="500">
+              <div className="card h-100 border-0 shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title text-secondary">
+                    <i className="fas fa-bookmark me-2 text-primary" />
+                    Consistent Bible Reading Coordinator &amp; Assistant
+                  </h5>
+                  <p className="card-text small">
+                    Develops and promotes strategic plans to encourage daily personal Bible reading across the CU. Manages reading-plan groups, shares devotional resources, tracks engagement, and provides motivation.
+                  </p>
                 </div>
               </div>
             </div>
@@ -357,42 +295,26 @@ const BibleStudyMinistryPage = () => {
         </div>
       </section>
 
-      {/* Leadership */}
-      <section className="leadership-spotlight-section">
+      {/* Current Leader */}
+      <section className="py-5 bg-light">
         <div className="container">
-          <h2 className="section-title text-center" data-aos="fade-up">
-            Key Responsibilities
-          </h2>
-          <p
-            className="lead text-center"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            Our leadership is committed to these core responsibilities
-          </p>
-          <div className="row">
-            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
-              <div className="leadership-card">
-                <h5><i className="fas fa-check-circle text-success me-2"></i>Overall Strategy</h5>
-                <p>Managing the overall health and strategy of small group Bible studies</p>
-              </div>
-            </div>
-            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
-              <div className="leadership-card">
-                <h5><i className="fas fa-check-circle text-success me-2"></i>Leader Development</h5>
-                <p>Training and equipping Bible study group leaders for effectiveness</p>
-              </div>
-            </div>
-            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
-              <div className="leadership-card">
-                <h5><i className="fas fa-check-circle text-success me-2"></i>Program Oversight</h5>
-                <p>Supervising BEST-P program execution and ensuring quality delivery</p>
-              </div>
-            </div>
-            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="500">
-              <div className="leadership-card">
-                <h5><i className="fas fa-check-circle text-success me-2"></i>Culture of Bible Study</h5>
-                <p>Championing a culture of consistent personal Bible reading and study</p>
+          <h2 className="section-title text-center mb-5">Our Current Leader</h2>
+          <div className="row justify-content-center">
+            <div className="col-lg-6 col-md-8 text-center" data-aos="zoom-in">
+              <div className="card border-0 shadow-lg p-4">
+                <img
+                  src="/assets/images/CALEB.jpg"
+                  alt="Caleb Esere"
+                  className="img-fluid rounded-circle mb-4"
+                  style={{ maxWidth: "200px", margin: "0 auto" }}
+                />
+                <h4 className="card-title mb-2">Caleb Esere</h4>
+                <p className="text-secondary mb-3">
+                  <strong>Bible Study &amp; Training Coordinator</strong>
+                </p>
+                <p className="card-text text-muted">
+                  Providing visionary leadership and spiritual oversight for the Bible Study &amp; Training Ministry, ensuring members are equipped with deep knowledge of God&apos;s Word and committed to consistent personal devotion.
+                </p>
               </div>
             </div>
           </div>
@@ -400,52 +322,50 @@ const BibleStudyMinistryPage = () => {
       </section>
 
       {/* Join CTA */}
-      <section className="cta-section">
+      <section className="py-5 cta-section text-white">
         <div className="container">
-          <h2 className="section-title text-center" data-aos="fade-up">
-            Join Our Bible Study &amp; Training Ministry!
-          </h2>
-          <p
-            className="lead text-center"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            If you have a passion for God&apos;s Word and growing deeper in your faith, we invite you to join our community of Bible students.
-          </p>
+          <div className="text-center mb-5" data-aos="zoom-in">
+            <h2 className="section-title text-white mb-3">
+              Join the Bible Study &amp; Training Ministry!
+            </h2>
+            <p className="lead text-white-50">
+              Whether you want to deepen your knowledge of Scripture, grow spiritually through community, or develop teaching skills, there&apos;s a place for you in our ministry.
+            </p>
+          </div>
           <div className="row justify-content-center">
             <div className="col-md-8" data-aos="fade-up" data-aos-delay="200">
               <form onSubmit={handleSubmit} noValidate>
                 <div className="mb-3">
-                  <label htmlFor="fullName" className="form-label">
+                  <label htmlFor="fullName" className="form-label text-white">
                     Your Full Name
                   </label>
                   <input
                     type="text"
                     className="form-control"
                     id="fullName"
-                    placeholder="Please enter your full name."
+                    placeholder="Please enter your full name"
                     required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
+                  <label htmlFor="email" className="form-label text-white">
                     Your Email
                   </label>
                   <input
                     type="email"
                     className="form-control"
                     id="email"
-                    placeholder="Please enter a valid university email address."
+                    placeholder="Please enter your university email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="areaOfInterest" className="form-label">
-                    Area of Interest
+                  <label htmlFor="areaOfInterest" className="form-label text-white">
+                    Which program interests you?
                   </label>
                   <select
                     className="form-select"
@@ -455,26 +375,25 @@ const BibleStudyMinistryPage = () => {
                     onChange={(e) => setAreaOfInterest(e.target.value)}
                   >
                     <option value="" disabled>
-                      Select an area
+                      Select a program
                     </option>
                     <option>Small Bible Study Groups</option>
-                    <option>Nurturing Classes</option>
                     <option>BEST-P Program</option>
                     <option>Consistent Bible Reading</option>
                     <option>General Interest</option>
                   </select>
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="experience" className="form-label">
-                    Tell us about your passion or interest (Optional)
+                  <label htmlFor="joinMessage" className="form-label text-white">
+                    Tell us about your interests (Optional)
                   </label>
                   <textarea
                     className="form-control"
-                    id="experience"
+                    id="joinMessage"
                     rows={3}
                     placeholder="Share what draws you to this ministry..."
-                    value={experience}
-                    onChange={(e) => setExperience(e.target.value)}
+                    value={joinMessage}
+                    onChange={(e) => setJoinMessage(e.target.value)}
                   />
                 </div>
                 <button type="submit" className="btn btn-primary w-100">
@@ -482,85 +401,78 @@ const BibleStudyMinistryPage = () => {
                 </button>
               </form>
               {showSuccess && (
-                <div className="mt-3 text-success animate-pop-in">
-                  Thank you for your interest in the Bible Study &amp; Training Ministry! We&apos;ll get in touch with you soon.
+                <div
+                  className="mt-3 alert alert-success d-flex justify-content-between align-items-center"
+                  role="alert"
+                >
+                  <span>
+                    Thank you for your interest! We&apos;ll get in touch with you soon.
+                  </span>
+                  <button
+                    type="button"
+                    className="btn-close btn-close-white"
+                    onClick={hide}
+                    aria-label="Close"
+                  />
                 </div>
               )}
             </div>
           </div>
-          <div className="row mt-4 justify-content-center">
-            <div
-              className="col-md-4 text-center"
-              data-aos="fade-up"
-              data-aos-delay="300"
-            >
-              <Link to="/ministries" className="btn btn-primary">
-                View All Ministries
+          <div className="row mt-5 justify-content-center">
+            <div className="col-md-4 text-center" data-aos="fade-up" data-aos-delay="300">
+              <Link to="/ministries" className="btn btn-primary btn-lg">
+                View All Ministries <i className="fas fa-arrow-right ms-2" />
               </Link>
             </div>
-            <div
-              className="col-md-4 text-center"
-              data-aos="fade-up"
-              data-aos-delay="400"
-            >
-              <Link to="/events" className="btn btn-secondary">
-                View Events
+            <div className="col-md-4 text-center" data-aos="fade-up" data-aos-delay="400">
+              <Link to="/events" className="btn btn-secondary btn-lg">
+                Upcoming Events <i className="fas fa-calendar ms-2" />
               </Link>
             </div>
           </div>
         </div>
       </section>
 
+
+
       {/* Gallery */}
-      <section className="sub-ministries-section">
+      <section className="py-5 sub-ministries-section">
         <div className="container">
           <h2 className="section-title text-center" data-aos="fade-up">
-            Ministry in Action
+            Ministry Highlights
           </h2>
-          <div className="row">
-            <div className="col-md-3 mb-4" data-aos="zoom-in">
+          <div className="row g-4">
+            <div className="col-md-6 col-lg-3" data-aos="zoom-in">
               <img
                 src="/assets/images/bible-study-group.jpg"
-                alt="Bible Study Group"
-                className="img-fluid rounded"
+                alt="Small Bible Study Groups"
+                className="img-fluid rounded-3 shadow-sm"
               />
-              <p className="text-center mt-2">Bible Study Group Session</p>
+              <p className="text-center mt-3 small"><strong>Small Bible Study Groups</strong></p>
             </div>
-            <div
-              className="col-md-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="100"
-            >
-              <img
-                src="/assets/images/nurturing-class.jpg"
-                alt="Nurturing Class"
-                className="img-fluid rounded"
-              />
-              <p className="text-center mt-2">Nurturing Class</p>
-            </div>
-            <div
-              className="col-md-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
+            <div className="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
               <img
                 src="/assets/images/best-p.jpg"
                 alt="BEST-P Program"
-                className="img-fluid rounded"
+                className="img-fluid rounded-3 shadow-sm"
               />
-              <p className="text-center mt-2">BEST-P Training</p>
+              <p className="text-center mt-3 small"><strong>BEST-P Training</strong></p>
             </div>
-            <div
-              className="col-md-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="300"
-            >
+            <div className="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+              <img
+                src="/assets/images/bible-study-group.jpg"
+                alt="Consistent Bible Reading"
+                className="img-fluid rounded-3 shadow-sm"
+              />
+              <p className="text-center mt-3 small"><strong>Personal Reading Groups</strong></p>
+            </div>
+            <div className="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
               <img
                 src="/assets/images/baptism.jpg"
-                alt="Baptism Ceremony"
-                className="img-fluid rounded"
+                alt="Baptism Celebration"
+                className="img-fluid rounded-3 shadow-sm"
               />
-              <p className="text-center mt-2">Baptism Ceremony</p>
+              <p className="text-center mt-3 small"><strong>Baptism Celebration</strong></p>
             </div>
           </div>
         </div>
