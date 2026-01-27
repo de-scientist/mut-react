@@ -452,12 +452,15 @@ p {
   font-weight: 600;
   margin-bottom: 5px;
   color: var(--mutcu-navy-blue);
+  display: block;
 }
 
 .executive-member-card .member-role {
   font-size: 0.95rem;
-  color: #555;
+  color: var(--mutcu-navy-blue);
   text-transform: none; /* Keep role text as is */
+  display: block;
+  font-weight: 500;
 }
 
 /* Why Join MUTCU Section */
@@ -570,6 +573,84 @@ p {
 .footer .social-icons a:hover {
   color: var(--mutcu-orange);
   transform: translateY(-3px);
+}
+
+/* Committee Pages Specific Styles */
+.leader-profile-section {
+  background-color: #fff;
+  padding: 80px 0;
+}
+
+.leader-profile-section h3 {
+  color: var(--mutcu-navy-blue);
+}
+
+.leader-profile-section p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.roles-responsibilities-section {
+  background-color: #f8f9fa;
+  padding: 80px 0;
+}
+
+.roles-list li {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 20px;
+  padding-left: 10px;
+}
+
+.roles-list li i {
+  color: var(--mutcu-orange);
+  font-size: 1.3rem;
+}
+
+.cta-section {
+  background: linear-gradient(
+    135deg,
+    var(--mutcu-navy-blue),
+    var(--mutcu-teal)
+  );
+  padding: 80px 0;
+}
+
+.cta-section .section-title {
+  color: #fff;
+}
+
+.cta-section .section-title::after {
+  background-color: var(--mutcu-orange);
+}
+
+.cta-section .section-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 30px;
+}
+
+.cta-section .btn-primary {
+  background-color: var(--mutcu-orange);
+  border-color: var(--mutcu-orange);
+  color: #fff;
+}
+
+.cta-section .btn-primary:hover {
+  background-color: #e68a00;
+  border-color: #e68a00;
+}
+
+.cta-section .btn-secondary {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
+  color: #fff;
+}
+
+.cta-section .btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: #fff;
+  color: #fff;
 }
 
 /* Responsive Adjustments */
