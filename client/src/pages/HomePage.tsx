@@ -409,6 +409,26 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Join Us CTA Section */}
+      <section className="join-us-cta-section py-5" style={{ backgroundColor: '#ff9700', color: 'white' }}>
+        <div className="container">
+          <div className="row align-items-center justify-content-center">
+            <div className="col-lg-8 text-center" data-aos="zoom-in">
+              <div className="mb-4">
+                <i className="fas fa-user-plus" style={{ fontSize: '4rem', marginBottom: '1rem' }} />
+              </div>
+              <h2 className="display-5 mb-3" style={{ color: 'white' }}>Ready to Join Us?</h2>
+              <p className="lead mb-5" style={{ color: 'rgba(255,255,255,0.95)' }}>
+                Become part of the MUTCU family and experience discipleship, fellowship, and spiritual growth.
+              </p>
+              <Link to="/register" className="btn btn-light btn-lg" style={{ fontWeight: '600', color: '#ff9700' }}>
+                Register Now <i className="fas fa-arrow-right ms-2" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About Section */}
       <section className="about-section py-5">
         <div className="container">
