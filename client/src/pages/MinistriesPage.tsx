@@ -92,7 +92,7 @@ const COMMITTEES: CommitteeCard[] = [
       "Sound, livestream, projection, photography/video, and technical support for services and events.",
     icon: "fa-sliders-h",
     imageUrl: "/assets/images/film1.jpg",
-    route: "/ministries/technical",
+    route: "/ministries/technical-department",
   },
   {
     key: "hospitality",
