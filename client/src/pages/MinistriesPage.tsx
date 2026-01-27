@@ -102,7 +102,7 @@ const COMMITTEES: CommitteeCard[] = [
       "Welcoming guests, coordinating seating/hosting, and ensuring visitors and members feel at home.",
     icon: "fa-mug-hot",
     imageUrl: "/assets/images/guest-welcome.jfif",
-    route: "/ministries/hospitality",
+    route: "/ministries/hospitality-ministry",
   },
   {
     key: "welfare",

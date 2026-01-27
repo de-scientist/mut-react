@@ -190,41 +190,6 @@ const HospitalityMinistryPage = () => {
       </section>
 
       {/* Events */}
-      <section className="key-events-section">
-        <div className="container">
-          <h2 className="section-title text-center" data-aos="fade-up">
-            Featured Events
-          </h2>
-          <p
-            className="lead text-center"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            Join us for hospitality-focused events.
-          </p>
-          <div className="row">
-            <div
-              className="col-md-4 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <div className="event-highlight-card">
-                <div className="card-body text-center">
-                  <i className="fas fa-utensils event-icon" />
-                  <h5 className="card-title">Hospitality Day</h5>
-                  <p className="card-text">
-                    A day of fellowship and catering training.
-                  </p>
-                  <p className="text-muted">
-                    <i className="fas fa-calendar-alt me-2" /> 19th October 2025
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Leadership */}
       <section className="leadership-spotlight-section">
         <div className="container">
@@ -242,12 +207,12 @@ const HospitalityMinistryPage = () => {
             <div className="col-md-4 col-lg-3 mb-4" data-aos="zoom-in">
               <div className="executive-member-card">
                 <img
-                  src="/assets/images/Waci.jpg"
-                  alt="Waci"
+                  src="/assets/images/PURITY.jpg"
+                  alt="Purity Njeri"
                   className="img-fluid rounded-circle mb-2 border-orange"
                 />
-                <h5 className="member-name">Waci</h5>
-                <p className="member-role">Hospitality Coordinator</p>
+                <h5 className="member-name">Purity Njeri</h5>
+                <p className="member-role">First Vice-Chairperson (Female)</p>
                 <button className="btn btn-outline-light btn-sm" type="button">
                   View Profile
                 </button>
@@ -363,49 +328,6 @@ const HospitalityMinistryPage = () => {
               <Link to="/events" className="btn btn-secondary">
                 View Hospitality Events
               </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery */}
-      <section className="sub-ministries-section">
-        <div className="container">
-          <h2 className="section-title text-center" data-aos="fade-up">
-            Ministry in Action
-          </h2>
-          <div className="row">
-            <div className="col-md-3 mb-4" data-aos="zoom-in">
-              <img
-                src="/assets/images/kitchen-prep.jpg"
-                alt="Kitchen Prep"
-                className="img-fluid rounded"
-              />
-              <p className="text-center mt-2">Kitchen Ministry at Work</p>
-            </div>
-            <div
-              className="col-md-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="100"
-            >
-              <img
-                src="/assets/images/guest-welcome.jfif"
-                alt="Guest Welcome"
-                className="img-fluid rounded"
-              />
-              <p className="text-center mt-2">Guest Relations Team</p>
-            </div>
-            <div
-              className="col-md-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <img
-                src="/assets/images/event-catering.jfif"
-                alt="Event Catering"
-                className="img-fluid rounded"
-              />
-              <p className="text-center mt-2">Event Catering Setup</p>
             </div>
           </div>
         </div>
