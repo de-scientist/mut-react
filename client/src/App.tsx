@@ -35,8 +35,8 @@ import HospitalityMinistryPage from "./pages/ministries/HospitalityMinistryPage"
 import TechnicalDepartmentPage from "./pages/ministries/TechnicalDepartmentPage";
 import WelfareCommitteePage from "./pages/ministries/WelfareCommitteePage";
 import RMCPage from "./pages/ministries/RMCPage";
-import TreasuryCommitteePage from "./pages/ministries/TreasuryCommitteePage";
-import BibleStudyTrainingCommitteePage from "./pages/ministries/BibleStudyTrainingCommitteePage";
+// import TreasuryCommitteePage from "./pages/ministries/TreasuryCommitteePage";
+// import BibleStudyTrainingCommitteePage from "./pages/ministries/BibleStudyTrainingCommitteePage";
 import DiscipleshipCommitteePage from "./pages/ministries/DiscipleshipCommitteePage";
 import SpecialCommitteesPage from "./pages/ministries/Special-Committees";
 import AdvisoryBoardPage from "./pages/ministries/AdvisoryBoardPage";
