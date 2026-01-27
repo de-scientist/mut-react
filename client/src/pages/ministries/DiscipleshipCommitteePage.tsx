@@ -91,19 +91,51 @@ const DiscipleshipCommitteePage = () => {
                 desc: "Structured classes for deeper spiritual formation, biblical knowledge, leadership training, and development of servant-leaders.",
               },
             ].map((x, i) => (
-              <div className="col-md-6 col-lg-4" key={i} data-aos="zoom-in">
-                <div className="principle-card h-100 text-center">
-                  <i className={`fas ${x.icon} feature-icon mb-3`} />
-                  <h4 className="card-title">{x.title}</h4>
-                  <p className="text-muted mb-0">{x.desc}</p>
+              <div className="col-md-6 col-lg-6" key={i} data-aos="zoom-in" data-aos-delay={i * 100}>
+                <div className="card h-100 border-0 shadow-sm">
+                  <div className="card-body">
+                    <div className="mb-3">
+                      <i className={`fas ${x.icon} text-primary`} style={{ fontSize: "2rem" }} />
+                    </div>
+                    <h5 className="card-title text-secondary">{x.title}</h5>
+                    <p className="small text-muted mb-2">
+                      <strong>Led by:</strong> {x.coordinator}
+                    </p>
+                    <p className="card-text small">{x.desc}</p>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-4">
-            <Link to="/contact" className="btn btn-primary">
-              Talk to a Leader <i className="fas fa-envelope ms-2" />
+          <div className="row mt-5 justify-content-center">
+            <div className="col-lg-10">
+              <div className="card border-0 bg-white shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title text-secondary mb-3">
+                    <i className="fas fa-chair me-2 text-primary" /> Overall Leadership
+                  </h5>
+                  <div className="row">
+                    <div className="col-md-6 mb-3">
+                      <p className="mb-1"><strong>Discipleship Coordinator (Chair):</strong></p>
+                      <p className="small text-muted">Oversees all discipleship pathways, coordinates with sub-program leaders, ensures theological consistency, tracks member progression.</p>
+                    </div>
+                    <div className="col-md-6 mb-3">
+                      <p className="mb-1"><strong>Secretary/Treasurer:</strong></p>
+                      <p className="small text-muted">Maintains records of member progress, coordinates scheduling, manages resources, documents outcomes and growth milestones.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-5">
+            <Link to="/contact" className="btn btn-primary me-3">
+              Join Discipleship <i className="fas fa-users ms-2" />
+            </Link>
+            <Link to="/ministries" className="btn btn-secondary">
+              Back to Committees <i className="fas fa-arrow-left ms-2" />
             </Link>
           </div>
         </div>
