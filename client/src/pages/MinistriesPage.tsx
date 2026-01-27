@@ -112,7 +112,7 @@ const COMMITTEES: CommitteeCard[] = [
       "Member care, encouragement, support in times of need, and strengthening fellowship as a family.",
     icon: "fa-hand-holding-heart",
     imageUrl: "/assets/images/placeholder2.jpg",
-    route: "/ministries/welfare",
+    route: "/ministries/welfare-committee",
   },
   {
     key: "rmc",
