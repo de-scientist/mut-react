@@ -50,29 +50,43 @@ const HospitalityMinistryPage = () => {
       <section className="ministry-intro-section">
         <div className="container">
           <div className="row align-items-center">
+            <div className="col-lg-7">
+              <h2 className="section-title" data-aos="fade-right">
+                About the Hospitality Committee
+              </h2>
+              <div data-aos="fade-right" data-aos-delay="100">
+                <h5 className="text-secondary mb-3">Mandate</h5>
+                <p>
+                  To model the love of Christ by creating a welcoming environment, caring for guests and members, and managing the CU office resources.
+                </p>
+              </div>
+              <div data-aos="fade-right" data-aos-delay="200">
+                <h5 className="text-secondary mb-3">Our Mission</h5>
+                <p>
+                  The Hospitality Committee reflects Christ's love through warmth, welcome, and genuine care. We create a welcoming environment for all members and visitors, demonstrating compassion through thoughtful service and excellent hospitality.
+                </p>
+              </div>
+              <div data-aos="fade-right" data-aos-delay="300">
+                <h5 className="text-secondary mb-3">Our Focus</h5>
+                <ul>
+                  <li>Creating welcoming environments for all members and guests</li>
+                  <li>Managing office resources and supplies with stewardship</li>
+                  <li>New member integration and care</li>
+                  <li>Guest reception and refreshment provision</li>
+                  <li>Fostering genuine community and fellowship</li>
+                </ul>
+              </div>
+            </div>
             <div className="col-lg-5 text-center mb-4 mb-lg-0">
               <img
                 src="/assets/images/Waci.jpg"
-                alt="Waci"
+                alt="Hospitality Coordinator"
                 className="img-fluid rounded-circle"
                 data-aos="zoom-in"
               />
-              <h3 className="mt-3">Waci</h3>
-              <p className="text-muted">Hospitality Coordinator</p>
-            </div>
-            <div className="col-lg-7">
-              <h2 className="section-title" data-aos="fade-right">
-                About the Hospitality Ministry
-              </h2>
-              <p data-aos="fade-right" data-aos-delay="100">
-                The Hospitality Ministry focuses on creating a welcoming
-                environment for all MUTCU members and visitors. It includes the
-                Kitchen Ministry and works to foster fellowship through service.
-              </p>
-              <p data-aos="fade-right" data-aos-delay="200">
-                The ministry oversees Kitchen Ministry, Guest Relations, and
-                Event Catering, ensuring food safety, resource management, and a
-                spirit of generosity and care in all activities.
+              <h3 className="mt-3">Hospitality Committee</h3>
+              <p className="text-muted">
+                Led by the First Vice-Chairperson (Female)
               </p>
             </div>
           </div>

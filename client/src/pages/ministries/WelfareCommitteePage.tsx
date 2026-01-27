@@ -30,21 +30,28 @@ const WelfareCommitteePage = () => {
               <h2 className="section-title text-start">
                 About the Welfare Committee
               </h2>
-              <p className="lead">
-                The Welfare Committee actively embodies the Union&apos;s
-                commitment to community and mutual support. This committee is
-                dedicated to assisting members facing various difficulties,
-                particularly financial challenges like tuition fees. It serves
-                as a tangible expression of God&apos;s love and the Union&apos;s
-                solidarity.
-              </p>
-              <p>
-                The committee actively raises funds and organizes initiatives to
-                provide practical and spiritual support, ensuring that no member
-                feels left behind. This ministry reflects our core value of love
-                and community, fostering a truly supportive family environment
-                within MUTCU.
-              </p>
+              <div>
+                <h5 className="text-secondary">Mandate</h5>
+                <p>
+                  To demonstrate Christ&apos;s love through practical, emotional, and spiritual support to Union members.
+                </p>
+              </div>
+              <div>
+                <h5 className="text-secondary">Our Mission</h5>
+                <p>
+                  The Welfare Committee actively embodies the Union&apos;s commitment to community and mutual support. We are dedicated to assisting members facing various difficulties and providing tangible expressions of God&apos;s love and solidarity. The committee raises funds, identifies welfare needs, and organizes support initiatives to ensure that no member feels left behind, fostering a truly supportive family environment within MUTCU.
+                </p>
+              </div>
+              <div>
+                <h5 className="text-secondary">Our Focus Areas</h5>
+                <ul>
+                  <li>Identifying and assessing welfare needs of members</li>
+                  <li>Financial support with tuition fees and emergencies</li>
+                  <li>Emotional and pastoral care for members in need</li>
+                  <li>Mentorship and guidance from counselling coordinators</li>
+                  <li>Community-specific support through Ladies&apos; and Gents&apos; sub-committees</li>
+                </ul>
+              </div>
             </div>
             <div
               className="col-lg-5 text-center"
@@ -64,35 +71,63 @@ const WelfareCommitteePage = () => {
       <section className="py-5 bg-light roles-responsibilities-section">
         <div className="container">
           <h2 className="section-title text-center">
-            Key Roles &amp; Activities
+            Committee Structure &amp; Leadership
           </h2>
           <p className="text-center lead mb-5">
-            The Welfare Committee provides practical support and care to
-            members.
+            The Welfare Committee comprises dedicated leaders committed to member care and support.
           </p>
-          <div className="row justify-content-center">
-            <div className="col-lg-10">
-              <ul className="list-unstyled roles-list">
-                <li data-aos="fade-up" data-aos-delay="100">
-                  <i className="fas fa-check-circle me-3" />
-                  Actively raising funds to assist members facing financial
-                  difficulties, especially with tuition fees.
-                </li>
-                <li data-aos="fade-up" data-aos-delay="200">
-                  <i className="fas fa-check-circle me-3" />
-                  Identifying and assessing the welfare needs of Union members.
-                </li>
-                <li data-aos="fade-up" data-aos-delay="300">
-                  <i className="fas fa-check-circle me-3" />
-                  Organizing support initiatives, such as food drives, clothing
-                  collections, or mentorship programs.
-                </li>
-                <li data-aos="fade-up" data-aos-delay="400">
-                  <i className="fas fa-check-circle me-3" />
-                  Providing pastoral care and emotional support to members in
-                  need.
-                </li>
-              </ul>
+          <div className="row g-4 justify-content-center">
+            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
+              <div className="card h-100 border-0 shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title text-secondary">
+                    <i className="fas fa-chair me-2 text-primary" />
+                    Welfare Coordinator (Chairperson)
+                  </h5>
+                  <p className="card-text small">
+                    Oversees committee operations, fund management, coordinates welfare case identification and assessment, ensures timely support delivery.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div className="card h-100 border-0 shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title text-secondary">
+                    <i className="fas fa-users me-2 text-primary" />
+                    Vice Chairs &amp; Officers
+                  </h5>
+                  <p className="card-text small">
+                    1st Vice Chair (Female), 2nd Vice Chair (Male), Treasurer, Secretary/Treasurer - support chairperson in planning, organizing fundraising, record-keeping.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <div className="card h-100 border-0 shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title text-secondary">
+                    <i className="fas fa-heart me-2 text-primary" />
+                    Guidance &amp; Counselling Coordinators
+                  </h5>
+                  <p className="card-text small">
+                    Provide pastoral care, emotional and spiritual support, coordinate mentorship, connect members with professional counselling services when needed.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="400">
+              <div className="card h-100 border-0 shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title text-secondary">
+                    <i className="fas fa-people-group me-2 text-primary" />
+                    Ladies&apos; &amp; Gents&apos; Sub-Committees
+                  </h5>
+                  <p className="card-text small">
+                    Provide gender-specific support and mentorship, organize community-focused initiatives, coordinate with Anza FYT for youth welfare programs.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -101,16 +136,16 @@ const WelfareCommitteePage = () => {
       <section className="py-5 cta-section text-white">
         <div className="container text-center" data-aos="zoom-in">
           <h2 className="section-title text-white">
-            Support Our Welfare Initiatives!
+            Join Us in Caring for Our MUTCU Family
           </h2>
           <p className="lead mb-4 text-white-50">
-            Join us in extending practical love and support to our MUTCU family.
+            Whether through volunteering, fundraising, or donating, your involvement makes a tangible difference in members&apos; lives.
           </p>
           <Link to="/contact" className="btn btn-primary btn-lg me-3">
             Get Involved <i className="fas fa-hand-fist ms-2" />
           </Link>
           <Link to="/contact" className="btn btn-secondary btn-lg">
-            Donate <i className="fas fa-dollar-sign ms-2" />
+            Make a Donation <i className="fas fa-heart ms-2" />
           </Link>
         </div>
       </section>

@@ -29,22 +29,29 @@ const CreativeArtsMinistryPage = () => {
               data-aos="fade-right"
               data-aos-delay="100"
             >
-              <h2 className="section-title text-start">About CREAM</h2>
-              <p className="lead">
-                The Creative Arts Ministry (CREAM) is a vibrant and diverse
-                ministry dedicated to using artistic expression to glorify God
-                and communicate the gospel. We believe that creativity is a
-                divine gift, and we use various mediums like drama, dance, and
-                spoken word to inspire, edify, and engage the MUTCU community
-                and beyond.
-              </p>
-              <p>
-                CREAM plays a vital role in our union&apos;s outreach and
-                internal events, often collaborating with the Music Ministry to
-                create powerful and memorable worship experiences. Our mission
-                is to raise up a generation of creative worshippers who use
-                their talents for God&apos;s kingdom.
-              </p>
+              <h2 className="section-title text-start">About the Creative Arts Ministry</h2>
+              <div className="mb-4">
+                <h5 className="text-secondary mb-3">Mandate</h5>
+                <p>
+                  To use diverse artistic gifts to glorify God, edify the church, and communicate the gospel in a compelling way.
+                </p>
+              </div>
+              <div className="mb-4">
+                <h5 className="text-secondary mb-3">Our Mission</h5>
+                <p className="lead">
+                  The Creative Arts Ministry uses drama, dance, spoken word, poetry, fine arts, and modeling to express faith and reach our community with the Gospel. We believe that artistic expression is a powerful medium for worship, evangelism, and spiritual growth.
+                </p>
+              </div>
+              <div>
+                <h5 className="text-secondary mb-3">Our Focus</h5>
+                <ul>
+                  <li>Excellence in all creative presentations</li>
+                  <li>Biblical soundness in all messaging and content</li>
+                  <li>Developing artists as worshippers and witnesses</li>
+                  <li>Leading Transformation and Advocacy campaigns</li>
+                  <li>Supporting social action and Christian witness</li>
+                </ul>
+              </div>
             </div>
             <div
               className="col-lg-5 text-center"
@@ -63,57 +70,85 @@ const CreativeArtsMinistryPage = () => {
 
       <section className="py-5 bg-light creative-ensembles-section">
         <div className="container">
-          <h2 className="section-title text-center">Our Creative Outlets</h2>
+          <h2 className="section-title text-center">Our Creative Sub-Ministries</h2>
           <p className="text-center lead mb-5">
-            CREAM is a home for all forms of artistic expression including
-            drama, dance, spoken word, and modeling.
+            The Creative Arts Ministry comprises four distinct sub-committees, each dedicated to a unique form of artistic expression.
           </p>
           <div className="row">
             <div
-              className="col-md-6 col-lg-4 mb-4"
+              className="col-md-6 col-lg-3 mb-4"
               data-aos="fade-up"
               data-aos-delay="100"
             >
               <div className="creative-card p-4 rounded-3 shadow-sm h-100">
-                <i className="fas fa-hand-spock feature-icon mb-3" />
-                <h3 className="card-title">Dance</h3>
+                <i className="fas fa-theater-masks feature-icon mb-3" />
+                <h3 className="card-title">Drama Ministry</h3>
                 <p>
-                  The Dance ministry uses choreographed movements to praise and
-                  worship God, creating a dynamic and expressive form of prayer.
+                  Communicates biblical truths and Christian values through powerful theatrical presentations and performances.
                 </p>
-                <p className="text-muted">
-                  <i className="fas fa-clock me-2" />
-                  <b>Meeting Time:</b> Wednesdays, 7:00 PM - 9:00 PM
-                </p>
+                <h6>Includes:</h6>
+                <ul className="small">
+                  <li>Scriptwriting & directing</li>
+                  <li>Character development</li>
+                  <li>Skill mentoring</li>
+                </ul>
               </div>
             </div>
             <div
-              className="col-md-6 col-lg-4 mb-4"
+              className="col-md-6 col-lg-3 mb-4"
               data-aos="fade-up"
               data-aos-delay="200"
             >
               <div className="creative-card p-4 rounded-3 shadow-sm h-100">
-                <i className="fas fa-theater-masks feature-icon mb-3" />
-                <h3 className="card-title">Drama</h3>
+                <i className="fas fa-hand-spock feature-icon mb-3" />
+                <h3 className="card-title">Dance Ministry</h3>
                 <p>
-                  Our drama team presents powerful performances that communicate
-                  biblical truths and Christian values through theatrical
-                  expression.
+                  Uses choreographed movements to lead worship and express faith through dynamic physical expression.
                 </p>
+                <h6>Includes:</h6>
+                <ul className="small">
+                  <li>Worship dance</li>
+                  <li>Choreography</li>
+                  <li>Event performances</li>
+                </ul>
               </div>
             </div>
             <div
-              className="col-md-6 col-lg-4 mb-4"
+              className="col-md-6 col-lg-3 mb-4"
               data-aos="fade-up"
               data-aos-delay="300"
             >
               <div className="creative-card p-4 rounded-3 shadow-sm h-100">
                 <i className="fas fa-microphone feature-icon mb-3" />
-                <h3 className="card-title">Spoken Word</h3>
+                <h3 className="card-title">SPARCS Ministry</h3>
                 <p>
-                  Using poetry and spoken word to express faith, share
-                  testimonies, and inspire the community with powerful words.
+                  Spoken Word, Poetry, Arts &amp; Creative Skits - expressing faith through creative writing and performance.
                 </p>
+                <h6>Includes:</h6>
+                <ul className="small">
+                  <li>Spoken word poetry</li>
+                  <li>Creative writing</li>
+                  <li>Fine arts presentations</li>
+                </ul>
+              </div>
+            </div>
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <div className="creative-card p-4 rounded-3 shadow-sm h-100">
+                <i className="fas fa-crown feature-icon mb-3" />
+                <h3 className="card-title">Models Ministry</h3>
+                <p>
+                  Serving as ambassadors for MUTCU, promoting Christian character and values through fashion and advocacy.
+                </p>
+                <h6>Includes:</h6>
+                <ul className="small">
+                  <li>Mr. &amp; Miss MUTCU leadership</li>
+                  <li>Social action campaigns</li>
+                  <li>Community transformation</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -122,13 +157,27 @@ const CreativeArtsMinistryPage = () => {
 
       <section className="py-5 cta-section text-white">
         <div className="container text-center" data-aos="zoom-in">
-          <h2 className="section-title text-white">Join CREAM!</h2>
+          <h2 className="section-title text-white">Join the Creative Arts Ministry!</h2>
           <p className="lead mb-4 text-white-50">
-            Express your faith through creativity and artistic talent.
+            Whether you're passionate about drama, dance, spoken word, or advocacy, we invite you to use your creative gifts to glorify God and impact our community.
           </p>
-          <Link to="/contact" className="btn btn-primary btn-lg">
-            Get Involved <i className="fas fa-hand-fist ms-2" />
-          </Link>
+          <div className="row justify-content-center">
+            <div className="col-md-8 text-center">
+              <h5 className="text-white mb-4">How to Get Involved</h5>
+              <div className="row">
+                <div className="col-md-6 mb-3">
+                  <Link to="/contact" className="btn btn-primary btn-lg w-100">
+                    Submit Interest <i className="fas fa-hand-fist ms-2" />
+                  </Link>
+                </div>
+                <div className="col-md-6 mb-3">
+                  <Link to="/events" className="btn btn-secondary btn-lg w-100">
+                    View Upcoming Events <i className="fas fa-calendar ms-2" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>

@@ -66,36 +66,43 @@ const PrayerMinistryPage = () => {
       <section className="ministry-intro-section">
         <div className="container">
           <div className="row align-items-center">
-            <div className="col-lg-5 text-center mb-4 mb-lg-0">
-              <img
-                src="/assets/images/MARTHA.jpeg"
-                alt="Martha Thuku"
-                className="img-fluid rounded-circle"
-                data-aos="zoom-in"
-              />
-              <h3 className="mt-3">Martha Thuku</h3>
-              <p className="text-muted">Prayer Coordinator</p>
-            </div>
             <div className="col-lg-7">
               <h2 className="section-title" data-aos="fade-right">
                 About the Prayer Ministry
               </h2>
-              <p data-aos="fade-right" data-aos-delay="100">
-                The Prayer Ministry is the spiritual engine of MUTCU, dedicated
-                to cultivating a deep culture of prayer and intercession among
-                members. It organizes various prayer gatherings, from daily
-                sessions to special prayer keshas and retreats, ensuring that
-                the Union&apos;s activities are founded on spiritual dependence
-                and divine guidance.
-              </p>
-              <p data-aos="fade-right" data-aos-delay="200">
-                As outlined in the MUTCU constitution and policies, the Prayer
-                Coordinator leads in organizing prayer retreats, keshas, days,
-                chains, groups, trainings, and outreaches. The ministry
-                encourages consistent and fervent prayer for the Union,
-                university, nation, and global needs, believing prayer is key to
-                spiritual breakthroughs and fulfilling MUTCU&apos;s vision and
-                mission.
+              <div data-aos="fade-right" data-aos-delay="100">
+                <h5 className="text-secondary mb-3">Mandate</h5>
+                <p>
+                  To mobilize and lead the Christian Union in consistent, fervent, and effective prayer.
+                </p>
+              </div>
+              <div data-aos="fade-right" data-aos-delay="200">
+                <h5 className="text-secondary mb-3">Our Mission</h5>
+                <p>
+                  The Prayer Ministry is the spiritual engine of MUTCU, dedicated to cultivating a deep culture of prayer and intercession among members. We believe that prayer is foundational to all ministry and that consistent, fervent intercession is key to spiritual breakthroughs and fulfilling the Union&apos;s vision and mission.
+                </p>
+              </div>
+              <div data-aos="fade-right" data-aos-delay="300">
+                <h5 className="text-secondary mb-3">Our Focus</h5>
+                <ul>
+                  <li>Planning and coordinating all corporate prayer meetings</li>
+                  <li>Organizing prayer weeks, fasts, and special prayer events</li>
+                  <li>Identifying and communicating key prayer points for the CU</li>
+                  <li>Building accountability and personal prayer disciplines among members</li>
+                  <li>Mobilizing year-based prayer coordinators to lead within their groups</li>
+                </ul>
+              </div>
+            </div>
+            <div className="col-lg-5 text-center mb-4 mb-lg-0">
+              <img
+                src="/assets/images/MARTHA.jpeg"
+                alt="Prayer Coordinator"
+                className="img-fluid rounded-circle"
+                data-aos="zoom-in"
+              />
+              <h3 className="mt-3">Prayer Coordinator</h3>
+              <p className="text-muted">
+                Leads our Prayer Ministry with spiritual oversight
               </p>
             </div>
           </div>
@@ -106,118 +113,161 @@ const PrayerMinistryPage = () => {
       <section className="sub-ministries-section">
         <div className="container">
           <h2 className="section-title text-center" data-aos="fade-up">
-            Our Prayer Gatherings
+            Our Prayer Gatherings &amp; Programs
           </h2>
           <p
             className="lead text-center"
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            The Prayer Ministry facilitates multiple opportunities for corporate
-            and personal prayer throughout the week in the Prayer Room. Click on
-            the cards to learn more!
+            The Prayer Ministry facilitates multiple opportunities for corporate and personal prayer throughout the spiritual year.
           </p>
           <div className="row">
             <div
-              className="col-md-6 col-lg-3 mb-4"
+              className="col-md-6 col-lg-4 mb-4"
               data-aos="fade-up"
               data-aos-delay="200"
             >
               <div className="sub-ministry-card">
-                <div className="card-body text-center">
+                <div className="card-body">
                   <i className="fas fa-sun choir-icon mb-3" />
-                  <h4 className="card-title">Morning Prayers</h4>
+                  <h4 className="card-title">Corporate Prayer Meetings</h4>
                   <p className="card-text">
-                    Start your day with corporate prayer, seeking God&apos;s
-                    guidance and strength.
+                    Regular gatherings for united intercession and petition.
                   </p>
                   <h6>Activities</h6>
                   <ul>
-                    <li>Guided prayers</li>
-                    <li>Scripture reading</li>
-                    <li>Intercession for the day ahead</li>
+                    <li>Daily prayer meetings</li>
+                    <li>Guided intercession</li>
+                    <li>Scripture reading and worship</li>
                   </ul>
-                  <p className="text-muted">
-                    <i className="fas fa-clock me-2" />
-                    6:00 AM - 6:50 AM (Sunday - Friday)
+                  <p className="text-muted small">
+                    <i className="fas fa-calendar-alt me-2" /> Regular schedule
                   </p>
                 </div>
               </div>
             </div>
 
             <div
-              className="col-md-6 col-lg-3 mb-4"
+              className="col-md-6 col-lg-4 mb-4"
               data-aos="fade-up"
               data-aos-delay="300"
             >
               <div className="sub-ministry-card">
-                <div className="card-body text-center">
-                  <i className="fas fa-utensils band-icon mb-3" />
-                  <h4 className="card-title">Lunch Hour Prayers</h4>
+                <div className="card-body">
+                  <i className="fas fa-ban band-icon mb-3" />
+                  <h4 className="card-title">Prayer Weeks &amp; Fasts</h4>
                   <p className="card-text">
-                    Midday refreshment through prayer and teachings on selected
-                    days.
+                    Intensive periods of prayer, fasting, and intercession.
                   </p>
                   <h6>Activities</h6>
                   <ul>
-                    <li>Prayer sessions with teachings (Mon, Wed, Fri)</li>
-                    <li>Focused intercession</li>
+                    <li>Special prayer weeks</li>
+                    <li>Corporate fasting</li>
+                    <li>Intensive intercession periods</li>
                   </ul>
-                  <p className="text-muted">
-                    <i className="fas fa-clock me-2" />
-                    12:00 PM - 12:50 PM (Daily)
+                  <p className="text-muted small">
+                    <i className="fas fa-calendar-alt me-2" /> Scheduled throughout the year
                   </p>
                 </div>
               </div>
             </div>
 
             <div
-              className="col-md-6 col-lg-3 mb-4"
+              className="col-md-6 col-lg-4 mb-4"
               data-aos="fade-up"
               data-aos-delay="400"
             >
               <div className="sub-ministry-card">
-                <div className="card-body text-center">
-                  <i className="fas fa-moon praise-icon mb-3" />
-                  <h4 className="card-title">Evening Prayers</h4>
+                <div className="card-body">
+                  <i className="fas fa-mountain praise-icon mb-3" />
+                  <h4 className="card-title">Prayer Retreats &amp; Keshas</h4>
                   <p className="card-text">
-                    End the day in thanksgiving and supplication before God.
+                    Extended prayer events and all-night intercession sessions.
                   </p>
                   <h6>Activities</h6>
                   <ul>
-                    <li>Reflective prayers</li>
-                    <li>Sharing testimonies</li>
-                    <li>Night intercession</li>
+                    <li>Off-campus prayer retreats</li>
+                    <li>All-night prayer keshas</li>
+                    <li>Deep intercession and worship</li>
                   </ul>
-                  <p className="text-muted">
-                    <i className="fas fa-clock me-2" />
-                    9:00 PM - 9:30 PM (Sunday - Friday)
+                  <p className="text-muted small">
+                    <i className="fas fa-calendar-alt me-2" /> As scheduled
                   </p>
                 </div>
               </div>
             </div>
 
             <div
-              className="col-md-6 col-lg-3 mb-4"
+              className="col-md-6 col-lg-4 mb-4"
               data-aos="fade-up"
               data-aos-delay="500"
             >
               <div className="sub-ministry-card">
-                <div className="card-body text-center">
-                  <i className="fas fa-ban instrumentalists-icon mb-3" />
-                  <h4 className="card-title">Corporate Fasting</h4>
+                <div className="card-body">
+                  <i className="fas fa-hands-praying band-icon mb-3" />
+                  <h4 className="card-title">Year Fellowship Prayer Groups</h4>
                   <p className="card-text">
-                    United fasting for spiritual breakthroughs and communal
-                    needs.
+                    Prayer coordinators mobilizing intercession within each year group.
                   </p>
                   <h6>Activities</h6>
                   <ul>
-                    <li>Guided fasting with prayer focuses</li>
-                    <li>Breaking fast together</li>
+                    <li>Year-based prayer meetings</li>
+                    <li>Prayer request collection</li>
+                    <li>Praise report sharing</li>
                   </ul>
-                  <p className="text-muted">
-                    <i className="fas fa-clock me-2" />
-                    Once a fortnight on Wednesdays
+                  <p className="text-muted small">
+                    <i className="fas fa-calendar-alt me-2" /> During fellowship meetings
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="col-md-6 col-lg-4 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="600"
+            >
+              <div className="sub-ministry-card">
+                <div className="card-body">
+                  <i className="fas fa-handshake choir-icon mb-3" />
+                  <h4 className="card-title">Prayer Partnerships</h4>
+                  <p className="card-text">
+                    Accountability and prayer partner groups for personal growth.
+                  </p>
+                  <h6>Activities</h6>
+                  <ul>
+                    <li>Prayer pairs and triads</li>
+                    <li>Mutual intercession</li>
+                    <li>Accountability partnerships</li>
+                  </ul>
+                  <p className="text-muted small">
+                    <i className="fas fa-calendar-alt me-2" /> Ongoing throughout the year
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="col-md-6 col-lg-4 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="700"
+            >
+              <div className="sub-ministry-card">
+                <div className="card-body">
+                  <i className="fas fa-bullhorn instrumentalists-icon mb-3" />
+                  <h4 className="card-title">Prayer Requests &amp; Updates</h4>
+                  <p className="card-text">
+                    Communication of prayer points and praise reports for the CU.
+                  </p>
+                  <h6>Activities</h6>
+                  <ul>
+                    <li>Prayer request dissemination</li>
+                    <li>Praise report sharing</li>
+                    <li>CU prayer focus updates</li>
+                  </ul>
+                  <p className="text-muted small">
+                    <i className="fas fa-calendar-alt me-2" /> Regular communication
                   </p>
                 </div>
               </div>
@@ -230,75 +280,80 @@ const PrayerMinistryPage = () => {
       <section className="key-events-section">
         <div className="container">
           <h2 className="section-title text-center" data-aos="fade-up">
-            Featured Events
+            Committee Structure &amp; Leadership
           </h2>
           <p
             className="lead text-center"
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            The Prayer Ministry organizes special events to deepen the
-            Union&apos;s prayer life.
+            The Prayer Ministry is structured with dedicated roles to ensure effective coordination and spiritual leadership.
           </p>
           <div className="row">
             <div
-              className="col-md-4 mb-4"
+              className="col-md-6 col-lg-3 mb-4"
               data-aos="zoom-in"
               data-aos-delay="200"
             >
               <div className="event-highlight-card">
                 <div className="card-body text-center">
-                  <i className="fas fa-pray event-icon" />
-                  <h5 className="card-title">Prayer Kesha</h5>
+                  <i className="fas fa-hands-praying event-icon" />
+                  <h5 className="card-title">Chairperson</h5>
                   <p className="card-text">
-                    All-night prayer session for intense intercession and
-                    worship.
+                    Prayer Coordinator
                   </p>
-                  <p className="text-muted">
-                    <i className="fas fa-calendar-alt me-2" />
-                    Next Date: 26th September
-                  </p>
+                  <small className="text-muted">Provides overall spiritual leadership and coordination</small>
                 </div>
               </div>
             </div>
 
             <div
-              className="col-md-4 mb-4"
+              className="col-md-6 col-lg-3 mb-4"
               data-aos="zoom-in"
               data-aos-delay="300"
             >
               <div className="event-highlight-card">
                 <div className="card-body text-center">
-                  <i className="fas fa-church event-icon" />
-                  <h5 className="card-title">Prayer Service</h5>
+                  <i className="fas fa-file-alt event-icon" />
+                  <h5 className="card-title">Secretary/Treasurer</h5>
                   <p className="card-text">
-                    Dedicated service focused on prayer and spiritual renewal.
+                    Administrative &amp; Financial Support
                   </p>
-                  <p className="text-muted">
-                    <i className="fas fa-calendar-alt me-2" />
-                    Next Date: 24th October
-                  </p>
+                  <small className="text-muted">Handles communications and prayer request distribution</small>
                 </div>
               </div>
             </div>
 
             <div
-              className="col-md-4 mb-4"
+              className="col-md-6 col-lg-3 mb-4"
               data-aos="zoom-in"
               data-aos-delay="400"
             >
               <div className="event-highlight-card">
                 <div className="card-body text-center">
-                  <i className="fas fa-mountain event-icon" />
-                  <h5 className="card-title">Prayer Retreat</h5>
+                  <i className="fas fa-users event-icon" />
+                  <h5 className="card-title">Year Prayer Coordinators</h5>
                   <p className="card-text">
-                    Off-campus retreat for extended prayer, teaching, and
-                    fellowship.
+                    Anza, Endelea 1, Endelea 2, VUKA FiT
                   </p>
-                  <p className="text-muted">
-                    <i className="fas fa-calendar-alt me-2" />
-                    Frequency: Annually, date to be announced
+                  <small className="text-muted">Mobilize prayer within their year groups</small>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="500"
+            >
+              <div className="event-highlight-card">
+                <div className="card-body text-center">
+                  <i className="fas fa-comments event-icon" />
+                  <h5 className="card-title">Committee Members</h5>
+                  <p className="card-text">
+                    Prayer Warriors &amp; Support Team
                   </p>
+                  <small className="text-muted">Active participation in planning and execution</small>
                 </div>
               </div>
             </div>
@@ -310,28 +365,38 @@ const PrayerMinistryPage = () => {
       <section className="leadership-spotlight-section">
         <div className="container">
           <h2 className="section-title text-center" data-aos="fade-up">
-            Ministry Leadership
+            Key Responsibilities
           </h2>
           <p
             className="lead text-center"
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            Guided by dedicated leadership, our Prayer Ministry thrives.
+            The Prayer Coordinator and leadership team are committed to advancing prayer throughout the CU.
           </p>
-          <div className="row justify-content-center">
-            <div className="col-md-4 col-lg-3 mb-4" data-aos="zoom-in">
-              <div className="executive-member-card">
-                <img
-                  src="/assets/images/MARTHA.jpeg"
-                  alt="Martha Thuku"
-                  className="img-fluid rounded-circle mb-2 border-orange"
-                />
-                <h5 className="member-name">Martha Thuku</h5>
-                <p className="member-role">Prayer Coordinator</p>
-                <button className="btn btn-outline-light btn-sm" type="button">
-                  View Profile
-                </button>
+          <div className="row">
+            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <div className="leadership-card">
+                <h5><i className="fas fa-check-circle text-success me-2"></i>Planning &amp; Coordination</h5>
+                <p>Strategically planning all corporate prayer meetings, prayer weeks, and special events</p>
+              </div>
+            </div>
+            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+              <div className="leadership-card">
+                <h5><i className="fas fa-check-circle text-success me-2"></i>Prayer Direction Setting</h5>
+                <p>Identifying and communicating key prayer points for the CU and beyond</p>
+              </div>
+            </div>
+            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+              <div className="leadership-card">
+                <h5><i className="fas fa-check-circle text-success me-2"></i>Year Group Mobilization</h5>
+                <p>Appointing and supporting prayer coordinators within each year fellowship</p>
+              </div>
+            </div>
+            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="500">
+              <div className="leadership-card">
+                <h5><i className="fas fa-check-circle text-success me-2"></i>Prayer Culture Building</h5>
+                <p>Championing a culture of fervent, consistent prayer throughout the entire union</p>
               </div>
             </div>
           </div>
@@ -349,9 +414,7 @@ const PrayerMinistryPage = () => {
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            If you have a passion for intercession and spiritual warfare, we
-            invite you to join the Prayer Ministry. Fill out the form below to
-            express your interest!
+            If you have a passion for intercession and believe in the power of prayer, we invite you to join our Prayer Ministry and help mobilize the union in fervent, consistent prayer.
           </p>
           <div className="row justify-content-center">
             <div className="col-md-8" data-aos="fade-up" data-aos-delay="200">
@@ -404,21 +467,22 @@ const PrayerMinistryPage = () => {
                       <option value="" disabled>
                         Select an area
                       </option>
-                      <option>Morning Prayers</option>
-                      <option>Lunch Hour Prayers</option>
-                      <option>Evening Prayers</option>
-                      <option>Intercession Group</option>
+                      <option>Corporate Prayer Meetings</option>
+                      <option>Prayer Weeks &amp; Fasts</option>
+                      <option>Prayer Retreats &amp; Keshas</option>
+                      <option>Year Group Prayer Coordinator</option>
                       <option>General Interest</option>
                     </select>
                   </div>
                   <div className="mb-3">
                     <label htmlFor="experience" className="form-label">
-                      Tell us about your prayer experience or passion (Optional)
+                      Tell us about your prayer passion or experience (Optional)
                     </label>
                     <textarea
                       className="form-control"
                       id="experience"
                       rows={3}
+                      placeholder="Share what draws you to prayer ministry..."
                       value={experience}
                       onChange={(e) => setExperience(e.target.value)}
                     />
@@ -455,8 +519,8 @@ const PrayerMinistryPage = () => {
               data-aos="fade-up"
               data-aos-delay="400"
             >
-              <Link to="/events" className="btn btn-secondary">
-                View Prayer Events
+              <Link to="/ministries" className="btn btn-secondary">
+                View All Ministries
               </Link>
             </div>
           </div>
