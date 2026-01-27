@@ -153,26 +153,11 @@ export default function MinistriesPage() {
         const activeItems = items.filter((m) => m.isActive !== false);
 
         setApiMinistries(activeItems);
-
-        // If backend has few items, still okay — our UI will show all 10 committees anyway.
-        if (activeItems.length === 0) {
-          setNotice(
-            "Heads up: no ministries were returned from the server. Showing the official committee list from the Leadership Manual.",
-          );
-        } else if (activeItems.length < 10) {
-          setNotice(
-            "Some committees are not yet available in the database. Showing the official committee list; missing ones will use default content for now.",
-          );
-        } else {
-          setNotice(null);
-        }
+        // Silently use fallback data if needed - no notices
       } catch (err: any) {
         console.error("Ministries fetch failed:", err);
-        setNotice(
-          err?.data?.message ||
-            err?.message ||
-            "Failed to retrieve ministries from the server. Showing the official committee list from the Leadership Manual.",
-        );
+        // Silently fail - don't show any notice, just use the fallback committees
+        setNotice(null);
         setApiMinistries([]);
       } finally {
         setLoading(false);
@@ -245,10 +230,8 @@ export default function MinistriesPage() {
           <h2 className="section-title text-center">
             MUTCU’s 10 Core Committees
           </h2>
-          <p className="text-center lead mb-4">
-            This page highlights the official committees (as structured in the Leadership Manual).
-            Each committee page contains its sub-ministries and how to get involved.
-          </p>
+          {/* This page highlights the official committees (as structured in the Leadership Manual).
+            Each committee page contains its sub-ministries and how to get involved. */}
 
           {/* Search */}
           <div className="row justify-content-center mb-4">
