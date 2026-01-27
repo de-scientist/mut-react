@@ -162,7 +162,7 @@ const ContactPage = () => {
                   <div className="contact-info-card text-center p-4 rounded-3 shadow-sm h-100">
                     <i className="fas fa-envelope feature-icon mb-3" />
                     <h4>Email</h4>
-                    <p>info@mutcu.ac.ke</p>
+                    <p>mutcunion@gmail.com</p>
                   </div>
                 </div>
               </div>
