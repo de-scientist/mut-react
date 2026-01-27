@@ -407,7 +407,7 @@ const AboutPage = () => {
           </h2>
           <div className="d-flex flex-wrap justify-content-center gap-3">
             <Link
-              to="/contact"
+              to="/register"
               className="btn btn-navy-action px-5 py-3 rounded-pill fw-bold"
             >
               Join MUTCU Now
