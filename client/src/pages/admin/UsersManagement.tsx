@@ -15,8 +15,8 @@ import {
   Share2,
 } from "lucide-react";
 import "../../styles/adminForms.css";
-import exportHelper from "../utils/exportHelper";
-import sharingHelper from "../utils/sharingHelper";
+import exportHelper from "./utils/exportHelper";
+import sharingHelper from "./utils/sharingHelper";
 
 interface User {
   id: string;
