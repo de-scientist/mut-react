@@ -155,7 +155,7 @@ const UsersManagement = () => {
         `Export of all users (${users.length} total)`
       );
 
-      await ExportHelper.export(exportData, format, {
+      await exportHelper.export(exportData, format, {
         filename: `users`,
         includeLogo: true,
         includeTimestamp: true
@@ -169,7 +169,7 @@ const UsersManagement = () => {
   // Sharing functions
   const shareAllUsers = async () => {
     try {
-      const shareableUsers = SharingHelper.prepareShareData(
+      const shareableUsers = sharingHelper.prepareShareData(
         users,
         'Users Directory',
         {
@@ -180,7 +180,7 @@ const UsersManagement = () => {
         }
       );
 
-      await SharingHelper.shareBulk(shareableUsers, {
+      await sharingHelper.shareBulk(shareableUsers, {
         bulkTitle: 'Users Directory',
         method: 'native'
       });
@@ -192,7 +192,7 @@ const UsersManagement = () => {
 
   const shareSingleUser = async (user: User) => {
     try {
-      await SharingHelper.shareItem(user, {
+      await sharingHelper.shareItem(user, {
         formatTemplate: (item) => ({
           title: item.name || item.email,
           text: `${item.role} - ${item.isActive ? 'Active' : 'Inactive'}`,
