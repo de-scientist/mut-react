@@ -15,8 +15,8 @@ import {
   Share2,
 } from "lucide-react";
 import "../../styles/adminForms.css";
-import ExportHelper from "../utils/exportHelper";
-import SharingHelper from "../utils/sharingHelper";
+import exportHelper from "../utils/exportHelper";
+import sharingHelper from "../utils/sharingHelper";
 
 interface User {
   id: string;
@@ -142,7 +142,7 @@ const UsersManagement = () => {
   // Export functions
   const exportUsers = async (format: 'csv' | 'word' | 'pdf') => {
     try {
-      const exportData = ExportHelper.prepareExportData(
+      const exportData = exportHelper.prepareExportData(
         users,
         {
           email: 'Email',
