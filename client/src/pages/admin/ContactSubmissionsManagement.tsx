@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { contactAPI } from "../../services/api";
 import Toast from "../../components/Toast";
-import { Search, ArrowLeft, Mail, ExternalLink, Filter } from "lucide-react";
+import { Search, ArrowLeft, Mail, ExternalLink, Filter, Download, Share2, FileText } from "lucide-react";
+import exportHelper from "./utils/exportHelper";
+import sharingHelper from "./utils/sharingHelper";
 
 interface ContactSubmission {
   id: string;

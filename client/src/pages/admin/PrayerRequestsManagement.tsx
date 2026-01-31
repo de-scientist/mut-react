@@ -426,20 +426,29 @@ const PrayerRequestsManagement = () => {
                             {req.status.replace("_", " ")}
                           </span>
                         </td>
-                        <td className="px-4 text-end">
-                          <select
-                            className="form-select form-select-sm status-select-custom border-primary-subtle shadow-sm"
-                            value={req.status}
-                            onChange={(e) =>
-                              handleStatusUpdate(req.id, e.target.value)
-                            }
-                            title={`Change status for ${req.name || "Anonymous"}`} // Fixes axe/forms
-                            aria-label="Change status"
-                          >
-                            <option value="PENDING">Mark Pending</option>
-                            <option value="PRAYED_FOR">Mark Prayed For</option>
-                            <option value="ANSWERED">Mark Answered</option>
-                          </select>
+                        <td className="px-4 py-3 text-end">
+                          <div className="d-flex justify-content-end gap-2">
+                            <button
+                              className="btn btn-sm btn-light-info rounded-circle p-2"
+                              onClick={() => shareSinglePrayerRequest(req)}
+                              title="Share this prayer request"
+                            >
+                              <Share2 size={14} />
+                            </button>
+                            <select
+                              className="form-select form-select-sm status-select-custom border-primary-subtle shadow-sm"
+                              value={req.status}
+                              onChange={(e) =>
+                                handleStatusUpdate(req.id, e.target.value)
+                              }
+                              title={`Change status for ${req.name || "Anonymous"}`} // Fixes axe/forms
+                              aria-label="Change status"
+                            >
+                              <option value="PENDING">Mark Pending</option>
+                              <option value="PRAYED_FOR">Mark Prayed For</option>
+                              <option value="ANSWERED">Mark Answered</option>
+                            </select>
+                          </div>
                         </td>
                       </tr>
                     );

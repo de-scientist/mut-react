@@ -13,8 +13,11 @@ import {
   Link as LinkIcon,
   FileText,
   Share2,
+  Download,
 } from "lucide-react";
 import "../../styles/adminForms.css";
+import exportHelper from "./utils/exportHelper";
+import sharingHelper from "./utils/sharingHelper";
 
 interface Resource {
   id: string;
@@ -210,6 +213,74 @@ const AdminResourcesManagement = () => {
     URL.revokeObjectURL(url);
   };
 
+  // Enhanced export functions using centralized helper
+  const exportResources = async (format: 'csv' | 'word' | 'pdf') => {
+    try {
+      const exportData = exportHelper.prepareExportData(
+        resources,
+        {
+          title: 'Title',
+          description: 'Description',
+          type: 'Type',
+          url: 'URL',
+          imageUrl: 'Image URL',
+          isActive: 'Status',
+          createdAt: 'Created Date',
+          updatedAt: 'Updated Date'
+        },
+        'Resources Export',
+        `Export of all resources (${resources.length} total)`
+      );
+
+      await exportHelper.export(exportData, format, {
+        filename: `resources`,
+        includeLogo: true,
+        includeTimestamp: true
+      });
+    } catch (error) {
+      setError('Failed to export resources');
+      console.error('Export error:', error);
+    }
+  };
+
+  // Enhanced sharing functions
+  const shareAllResources = async () => {
+    try {
+      const shareableResources = sharingHelper.prepareShareData(
+        resources,
+        {
+          itemTitleField: 'title',
+          itemDescriptionField: 'description',
+          itemUrlField: 'url',
+          itemType: 'resource'
+        }
+      );
+
+      await sharingHelper.shareBulk(shareableResources, {
+        bulkTitle: 'Resources Directory',
+        method: 'native'
+      });
+    } catch (error) {
+      setError('Failed to share resources');
+      console.error('Share error:', error);
+    }
+  };
+
+  const shareSingleResource = async (resource: Resource) => {
+    try {
+      await sharingHelper.shareItem(resource, {
+        formatTemplate: (item) => ({
+          title: item.title,
+          text: `${item.type || 'Resource'} - ${item.description || ''}`,
+          url: item.url || item.imageUrl
+        })
+      });
+    } catch (error) {
+      setError('Failed to share resource');
+      console.error('Share error:', error);
+    }
+  };
+
   const shareResources = async () => {
     if (!resources.length) return;
 
@@ -254,16 +325,39 @@ ${r.url ? `Link: ${r.url}` : ""}
               <ArrowLeft size={18} /> Dashboard
             </button>
 
-            <button
-              onClick={exportResourcesCSV}
-              className="btn btn-outline-secondary shadow-sm d-flex align-items-center gap-2"
-            >
-              <FileText size={18} /> Export
-            </button>
+            {/* Export Dropdown */}
+            <div className="dropdown">
+              <button
+                className="btn btn-outline-secondary shadow-sm dropdown-toggle d-flex align-items-center gap-2"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <Download size={18} /> Export
+              </button>
+              <ul className="dropdown-menu">
+                <li>
+                  <button className="dropdown-item" onClick={() => exportResources('csv')}>
+                    <FileText size={16} className="me-2" /> Export as CSV
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item" onClick={() => exportResources('word')}>
+                    <FileText size={16} className="me-2" /> Export as Word
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item" onClick={() => exportResources('pdf')}>
+                    <FileText size={16} className="me-2" /> Export as PDF
+                  </button>
+                </li>
+              </ul>
+            </div>
 
+            {/* Share Button */}
             <button
-              onClick={shareResources}
               className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2"
+              onClick={shareAllResources}
             >
               <Share2 size={18} /> Share
             </button>
@@ -470,6 +564,15 @@ ${r.url ? `Link: ${r.url}` : ""}
                           >
                             <Edit3 size={16} />
                           </button>
+
+                          <button
+                            className="btn btn-sm btn-light-info rounded-circle"
+                            title="Share Resource"
+                            onClick={() => shareSingleResource(resource)}
+                          >
+                            <Share2 size={16} />
+                          </button>
+
                           <button
                             className="btn btn-sm btn-light-warning rounded-circle"
                             title="toggle"
@@ -481,6 +584,7 @@ ${r.url ? `Link: ${r.url}` : ""}
                           >
                             <Power size={16} />
                           </button>
+
                           <button
                             className="btn btn-sm btn-light-danger rounded-circle"
                             title="delete"
