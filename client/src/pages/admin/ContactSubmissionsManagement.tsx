@@ -145,6 +145,77 @@ const ContactSubmissionsManagement = () => {
     URL.revokeObjectURL(url);
   };
 
+  // Enhanced export functions using centralized helper
+  const exportContacts = async (format: 'csv' | 'word' | 'pdf') => {
+    try {
+      const exportData = exportHelper.prepareExportData(
+        submissions,
+        {
+          name: 'Name',
+          email: 'Email',
+          subject: 'Subject',
+          message: 'Message',
+          status: 'Status',
+          createdAt: 'Created Date',
+          updatedAt: 'Updated Date'
+        },
+        'Contact Submissions Export',
+        `Export of all contact submissions (${submissions.length} total)`
+      );
+
+      await exportHelper.export(exportData, format, {
+        filename: `contact-submissions`,
+        includeLogo: true,
+        includeTimestamp: true
+      });
+    } catch (error) {
+      setError('Failed to export contact submissions');
+      console.error('Export error:', error);
+    }
+  };
+
+  // Enhanced sharing functions
+  const shareAllContacts = async () => {
+    try {
+      const shareableContacts = sharingHelper.prepareShareData(
+        submissions,
+        {
+          itemTitleField: 'name',
+          itemDescriptionField: 'subject',
+          itemUrlField: 'email',
+          itemType: 'contact'
+        }
+      );
+
+      await sharingHelper.shareBulk(shareableContacts, {
+        bulkTitle: 'Contact Submissions Directory',
+        method: 'native'
+      });
+    } catch (error) {
+      setError('Failed to share contact submissions');
+      console.error('Share error:', error);
+    }
+  };
+
+  const shareSingleContact = async (submission: ContactSubmission) => {
+    try {
+      await sharingHelper.shareItem({
+        ...submission,
+        title: `${submission.name} - ${submission.subject}`,
+        description: submission.message.substring(0, 100) + '...'
+      }, {
+        formatTemplate: (item) => ({
+          title: `${item.name} - ${item.subject}`,
+          text: `${item.status} - ${item.message.substring(0, 100)}...`,
+          url: `mailto:${item.email}`
+        })
+      });
+    } catch (error) {
+      setError('Failed to share contact submission');
+      console.error('Share error:', error);
+    }
+  };
+
   // Share contact submissions
   const shareContacts = async () => {
     const text = submissions
@@ -190,23 +261,49 @@ const ContactSubmissionsManagement = () => {
           </div>
 
           <div className="d-flex gap-2 flex-wrap">
-            <button
-              className="btn btn-outline-primary btn-sm rounded-pill shadow-sm"
-              onClick={exportContactsCSV}
-              title="Export all contact submissions"
-            >
-              Export CSV
-            </button>
+            {/* Export Dropdown */}
+            <div className="dropdown">
+              <button
+                className="btn btn-outline-primary btn-sm rounded-pill shadow-sm dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                title="Export all contact submissions"
+              >
+                <Download size={16} className="me-1" /> Export
+              </button>
+              <ul className="dropdown-menu">
+                <li>
+                  <button className="dropdown-item" onClick={() => exportContacts('csv')}>
+                    <FileText size={16} className="me-2" /> Export as CSV
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item" onClick={() => exportContacts('word')}>
+                    <FileText size={16} className="me-2" /> Export as Word
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item" onClick={() => exportContacts('pdf')}>
+                    <FileText size={16} className="me-2" /> Export as PDF
+                  </button>
+                </li>
+              </ul>
+            </div>
 
+            {/* Share Button */}
             <button
               className="btn btn-outline-secondary btn-sm rounded-pill shadow-sm"
-              onClick={shareContacts}
+              onClick={shareAllContacts}
               title="Share contact submissions"
             >
-              Share
+              <Share2 size={16} className="me-1" /> Share All
             </button>
 
-            <div className="input-group shadow-sm">
+            <div
+              className="input-group shadow-sm"
+              style={{ maxWidth: "300px" }}
+            >
               <span className="input-group-text bg-white border-end-0">
                 <Search size={18} className="text-muted" />
               </span>
@@ -331,20 +428,29 @@ const ContactSubmissionsManagement = () => {
                         )}
                       </td>
                       <td className="pe-4 text-end">
-                        <select
-                          className="form-select form-select-sm d-inline-block w-auto border-0 bg-light-subtle shadow-none"
-                          value={submission.status}
-                          onChange={(e) =>
-                            handleStatusUpdate(submission.id, e.target.value)
-                          }
-                          title="Change submission status"
-                          aria-label="Change status"
-                        >
-                          <option value="NEW">New</option>
-                          <option value="IN_PROGRESS">In Progress</option>
-                          <option value="RESOLVED">Resolved</option>
-                          <option value="ARCHIVED">Archived</option>
-                        </select>
+                        <div className="d-flex justify-content-end gap-2 align-items-center">
+                          <button
+                            className="btn btn-sm btn-light-info rounded-circle p-2"
+                            onClick={() => shareSingleContact(submission)}
+                            title="Share this contact submission"
+                          >
+                            <Share2 size={14} />
+                          </button>
+                          <select
+                            className="form-select form-select-sm d-inline-block w-auto border-0 bg-light-subtle shadow-none"
+                            value={submission.status}
+                            onChange={(e) =>
+                              handleStatusUpdate(submission.id, e.target.value)
+                            }
+                            title="Change submission status"
+                            aria-label="Change status"
+                          >
+                            <option value="NEW">New</option>
+                            <option value="IN_PROGRESS">In Progress</option>
+                            <option value="RESOLVED">Resolved</option>
+                            <option value="ARCHIVED">Archived</option>
+                          </select>
+                        </div>
                       </td>
                     </tr>
                   ))
