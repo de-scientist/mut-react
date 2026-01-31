@@ -127,7 +127,11 @@ const NewsletterSubscriptionsManagement = () => {
 
   const shareSingleSubscription = async (subscription: Subscription) => {
     try {
-      await sharingHelper.shareItem(subscription, {
+      await sharingHelper.shareItem({
+        ...subscription,
+        title: subscription.email,
+        description: subscription.isActive ? 'Active' : 'Inactive'
+      }, {
         formatTemplate: (item) => ({
           title: item.email,
           text: `Status: ${item.isActive ? 'Active' : 'Inactive'}`,
@@ -273,9 +277,45 @@ const NewsletterSubscriptionsManagement = () => {
                 </select>
               </div>
               <div className="col-md-5 text-md-end">
-                <button className="btn btn-primary shadow-sm rounded-pill d-inline-flex align-items-center gap-2 px-4">
-                  <Download size={18} /> Export CSV
-                </button>
+                <div className="d-flex gap-2">
+                  {/* Export Dropdown */}
+                  <div className="dropdown">
+                    <button
+                      className="btn btn-primary shadow-sm rounded-pill d-inline-flex align-items-center gap-2 dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <Download size={18} /> Export
+                    </button>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <button className="dropdown-item" onClick={() => exportSubscriptions('csv')}>
+                          <FileText size={16} className="me-2" /> Export as CSV
+                        </button>
+                      </li>
+                      <li>
+                        <button className="dropdown-item" onClick={() => exportSubscriptions('word')}>
+                          <FileText size={16} className="me-2" /> Export as Word
+                        </button>
+                      </li>
+                      <li>
+                        <button className="dropdown-item" onClick={() => exportSubscriptions('pdf')}>
+                          <FileText size={16} className="me-2" /> Export as PDF
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Share Button */}
+                  <button
+                    className="btn btn-outline-info shadow-sm rounded-pill d-inline-flex align-items-center gap-2"
+                    onClick={shareAllSubscriptions}
+                    title="Share all subscribers"
+                  >
+                    <Share2 size={18} /> Share All
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -344,9 +384,18 @@ const NewsletterSubscriptionsManagement = () => {
                         </div>
                       </td>
                       <td className="px-4 text-end">
-                        <button className="btn btn-sm btn-light rounded-pill px-3 fw-bold">
-                          Manage
-                        </button>
+                        <div className="d-flex justify-content-end gap-2">
+                          <button 
+                            className="btn btn-sm btn-light rounded-pill px-3 fw-bold"
+                            onClick={() => shareSingleSubscription(subscription)}
+                            title="Share this subscription"
+                          >
+                            <Share2 size={14} className="me-1" /> Share
+                          </button>
+                          <button className="btn btn-sm btn-light rounded-pill px-3 fw-bold">
+                            Manage
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))

@@ -15,7 +15,11 @@ import {
   User,
   Calendar,
   Download,
+  Share2,
+  FileText,
 } from "lucide-react";
+import exportHelper from "./utils/exportHelper";
+import sharingHelper from "./utils/sharingHelper";
 
 interface PrayerRequest {
   id: string;
