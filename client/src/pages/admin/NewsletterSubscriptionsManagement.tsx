@@ -10,7 +10,11 @@ import {
   Download,
   Search,
   Calendar,
+  Share2,
+  FileText,
 } from "lucide-react";
+import exportHelper from "./utils/exportHelper";
+import sharingHelper from "./utils/sharingHelper";
 
 interface Subscription {
   id: string;
@@ -71,6 +75,70 @@ const NewsletterSubscriptionsManagement = () => {
     }),
     [subscriptions],
   );
+
+  // Export functions
+  const exportSubscriptions = async (format: 'csv' | 'word' | 'pdf') => {
+    try {
+      const exportData = exportHelper.prepareExportData(
+        subscriptions,
+        {
+          email: 'Email',
+          isActive: 'Status',
+          createdAt: 'Subscribed Date',
+          updatedAt: 'Updated Date'
+        },
+        'Newsletter Subscriptions Export',
+        `Export of all newsletter subscribers (${subscriptions.length} total)`
+      );
+
+      await exportHelper.export(exportData, format, {
+        filename: `newsletter-subscriptions`,
+        includeLogo: true,
+        includeTimestamp: true
+      });
+    } catch (error) {
+      setError('Failed to export subscriptions');
+      console.error('Export error:', error);
+    }
+  };
+
+  // Sharing functions
+  const shareAllSubscriptions = async () => {
+    try {
+      const shareableSubscriptions = sharingHelper.prepareShareData(
+        subscriptions,
+        {
+          itemTitleField: 'email',
+          itemDescriptionField: 'isActive',
+          itemUrlField: 'id',
+          itemType: 'newsletter'
+        }
+      );
+
+      await sharingHelper.shareBulk(shareableSubscriptions, {
+        bulkTitle: 'Newsletter Subscribers Directory',
+        method: 'native'
+      });
+    } catch (error) {
+      setError('Failed to share subscriptions');
+      console.error('Share error:', error);
+    }
+  };
+
+  const shareSingleSubscription = async (subscription: Subscription) => {
+    try {
+      await sharingHelper.shareItem(subscription, {
+        formatTemplate: (item) => ({
+          title: item.email,
+          text: `Status: ${item.isActive ? 'Active' : 'Inactive'}`,
+          url: `mailto:${item.email}`
+        })
+      });
+    } catch (error) {
+      setError('Failed to share subscription');
+      console.error('Share error:', error);
+    }
+  };
 
   if (loading) {
     return (
