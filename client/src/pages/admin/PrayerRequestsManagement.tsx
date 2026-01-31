@@ -136,6 +136,76 @@ const PrayerRequestsManagement = () => {
     link.click();
   };
 
+  // Enhanced export functions using centralized helper
+  const exportPrayerRequests = async (format: 'csv' | 'word' | 'pdf') => {
+    try {
+      const exportData = exportHelper.prepareExportData(
+        requests,
+        {
+          name: 'Name',
+          request: 'Request',
+          status: 'Status',
+          isPublic: 'Visibility',
+          createdAt: 'Date Submitted',
+          updatedAt: 'Updated Date'
+        },
+        'Prayer Requests Export',
+        `Export of all prayer requests (${requests.length} total)`
+      );
+
+      await exportHelper.export(exportData, format, {
+        filename: `prayer-requests`,
+        includeLogo: true,
+        includeTimestamp: true
+      });
+    } catch (error) {
+      setError('Failed to export prayer requests');
+      console.error('Export error:', error);
+    }
+  };
+
+  // Sharing functions
+  const shareAllPrayerRequests = async () => {
+    try {
+      const shareableRequests = sharingHelper.prepareShareData(
+        requests,
+        {
+          itemTitleField: 'name',
+          itemDescriptionField: 'request',
+          itemUrlField: 'id',
+          itemType: 'prayer'
+        }
+      );
+
+      await sharingHelper.shareBulk(shareableRequests, {
+        bulkTitle: 'Prayer Requests Directory',
+        method: 'native'
+      });
+    } catch (error) {
+      setError('Failed to share prayer requests');
+      console.error('Share error:', error);
+    }
+  };
+
+  const shareSinglePrayerRequest = async (request: PrayerRequest) => {
+    try {
+      await sharingHelper.shareItem({
+        ...request,
+        title: request.name || 'Anonymous',
+        description: request.request.substring(0, 100) + '...'
+      }, {
+        formatTemplate: (item) => ({
+          title: item.name || 'Anonymous',
+          text: `${item.status} - ${item.isPublic ? 'Public' : 'Private'}\n${item.request.substring(0, 100)}...`,
+          url: `/prayer/${item.id}`
+        })
+      });
+    } catch (error) {
+      setError('Failed to share prayer request');
+      console.error('Share error:', error);
+    }
+  };
+
   const openDetailModal = (request: PrayerRequest) => {
     setSelectedRequest(request);
     setShowDetailModal(true);
@@ -164,14 +234,46 @@ const PrayerRequestsManagement = () => {
             </p>
           </div>
           <div className="d-flex gap-2">
+            {/* Export Dropdown */}
+            <div className="dropdown">
+              <button
+                className="btn btn-success shadow-sm d-flex align-items-center gap-2 dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                title="Download prayer requests"
+                aria-label="Download prayer requests"
+              >
+                <Download size={18} /> Export
+              </button>
+              <ul className="dropdown-menu">
+                <li>
+                  <button className="dropdown-item" onClick={() => exportPrayerRequests('csv')}>
+                    <FileText size={16} className="me-2" /> Export as CSV
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item" onClick={() => exportPrayerRequests('word')}>
+                    <FileText size={16} className="me-2" /> Export as Word
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item" onClick={() => exportPrayerRequests('pdf')}>
+                    <FileText size={16} className="me-2" /> Export as PDF
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            {/* Share Button */}
             <button
-              onClick={handleDownloadCSV}
-              className="btn btn-success shadow-sm d-flex align-items-center gap-2"
-              title="Download all prayer requests as CSV"
-              aria-label="Download CSV"
+              className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2"
+              onClick={shareAllPrayerRequests}
+              title="Share all prayer requests"
             >
-              <Download size={18} /> Export CSV
+              <Share2 size={18} /> Share All
             </button>
+
             <button
               onClick={() => navigate("/admin")}
               className="btn btn-white border shadow-sm d-flex align-items-center gap-2"
