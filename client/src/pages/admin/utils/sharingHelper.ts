@@ -141,7 +141,7 @@ class SharingHelper {
    * Share to specific social media platforms
    */
   private static async shareToSocialPlatform(data: ShareData, platform: string): Promise<void> {
-    const { title, text, url } = data;
+    const {  text, url } = data;
     const shareUrl = url || this.BASE_URL;
     
     let platformUrl = '';
@@ -335,7 +335,7 @@ class SharingHelper {
    */
   static prepareShareData<T extends Record<string, any>>(
     items: T[],
-    title: string,
+    // title: string,
     options: {
       itemTitleField?: keyof T;
       itemDescriptionField?: keyof T;
