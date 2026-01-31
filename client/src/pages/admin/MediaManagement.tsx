@@ -4,8 +4,10 @@ import { mediaAPI } from "../../services/api";
 import ConfirmationModal from "../../components/ConfirmationModal";
 import ImageUpload from "../../components/ImageUpload";
 import Toast from "../../components/Toast";
-import { Plus, Edit3, Trash2, ArrowLeft, Power } from "lucide-react";
+import { Plus, Edit3, Trash2, ArrowLeft, Power, Download, Share2, FileText } from "lucide-react";
 import "../../styles/adminForms.css";
+import exportHelper from "./utils/exportHelper";
+import sharingHelper from "./utils/sharingHelper";
 
 interface MediaItem {
   id: string;
@@ -144,6 +146,73 @@ const MediaManagement = () => {
       );
     } catch (err: any) {
       setError(err.message || "Failed to update visibility");
+    }
+  };
+
+  // Export functions
+  const exportMedia = async (format: 'csv' | 'word' | 'pdf') => {
+    try {
+      const exportData = exportHelper.prepareExportData(
+        gallery,
+        {
+          title: 'Title',
+          description: 'Description',
+          category: 'Category',
+          imageUrl: 'Image URL',
+          isActive: 'Status',
+          createdAt: 'Created Date',
+          updatedAt: 'Updated Date'
+        },
+        'Media Gallery Export',
+        `Export of all media items (${gallery.length} total)`
+      );
+
+      await exportHelper.export(exportData, format, {
+        filename: `media-gallery`,
+        includeLogo: true,
+        includeTimestamp: true
+      });
+    } catch (error) {
+      setError('Failed to export media gallery');
+      console.error('Export error:', error);
+    }
+  };
+
+  // Sharing functions
+  const shareAllMedia = async () => {
+    try {
+      const shareableMedia = sharingHelper.prepareShareData(
+        gallery,
+        {
+          itemTitleField: 'title',
+          itemDescriptionField: 'description',
+          itemUrlField: 'imageUrl',
+          itemType: 'media'
+        }
+      );
+
+      await sharingHelper.shareBulk(shareableMedia, {
+        bulkTitle: 'Media Gallery Directory',
+        method: 'native'
+      });
+    } catch (error) {
+      setError('Failed to share media gallery');
+      console.error('Share error:', error);
+    }
+  };
+
+  const shareSingleMedia = async (item: MediaItem) => {
+    try {
+      await sharingHelper.shareItem(item, {
+        formatTemplate: (item) => ({
+          title: item.title,
+          text: `${item.category || 'No category'} - ${item.description || ''}`,
+          url: item.imageUrl
+        })
+      });
+    } catch (error) {
+      setError('Failed to share media item');
+      console.error('Share error:', error);
     }
   };
 
