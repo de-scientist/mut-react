@@ -460,7 +460,7 @@ For technical support:
 - **Language**: TypeScript
 - **Module System**: ES Modules
 - **Database**: PostgreSQL
-- **ORM**: Prisma
+- **ORM**: Drizzle
 - **Validation**: Zod
 - **Authentication**: JWT
 - **Security**: Helmet, CORS, Rate Limiting
