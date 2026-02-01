@@ -50,29 +50,43 @@ const HospitalityMinistryPage = () => {
       <section className="ministry-intro-section">
         <div className="container">
           <div className="row align-items-center">
+            <div className="col-lg-7">
+              <h2 className="section-title" data-aos="fade-right">
+                About the Hospitality Committee
+              </h2>
+              <div data-aos="fade-right" data-aos-delay="100">
+                <h5 className="text-secondary mb-3">Mandate</h5>
+                <p>
+                  To model the love of Christ by creating a welcoming environment, caring for guests and members, and managing the CU office resources.
+                </p>
+              </div>
+              <div data-aos="fade-right" data-aos-delay="200">
+                <h5 className="text-secondary mb-3">Our Mission</h5>
+                <p>
+                  The Hospitality Committee reflects Christ's love through warmth, welcome, and genuine care. We create a welcoming environment for all members and visitors, demonstrating compassion through thoughtful service and excellent hospitality.
+                </p>
+              </div>
+              <div data-aos="fade-right" data-aos-delay="300">
+                <h5 className="text-secondary mb-3">Our Focus</h5>
+                <ul>
+                  <li>Creating welcoming environments for all members and guests</li>
+                  <li>Managing office resources and supplies with stewardship</li>
+                  <li>New member integration and care</li>
+                  <li>Guest reception and refreshment provision</li>
+                  <li>Fostering genuine community and fellowship</li>
+                </ul>
+              </div>
+            </div>
             <div className="col-lg-5 text-center mb-4 mb-lg-0">
               <img
                 src="/assets/images/Waci.jpg"
-                alt="Waci"
+                alt="Hospitality Coordinator"
                 className="img-fluid rounded-circle"
                 data-aos="zoom-in"
               />
-              <h3 className="mt-3">Waci</h3>
-              <p className="text-muted">Hospitality Coordinator</p>
-            </div>
-            <div className="col-lg-7">
-              <h2 className="section-title" data-aos="fade-right">
-                About the Hospitality Ministry
-              </h2>
-              <p data-aos="fade-right" data-aos-delay="100">
-                The Hospitality Ministry focuses on creating a welcoming
-                environment for all MUTCU members and visitors. It includes the
-                Kitchen Ministry and works to foster fellowship through service.
-              </p>
-              <p data-aos="fade-right" data-aos-delay="200">
-                The ministry oversees Kitchen Ministry, Guest Relations, and
-                Event Catering, ensuring food safety, resource management, and a
-                spirit of generosity and care in all activities.
+              <h3 className="mt-3">Hospitality Committee</h3>
+              <p className="text-muted">
+                Led by the First Vice-Chairperson (Female)
               </p>
             </div>
           </div>
@@ -176,41 +190,6 @@ const HospitalityMinistryPage = () => {
       </section>
 
       {/* Events */}
-      <section className="key-events-section">
-        <div className="container">
-          <h2 className="section-title text-center" data-aos="fade-up">
-            Featured Events
-          </h2>
-          <p
-            className="lead text-center"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            Join us for hospitality-focused events.
-          </p>
-          <div className="row">
-            <div
-              className="col-md-4 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <div className="event-highlight-card">
-                <div className="card-body text-center">
-                  <i className="fas fa-utensils event-icon" />
-                  <h5 className="card-title">Hospitality Day</h5>
-                  <p className="card-text">
-                    A day of fellowship and catering training.
-                  </p>
-                  <p className="text-muted">
-                    <i className="fas fa-calendar-alt me-2" /> 19th October 2025
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Leadership */}
       <section className="leadership-spotlight-section">
         <div className="container">
@@ -228,12 +207,12 @@ const HospitalityMinistryPage = () => {
             <div className="col-md-4 col-lg-3 mb-4" data-aos="zoom-in">
               <div className="executive-member-card">
                 <img
-                  src="/assets/images/Waci.jpg"
-                  alt="Waci"
+                  src="/assets/images/PURITY.jpg"
+                  alt="Purity Njeri"
                   className="img-fluid rounded-circle mb-2 border-orange"
                 />
-                <h5 className="member-name">Waci</h5>
-                <p className="member-role">Hospitality Coordinator</p>
+                <h5 className="member-name">Purity Njeri</h5>
+                <p className="member-role">First Vice-Chairperson (Female)</p>
                 <button className="btn btn-outline-light btn-sm" type="button">
                   View Profile
                 </button>
@@ -349,49 +328,6 @@ const HospitalityMinistryPage = () => {
               <Link to="/events" className="btn btn-secondary">
                 View Hospitality Events
               </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery */}
-      <section className="sub-ministries-section">
-        <div className="container">
-          <h2 className="section-title text-center" data-aos="fade-up">
-            Ministry in Action
-          </h2>
-          <div className="row">
-            <div className="col-md-3 mb-4" data-aos="zoom-in">
-              <img
-                src="/assets/images/kitchen-prep.jpg"
-                alt="Kitchen Prep"
-                className="img-fluid rounded"
-              />
-              <p className="text-center mt-2">Kitchen Ministry at Work</p>
-            </div>
-            <div
-              className="col-md-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="100"
-            >
-              <img
-                src="/assets/images/guest-welcome.jfif"
-                alt="Guest Welcome"
-                className="img-fluid rounded"
-              />
-              <p className="text-center mt-2">Guest Relations Team</p>
-            </div>
-            <div
-              className="col-md-3 mb-4"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <img
-                src="/assets/images/event-catering.jfif"
-                alt="Event Catering"
-                className="img-fluid rounded"
-              />
-              <p className="text-center mt-2">Event Catering Setup</p>
             </div>
           </div>
         </div>

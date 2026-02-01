@@ -50,34 +50,41 @@ const MissionsEvangelismMinistryPage = () => {
       <section className="ministry-intro-section">
         <div className="container">
           <div className="row align-items-center">
-            <div className="col-lg-5 text-center mb-4 mb-lg-0">
-              <img
-                src="/assets/images/MUTUKU.jpeg"
-                alt="Mercy Mutuku"
-                className="img-fluid rounded-circle"
-                data-aos="zoom-in"
-              />
-              <h3 className="mt-3">Mercy Mutuku</h3>
-              <p className="text-muted">
-                Missions &amp; Evangelism Coordinator
-              </p>
-            </div>
             <div className="col-lg-7">
               <h2 className="section-title" data-aos="fade-right">
                 About the Missions &amp; Evangelism Ministry
               </h2>
-              <p data-aos="fade-right" data-aos-delay="100">
-                The Missions &amp; Evangelism Ministry is committed to
-                fulfilling the Great Commission by spreading the Gospel and
-                engaging in community outreach. We organize evangelistic
-                crusades, missions trips, and outreach programs to share
-                God&apos;s love both on and off campus.
-              </p>
-              <p data-aos="fade-right" data-aos-delay="200">
-                Aligned with MUTCU&apos;s mission, we aim to reach the lost,
-                disciple new believers, and support community development
-                through service projects, reflecting our call to love and serve
-                as Jesus did.
+              <div data-aos="fade-right" data-aos-delay="100">
+                <h5 className="text-secondary mb-3">Mandate</h5>
+                <p>
+                  To equip and mobilize the CU to faithfully proclaim the gospel in word and deed, both on campus and beyond, ensuring that every member is engaged in the Great Commission.
+                </p>
+              </div>
+              <div data-aos="fade-right" data-aos-delay="200">
+                <h5 className="text-secondary mb-3">Our Mission</h5>
+                <p>
+                  The Missions &amp; Evangelism Ministry is committed to spreading the Gospel and serving communities. Through evangelism, community service, and discipleship, we seek to reach the lost, establish new believers in faith, and demonstrate Christ&apos;s love through compassionate action.
+                </p>
+              </div>
+              <div data-aos="fade-right" data-aos-delay="300">
+                <h5 className="text-secondary mb-3">Our Three Focus Areas</h5>
+                <ul>
+                  <li><strong>Evangelism:</strong> Campus-wide and community evangelistic efforts</li>
+                  <li><strong>Hope Ministry:</strong> Compassionate outreach to vulnerable groups</li>
+                  <li><strong>Integral Ministry:</strong> Strategic outreach to high schools and community service</li>
+                </ul>
+              </div>
+            </div>
+            <div className="col-lg-5 text-center mb-4 mb-lg-0">
+              <img
+                src="/assets/images/MUTUKU.jpeg"
+                alt="Missions & Evangelism Coordinator"
+                className="img-fluid rounded-circle"
+                data-aos="zoom-in"
+              />
+              <h3 className="mt-3">Missions &amp; Evangelism Coordinator</h3>
+              <p className="text-muted">
+                Provides strategic leadership and oversight
               </p>
             </div>
           </div>
@@ -88,116 +95,92 @@ const MissionsEvangelismMinistryPage = () => {
       <section className="sub-ministries-section">
         <div className="container">
           <h2 className="section-title text-center" data-aos="fade-up">
-            Our Outreach Programs
+            Our Sub-Committees &amp; Programs
           </h2>
           <p
             className="lead text-center"
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            Explore the various ways we engage in missions and evangelism.
+            The ministry operates through three specialized sub-committees, each with a distinct focus and leadership.
           </p>
           <div className="row">
-            {/* Evangelistic Crusades */}
+            {/* Evangelism Sub-Committee */}
             <div
-              className="col-md-6 col-lg-3 mb-4"
+              className="col-md-6 col-lg-4 mb-4"
               data-aos="fade-up"
               data-aos-delay="200"
             >
               <div className="sub-ministry-card">
-                <div className="card-body text-center">
+                <div className="card-body">
                   <i className="fas fa-church choir-icon mb-3" />
-                  <h4 className="card-title">Evangelistic Crusades</h4>
+                  <h4 className="card-title">Evangelism Sub-Committee</h4>
                   <p className="card-text">
-                    Large-scale events to preach the Gospel and invite
-                    salvation.
+                    Spearheading on-campus and off-campus evangelistic efforts.
                   </p>
-                  <h6>Activities</h6>
+                  <h6>Focus Areas</h6>
                   <ul>
-                    <li>Open-air preaching</li>
-                    <li>Music and worship</li>
-                    <li>Follow-up discipleship</li>
+                    <li>Campus evangelism programs</li>
+                    <li>Evangelistic campaigns</li>
+                    <li>Year-based evangelism leaders</li>
+                    <li>Training in personal evangelism</li>
                   </ul>
-                  <p className="text-muted">
-                    <i className="fas fa-clock me-2" /> Quarterly, dates vary
+                  <p className="text-muted small">
+                    <i className="fas fa-calendar-alt me-2" /> Regular activities
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Missions Trips */}
+            {/* Hope Ministry Sub-Committee */}
             <div
-              className="col-md-6 col-lg-3 mb-4"
+              className="col-md-6 col-lg-4 mb-4"
               data-aos="fade-up"
               data-aos-delay="300"
             >
               <div className="sub-ministry-card">
-                <div className="card-body text-center">
-                  <i className="fas fa-globe band-icon mb-3" />
-                  <h4 className="card-title">Missions Trips</h4>
+                <div className="card-body">
+                  <i className="fas fa-hands-helping band-icon mb-3" />
+                  <h4 className="card-title">Hope Ministry Sub-Committee</h4>
                   <p className="card-text">
-                    Trips to underserved areas for evangelism and service.
+                    Demonstrating Christ&apos;s compassion to vulnerable groups.
                   </p>
-                  <h6>Activities</h6>
+                  <h6>Focus Areas</h6>
                   <ul>
-                    <li>Community outreach</li>
-                    <li>Building projects</li>
-                    <li>Teaching and training</li>
+                    <li>Hospital visitations</li>
+                    <li>Prison ministry</li>
+                    <li>Children&apos;s home outreach</li>
+                    <li>Rescue centre support</li>
                   </ul>
-                  <p className="text-muted">
-                    <i className="fas fa-clock me-2" /> Annually, during breaks
+                  <p className="text-muted small">
+                    <i className="fas fa-calendar-alt me-2" /> Scheduled visits
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Community Outreach */}
+            {/* Integral Ministry Sub-Committee */}
             <div
-              className="col-md-6 col-lg-3 mb-4"
+              className="col-md-6 col-lg-4 mb-4"
               data-aos="fade-up"
               data-aos-delay="400"
             >
               <div className="sub-ministry-card">
-                <div className="card-body text-center">
-                  <i className="fas fa-hands-helping praise-icon mb-3" />
-                  <h4 className="card-title">Community Outreach</h4>
+                <div className="card-body">
+                  <i className="fas fa-globe praise-icon mb-3" />
+                  <h4 className="card-title">Integral Ministry Sub-Committee</h4>
                   <p className="card-text">
-                    Local initiatives to serve and share the Gospel.
+                    Strategic outreach to specific groups and community service.
                   </p>
-                  <h6>Activities</h6>
+                  <h6>Focus Areas</h6>
                   <ul>
-                    <li>Food and clothing drives</li>
-                    <li>Health awareness campaigns</li>
-                    <li>Evangelism walks</li>
+                    <li>High school Christian Union support</li>
+                    <li>Sunday school programs</li>
+                    <li>Community Service & Social Action</li>
+                    <li>CSR street evangelism</li>
                   </ul>
-                  <p className="text-muted">
-                    <i className="fas fa-clock me-2" /> Monthly, weekends
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Discipleship Teams */}
-            <div
-              className="col-md-6 col-lg-3 mb-4"
-              data-aos="fade-up"
-              data-aos-delay="500"
-            >
-              <div className="sub-ministry-card">
-                <div className="card-body text-center">
-                  <i className="fas fa-users instrumentalists-icon mb-3" />
-                  <h4 className="card-title">Discipleship Teams</h4>
-                  <p className="card-text">
-                    Teams to mentor new believers post-evangelism.
-                  </p>
-                  <h6>Activities</h6>
-                  <ul>
-                    <li>One-on-one mentoring</li>
-                    <li>Small group sessions</li>
-                    <li>Spiritual growth support</li>
-                  </ul>
-                  <p className="text-muted">
-                    <i className="fas fa-clock me-2" /> Ongoing, weekly meetings
+                  <p className="text-muted small">
+                    <i className="fas fa-calendar-alt me-2" /> Ongoing partnerships
                   </p>
                 </div>
               </div>
@@ -210,70 +193,77 @@ const MissionsEvangelismMinistryPage = () => {
       <section className="key-events-section">
         <div className="container">
           <h2 className="section-title text-center" data-aos="fade-up">
-            Featured Events
+            Committee Leadership &amp; Roles
           </h2>
           <p
             className="lead text-center"
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            Join us for impactful missions and evangelism events.
+            Our leadership structure ensures doctrinal soundness and effective coordination across all outreach activities.
           </p>
           <div className="row">
             <div
-              className="col-md-4 mb-4"
+              className="col-md-6 col-lg-3 mb-4"
               data-aos="zoom-in"
               data-aos-delay="200"
             >
               <div className="event-highlight-card">
                 <div className="card-body text-center">
-                  <i className="fas fa-microphone event-icon" />
-                  <h5 className="card-title">Crusade Revival</h5>
+                  <i className="fas fa-user-tie event-icon" />
+                  <h5 className="card-title">Chairperson</h5>
                   <p className="card-text">
-                    A powerful revival crusade to reach the community.
+                    M&amp;E Coordinator
                   </p>
-                  <p className="text-muted">
-                    <i className="fas fa-calendar-alt me-2" /> 15th September
-                    2025
-                  </p>
+                  <small className="text-muted">Strategic leadership &amp; oversight</small>
                 </div>
               </div>
             </div>
             <div
-              className="col-md-4 mb-4"
+              className="col-md-6 col-lg-3 mb-4"
               data-aos="zoom-in"
               data-aos-delay="300"
             >
               <div className="event-highlight-card">
                 <div className="card-body text-center">
-                  <i className="fas fa-plane event-icon" />
-                  <h5 className="card-title">Missions Trip</h5>
+                  <i className="fas fa-users event-icon" />
+                  <h5 className="card-title">Evangelism Leader</h5>
                   <p className="card-text">
-                    Trip to a rural area for evangelism and service.
+                    Campus &amp; Outreach
                   </p>
-                  <p className="text-muted">
-                    <i className="fas fa-calendar-alt me-2" /> 20th-27th October
-                    2025
-                  </p>
+                  <small className="text-muted">Leads campus-wide evangelism</small>
                 </div>
               </div>
             </div>
             <div
-              className="col-md-4 mb-4"
+              className="col-md-6 col-lg-3 mb-4"
               data-aos="zoom-in"
               data-aos-delay="400"
             >
               <div className="event-highlight-card">
                 <div className="card-body text-center">
                   <i className="fas fa-heart event-icon" />
-                  <h5 className="card-title">Community Service Day</h5>
+                  <h5 className="card-title">Hope Leader</h5>
                   <p className="card-text">
-                    Day of service and Gospel sharing in Murang&apos;a.
+                    Vulnerable Groups Ministry
                   </p>
-                  <p className="text-muted">
-                    <i className="fas fa-calendar-alt me-2" /> 25th November
-                    2025
+                  <small className="text-muted">Compassionate community care</small>
+                </div>
+              </div>
+            </div>
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="500"
+            >
+              <div className="event-highlight-card">
+                <div className="card-body text-center">
+                  <i className="fas fa-globe event-icon" />
+                  <h5 className="card-title">Integral Leader</h5>
+                  <p className="card-text">
+                    Strategic Outreach
                   </p>
+                  <small className="text-muted">High schools &amp; CSR initiatives</small>
                 </div>
               </div>
             </div>
@@ -285,30 +275,38 @@ const MissionsEvangelismMinistryPage = () => {
       <section className="leadership-spotlight-section">
         <div className="container">
           <h2 className="section-title text-center" data-aos="fade-up">
-            Ministry Leadership
+            Key Responsibilities
           </h2>
           <p
             className="lead text-center"
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            Led by passionate leaders, our ministry thrives.
+            Our leadership is committed to spreading the gospel with excellence and integrity.
           </p>
-          <div className="row justify-content-center">
-            <div className="col-md-4 col-lg-3 mb-4" data-aos="zoom-in">
-              <div className="executive-member-card">
-                <img
-                  src="/assets/images/MUTUKU.jpeg"
-                  alt="Mercy Mutuku"
-                  className="img-fluid rounded-circle mb-2 border-orange"
-                />
-                <h5 className="member-name">Mercy Mutuku</h5>
-                <p className="member-role">
-                  Missions &amp; Evangelism Coordinator
-                </p>
-                <button className="btn btn-outline-light btn-sm" type="button">
-                  View Profile
-                </button>
+          <div className="row">
+            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+              <div className="leadership-card">
+                <h5><i className="fas fa-check-circle text-success me-2"></i>Strategic Planning</h5>
+                <p>Developing overall outreach strategy aligned with MUTCU&apos;s vision and doctrinal basis</p>
+              </div>
+            </div>
+            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+              <div className="leadership-card">
+                <h5><i className="fas fa-check-circle text-success me-2"></i>Team Training</h5>
+                <p>Ensuring all outreach teams are well-trained and grounded in biblical evangelism</p>
+              </div>
+            </div>
+            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+              <div className="leadership-card">
+                <h5><i className="fas fa-check-circle text-success me-2"></i>Resource Provision</h5>
+                <p>Ensuring outreach teams are adequately resourced for effective ministry</p>
+              </div>
+            </div>
+            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="500">
+              <div className="leadership-card">
+                <h5><i className="fas fa-check-circle text-success me-2"></i>Doctrinal Oversight</h5>
+                <p>Maintaining alignment with MUTCU&apos;s doctrinal basis in all evangelism activities</p>
               </div>
             </div>
           </div>
@@ -326,7 +324,7 @@ const MissionsEvangelismMinistryPage = () => {
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            If you are passionate about sharing the Gospel and serving, join us!
+            If you are passionate about sharing the Gospel and serving others, join us in reaching our campus and communities with the Good News of Jesus Christ.
           </p>
           <div className="row justify-content-center">
             <div className="col-md-8" data-aos="fade-up" data-aos-delay="200">
@@ -373,21 +371,22 @@ const MissionsEvangelismMinistryPage = () => {
                     <option value="" disabled>
                       Select an area
                     </option>
-                    <option>Evangelistic Crusades</option>
-                    <option>Missions Trips</option>
-                    <option>Community Outreach</option>
-                    <option>Discipleship Teams</option>
+                    <option>Campus Evangelism</option>
+                    <option>Hope Ministry (Community Care)</option>
+                    <option>Integral Ministry (High Schools &amp; CSR)</option>
+                    <option>Evangelism Training</option>
                     <option>General Interest</option>
                   </select>
                 </div>
                 <div className="mb-3">
                   <label htmlFor="experience" className="form-label">
-                    Tell us about your experience or passion (Optional)
+                    Tell us about your passion or experience (Optional)
                   </label>
                   <textarea
                     className="form-control"
                     id="experience"
                     rows={3}
+                    placeholder="What draws you to missions and evangelism?"
                     value={experience}
                     onChange={(e) => setExperience(e.target.value)}
                   />
@@ -410,8 +409,8 @@ const MissionsEvangelismMinistryPage = () => {
               data-aos="fade-up"
               data-aos-delay="300"
             >
-              <Link to="/" className="btn btn-primary">
-                Volunteer for a Mission
+              <Link to="/ministries" className="btn btn-primary">
+                View All Ministries
               </Link>
             </div>
             <div

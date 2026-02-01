@@ -10,7 +10,11 @@ import {
   Download,
   Search,
   Calendar,
+  Share2,
+  FileText,
 } from "lucide-react";
+import exportHelper from "./utils/exportHelper";
+import sharingHelper from "./utils/sharingHelper";
 
 interface Subscription {
   id: string;
@@ -71,6 +75,74 @@ const NewsletterSubscriptionsManagement = () => {
     }),
     [subscriptions],
   );
+
+  // Export functions
+  const exportSubscriptions = async (format: 'csv' | 'word' | 'pdf') => {
+    try {
+      const exportData = exportHelper.prepareExportData(
+        subscriptions,
+        {
+          email: 'Email',
+          isActive: 'Status',
+          createdAt: 'Subscribed Date',
+          updatedAt: 'Updated Date'
+        },
+        'Newsletter Subscriptions Export',
+        `Export of all newsletter subscribers (${subscriptions.length} total)`
+      );
+
+      await exportHelper.export(exportData, format, {
+        filename: `newsletter-subscriptions`,
+        includeLogo: true,
+        includeTimestamp: true
+      });
+    } catch (error) {
+      setError('Failed to export subscriptions');
+      console.error('Export error:', error);
+    }
+  };
+
+  // Sharing functions
+  const shareAllSubscriptions = async () => {
+    try {
+      const shareableSubscriptions = sharingHelper.prepareShareData(
+        subscriptions,
+        {
+          itemTitleField: 'email',
+          itemDescriptionField: 'isActive',
+          itemUrlField: 'id',
+          itemType: 'newsletter'
+        }
+      );
+
+      await sharingHelper.shareBulk(shareableSubscriptions, {
+        bulkTitle: 'Newsletter Subscribers Directory',
+        method: 'native'
+      });
+    } catch (error) {
+      setError('Failed to share subscriptions');
+      console.error('Share error:', error);
+    }
+  };
+
+  const shareSingleSubscription = async (subscription: Subscription) => {
+    try {
+      await sharingHelper.shareItem({
+        ...subscription,
+        title: subscription.email,
+        description: subscription.isActive ? 'Active' : 'Inactive'
+      }, {
+        formatTemplate: (item) => ({
+          title: item.email,
+          text: `Status: ${item.isActive ? 'Active' : 'Inactive'}`,
+          url: `mailto:${item.email}`
+        })
+      });
+    } catch (error) {
+      setError('Failed to share subscription');
+      console.error('Share error:', error);
+    }
+  };
 
   if (loading) {
     return (
@@ -205,9 +277,45 @@ const NewsletterSubscriptionsManagement = () => {
                 </select>
               </div>
               <div className="col-md-5 text-md-end">
-                <button className="btn btn-primary shadow-sm rounded-pill d-inline-flex align-items-center gap-2 px-4">
-                  <Download size={18} /> Export CSV
-                </button>
+                <div className="d-flex gap-2">
+                  {/* Export Dropdown */}
+                  <div className="dropdown">
+                    <button
+                      className="btn btn-primary shadow-sm rounded-pill d-inline-flex align-items-center gap-2 dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <Download size={18} /> Export
+                    </button>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <button className="dropdown-item" onClick={() => exportSubscriptions('csv')}>
+                          <FileText size={16} className="me-2" /> Export as CSV
+                        </button>
+                      </li>
+                      <li>
+                        <button className="dropdown-item" onClick={() => exportSubscriptions('word')}>
+                          <FileText size={16} className="me-2" /> Export as Word
+                        </button>
+                      </li>
+                      <li>
+                        <button className="dropdown-item" onClick={() => exportSubscriptions('pdf')}>
+                          <FileText size={16} className="me-2" /> Export as PDF
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Share Button */}
+                  <button
+                    className="btn btn-outline-info shadow-sm rounded-pill d-inline-flex align-items-center gap-2"
+                    onClick={shareAllSubscriptions}
+                    title="Share all subscribers"
+                  >
+                    <Share2 size={18} /> Share All
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -276,9 +384,18 @@ const NewsletterSubscriptionsManagement = () => {
                         </div>
                       </td>
                       <td className="px-4 text-end">
-                        <button className="btn btn-sm btn-light rounded-pill px-3 fw-bold">
-                          Manage
-                        </button>
+                        <div className="d-flex justify-content-end gap-2">
+                          <button 
+                            className="btn btn-sm btn-light rounded-pill px-3 fw-bold"
+                            onClick={() => shareSingleSubscription(subscription)}
+                            title="Share this subscription"
+                          >
+                            <Share2 size={14} className="me-1" /> Share
+                          </button>
+                          <button className="btn btn-sm btn-light rounded-pill px-3 fw-bold">
+                            Manage
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))

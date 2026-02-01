@@ -6,14 +6,17 @@ import {
   ArrowLeft,
   UserPlus,
   ShieldCheck,
-  // ShieldAlert,
   UserCircle,
   Edit3,
   UserX,
   Mail,
   Shield,
+  Download,
+  Share2,
 } from "lucide-react";
 import "../../styles/adminForms.css";
+import exportHelper from "./utils/exportHelper";
+import sharingHelper from "./utils/sharingHelper";
 
 interface User {
   id: string;
@@ -136,6 +139,72 @@ const UsersManagement = () => {
     }
   };
 
+  // Export functions
+  const exportUsers = async (format: 'csv' | 'word' | 'pdf') => {
+    try {
+      const exportData = exportHelper.prepareExportData(
+        users,
+        {
+          email: 'Email',
+          name: 'Name',
+          role: 'Role',
+          isActive: 'Status',
+          createdAt: 'Joined Date'
+        },
+        'Users Export',
+        `Export of all users (${users.length} total)`
+      );
+
+      await exportHelper.export(exportData, format, {
+        filename: `users`,
+        includeLogo: true,
+        includeTimestamp: true
+      });
+    } catch (error) {
+      setError('Failed to export users');
+      console.error('Export error:', error);
+    }
+  };
+
+  // Sharing functions
+  const shareAllUsers = async () => {
+    try {
+      const shareableUsers = sharingHelper.prepareShareData(
+        users,
+        'Users Directory',
+        {
+          itemTitleField: 'email',
+          itemDescriptionField: 'name',
+          itemUrlField: 'id',
+          itemType: 'users'
+        }
+      );
+
+      await sharingHelper.shareBulk(shareableUsers, {
+        bulkTitle: 'Users Directory',
+        method: 'native'
+      });
+    } catch (error) {
+      setError('Failed to share users');
+      console.error('Share error:', error);
+    }
+  };
+
+  const shareSingleUser = async (user: User) => {
+    try {
+      await sharingHelper.shareItem(user, {
+        formatTemplate: (item) => ({
+          title: item.name || item.email,
+          text: `${item.role} - ${item.isActive ? 'Active' : 'Inactive'}`,
+          url: `mailto:${item.email}`
+        })
+      });
+    } catch (error) {
+      setError('Failed to share user');
+      console.error('Share error:', error);
+    }
+  };
+
   const stats = useMemo(
     () => ({
       total: users.length,
@@ -174,6 +243,44 @@ const UsersManagement = () => {
             aria-label="Go back to admin dashboard"
           >
             <ArrowLeft size={18} /> Dashboard
+          </button>
+          
+          {/* Export Dropdown */}
+          <div className="dropdown">
+            <button
+              className="btn btn-outline-secondary shadow-sm dropdown-toggle d-flex align-items-center gap-2"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <Download size={18} /> Export
+            </button>
+            <ul className="dropdown-menu">
+              <li>
+                <button className="dropdown-item" onClick={() => exportUsers('csv')}>
+                  Export as CSV
+                </button>
+              </li>
+              <li>
+                <button className="dropdown-item" onClick={() => exportUsers('word')}>
+                  Export as Word
+                </button>
+              </li>
+              <li>
+                <button className="dropdown-item" onClick={() => exportUsers('pdf')}>
+                  Export as PDF
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Share Button */}
+          <button
+            className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2"
+            onClick={shareAllUsers}
+            title="Share users directory"
+          >
+            <Share2 size={18} /> Share All
           </button>
         </div>
 
@@ -416,6 +523,16 @@ const UsersManagement = () => {
                           >
                             <Edit3 size={14} className="text-primary" />
                           </button>
+
+                          <button
+                            className="btn btn-sm btn-white border shadow-sm"
+                            onClick={() => shareSingleUser(user)}
+                            title={`Share ${user.email}`}
+                            aria-label="Share user"
+                          >
+                            <Share2 size={14} className="text-info" />
+                          </button>
+
                           {user.isActive && (
                             <button
                               className="btn btn-sm btn-white border shadow-sm"

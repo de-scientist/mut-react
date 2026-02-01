@@ -4,6 +4,9 @@ import { adminBlogsAPI } from "../../services/api";
 import ImageUpload from "../../components/ImageUpload";
 import "../../styles/adminForms.css";
 import "../../styles/blogs.css";
+import { Download, Share2, FileText } from "lucide-react";
+import exportHelper from "./utils/exportHelper";
+import sharingHelper from "./utils/sharingHelper";
 
 interface Blog {
   id: string;
@@ -212,6 +215,73 @@ const BlogsManagement = () => {
     setError(null);
   };
 
+  // Export functions
+  const exportBlogs = async (format: 'csv' | 'word' | 'pdf') => {
+    try {
+      const exportData = exportHelper.prepareExportData(
+        blogs,
+        {
+          title: 'Title',
+          slug: 'Slug',
+          excerpt: 'Excerpt',
+          author: 'Author',
+          status: 'Status',
+          createdAt: 'Created Date',
+          publishedAt: 'Published Date'
+        },
+        'Blogs Export',
+        `Export of all blog posts (${blogs.length} total)`
+      );
+
+      await exportHelper.export(exportData, format, {
+        filename: `blogs`,
+        includeLogo: true,
+        includeTimestamp: true
+      });
+    } catch (error) {
+      setError('Failed to export blogs');
+      console.error('Export error:', error);
+    }
+  };
+
+  // Sharing functions
+  const shareAllBlogs = async () => {
+    try {
+      const shareableBlogs = sharingHelper.prepareShareData(
+        blogs,
+        {
+          itemTitleField: 'title',
+          itemDescriptionField: 'excerpt',
+          itemUrlField: 'slug',
+          itemType: 'blog'
+        }
+      );
+
+      await sharingHelper.shareBulk(shareableBlogs, {
+        bulkTitle: 'Blog Posts Directory',
+        method: 'native'
+      });
+    } catch (error) {
+      setError('Failed to share blogs');
+      console.error('Share error:', error);
+    }
+  };
+
+  const shareSingleBlog = async (blog: Blog) => {
+    try {
+      await sharingHelper.shareItem(blog, {
+        formatTemplate: (item) => ({
+          title: item.title,
+          text: `${item.excerpt || ''}\nStatus: ${item.status}`,
+          url: `/blog/${item.slug}`
+        })
+      });
+    } catch (error) {
+      setError('Failed to share blog');
+      console.error('Share error:', error);
+    }
+  };
+
   return (
     <div className="admin-management bg-light min-vh-100 pb-5">
       <header className="bg-primary-dark text-white py-4 shadow-sm sticky-top">
@@ -231,6 +301,45 @@ const BlogsManagement = () => {
               <i className="fas fa-rotate me-2" aria-hidden="true" />
               Refresh
             </button>
+            
+            {/* Export Dropdown */}
+            <div className="dropdown">
+              <button
+                className="btn btn-outline-light btn-sm dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <Download size={16} className="me-1" /> Export
+              </button>
+              <ul className="dropdown-menu">
+                <li>
+                  <button className="dropdown-item" onClick={() => exportBlogs('csv')}>
+                    <FileText size={16} className="me-2" /> Export as CSV
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item" onClick={() => exportBlogs('word')}>
+                    <FileText size={16} className="me-2" /> Export as Word
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item" onClick={() => exportBlogs('pdf')}>
+                    <FileText size={16} className="me-2" /> Export as PDF
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            {/* Share Button */}
+            <button
+              className="btn btn-outline-info btn-sm"
+              onClick={shareAllBlogs}
+              title="Share all blog posts"
+            >
+              <Share2 size={16} className="me-1" /> Share All
+            </button>
+            
             <button
               className="btn btn-outline-light btn-sm"
               onClick={() => navigate("/admin")}
@@ -551,6 +660,13 @@ const BlogsManagement = () => {
                               {blog.status === "published"
                                 ? "Unpublish"
                                 : "Publish"}
+                            </button>
+                            <button
+                              className="btn btn-outline-info"
+                              onClick={() => shareSingleBlog(blog)}
+                              title="Share this blog post"
+                            >
+                              <Share2 size={14} />
                             </button>
                             <button
                               className="btn btn-outline-danger"

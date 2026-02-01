@@ -41,7 +41,7 @@ const COMMITTEES: CommitteeCard[] = [
     description:
       "Mentorship, accountability, and practical Christian living to nurture believers into maturity.",
     icon: "fa-user-friends",
-    imageUrl: "/assets/images/bs1.jpg",
+    imageUrl: "https://picsum.photos/400/300?random=2",
     route: "/ministries/discipleship",
   },
   {
@@ -91,8 +91,8 @@ const COMMITTEES: CommitteeCard[] = [
     description:
       "Sound, livestream, projection, photography/video, and technical support for services and events.",
     icon: "fa-sliders-h",
-    imageUrl: "/assets/images/tech.jpg",
-    route: "/ministries/technical",
+    imageUrl: "/assets/images/technicalDpt.jpg",
+    route: "/ministries/technical-department",
   },
   {
     key: "hospitality",
@@ -101,8 +101,8 @@ const COMMITTEES: CommitteeCard[] = [
     description:
       "Welcoming guests, coordinating seating/hosting, and ensuring visitors and members feel at home.",
     icon: "fa-mug-hot",
-    imageUrl: "/assets/images/hospitality.jpg",
-    route: "/ministries/hospitality",
+    imageUrl: "/assets/images/guest-welcome.jfif",
+    route: "/ministries/hospitality-ministry",
   },
   {
     key: "welfare",
@@ -111,8 +111,8 @@ const COMMITTEES: CommitteeCard[] = [
     description:
       "Member care, encouragement, support in times of need, and strengthening fellowship as a family.",
     icon: "fa-hand-holding-heart",
-    imageUrl: "/assets/images/welfare.jpg",
-    route: "/ministries/welfare",
+    imageUrl: "/assets/images/welfare11.jpg",
+    route: "/ministries/welfare-committee",
   },
   {
     key: "rmc",
@@ -121,7 +121,7 @@ const COMMITTEES: CommitteeCard[] = [
     description:
       "Stewardship and mobilization of financial/material resources to support ministry work and programs.",
     icon: "fa-donate",
-    imageUrl: "/assets/images/rmc.jpg",
+    imageUrl: "/assets/images/placeholder3.jpg",
     route: "/ministries/rmc",
   },
 ];
@@ -146,10 +146,6 @@ export default function MinistriesPage() {
       try {
         setLoading(true);
 
-        // IMPORTANT:
-        // If your backend filter expects `active=true` or `isActive=true` differently,
-        // this can cause "Failed to retrieve ministries" / partial returns.
-        // We fetch WITHOUT filters first (more reliable), then filter client-side.
         const res = await ministriesAPI.getAll();
         const items = extractMinistries(res);
 
@@ -157,26 +153,11 @@ export default function MinistriesPage() {
         const activeItems = items.filter((m) => m.isActive !== false);
 
         setApiMinistries(activeItems);
-
-        // If backend has few items, still okay — our UI will show all 10 committees anyway.
-        if (activeItems.length === 0) {
-          setNotice(
-            "Heads up: no ministries were returned from the server. Showing the official committee list from the Leadership Manual.",
-          );
-        } else if (activeItems.length < 10) {
-          setNotice(
-            "Some committees are not yet available in the database. Showing the official committee list; missing ones will use default content for now.",
-          );
-        } else {
-          setNotice(null);
-        }
+        // Silently use fallback data if needed - no notices
       } catch (err: any) {
         console.error("Ministries fetch failed:", err);
-        setNotice(
-          err?.data?.message ||
-            err?.message ||
-            "Failed to retrieve ministries from the server. Showing the official committee list from the Leadership Manual.",
-        );
+        // Silently fail - don't show any notice, just use the fallback committees
+        setNotice(null);
         setApiMinistries([]);
       } finally {
         setLoading(false);
@@ -249,10 +230,8 @@ export default function MinistriesPage() {
           <h2 className="section-title text-center">
             MUTCU’s 10 Core Committees
           </h2>
-          <p className="text-center lead mb-4">
-            This page highlights the official committees (as structured in the Leadership Manual).
-            Each committee page contains its sub-ministries and how to get involved.
-          </p>
+          {/* This page highlights the official committees (as structured in the Leadership Manual).
+            Each committee page contains its sub-ministries and how to get involved. */}
 
           {/* Search */}
           <div className="row justify-content-center mb-4">
@@ -268,9 +247,9 @@ export default function MinistriesPage() {
                   onChange={(e) => setQuery(e.target.value)}
                 />
               </div>
-              <div className="form-text">
+              {/* <div className="form-text">
                 Tip: Even if the API is down, these 10 committees will still display.
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -330,11 +309,11 @@ export default function MinistriesPage() {
                           </div>
                         )}
 
-                        <div className="card-body">
+                        <div className="card-body text-center">
                           {renderIcon(c.icon)}
                           <h4 className="card-title">{c.name}</h4>
                           <p className="card-text">{c.description}</p>
-                          <span className="btn btn-sm btn-outline-primary mt-3">
+                          <span className="btn btn-primary btn-sm mt-2">
                             Learn More <i className="fas fa-arrow-right ms-2" />
                           </span>
                         </div>
@@ -346,7 +325,7 @@ export default function MinistriesPage() {
 
               {/* Optional link to special committees page */}
               <div className="text-center mt-4">
-                <Link to="/ministries/special-committees" className="btn btn-secondary btn-lg">
+                <Link to="/special-committees" className="btn btn-secondary btn-lg">
                   View Special Committees <i className="fas fa-users ms-2" />
                 </Link>
               </div>

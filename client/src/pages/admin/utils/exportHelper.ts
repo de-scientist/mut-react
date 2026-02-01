@@ -1,0 +1,338 @@
+/**
+ * Centralized Export Utility
+ * Supports CSV, Word (.docx), and PDF export with branding
+ */
+
+interface ExportData {
+  headers: string[];
+  rows: string[][];
+  title?: string;
+  description?: string;
+}
+
+interface ExportOptions {
+  filename?: string;
+  includeLogo?: boolean;
+  includeTimestamp?: boolean;
+  customHeader?: string;
+  customFooter?: string;
+}
+
+class ExportHelper {
+  private static readonly LOGO_PATH = '/Full Logo.png';
+  private static readonly ORGANIZATION_NAME = 'Admin Dashboard';
+
+  /**
+   * Export data to CSV format
+   */
+  static async exportToCSV(
+    data: ExportData,
+    options: ExportOptions = {}
+  ): Promise<void> {
+    const {
+      filename = 'export',
+      includeTimestamp = true,
+      customHeader = '',
+      customFooter = ''
+    } = options;
+
+    try {
+      let csvContent = '';
+
+      // Add custom header if provided
+      if (customHeader) {
+        csvContent += `"${customHeader}"\n\n`;
+      }
+
+      // Add title if provided
+      if (data.title) {
+        csvContent += `"${data.title}"\n`;
+      }
+
+      // Add description if provided
+      if (data.description) {
+        csvContent += `"${data.description}"\n`;
+      }
+
+      // Add timestamp if requested
+      if (includeTimestamp) {
+        csvContent += `"Generated on: ${new Date().toLocaleString()}"\n\n`;
+      }
+
+      // Add headers
+      csvContent += data.headers.map(header => `"${header}"`).join(',') + '\n';
+
+      // Add data rows
+      csvContent += data.rows.map(row => 
+        row.map(field => `"${String(field).replace(/"/g, '""')}"`).join(',')
+      ).join('\n');
+
+      // Add custom footer if provided
+      if (customFooter) {
+        csvContent += '\n\n"' + customFooter + '"';
+      }
+
+      // Create and download file
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${filename}_${includeTimestamp ? new Date().toISOString().split('T')[0] : ''}.csv`;
+      link.click();
+      URL.revokeObjectURL(url);
+
+    } catch (error) {
+      console.error('Error exporting CSV:', error);
+      throw new Error('Failed to export CSV file');
+    }
+  }
+
+  /**
+   * Export data to Word (.docx) format
+   */
+  static async exportToWord(
+    data: ExportData,
+    options: ExportOptions = {}
+  ): Promise<void> {
+    const {
+      filename = 'export',
+      includeLogo = true,
+      includeTimestamp = true,
+      customHeader = '',
+      customFooter = ''
+    } = options;
+
+    try {
+      // Create HTML content for Word document
+      let htmlContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8">
+          <title>${data.title || 'Export'}</title>
+          <style>
+            body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+            .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #04003d; padding-bottom: 20px; }
+            .logo { max-width: 200px; margin-bottom: 20px; }
+            .title { font-size: 24px; font-weight: bold; color: #04003d; margin-bottom: 10px; }
+            .description { font-size: 14px; color: #666; margin-bottom: 10px; }
+            .timestamp { font-size: 12px; color: #999; margin-bottom: 20px; }
+            table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+            th { background-color: #04003d; color: white; padding: 12px; text-align: left; font-weight: bold; }
+            td { padding: 10px; border: 1px solid #ddd; }
+            tr:nth-child(even) { background-color: #f9f9f9; }
+            .footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #666; text-align: center; }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            ${includeLogo ? `<img src="${this.LOGO_PATH}" alt="Logo" class="logo" /><br>` : ''}
+            <div class="title">${data.title || 'Export Report'}</div>
+            ${data.description ? `<div class="description">${data.description}</div>` : ''}
+            ${includeTimestamp ? `<div class="timestamp">Generated on: ${new Date().toLocaleString()}</div>` : ''}
+            ${customHeader ? `<div class="description">${customHeader}</div>` : ''}
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                ${data.headers.map(header => `<th>${header}</th>`).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              ${data.rows.map(row => `
+                <tr>
+                  ${row.map(field => `<td>${String(field).replace(/</g, '&lt;').replace(/>/g, '&gt;')}</td>`).join('')}
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+
+          ${customFooter ? `<div class="footer">${customFooter}</div>` : ''}
+          <div class="footer">
+            Generated by ${this.ORGANIZATION_NAME} | Page ${data.title || 'Export'}
+          </div>
+        </body>
+        </html>
+      `;
+
+      // Create and download file
+      const blob = new Blob([htmlContent], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${filename}_${includeTimestamp ? new Date().toISOString().split('T')[0] : ''}.docx`;
+      link.click();
+      URL.revokeObjectURL(url);
+
+    } catch (error) {
+      console.error('Error exporting Word:', error);
+      throw new Error('Failed to export Word document');
+    }
+  }
+
+  /**
+   * Export data to PDF format
+   */
+  static async exportToPDF(
+    data: ExportData,
+    options: ExportOptions = {}
+  ): Promise<void> {
+    const {
+      filename = 'export',
+      includeLogo = true,
+      includeTimestamp = true,
+      customHeader = '',
+      customFooter = ''
+    } = options;
+
+    try {
+      // Create HTML content for PDF
+      let htmlContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8">
+          <title>${data.title || 'Export'}</title>
+          <style>
+            @page { margin: 20mm; size: A4; }
+            body { font-family: Arial, sans-serif; margin: 0; padding: 20px; line-height: 1.6; }
+            .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #04003d; padding-bottom: 20px; }
+            .logo { max-width: 150px; margin-bottom: 15px; }
+            .title { font-size: 20px; font-weight: bold; color: #04003d; margin-bottom: 10px; }
+            .description { font-size: 12px; color: #666; margin-bottom: 10px; }
+            .timestamp { font-size: 10px; color: #999; margin-bottom: 20px; }
+            table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 10px; }
+            th { background-color: #04003d; color: white; padding: 8px; text-align: left; font-weight: bold; }
+            td { padding: 6px; border: 1px solid #ddd; }
+            tr:nth-child(even) { background-color: #f9f9f9; }
+            .footer { margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd; font-size: 10px; color: #666; text-align: center; }
+            .page-break { page-break-before: always; }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            ${includeLogo ? `<img src="${this.LOGO_PATH}" alt="Logo" class="logo" /><br>` : ''}
+            <div class="title">${data.title || 'Export Report'}</div>
+            ${data.description ? `<div class="description">${data.description}</div>` : ''}
+            ${includeTimestamp ? `<div class="timestamp">Generated on: ${new Date().toLocaleString()}</div>` : ''}
+            ${customHeader ? `<div class="description">${customHeader}</div>` : ''}
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                ${data.headers.map(header => `<th>${header}</th>`).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              ${data.rows.map(row => `
+                <tr>
+                  ${row.map(field => `<td>${String(field).replace(/</g, '&lt;').replace(/>/g, '&gt;')}</td>`).join('')}
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+
+          ${customFooter ? `<div class="footer">${customFooter}</div>` : ''}
+          <div class="footer">
+            Generated by ${this.ORGANIZATION_NAME} | Page ${data.title || 'Export'}
+          </div>
+        </body>
+        </html>
+      `;
+
+      // Create a temporary window for printing
+      const printWindow = window.open('', '_blank');
+      if (printWindow) {
+        printWindow.document.write(htmlContent);
+        printWindow.document.close();
+        
+        // Wait for content to load, then print
+        setTimeout(() => {
+          printWindow.print();
+          printWindow.close();
+        }, 500);
+      } else {
+        // Fallback: create blob and download
+        const blob = new Blob([htmlContent], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${filename}_${includeTimestamp ? new Date().toISOString().split('T')[0] : ''}.html`;
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+
+    } catch (error) {
+      console.error('Error exporting PDF:', error);
+      throw new Error('Failed to export PDF file');
+    }
+  }
+
+  /**
+   * Generic export method that handles all formats
+   */
+  static async export(
+    data: ExportData,
+    format: 'csv' | 'word' | 'pdf',
+    options: ExportOptions = {}
+  ): Promise<void> {
+    switch (format.toLowerCase()) {
+      case 'csv':
+        return this.exportToCSV(data, options);
+      case 'word':
+      case 'docx':
+        return this.exportToWord(data, options);
+      case 'pdf':
+        return this.exportToPDF(data, options);
+      default:
+        throw new Error(`Unsupported export format: ${format}`);
+    }
+  }
+
+  /**
+   * Helper method to prepare data from common admin interfaces
+   */
+  static prepareExportData<T extends Record<string, any>>(
+    items: T[],
+    columnMapping: Partial<Record<keyof T, string>>,
+    title?: string,
+    description?: string
+  ): ExportData {
+    if (!items.length) {
+      return {
+        headers: ['No Data'],
+        rows: [['No records found']],
+        title,
+        description
+      };
+    }
+
+    // Get headers from column mapping or use keys
+    const headers = Object.keys(items[0]).map(key => 
+      columnMapping[key as keyof T] || key
+    );
+
+    // Convert items to rows
+    const rows = items.map(item => 
+      Object.keys(item).map(key => {
+        const value = item[key];
+        if (value === null || value === undefined) return '';
+        if (typeof value === 'boolean') return value ? 'Yes' : 'No';
+        if (value instanceof Date) return value.toLocaleString();
+        return String(value);
+      })
+    );
+
+    return {
+      headers,
+      rows,
+      title,
+      description
+    };
+  }
+}
+
+export default ExportHelper;
+export type { ExportData, ExportOptions };

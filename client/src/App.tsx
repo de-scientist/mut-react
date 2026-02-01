@@ -35,10 +35,10 @@ import HospitalityMinistryPage from "./pages/ministries/HospitalityMinistryPage"
 import TechnicalDepartmentPage from "./pages/ministries/TechnicalDepartmentPage";
 import WelfareCommitteePage from "./pages/ministries/WelfareCommitteePage";
 import RMCPage from "./pages/ministries/RMCPage";
-import TreasuryCommitteePage from "./pages/ministries/TreasuryCommitteePage";
-import BibleStudyTrainingCommitteePage from "./pages/ministries/BibleStudyTrainingCommitteePage";
+// import TreasuryCommitteePage from "./pages/ministries/TreasuryCommitteePage";
+// import BibleStudyTrainingCommitteePage from "./pages/ministries/BibleStudyTrainingCommitteePage";
 import DiscipleshipCommitteePage from "./pages/ministries/DiscipleshipCommitteePage";
-import SpecialCommitteesPage from "./pages/ministries/SpecialCommitteesPage";
+import SpecialCommitteesPage from "./pages/ministries/Special-Committees";
 import AdvisoryBoardPage from "./pages/ministries/AdvisoryBoardPage";
 import AuditingCommitteePage from "./pages/ministries/AuditingCommitteePage";
 import AssociatesCommitteePage from "./pages/ministries/AssociatesCommitteePage";
@@ -100,7 +100,7 @@ function App() {
           element={<MusicMinistryPage />}
         />
         <Route
-          path="ministries/bible-study-discipleship"
+          path="ministries/bible-study"
           element={<BibleStudyMinistryPage />}
         />
         <Route
@@ -127,19 +127,11 @@ function App() {
           path="ministries/welfare-committee"
           element={<WelfareCommitteePage />}
         />
+        <Route
+          path="ministries/discipleship"
+          element={<DiscipleshipCommitteePage />}
+        />
         <Route path="ministries/RMC" element={<RMCPage />} />
-
-        {/* Core committees */}
-        <Route path="/ministries/treasury" element={<TreasuryCommitteePage />} />
-        <Route path="/ministries/hospitality" element={<HospitalityMinistryPage />} />
-        <Route path="/ministries/music" element={<MusicMinistryPage />} />
-        <Route path="/ministries/prayer" element={<PrayerMinistryPage />} />
-        <Route path="/ministries/missions-evangelism" element={<MissionsEvangelismMinistryPage />} />
-        <Route path="/ministries/creative-arts" element={<CreativeArtsMinistryPage />} />
-        <Route path="/ministries/technical-media" element={<TechnicalDepartmentPage />} />
-        <Route path="/ministries/welfare" element={<WelfareCommitteePage />} />
-        <Route path="/ministries/bible-study-training" element={<BibleStudyTrainingCommitteePage />} />
-        <Route path="/ministries/discipleship" element={<DiscipleshipCommitteePage />} />
 
         {/* Special committees */}
         <Route path="/special-committees" element={<SpecialCommitteesPage />} />

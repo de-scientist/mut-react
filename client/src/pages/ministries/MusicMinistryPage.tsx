@@ -1,5 +1,4 @@
 import { type FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
 import { useTimedSuccess } from "../../hooks/useTimedSuccess";
 import "../../assets/mut/css/music-ministry.css";
 
@@ -47,7 +46,7 @@ const MusicMinistryPage = () => {
         >
           <h1 className="display-3 mb-3">MUTCU Music Ministry</h1>
           <p className="lead">
-            Leading Worship and Glorifying God Through Song
+            Leading Worship and Glorifying God Through Songs
           </p>
         </div>
       </section>
@@ -64,21 +63,27 @@ const MusicMinistryPage = () => {
               <h2 className="section-title text-start">
                 About the Music Ministry
               </h2>
-              <p className="lead">
-                The Music Ministry of MUTCU is dedicated to leading the Union in
-                vibrant and spiritually uplifting worship experiences.
-                Comprising various teams including the choir, band,
-                instrumentalists, and praise and worship leaders, this ministry
-                plays a crucial role in creating an atmosphere where members can
-                connect with God through music and song.
-              </p>
-              <p>
-                Our goal is to foster a heart of worship and praise among the
-                MUTCU family, ensuring that all musical presentations are
-                excellent and align with the Union&apos;s spiritual goals. We
-                believe that music is a powerful tool for evangelism,
-                edification, and glorifying God.
-              </p>
+              <div className="mb-4">
+                <h5 className="text-secondary mb-3">Mandate</h5>
+                <p>
+                  To lead the congregation in authentic, biblical, and excellent worship through music.
+                </p>
+              </div>
+              <div className="mb-4">
+                <h5 className="text-secondary mb-3">Our Mission</h5>
+                <p className="lead">
+                  The Music Ministry of MUTCU is dedicated to leading the Union in vibrant and spiritually uplifting worship experiences. Through multiple music teams including the choir, band, praise and worship leaders, and instrumentalists, we create an atmosphere where members can connect with God and express their faith through song.
+                </p>
+              </div>
+              <div>
+                <h5 className="text-secondary mb-3">Our Commitment</h5>
+                <ul>
+                  <li>Ensuring theological depth and doctrinal soundness in all worship</li>
+                  <li>Maintaining excellence in musical quality and presentation</li>
+                  <li>Using music as a powerful tool for worship, evangelism, and edification</li>
+                  <li>Developing musicians and worship leaders for ministry impact</li>
+                </ul>
+              </div>
             </div>
             <div
               className="col-lg-5 text-center"
@@ -98,10 +103,9 @@ const MusicMinistryPage = () => {
       {/* Ensembles */}
       <section className="py-5 bg-light sub-ministries-section">
         <div className="container">
-          <h2 className="section-title text-center">Our Musical Ensembles</h2>
+          <h2 className="section-title text-center">Our Music Sub-Ministries</h2>
           <p className="text-center lead mb-5">
-            Within the Music Ministry, various teams come together to lead MUTCU
-            in worship and praise.
+            The Music Ministry comprises four sub-committees, each dedicated to a specific aspect of worship and musical excellence.
           </p>
 
           <div className="row">
@@ -141,7 +145,7 @@ const MusicMinistryPage = () => {
                 </ul>
                 <p className="mb-0 text-muted">
                   <i className="fas fa-clock me-2" />
-                  <b>Meeting Times:</b> Sundays, 2:00 PM - 4:00 PM (Room 7) -
+                  <b>Meeting Times:</b> Saturdays , 2:00 PM - 4:00 PM (Room 7) -
                   Other times confirmed weekly.
                 </p>
               </div>
@@ -224,8 +228,8 @@ const MusicMinistryPage = () => {
                 </ul>
                 <p className="mb-0 text-muted">
                   <i className="fas fa-clock me-2" />
-                  <b>Meeting Times:</b> Thursday, 7:00 PM - 9:00 PM (Music
-                  Room).
+                  <b>Meeting Times:</b> Wednesday, 7:00 PM - 9:00 PM (Confirmed
+                  weekly).
                 </p>
               </div>
             </div>
@@ -240,27 +244,30 @@ const MusicMinistryPage = () => {
                 <div className="card-image-container mb-4">
                   <img
                     src="/assets/images/music1.jpg"
-                    alt="Instrumentalists"
+                    alt="Music Outreach and Production"
                     className="img-fluid rounded-3"
                   />
                 </div>
                 <div className="d-flex align-items-center mb-3">
-                  <i className="fas fa-guitar instrumentalist-icon me-3" />
-                  <h3 className="card-title mb-0">Instrumentalists</h3>
+                  <i className="fas fa-microphone band-icon me-3" />
+                  <h3 className="card-title mb-0">Outreach &amp; Production</h3>
                 </div>
                 <p>
-                  This group includes individuals who play various instruments
-                  to support different ministry activities and events.
+                  This ministry supervises music-related responsibilities outside
+                  the main music ministry, handles recording and production of
+                  music content, and nurtures emerging musical talents through
+                  auditions and mentorship.
                 </p>
                 <h6>Activities:</h6>
                 <ul>
-                  <li>Providing music for fellowships or special occasions.</li>
-                  <li>Collaborating with other ministries for events.</li>
+                  <li>Conducting singing auditions to identify and train talent.</li>
+                  <li>Recording and producing music content in collaboration with Technical &amp; Media Ministry.</li>
                   <li>Mentoring aspiring musicians in the Union.</li>
+                  <li>Managing music-related outreach activities.</li>
                 </ul>
                 <p className="mb-0 text-muted">
                   <i className="fas fa-clock me-2" />
-                  <b>Meeting Times:</b> Wednesdays, 7:00 PM - 9:00 PM (Room 15).
+                  <b>Meeting Times:</b> As scheduled with Technical &amp; Media Ministry.
                 </p>
               </div>
             </div>
@@ -292,8 +299,7 @@ const MusicMinistryPage = () => {
                   featuring ministrations from all Music Ministry teams.
                 </p>
                 <p className="mb-0 text-muted">
-                  <i className="fas fa-calendar-alt me-2" /> Next Date: 7th
-                  November.
+                  <i className="fas fa-calendar-alt me-2" /> Friday services
                 </p>
               </div>
             </div>
@@ -311,7 +317,7 @@ const MusicMinistryPage = () => {
                   music and drama.
                 </p>
                 <p className="mb-0 text-muted">
-                  <i className="fas fa-calendar-alt me-2" /> Next Date: 12th
+                  <i className="fas fa-calendar-alt me-2" /> Next Date:
                   December.
                 </p>
               </div>
@@ -341,27 +347,34 @@ const MusicMinistryPage = () => {
       {/* Leadership */}
       <section className="py-5 leadership-spotlight-section text-white">
         <div className="container text-center" data-aos="zoom-in">
-          <h2 className="section-title text-white">Ministry Leadership</h2>
+          <h2 className="section-title text-white">Key Responsibilities</h2>
           <p className="lead mb-4 text-white-50">
-            Guided by dedicated leadership, our Music Ministry thrives.
+            The Music Coordinator provides executive oversight and spiritual direction for all music ministry activities.
           </p>
           <div className="row justify-content-center">
-            <div className="col-md-6 col-lg-4">
-              <Link
-                to="/committees/music"
-                className="executive-member-card d-block text-center text-decoration-none rounded-3 shadow-sm h-100 p-4"
-              >
-                <img
-                  src="/assets/images/PETER.jpg"
-                  alt="Peter Vaati"
-                  className="img-fluid rounded-circle mb-3 border border-3 border-navy"
-                />
-                <h4 className="member-name">Peter Vaati</h4>
-                <p className="member-role">Coordinator, Music Ministry</p>
-                <span className="btn btn-sm btn-outline-light mt-2">
-                  View Profile <i className="fas fa-user-circle ms-2" />
-                </span>
-              </Link>
+            <div className="col-md-6 col-lg-4 mb-4">
+              <div className="leadership-card bg-white text-dark rounded-3 shadow-sm p-4 h-100">
+                <h5 className="card-title"><i className="fas fa-check-circle text-success me-2"></i>Spiritual Direction</h5>
+                <p>Providing spiritual and artistic leadership for the entire music ministry</p>
+              </div>
+            </div>
+            <div className="col-md-6 col-lg-4 mb-4">
+              <div className="leadership-card bg-white text-dark rounded-3 shadow-sm p-4 h-100">
+                <h5 className="card-title"><i className="fas fa-check-circle text-success me-2"></i>Quality Assurance</h5>
+                <p>Ensuring overall quality, theological depth, and doctrinal soundness of worship</p>
+              </div>
+            </div>
+            <div className="col-md-6 col-lg-4 mb-4">
+              <div className="leadership-card bg-white text-dark rounded-3 shadow-sm p-4 h-100">
+                <h5 className="card-title"><i className="fas fa-check-circle text-success me-2"></i>Team Mentoring</h5>
+                <p>Mentoring and supporting music team leaders for effective ministry</p>
+              </div>
+            </div>
+            <div className="col-md-6 col-lg-4 mb-4">
+              <div className="leadership-card bg-white text-dark rounded-3 shadow-sm p-4 h-100">
+                <h5 className="card-title"><i className="fas fa-check-circle text-success me-2"></i>Coordination</h5>
+                <p>Coordinating the overall music schedule and serving as the link to Executive Council</p>
+              </div>
             </div>
           </div>
         </div>
@@ -372,8 +385,7 @@ const MusicMinistryPage = () => {
         <div className="container text-center" data-aos="zoom-in">
           <h2 className="section-title text-white">Join Our Music Ministry!</h2>
           <p className="lead mb-4 text-white-50">
-            If you have a passion for worship through music, we invite you to
-            join the Music Ministry.
+            If you have a passion for worship through music and want to lead others in encountering God, we invite you to join one of our music sub-ministries.
           </p>
           <div className="row justify-content-center">
             <div className="col-md-8 text-start">
@@ -392,7 +404,7 @@ const MusicMinistryPage = () => {
                       className="form-control"
                       id="joinName"
                       required
-                      placeholder="Jabez Ayugu"
+                      placeholder="Enter your full name"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                     />
@@ -406,14 +418,14 @@ const MusicMinistryPage = () => {
                       className="form-control"
                       id="joinEmail"
                       required
-                      placeholder="jabezayugu@mut.ac.ke"
+                      placeholder="Enter your university email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="joinInterest" className="form-label">
-                      Area of Interest
+                      Sub-Ministry of Interest
                     </label>
                     <select
                       className="form-select"
@@ -425,23 +437,22 @@ const MusicMinistryPage = () => {
                       <option value="" disabled>
                         Select an area
                       </option>
-                      <option value="choir">Choir</option>
-                      <option value="band">Band</option>
-                      <option value="instrumentalist">Instrumentalists</option>
-                      <option value="praise-worship">Praise and Worship</option>
+                      <option value="praise-worship">Praise &amp; Worship Ministry</option>
+                      <option value="choir">Choir Ministry</option>
+                      <option value="band">Band Ministry</option>
+                      <option value="outreach">Outreach &amp; Production Ministry</option>
                       <option value="general">General Interest</option>
                     </select>
                   </div>
                   <div className="mb-3">
                     <label htmlFor="joinMessage" className="form-label">
-                      Tell us about your musical experience or passion
-                      (Optional)
+                      Tell us about your musical experience or passion (Optional)
                     </label>
                     <textarea
                       className="form-control"
                       id="joinMessage"
                       rows={3}
-                      placeholder="e.g., I play guitar and have experience leading worship..."
+                      placeholder="Share your musical background and why you're interested..."
                       value={joinMessage}
                       onChange={(e) => setJoinMessage(e.target.value)}
                     />

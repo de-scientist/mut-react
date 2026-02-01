@@ -34,7 +34,7 @@ async function main() {
       .where(eq(users.email, "admin@mutcu.ac.ke"));
 
     if (!existingAdmin.length) {
-      const hashedPassword = await bcrypt.hash("admin@mutcu.ac.ke", 10);
+      const hashedPassword = await bcrypt.hash("admin123", 10);
 
       await db.insert(users).values({
         id: randomUUID(),

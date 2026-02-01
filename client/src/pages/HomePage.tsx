@@ -304,52 +304,15 @@ const HomePage = () => {
         >
           <div className="carousel-inner">
             <div className="carousel-item active">
-              <div
-                className="hero-bg"
-                style={{
-                  backgroundImage: "url('/assets/images/Lumii_20241023_192938507.jpg')",
-                }}
-              />
-              <div className="hero-overlay" />
-              <div
-                className="hero-content text-center text-white"
-                data-aos="fade-up"
-                data-aos-duration="1000"
-              >
-                <h1 className="display-3 mb-4" data-aos="zoom-in" data-aos-delay="200">
-                  Inspire Love, Hope &amp; Godliness
-                </h1>
-                <p className="lead mb-5" data-aos="zoom-in" data-aos-delay="400">
-                  Murang&apos;a University of Technology Christian Union — a Christ-centred family for
-                  discipleship, evangelism, mission work, and leadership development.
-                </p>
-                <div data-aos="zoom-in" data-aos-delay="600">
-                  <Link to="/contact" className="btn btn-primary btn-lg me-3">
-                    Join Us <i className="fas fa-hand-point-right ms-2" />
-                  </Link>
-                  <Link to="/resources" className="btn btn-secondary btn-lg">
-                    Watch / Listen <i className="fas fa-play-circle ms-2" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="carousel-item">
               <div className="hero-bg" style={{ backgroundImage: "url('/assets/images/exec.jpg')" }} />
               <div className="hero-overlay" />
-              <div
-                className="hero-content text-center text-white"
-                data-aos="fade-up"
-                data-aos-duration="1000"
-              >
-                <h1 className="display-3 mb-4" data-aos="zoom-in" data-aos-delay="200">
-                  Raising a Christ-like Family
-                </h1>
-                <p className="lead mb-5" data-aos="zoom-in" data-aos-delay="400">
+              <div className="hero-content text-center text-white" data-aos="fade-up">
+                <h1 className="display-3 mb-4">Raising a Christ-like Family</h1>
+                <p className="lead mb-5">
                   Equipped in all aspects of life — united as one body, and reaching out to non-believers
                   within our community and beyond.
                 </p>
-                <div data-aos="zoom-in" data-aos-delay="600">
+                <div>
                   <Link to="/about" className="btn btn-primary btn-lg me-3">
                     Our Mission <i className="fas fa-bullseye ms-2" />
                   </Link>
@@ -361,21 +324,38 @@ const HomePage = () => {
             </div>
 
             <div className="carousel-item">
+              <div
+                className="hero-bg"
+                style={{ backgroundImage: "url('/assets/images/Lumii_20241023_192938507.jpg')" }}
+              />
+              <div className="hero-overlay" />
+              <div className="hero-content text-center text-white" data-aos="fade-up">
+                <h1 className="display-3 mb-4">Inspire Love, Hope &amp; Godliness</h1>
+                <p className="lead mb-5">
+                  Murang&apos;a University of Technology Christian Union — a Christ-centred family for
+                  discipleship, evangelism, mission work, and leadership development.
+                </p>
+                <div>
+                  <Link to="/contact" className="btn btn-primary btn-lg me-3">
+                    Join Us <i className="fas fa-hand-point-right ms-2" />
+                  </Link>
+                  <Link to="/resources" className="btn btn-secondary btn-lg">
+                    Watch / Listen <i className="fas fa-play-circle ms-2" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="carousel-item">
               <div className="hero-bg" style={{ backgroundImage: "url('/assets/images/church2.jpg')" }} />
               <div className="hero-overlay" />
-              <div
-                className="hero-content text-center text-white"
-                data-aos="fade-up"
-                data-aos-duration="1000"
-              >
-                <h1 className="display-3 mb-4" data-aos="zoom-in" data-aos-delay="200">
-                  Growing in the Word &amp; Prayer
-                </h1>
-                <p className="lead mb-5" data-aos="zoom-in" data-aos-delay="400">
+              <div className="hero-content text-center text-white" data-aos="fade-up">
+                <h1 className="display-3 mb-4">Growing in the Word &amp; Prayer</h1>
+                <p className="lead mb-5">
                   Join us for Bible study, prayer meetings, worship services, fellowships, and trainings that
                   build a grounded and fruitful walk with Christ.
                 </p>
-                <div data-aos="zoom-in" data-aos-delay="600">
+                <div>
                   <Link to="/resources" className="btn btn-primary btn-lg me-3">
                     Resources <i className="fas fa-book ms-2" />
                   </Link>
@@ -389,18 +369,12 @@ const HomePage = () => {
             <div className="carousel-item">
               <div className="hero-bg" style={{ backgroundImage: "url('/assets/images/church3.jpg')" }} />
               <div className="hero-overlay" />
-              <div
-                className="hero-content text-center text-white"
-                data-aos="fade-up"
-                data-aos-duration="1000"
-              >
-                <h1 className="display-3 mb-4" data-aos="zoom-in" data-aos-delay="200">
-                  A Model Christian Union
-                </h1>
-                <p className="lead mb-5" data-aos="zoom-in" data-aos-delay="400">
+              <div className="hero-content text-center text-white" data-aos="fade-up">
+                <h1 className="display-3 mb-4">A Model Christian Union</h1>
+                <p className="lead mb-5">
                   Cultivating Christ-centeredness among members to positively impact the society.
                 </p>
-                <div data-aos="zoom-in" data-aos-delay="600">
+                <div>
                   <Link to="/about" className="btn btn-primary btn-lg me-3">
                     Our Vision <i className="fas fa-eye ms-2" />
                   </Link>
@@ -435,11 +409,31 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="about-section py-5" data-aos="fade-up">
+      {/* Join Us CTA Section */}
+      <section className="join-us-cta-section py-5" style={{ backgroundColor: '#ff9700', color: 'white' }}>
         <div className="container">
-          <h2 className="section-title text-center">About MUTCU</h2>
-          <p className="text-center lead mb-5">
+          <div className="row align-items-center justify-content-center">
+            <div className="col-lg-8 text-center" data-aos="zoom-in">
+              <div className="mb-4">
+                <i className="fas fa-user-plus" style={{ fontSize: '4rem', marginBottom: '1rem' }} />
+              </div>
+              <h2 className="display-5 mb-3" style={{ color: 'white' }}>Ready to Join Us?</h2>
+              <p className="lead mb-5" style={{ color: 'rgba(255,255,255,0.95)' }}>
+                Become part of the MUTCU family and experience discipleship, fellowship, and spiritual growth.
+              </p>
+              <Link to="/register" className="btn btn-light btn-lg" style={{ fontWeight: '600', color: '#ff9700' }}>
+                Register Now <i className="fas fa-arrow-right ms-2" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="about-section py-5">
+        <div className="container">
+          <h2 className="section-title text-center" data-aos="fade-up">About MUTCU</h2>
+          <p className="text-center lead mb-5" data-aos="fade-up" data-aos-delay="100">
             Murang&apos;a University of Technology Christian Union (MUTCU) is a Christ-centred, student-led
             fellowship at MUT, affiliated with FOCUS Kenya. We exist to inspire love, hope, and godliness
             through discipleship, evangelism, mission work, and leadership development.
@@ -449,7 +443,7 @@ const HomePage = () => {
             <div
               className="col-lg-6 mb-4 mb-lg-0 order-lg-1 order-2"
               data-aos="fade-right"
-              data-aos-delay="100"
+              data-aos-delay="150"
             >
               <h3 className="section-subtitle">Our Mission</h3>
               <p>
@@ -463,12 +457,7 @@ const HomePage = () => {
                 impact the society.
               </p>
 
-              <Link
-                to="/about"
-                className="btn btn-primary mt-3"
-                data-aos="zoom-in"
-                data-aos-delay="300"
-              >
+              <Link to="/about" className="btn btn-primary mt-3">
                 Learn More About Us <i className="fas fa-info-circle ms-2" />
               </Link>
             </div>
@@ -476,7 +465,7 @@ const HomePage = () => {
             <div
               className="col-lg-6 order-lg-2 order-1 text-center"
               data-aos="fade-left"
-              data-aos-delay="200"
+              data-aos-delay="150"
             >
               <img
                 src="/assets/images/prayer1.jpg"
@@ -487,7 +476,7 @@ const HomePage = () => {
           </div>
 
           <div className="row mt-5">
-            <div className="col-12 text-center" data-aos="fade-up" data-aos-delay="400">
+            <div className="col-12 text-center" data-aos="fade-up" data-aos-delay="200">
               <h3 className="section-subtitle">Doctrinal Basis</h3>
               <p className="text-muted">
                 MUTCU is founded on the fundamental truths of Christianity: the unity of the Father, Son, and
@@ -503,21 +492,16 @@ const HomePage = () => {
       </section>
 
       {/* Core Values Section */}
-      <section className="core-values-section py-5" data-aos="fade-up">
+      <section className="core-values-section py-5">
         <div className="container">
-          <h2 className="section-title text-center text-white">Our Core Values</h2>
-          <p className="text-center lead mb-5 text-white-50">
+          <h2 className="section-title text-center text-white" data-aos="fade-up">Our Core Values</h2>
+          <p className="text-center lead mb-5 text-white-50" data-aos="fade-up" data-aos-delay="100">
             Our values shape our culture, our leadership, and how we serve in MUT and beyond.
           </p>
 
           <div className="row justify-content-center">
             {coreValues.map((v, idx) => (
-              <div
-                key={v.title}
-                className="col-md-6 col-lg-4 mb-4"
-                data-aos="zoom-in"
-                data-aos-delay={100 + idx * 100}
-              >
+              <div key={v.title} className="col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay={100 + idx * 80}>
                 <div className="value-card text-center p-4 rounded-3 shadow-sm">
                   <i className={`${v.icon} feature-icon mb-3`} />
                   <h4 className="value-title">{v.title}</h4>
@@ -532,19 +516,14 @@ const HomePage = () => {
       {/* Ministries Preview */}
       <section className="ministries-section py-5" data-aos="fade-up">
         <div className="container">
-          <h2 className="section-title text-center">Our Ministries</h2>
-          <p className="text-center lead mb-5">
+          <h2 className="section-title text-center" data-aos="fade-up">Our Ministries</h2>
+          <p className="text-center lead mb-5" data-aos="fade-up" data-aos-delay="100">
             Find your place to grow and to serve — each ministry exists to build believers and reach others.
           </p>
 
           <div className="row justify-content-center">
             {ministriesPreview.map((m, idx) => (
-              <div
-                key={m.title}
-                className="col-md-6 col-lg-4 mb-4"
-                data-aos="zoom-in"
-                data-aos-delay={100 + idx * 100}
-              >
+              <div key={m.title} className="col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay={100 + idx * 80}>
                 <div className="card ministry-card h-100 shadow-sm">
                   <img src={m.image} className="card-img-top" alt={m.title} />
                   <div className="card-body text-center">
@@ -560,7 +539,7 @@ const HomePage = () => {
             ))}
           </div>
 
-          <div className="text-center mt-4" data-aos="zoom-in" data-aos-delay="500">
+          <div className="text-center mt-4" data-aos="fade-up" data-aos-delay="300">
             <Link to="/ministries" className="btn btn-secondary btn-lg">
               View All Ministries <i className="fas fa-arrow-right ms-2" />
             </Link>
@@ -569,21 +548,16 @@ const HomePage = () => {
       </section>
 
       {/* Updated Programs / Highlights */}
-      <section className="events-section py-5 bg-light" data-aos="fade-up">
+      <section className="events-section py-5 bg-light">
         <div className="container">
-          <h2 className="section-title text-center">Upcoming Service Highlights</h2>
-          <p className="text-center lead mb-5">
+          <h2 className="section-title text-center" data-aos="fade-up">Upcoming Service Highlights</h2>
+          <p className="text-center lead mb-5" data-aos="fade-up" data-aos-delay="100">
             From our Sunday services and Friday fellowships — plan ahead and invite a friend.
           </p>
 
           <div className="row justify-content-center">
             {upcomingHighlights.map((ev, idx) => (
-              <div
-                key={ev.title}
-                className="col-md-6 col-lg-4 mb-4"
-                data-aos="zoom-in"
-                data-aos-delay={100 + idx * 100}
-              >
+              <div key={ev.title} className="col-md-6 col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay={100 + idx * 80}>
                 <div className="card event-card h-100 shadow-sm">
                   <img src={ev.image} className="card-img-top" alt={ev.title} />
                   <div className="card-body">
@@ -610,7 +584,7 @@ const HomePage = () => {
             ))}
           </div>
 
-          <div className="text-center mt-4" data-aos="zoom-in" data-aos-delay="400">
+          <div className="text-center mt-4" data-aos="fade-up" data-aos-delay="300">
             <Link to="/events" className="btn btn-secondary btn-lg">
               View Full Program <i className="fas fa-arrow-right ms-2" />
             </Link>

@@ -18,6 +18,8 @@ model User {
   password      String
   name          String?
   role          UserRole @default(USER)
+  adminRole     String?  // Additional admin role field
+  privileges    String?  // JSON string of admin privileges
   isActive      Boolean  @default(true)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -29,6 +31,12 @@ enum UserRole {
   USER
   ADMIN
   SUPER_ADMIN
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+  MODERATOR
 }
 
 // Events model
@@ -143,4 +151,54 @@ model Media {
   updatedAt   DateTime @updatedAt
 
   @@map("media")
+}
+
+// Blog posts model
+model Blog {
+  id            String   @id @default(uuid())
+  title         String
+  slug          String   @unique
+  excerpt       String?
+  content       String
+  featuredImage String?
+  author        String?
+  status        String   @default("draft") // draft | published
+  tags          String?  // comma-separated tags
+  publishedAt   DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("blogs")
+}
+
+// Members registration model
+model Member {
+  id          String   @id @default(uuid())
+  name        String
+  email       String
+  yearOfStudy String
+  course      String
+  ministry1   String?
+  ministry2   String?
+  message     String?
+  status      String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("members")
+}
+
+// Resources model
+model Resource {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  url         String?  // file or external link
+  type        String?  // PDF | AUDIO | VIDEO | LINK
+  imageUrl    String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("resources")
 }
