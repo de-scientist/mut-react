@@ -347,7 +347,6 @@ ${ministry.description || ""}`;
   </ul>
   <button
     className="btn btn-outline-secondary dropdown-toggle rounded-pill"
-    data-bs-toggle="dropdown"
   >
     <Download size={16} className="me-1" /> Share All Ministries
         
