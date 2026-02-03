@@ -171,7 +171,6 @@ const UsersManagement = () => {
     try {
       const shareableUsers = sharingHelper.prepareShareData(
         users,
-        'Users Directory',
         {
           // itemTitleField: 'email',
           itemDescriptionField: 'name',
