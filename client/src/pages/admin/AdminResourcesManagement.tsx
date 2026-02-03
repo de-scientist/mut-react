@@ -322,6 +322,13 @@ ${r.url ? `Link: ${r.url}` : ""}
               <Share2 size={18} /> Share
             </button>
 
+             <button
+  className="btn btn-outline-secondary shadow-sm d-flex align-items-center gap-2"
+  onClick={shareResources}
+>
+  <Share2 size={18} /> Quick Share (Text)
+</button>
+
             <button
               onClick={() => {
                 resetForm();
