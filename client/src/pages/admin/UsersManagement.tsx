@@ -173,10 +173,10 @@ const UsersManagement = () => {
         users,
         'Users Directory',
         {
-          itemTitleField: 'email',
+          // itemTitleField: 'email',
           itemDescriptionField: 'name',
           itemUrlField: 'id',
-          itemType: 'users'
+          // itemType: 'users'
         }
       );
 
