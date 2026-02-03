@@ -114,28 +114,6 @@ const PrayerRequestsManagement = () => {
     [requests],
   );
 
-  const handleDownloadCSV = () => {
-    const headers = ['Name', 'Request', 'Status', 'Visibility', 'Date Submitted'];
-    const rows = requests.map(req => [
-      req.name || 'Anonymous',
-      req.request.replace(/"/g, '""'), // Escape quotes
-      req.status,
-      req.isPublic ? 'Public' : 'Private',
-      new Date(req.createdAt).toLocaleString()
-    ]);
-    
-    const csvContent = [
-      headers.join(','),
-      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
-    ].join('\n');
-    
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = `prayer-requests-${new Date().toISOString().split('T')[0]}.csv`;
-    link.click();
-  };
-
   // Enhanced export functions using centralized helper
   const exportPrayerRequests = async (format: 'csv' | 'word' | 'pdf') => {
     try {
