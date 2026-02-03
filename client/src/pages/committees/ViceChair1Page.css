@@ -169,11 +169,7 @@
 
 /* CTA Section */
 .cta-section {
-  background: linear-gradient(
-    135deg,
-    var(--mutcu-navy-blue) 0%,
-    #1a0066 100%
-  );
+  background: linear-gradient(135deg, var(--mutcu-navy-blue) 0%, #1a0066 100%);
   padding: 80px 0;
 }
 

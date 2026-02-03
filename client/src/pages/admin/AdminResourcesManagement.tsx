@@ -174,55 +174,52 @@ const AdminResourcesManagement = () => {
   }
 
   // Enhanced export functions using centralized helper
-  const exportResources = async (format: 'csv' | 'word' | 'pdf') => {
+  const exportResources = async (format: "csv" | "word" | "pdf") => {
     try {
       const exportData = exportHelper.prepareExportData(
         resources,
         {
-          title: 'Title',
-          description: 'Description',
-          type: 'Type',
-          url: 'URL',
-          imageUrl: 'Image URL',
-          isActive: 'Status',
-          createdAt: 'Created Date',
-          updatedAt: 'Updated Date'
+          title: "Title",
+          description: "Description",
+          type: "Type",
+          url: "URL",
+          imageUrl: "Image URL",
+          isActive: "Status",
+          createdAt: "Created Date",
+          updatedAt: "Updated Date",
         },
-        'Resources Export',
-        `Export of all resources (${resources.length} total)`
+        "Resources Export",
+        `Export of all resources (${resources.length} total)`,
       );
 
       await exportHelper.export(exportData, format, {
         filename: `resources`,
         includeLogo: true,
-        includeTimestamp: true
+        includeTimestamp: true,
       });
     } catch (error) {
-      setError('Failed to export resources');
-      console.error('Export error:', error);
+      setError("Failed to export resources");
+      console.error("Export error:", error);
     }
   };
 
   // Enhanced sharing functions
   const shareAllResources = async () => {
     try {
-      const shareableResources = sharingHelper.prepareShareData(
-        resources,
-        {
-          itemTitleField: 'title',
-          itemDescriptionField: 'description',
-          itemUrlField: 'url',
-          itemType: 'resource'
-        }
-      );
+      const shareableResources = sharingHelper.prepareShareData(resources, {
+        itemTitleField: "title",
+        itemDescriptionField: "description",
+        itemUrlField: "url",
+        itemType: "resource",
+      });
 
       await sharingHelper.shareBulk(shareableResources, {
-        bulkTitle: 'Resources Directory',
-        method: 'native'
+        bulkTitle: "Resources Directory",
+        method: "native",
       });
     } catch (error) {
-      setError('Failed to share resources');
-      console.error('Share error:', error);
+      setError("Failed to share resources");
+      console.error("Share error:", error);
     }
   };
 
@@ -231,13 +228,13 @@ const AdminResourcesManagement = () => {
       await sharingHelper.shareItem(resource, {
         formatTemplate: (item) => ({
           title: item.title,
-          text: `${item.type || 'Resource'} - ${item.description || ''}`,
-          url: item.url || item.imageUrl
-        })
+          text: `${item.type || "Resource"} - ${item.description || ""}`,
+          url: item.url || item.imageUrl,
+        }),
       });
     } catch (error) {
-      setError('Failed to share resource');
-      console.error('Share error:', error);
+      setError("Failed to share resource");
+      console.error("Share error:", error);
     }
   };
 
@@ -297,17 +294,26 @@ ${r.url ? `Link: ${r.url}` : ""}
               </button>
               <ul className="dropdown-menu">
                 <li>
-                  <button className="dropdown-item" onClick={() => exportResources('csv')}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportResources("csv")}
+                  >
                     <FileText size={16} className="me-2" /> Export as CSV
                   </button>
                 </li>
                 <li>
-                  <button className="dropdown-item" onClick={() => exportResources('word')}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportResources("word")}
+                  >
                     <FileText size={16} className="me-2" /> Export as Word
                   </button>
                 </li>
                 <li>
-                  <button className="dropdown-item" onClick={() => exportResources('pdf')}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportResources("pdf")}
+                  >
                     <FileText size={16} className="me-2" /> Export as PDF
                   </button>
                 </li>
@@ -322,12 +328,12 @@ ${r.url ? `Link: ${r.url}` : ""}
               <Share2 size={18} /> Share
             </button>
 
-             <button
-  className="btn btn-outline-secondary shadow-sm d-flex align-items-center gap-2"
-  onClick={shareResources}
->
-  <Share2 size={18} /> Quick Share (Text)
-</button>
+            <button
+              className="btn btn-outline-secondary shadow-sm d-flex align-items-center gap-2"
+              onClick={shareResources}
+            >
+              <Share2 size={18} /> Quick Share (Text)
+            </button>
 
             <button
               onClick={() => {

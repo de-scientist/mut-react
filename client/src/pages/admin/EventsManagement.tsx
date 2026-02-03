@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { eventsAPI } from "../../services/api";
 import ConfirmationModal from "../../components/ConfirmationModal";
@@ -158,113 +158,113 @@ const EventsManagement = () => {
   };
 
   const exportEventsAsCSV = () => {
-  if (!events.length) return;
+    if (!events.length) return;
 
-  const headers = [
-    "Title",
-    "Description",
-    "Date",
-    "Time",
-    "Location",
-    "Active",
-  ];
+    const headers = [
+      "Title",
+      "Description",
+      "Date",
+      "Time",
+      "Location",
+      "Active",
+    ];
 
-  const rows = events.map((e) => [
-    e.title,
-    e.description || "",
-    e.date,
-    e.time || "",
-    e.location || "",
-    e.isActive ? "Yes" : "No",
-  ]);
+    const rows = events.map((e) => [
+      e.title,
+      e.description || "",
+      e.date,
+      e.time || "",
+      e.location || "",
+      e.isActive ? "Yes" : "No",
+    ]);
 
-  const csvContent =
-    [headers, ...rows].map((row) => row.join(",")).join("\n");
+    const csvContent = [headers, ...rows]
+      .map((row) => row.join(","))
+      .join("\n");
 
-  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-  const url = URL.createObjectURL(blob);
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
 
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "events.csv";
-  link.click();
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "events.csv";
+    link.click();
 
-  URL.revokeObjectURL(url);
-};
+    URL.revokeObjectURL(url);
+  };
 
-const exportEventsAsJSON = () => {
-  const blob = new Blob([JSON.stringify(events, null, 2)], {
-    type: "application/json",
-  });
-  const url = URL.createObjectURL(blob);
+  const exportEventsAsJSON = () => {
+    const blob = new Blob([JSON.stringify(events, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
 
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "events.json";
-  link.click();
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "events.json";
+    link.click();
 
-  URL.revokeObjectURL(url);
-};
+    URL.revokeObjectURL(url);
+  };
 
-const shareAllEvents = async () => {
-  if (!events.length) {
-    setError("No events to share");
-    return;
-  }
-
-  // Create a shareable message with all events
-  const shareText = events
-    .map(
-      (e) =>
-        `${e.title} - ${e.date}${e.time ? ` at ${e.time}` : ""} - ${
-          e.location || "No location"
-        }`
-    )
-    .join("\n");
-
-  const shareUrl = `${window.location.origin}/events`;
-
-  try {
-    if (navigator.share) {
-      await navigator.share({
-        title: "Community Events",
-        text: shareText,
-        url: shareUrl,
-      });
-    } else {
-      await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
-      setSuccessMessage("All events copied to clipboard!");
+  const shareAllEvents = async () => {
+    if (!events.length) {
+      setError("No events to share");
+      return;
     }
-  } catch {
-    setError("Unable to share events");
-  }
-};
 
-const shareSingleEvent = async (event: Event) => {
-  const shareText = `${event.title}
+    // Create a shareable message with all events
+    const shareText = events
+      .map(
+        (e) =>
+          `${e.title} - ${e.date}${e.time ? ` at ${e.time}` : ""} - ${
+            e.location || "No location"
+          }`,
+      )
+      .join("\n");
+
+    const shareUrl = `${window.location.origin}/events`;
+
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: "Community Events",
+          text: shareText,
+          url: shareUrl,
+        });
+      } else {
+        await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+        setSuccessMessage("All events copied to clipboard!");
+      }
+    } catch {
+      setError("Unable to share events");
+    }
+  };
+
+  const shareSingleEvent = async (event: Event) => {
+    const shareText = `${event.title}
 📅 ${new Date(event.date).toLocaleDateString()} ${event.time || ""}
 📍 ${event.location || "Location TBA"}
 
 ${event.description || ""}`;
 
-  const shareUrl = `${window.location.origin}/events/${event.id}`;
+    const shareUrl = `${window.location.origin}/events/${event.id}`;
 
-  try {
-    if (navigator.share) {
-      await navigator.share({
-        title: event.title,
-        text: shareText,
-        url: shareUrl,
-      });
-    } else {
-      await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
-      setSuccessMessage("Event link copied to clipboard!");
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: event.title,
+          text: shareText,
+          url: shareUrl,
+        });
+      } else {
+        await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+        setSuccessMessage("Event link copied to clipboard!");
+      }
+    } catch {
+      setError("Unable to share event");
     }
-  } catch {
-    setError("Unable to share event");
-  }
-};
-
+  };
 
   if (loading) {
     return (
@@ -308,33 +308,33 @@ ${event.description || ""}`;
             >
               <Plus size={18} /> Add New Event
             </button>
-           <div className="dropdown">
-  <button
-    className="btn btn-outline-secondary shadow-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-expanded="false"
-  >
-    <Download size={16} className="me-1" /> Export
-  </button>
-  <ul className="dropdown-menu">
-    <li>
-      <button className="dropdown-item" onClick={exportEventsAsCSV}>
-        Export as CSV
-      </button>
-    </li>
-    <li>
-      <button className="dropdown-item" onClick={exportEventsAsJSON}>
-        Export as JSON
-      </button>
-    </li>    
-  </ul>
-  <button className="dropdown-item" onClick={shareAllEvents}>
-        Share All Events
-      </button>
-</div>
-
-
-
+            <div className="dropdown">
+              <button
+                className="btn btn-outline-secondary shadow-sm dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <Download size={16} className="me-1" /> Export
+              </button>
+              <ul className="dropdown-menu">
+                <li>
+                  <button className="dropdown-item" onClick={exportEventsAsCSV}>
+                    Export as CSV
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="dropdown-item"
+                    onClick={exportEventsAsJSON}
+                  >
+                    Export as JSON
+                  </button>
+                </li>
+              </ul>
+              <button className="dropdown-item" onClick={shareAllEvents}>
+                Share All Events
+              </button>
+            </div>
           </div>
         </div>
 
@@ -512,7 +512,6 @@ ${event.description || ""}`;
                   >
                     {editingEvent ? "Save Changes" : "Publish Event"}
                   </button>
-                  
 
                   <button
                     type="button"
@@ -604,54 +603,57 @@ ${event.description || ""}`;
                         </span>
                       </td>
                       <td className="px-4 text-end">
-  <div className="d-flex justify-content-end gap-2">
+                        <div className="d-flex justify-content-end gap-2">
+                          {/* NEW SHARE BUTTON */}
+                          <button
+                            className="btn btn-sm btn-light rounded-circle p-2"
+                            onClick={() => shareSingleEvent(event)}
+                            title="Share Event"
+                          >
+                            <Share2 size={16} />
+                          </button>
 
-    {/* NEW SHARE BUTTON */}
-    <button
-      className="btn btn-sm btn-light rounded-circle p-2"
-      onClick={() => shareSingleEvent(event)}
-      title="Share Event"
-    >
-      <Share2 size={16} />
-    </button>
+                          <button
+                            title="edit"
+                            className="btn btn-sm btn-light-primary rounded-circle p-2"
+                            onClick={() => openEditForm(event)}
+                          >
+                            <Edit3 size={16} />
+                          </button>
 
-    <button
-    title="edit"
-      className="btn btn-sm btn-light-primary rounded-circle p-2"
-      onClick={() => openEditForm(event)}
-    >
-      <Edit3 size={16} />
-    </button>
+                          <button
+                            title={
+                              event.isActive
+                                ? "Deactivate Event"
+                                : "Activate Event"
+                            }
+                            className={`btn btn-sm rounded-circle p-2 ${
+                              event.isActive
+                                ? "btn-light-warning"
+                                : "btn-light-success"
+                            }`}
+                            onClick={() => {
+                              setSelectedEvent(event);
+                              setAction("toggle");
+                              setShowModal(true);
+                            }}
+                          >
+                            <Power size={16} />
+                          </button>
 
-    <button
-    title={event.isActive ? "Deactivate Event" : "Activate Event"}
-      className={`btn btn-sm rounded-circle p-2 ${
-        event.isActive ? "btn-light-warning" : "btn-light-success"
-      }`}
-      onClick={() => {
-        setSelectedEvent(event);
-        setAction("toggle");
-        setShowModal(true);
-      }}
-    >
-      <Power size={16} />
-    </button>
-
-    <button
-    title="delete"
-      className="btn btn-sm btn-light-danger rounded-circle p-2"
-      onClick={() => {
-        setSelectedEvent(event);
-        setAction("delete");
-        setShowModal(true);
-      }}
-    >
-      <Trash2 size={16} />
-    </button>
-
-  </div>
-</td>
-
+                          <button
+                            title="delete"
+                            className="btn btn-sm btn-light-danger rounded-circle p-2"
+                            onClick={() => {
+                              setSelectedEvent(event);
+                              setAction("delete");
+                              setShowModal(true);
+                            }}
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
+                      </td>
                     </tr>
                   ))
                 )}

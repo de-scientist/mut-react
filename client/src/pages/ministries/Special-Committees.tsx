@@ -52,7 +52,9 @@ const SpecialCommitteesPage = () => {
 
       <section className="py-5 bg-light">
         <div className="container">
-          <h2 className="section-title text-center">Explore Special Committees</h2>
+          <h2 className="section-title text-center">
+            Explore Special Committees
+          </h2>
           <p className="text-center lead mb-5">
             These committees strengthen MUTCU governance, accountability, and
             long-term impact.

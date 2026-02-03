@@ -196,10 +196,10 @@ const AboutPage = () => {
               </h6>
               <h2 className="display-6 fw-bold text-navy mb-4">Who We Are</h2>
               <p className="text-muted mb-4">
-                MUTCU is a vibrant, student-led Christian Society at Murang&apos;a
-                University of Technology, committed to discipleship, evangelism,
-                mission work, and leadership development — anchored in the
-                supremacy of the Holy Bible.
+                MUTCU is a vibrant, student-led Christian Society at
+                Murang&apos;a University of Technology, committed to
+                discipleship, evangelism, mission work, and leadership
+                development — anchored in the supremacy of the Holy Bible.
               </p>
 
               <div className="p-3 border-start border-4 border-teal bg-light rounded-end">

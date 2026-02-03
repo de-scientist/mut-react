@@ -11,8 +11,8 @@ interface ShareData {
 }
 
 interface ShareOptions {
-  method?: 'native' | 'clipboard' | 'email' | 'download' | 'platform';
-  platform?: 'twitter' | 'facebook' | 'linkedin' | 'whatsapp' | 'telegram';
+  method?: "native" | "clipboard" | "email" | "download" | "platform";
+  platform?: "twitter" | "facebook" | "linkedin" | "whatsapp" | "telegram";
   subject?: string;
   body?: string;
   filename?: string;
@@ -32,36 +32,41 @@ class SharingHelper {
   /**
    * Share content using native Web Share API or fallback methods
    */
-  static async share(data: ShareData, options: ShareOptions = {}): Promise<void> {
-    const { method = 'native', platform, subject, body, filename } = options;
+  static async share(
+    data: ShareData,
+    options: ShareOptions = {},
+  ): Promise<void> {
+    const { method = "native", platform, subject, body, filename } = options;
 
     try {
       switch (method) {
-        case 'native':
+        case "native":
           await this.shareNative(data);
           break;
-        case 'clipboard':
+        case "clipboard":
           await this.shareToClipboard(data);
           break;
-        case 'email':
+        case "email":
           await this.shareViaEmail(data, { subject, body });
           break;
-        case 'download':
+        case "download":
           await this.shareAsDownload(data, filename);
           break;
-        case 'platform':
+        case "platform":
           if (platform) {
             await this.shareToSocialPlatform(data, platform);
           } else {
-            throw new Error('Platform must be specified for platform sharing');
+            throw new Error("Platform must be specified for platform sharing");
           }
           break;
         default:
           throw new Error(`Unsupported sharing method: ${method}`);
       }
     } catch (error) {
-      console.error('Error sharing content:', error);
-      throw new Error(`Failed to share content: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      console.error("Error sharing content:", error);
+      throw new Error(
+        `Failed to share content: ${error instanceof Error ? error.message : "Unknown error"}`,
+      );
     }
   }
 
@@ -70,7 +75,7 @@ class SharingHelper {
    */
   private static async shareNative(data: ShareData): Promise<void> {
     if (!navigator.share) {
-      throw new Error('Web Share API not supported on this device');
+      throw new Error("Web Share API not supported on this device");
     }
 
     try {
@@ -78,10 +83,10 @@ class SharingHelper {
         title: data.title,
         text: data.text,
         url: data.url,
-        files: data.files
+        files: data.files,
       });
     } catch (error) {
-      if ((error as Error).name !== 'AbortError') {
+      if ((error as Error).name !== "AbortError") {
         throw error;
       }
       // User cancelled sharing - don't treat as error
@@ -93,16 +98,16 @@ class SharingHelper {
    */
   private static async shareToClipboard(data: ShareData): Promise<void> {
     if (!navigator.clipboard) {
-      throw new Error('Clipboard API not supported');
+      throw new Error("Clipboard API not supported");
     }
 
     const content = data.url ? `${data.text}\n\n${data.url}` : data.text;
-    
+
     try {
       await navigator.clipboard.writeText(content);
-      this.showNotification('Content copied to clipboard!', 'success');
+      this.showNotification("Content copied to clipboard!", "success");
     } catch (error) {
-      throw new Error('Failed to copy to clipboard');
+      throw new Error("Failed to copy to clipboard");
     }
   }
 
@@ -110,63 +115,71 @@ class SharingHelper {
    * Share via email
    */
   private static async shareViaEmail(
-    data: ShareData, 
-    options: { subject?: string; body?: string } = {}
+    data: ShareData,
+    options: { subject?: string; body?: string } = {},
   ): Promise<void> {
     const subject = options.subject || data.title;
-    const body = options.body || `${data.text}${data.url ? `\n\n${data.url}` : ''}`;
-    
+    const body =
+      options.body || `${data.text}${data.url ? `\n\n${data.url}` : ""}`;
+
     const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-    window.open(mailtoUrl, '_blank');
+
+    window.open(mailtoUrl, "_blank");
   }
 
   /**
    * Share as downloadable file
    */
-  private static async shareAsDownload(data: ShareData, filename?: string): Promise<void> {
+  private static async shareAsDownload(
+    data: ShareData,
+    filename?: string,
+  ): Promise<void> {
     const content = data.url ? `${data.text}\n\n${data.url}` : data.text;
-    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
-    
-    const link = document.createElement('a');
+
+    const link = document.createElement("a");
     link.href = url;
-    link.download = filename || `${data.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.txt`;
+    link.download =
+      filename || `${data.title.replace(/[^a-z0-9]/gi, "_").toLowerCase()}.txt`;
     link.click();
-    
+
     URL.revokeObjectURL(url);
   }
 
   /**
    * Share to specific social media platforms
    */
-  private static async shareToSocialPlatform(data: ShareData, platform: string): Promise<void> {
-    const {  text, url } = data;
+  private static async shareToSocialPlatform(
+    data: ShareData,
+    platform: string,
+  ): Promise<void> {
+    const { text, url } = data;
     const shareUrl = url || this.BASE_URL;
-    
-    let platformUrl = '';
-    
+
+    let platformUrl = "";
+
     switch (platform.toLowerCase()) {
-      case 'twitter':
+      case "twitter":
         platformUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`;
         break;
-      case 'facebook':
+      case "facebook":
         platformUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(text)}`;
         break;
-      case 'linkedin':
+      case "linkedin":
         platformUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
         break;
-      case 'whatsapp':
+      case "whatsapp":
         platformUrl = `https://wa.me/?text=${encodeURIComponent(`${text} ${shareUrl}`)}`;
         break;
-      case 'telegram':
+      case "telegram":
         platformUrl = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(text)}`;
         break;
       default:
         throw new Error(`Unsupported platform: ${platform}`);
     }
-    
-    window.open(platformUrl, '_blank', 'width=600,height=400');
+
+    window.open(platformUrl, "_blank", "width=600,height=400");
   }
 
   /**
@@ -174,29 +187,29 @@ class SharingHelper {
    */
   static async shareBulk(
     items: ShareableItem[],
-    options: ShareOptions & { 
+    options: ShareOptions & {
       itemFormatter?: (item: ShareableItem) => string;
       includeUrls?: boolean;
       bulkTitle?: string;
-    } = {}
+    } = {},
   ): Promise<void> {
-    const { 
-      itemFormatter, 
+    const {
+      itemFormatter,
       includeUrls = true,
-      bulkTitle = 'Shared Items',
-      ...shareOptions 
+      bulkTitle = "Shared Items",
+      ...shareOptions
     } = options;
 
     if (!items.length) {
-      throw new Error('No items to share');
+      throw new Error("No items to share");
     }
 
     // Format items for sharing
-    const formattedItems = items.map(item => {
+    const formattedItems = items.map((item) => {
       if (itemFormatter) {
         return itemFormatter(item);
       }
-      
+
       let itemText = `${item.title}`;
       if (item.description) {
         itemText += `\n${item.description}`;
@@ -204,17 +217,20 @@ class SharingHelper {
       if (includeUrls && item.url) {
         itemText += `\n${item.url}`;
       }
-      
+
       return itemText;
     });
 
-    const shareText = `${bulkTitle}\n\n${formattedItems.join('\n\n---\n\n')}`;
-    
-    await this.share({
-      title: bulkTitle,
-      text: shareText,
-      url: this.BASE_URL
-    }, shareOptions);
+    const shareText = `${bulkTitle}\n\n${formattedItems.join("\n\n---\n\n")}`;
+
+    await this.share(
+      {
+        title: bulkTitle,
+        text: shareText,
+        url: this.BASE_URL,
+      },
+      shareOptions,
+    );
   }
 
   /**
@@ -223,8 +239,12 @@ class SharingHelper {
   static async shareItem(
     item: ShareableItem,
     options: ShareOptions & {
-      formatTemplate?: (item: ShareableItem) => { title: string; text: string; url?: string };
-    } = {}
+      formatTemplate?: (item: ShareableItem) => {
+        title: string;
+        text: string;
+        url?: string;
+      };
+    } = {},
   ): Promise<void> {
     const { formatTemplate, ...shareOptions } = options;
 
@@ -235,13 +255,13 @@ class SharingHelper {
       shareData = {
         title: formatted.title,
         text: formatted.text,
-        url: formatted.url
+        url: formatted.url,
       };
     } else {
       shareData = {
         title: item.title,
         text: item.description || item.title,
-        url: item.url
+        url: item.url,
       };
     }
 
@@ -254,7 +274,7 @@ class SharingHelper {
   static generateShareableUrl(
     itemType: string,
     itemId: string,
-    baseUrl?: string
+    baseUrl?: string,
   ): string {
     const base = baseUrl || this.BASE_URL;
     return `${base}/${itemType}/${itemId}`;
@@ -271,28 +291,37 @@ class SharingHelper {
     return {
       nativeShare: !!navigator.share,
       clipboard: !!navigator.clipboard,
-      fileDownload: typeof document !== 'undefined' && typeof URL !== 'undefined'
+      fileDownload:
+        typeof document !== "undefined" && typeof URL !== "undefined",
     };
   }
 
   /**
    * Get available sharing methods based on device capabilities
    */
-  static getAvailableMethods(): Array<{ value: string; label: string; icon?: string }> {
+  static getAvailableMethods(): Array<{
+    value: string;
+    label: string;
+    icon?: string;
+  }> {
     const capabilities = this.getSharingCapabilities();
     const methods = [];
 
     if (capabilities.nativeShare) {
-      methods.push({ value: 'native', label: 'Share', icon: 'share' });
+      methods.push({ value: "native", label: "Share", icon: "share" });
     }
 
     if (capabilities.clipboard) {
-      methods.push({ value: 'clipboard', label: 'Copy to Clipboard', icon: 'clipboard' });
+      methods.push({
+        value: "clipboard",
+        label: "Copy to Clipboard",
+        icon: "clipboard",
+      });
     }
 
     methods.push(
-      { value: 'email', label: 'Share via Email', icon: 'email' },
-      { value: 'download', label: 'Download as File', icon: 'download' }
+      { value: "email", label: "Share via Email", icon: "email" },
+      { value: "download", label: "Download as File", icon: "download" },
     );
 
     return methods;
@@ -301,28 +330,35 @@ class SharingHelper {
   /**
    * Get available social platforms
    */
-  static getAvailablePlatforms(): Array<{ value: string; label: string; icon?: string }> {
+  static getAvailablePlatforms(): Array<{
+    value: string;
+    label: string;
+    icon?: string;
+  }> {
     return [
-      { value: 'twitter', label: 'Twitter', icon: 'twitter' },
-      { value: 'facebook', label: 'Facebook', icon: 'facebook' },
-      { value: 'linkedin', label: 'LinkedIn', icon: 'linkedin' },
-      { value: 'whatsapp', label: 'WhatsApp', icon: 'whatsapp' },
-      { value: 'telegram', label: 'Telegram', icon: 'telegram' }
+      { value: "twitter", label: "Twitter", icon: "twitter" },
+      { value: "facebook", label: "Facebook", icon: "facebook" },
+      { value: "linkedin", label: "LinkedIn", icon: "linkedin" },
+      { value: "whatsapp", label: "WhatsApp", icon: "whatsapp" },
+      { value: "telegram", label: "Telegram", icon: "telegram" },
     ];
   }
 
   /**
    * Show notification (helper method)
    */
-  private static showNotification(message: string, type: 'success' | 'error' = 'success'): void {
+  private static showNotification(
+    message: string,
+    type: "success" | "error" = "success",
+  ): void {
     // Create a simple notification
-    const notification = document.createElement('div');
-    notification.className = `alert alert-${type === 'success' ? 'success' : 'danger'} position-fixed top-0 end-0 m-3`;
-    notification.style.zIndex = '9999';
+    const notification = document.createElement("div");
+    notification.className = `alert alert-${type === "success" ? "success" : "danger"} position-fixed top-0 end-0 m-3`;
+    notification.style.zIndex = "9999";
     notification.textContent = message;
-    
+
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
       if (notification.parentNode) {
         notification.parentNode.removeChild(notification);
@@ -342,26 +378,29 @@ class SharingHelper {
       itemUrlField?: keyof T;
       baseUrl?: string;
       itemType?: string;
-    } = {}
+    } = {},
   ): ShareableItem[] {
     const {
-      itemTitleField = 'title' as keyof T,
-      itemDescriptionField = 'description' as keyof T,
-      itemUrlField = 'id' as keyof T,
+      itemTitleField = "title" as keyof T,
+      itemDescriptionField = "description" as keyof T,
+      itemUrlField = "id" as keyof T,
       baseUrl = this.BASE_URL,
-      itemType = 'item'
+      itemType = "item",
     } = options;
 
-    return items.map(item => ({
-      id: String(item.id || ''),
-      title: String(item[itemTitleField] || ''),
-      description: item[itemDescriptionField] ? String(item[itemDescriptionField]) : '',
-      url: item[itemUrlField] ? 
-        (typeof item[itemUrlField] === 'string' && item[itemUrlField].startsWith('http') ? 
-          String(item[itemUrlField]) : 
-          `${baseUrl}/${itemType}/${item[itemUrlField]}`) : 
-        undefined,
-      ...item
+    return items.map((item) => ({
+      id: String(item.id || ""),
+      title: String(item[itemTitleField] || ""),
+      description: item[itemDescriptionField]
+        ? String(item[itemDescriptionField])
+        : "",
+      url: item[itemUrlField]
+        ? typeof item[itemUrlField] === "string" &&
+          item[itemUrlField].startsWith("http")
+          ? String(item[itemUrlField])
+          : `${baseUrl}/${itemType}/${item[itemUrlField]}`
+        : undefined,
+      ...item,
     }));
   }
 }

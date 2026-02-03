@@ -37,7 +37,9 @@ const PrayerRequestsManagement = () => {
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<string>("");
-  const [selectedRequest, setSelectedRequest] = useState<PrayerRequest | null>(null);
+  const [selectedRequest, setSelectedRequest] = useState<PrayerRequest | null>(
+    null,
+  );
   const [showDetailModal, setShowDetailModal] = useState(false);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -115,72 +117,72 @@ const PrayerRequestsManagement = () => {
   );
 
   // Enhanced export functions using centralized helper
-  const exportPrayerRequests = async (format: 'csv' | 'word' | 'pdf') => {
+  const exportPrayerRequests = async (format: "csv" | "word" | "pdf") => {
     try {
       const exportData = exportHelper.prepareExportData(
         requests,
         {
-          name: 'Name',
-          request: 'Request',
-          status: 'Status',
-          isPublic: 'Visibility',
-          createdAt: 'Date Submitted',
-          updatedAt: 'Updated Date'
+          name: "Name",
+          request: "Request",
+          status: "Status",
+          isPublic: "Visibility",
+          createdAt: "Date Submitted",
+          updatedAt: "Updated Date",
         },
-        'Prayer Requests Export',
-        `Export of all prayer requests (${requests.length} total)`
+        "Prayer Requests Export",
+        `Export of all prayer requests (${requests.length} total)`,
       );
 
       await exportHelper.export(exportData, format, {
         filename: `prayer-requests`,
         includeLogo: true,
-        includeTimestamp: true
+        includeTimestamp: true,
       });
     } catch (error) {
-      setError('Failed to export prayer requests');
-      console.error('Export error:', error);
+      setError("Failed to export prayer requests");
+      console.error("Export error:", error);
     }
   };
 
   // Sharing functions
   const shareAllPrayerRequests = async () => {
     try {
-      const shareableRequests = sharingHelper.prepareShareData(
-        requests,
-        {
-          itemTitleField: 'name',
-          itemDescriptionField: 'request',
-          itemUrlField: 'id',
-          itemType: 'prayer'
-        }
-      );
+      const shareableRequests = sharingHelper.prepareShareData(requests, {
+        itemTitleField: "name",
+        itemDescriptionField: "request",
+        itemUrlField: "id",
+        itemType: "prayer",
+      });
 
       await sharingHelper.shareBulk(shareableRequests, {
-        bulkTitle: 'Prayer Requests Directory',
-        method: 'native'
+        bulkTitle: "Prayer Requests Directory",
+        method: "native",
       });
     } catch (error) {
-      setError('Failed to share prayer requests');
-      console.error('Share error:', error);
+      setError("Failed to share prayer requests");
+      console.error("Share error:", error);
     }
   };
 
   const shareSinglePrayerRequest = async (request: PrayerRequest) => {
     try {
-      await sharingHelper.shareItem({
-        ...request,
-        title: request.name || 'Anonymous',
-        description: request.request.substring(0, 100) + '...'
-      }, {
-        formatTemplate: (item) => ({
-          title: item.name || 'Anonymous',
-          text: `${item.status} - ${item.isPublic ? 'Public' : 'Private'}\n${item.request.substring(0, 100)}...`,
-          url: `/prayer/${item.id}`
-        })
-      });
+      await sharingHelper.shareItem(
+        {
+          ...request,
+          title: request.name || "Anonymous",
+          description: request.request.substring(0, 100) + "...",
+        },
+        {
+          formatTemplate: (item) => ({
+            title: item.name || "Anonymous",
+            text: `${item.status} - ${item.isPublic ? "Public" : "Private"}\n${item.request.substring(0, 100)}...`,
+            url: `/prayer/${item.id}`,
+          }),
+        },
+      );
     } catch (error) {
-      setError('Failed to share prayer request');
-      console.error('Share error:', error);
+      setError("Failed to share prayer request");
+      console.error("Share error:", error);
     }
   };
 
@@ -226,17 +228,26 @@ const PrayerRequestsManagement = () => {
               </button>
               <ul className="dropdown-menu">
                 <li>
-                  <button className="dropdown-item" onClick={() => exportPrayerRequests('csv')}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportPrayerRequests("csv")}
+                  >
                     <FileText size={16} className="me-2" /> Export as CSV
                   </button>
                 </li>
                 <li>
-                  <button className="dropdown-item" onClick={() => exportPrayerRequests('word')}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportPrayerRequests("word")}
+                  >
                     <FileText size={16} className="me-2" /> Export as Word
                   </button>
                 </li>
                 <li>
-                  <button className="dropdown-item" onClick={() => exportPrayerRequests('pdf')}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportPrayerRequests("pdf")}
+                  >
                     <FileText size={16} className="me-2" /> Export as PDF
                   </button>
                 </li>
@@ -375,9 +386,9 @@ const PrayerRequestsManagement = () => {
                           </div>
                         </td>
                         <td>
-                          <div 
-                            className="prayer-request-text text-muted" 
-                            style={{ cursor: 'pointer' }}
+                          <div
+                            className="prayer-request-text text-muted"
+                            style={{ cursor: "pointer" }}
                             onClick={() => openDetailModal(req)}
                             title="Click to view full request"
                           >
@@ -423,7 +434,9 @@ const PrayerRequestsManagement = () => {
                               aria-label="Change status"
                             >
                               <option value="PENDING">Mark Pending</option>
-                              <option value="PRAYED_FOR">Mark Prayed For</option>
+                              <option value="PRAYED_FOR">
+                                Mark Prayed For
+                              </option>
                               <option value="ANSWERED">Mark Answered</option>
                             </select>
                           </div>
@@ -448,16 +461,33 @@ const PrayerRequestsManagement = () => {
 
       {/* Detail Modal */}
       {showDetailModal && selectedRequest && (
-        <div className="modal fade show d-block" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }} onClick={() => setShowDetailModal(false)}>
-          <div className="modal-dialog modal-dialog-centered modal-lg" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="modal fade show d-block"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+          onClick={() => setShowDetailModal(false)}
+        >
+          <div
+            className="modal-dialog modal-dialog-centered modal-lg"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="modal-content border-0 shadow-lg rounded-4">
-              <div className="modal-header" style={{ backgroundColor: '#04003d', color: 'white', borderRadius: '1rem 1rem 0 0' }}>
-                <h5 className="modal-title d-flex align-items-center gap-2 fw-bold" style={{ color: '#e8e8e8' }}>
+              <div
+                className="modal-header"
+                style={{
+                  backgroundColor: "#04003d",
+                  color: "white",
+                  borderRadius: "1rem 1rem 0 0",
+                }}
+              >
+                <h5
+                  className="modal-title d-flex align-items-center gap-2 fw-bold"
+                  style={{ color: "#e8e8e8" }}
+                >
                   <MessageSquare size={20} /> Prayer Request Details
                 </h5>
-                <button 
-                  type="button" 
-                  className="btn-close btn-close-white" 
+                <button
+                  type="button"
+                  className="btn-close btn-close-white"
                   onClick={() => setShowDetailModal(false)}
                   aria-label="Close"
                 ></button>
@@ -465,39 +495,129 @@ const PrayerRequestsManagement = () => {
               <div className="modal-body p-4">
                 <div className="row g-4">
                   <div className="col-md-6">
-                    <label className="text-uppercase fw-bold mb-2" style={{ fontSize: '0.75rem', color: '#04003d', opacity: 0.7, letterSpacing: '0.5px' }}>From</label>
+                    <label
+                      className="text-uppercase fw-bold mb-2"
+                      style={{
+                        fontSize: "0.75rem",
+                        color: "#04003d",
+                        opacity: 0.7,
+                        letterSpacing: "0.5px",
+                      }}
+                    >
+                      From
+                    </label>
                     <div className="d-flex align-items-center gap-2">
-                      <div className="rounded-circle d-flex align-items-center justify-content-center" style={{ width: '40px', height: '40px', backgroundColor: '#30d5c8', color: 'white' }}>
+                      <div
+                        className="rounded-circle d-flex align-items-center justify-content-center"
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          backgroundColor: "#30d5c8",
+                          color: "white",
+                        }}
+                      >
                         <User size={20} />
                       </div>
-                      <p className="fw-bold fs-5 mb-0" style={{ color: '#04003d' }}>{selectedRequest.name || 'Anonymous'}</p>
+                      <p
+                        className="fw-bold fs-5 mb-0"
+                        style={{ color: "#04003d" }}
+                      >
+                        {selectedRequest.name || "Anonymous"}
+                      </p>
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <label className="text-uppercase fw-bold mb-2" style={{ fontSize: '0.75rem', color: '#04003d', opacity: 0.7, letterSpacing: '0.5px' }}>Submitted</label>
-                    <p className="mb-0" style={{ color: '#04003d' }}>{new Date(selectedRequest.createdAt).toLocaleString()}</p>
+                    <label
+                      className="text-uppercase fw-bold mb-2"
+                      style={{
+                        fontSize: "0.75rem",
+                        color: "#04003d",
+                        opacity: 0.7,
+                        letterSpacing: "0.5px",
+                      }}
+                    >
+                      Submitted
+                    </label>
+                    <p className="mb-0" style={{ color: "#04003d" }}>
+                      {new Date(selectedRequest.createdAt).toLocaleString()}
+                    </p>
                   </div>
                   <div className="col-12">
-                    <label className="text-uppercase fw-bold mb-2" style={{ fontSize: '0.75rem', color: '#04003d', opacity: 0.7, letterSpacing: '0.5px' }}>Prayer Request</label>
-                    <div className="p-4 rounded-3" style={{ backgroundColor: '#f8f9fa', border: '2px solid #30d5c8' }}>
-                      <p className="mb-0 lh-lg" style={{ color: '#04003d', fontSize: '1rem' }}>{selectedRequest.request}</p>
+                    <label
+                      className="text-uppercase fw-bold mb-2"
+                      style={{
+                        fontSize: "0.75rem",
+                        color: "#04003d",
+                        opacity: 0.7,
+                        letterSpacing: "0.5px",
+                      }}
+                    >
+                      Prayer Request
+                    </label>
+                    <div
+                      className="p-4 rounded-3"
+                      style={{
+                        backgroundColor: "#f8f9fa",
+                        border: "2px solid #30d5c8",
+                      }}
+                    >
+                      <p
+                        className="mb-0 lh-lg"
+                        style={{ color: "#04003d", fontSize: "1rem" }}
+                      >
+                        {selectedRequest.request}
+                      </p>
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <label className="text-uppercase fw-bold mb-2" style={{ fontSize: '0.75rem', color: '#04003d', opacity: 0.7, letterSpacing: '0.5px' }}>Status</label>
+                    <label
+                      className="text-uppercase fw-bold mb-2"
+                      style={{
+                        fontSize: "0.75rem",
+                        color: "#04003d",
+                        opacity: 0.7,
+                        letterSpacing: "0.5px",
+                      }}
+                    >
+                      Status
+                    </label>
                     <div>
-                      <span className={`badge rounded-pill px-3 py-2 d-inline-flex align-items-center gap-1 ${getStatusConfig(selectedRequest.status).color}`}>
+                      <span
+                        className={`badge rounded-pill px-3 py-2 d-inline-flex align-items-center gap-1 ${getStatusConfig(selectedRequest.status).color}`}
+                      >
                         {getStatusConfig(selectedRequest.status).icon}
-                        {selectedRequest.status.replace('_', ' ')}
+                        {selectedRequest.status.replace("_", " ")}
                       </span>
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <label className="text-uppercase fw-bold mb-2" style={{ fontSize: '0.75rem', color: '#04003d', opacity: 0.7, letterSpacing: '0.5px' }}>Visibility</label>
+                    <label
+                      className="text-uppercase fw-bold mb-2"
+                      style={{
+                        fontSize: "0.75rem",
+                        color: "#04003d",
+                        opacity: 0.7,
+                        letterSpacing: "0.5px",
+                      }}
+                    >
+                      Visibility
+                    </label>
                     <div>
-                      <span className={`badge rounded-pill px-3 py-2 d-inline-flex align-items-center gap-1`} style={{ backgroundColor: selectedRequest.isPublic ? '#30d5c8' : '#e9ecef', color: selectedRequest.isPublic ? 'white' : '#6c757d' }}>
-                        {selectedRequest.isPublic ? <Eye size={14} /> : <EyeOff size={14} />}
-                        {selectedRequest.isPublic ? 'Public' : 'Private'}
+                      <span
+                        className={`badge rounded-pill px-3 py-2 d-inline-flex align-items-center gap-1`}
+                        style={{
+                          backgroundColor: selectedRequest.isPublic
+                            ? "#30d5c8"
+                            : "#e9ecef",
+                          color: selectedRequest.isPublic ? "white" : "#6c757d",
+                        }}
+                      >
+                        {selectedRequest.isPublic ? (
+                          <Eye size={14} />
+                        ) : (
+                          <EyeOff size={14} />
+                        )}
+                        {selectedRequest.isPublic ? "Public" : "Private"}
                       </span>
                     </div>
                   </div>
@@ -505,8 +625,13 @@ const PrayerRequestsManagement = () => {
               </div>
               <div className="modal-footer border-0 pt-0">
                 <select
-                  className="form-select rounded-pill px-4" 
-                  style={{ width: 'auto', border: '2px solid #04003d', color: '#04003d', fontWeight: '500' }}
+                  className="form-select rounded-pill px-4"
+                  style={{
+                    width: "auto",
+                    border: "2px solid #04003d",
+                    color: "#04003d",
+                    fontWeight: "500",
+                  }}
                   value={selectedRequest.status}
                   onChange={(e) => {
                     handleStatusUpdate(selectedRequest.id, e.target.value);
@@ -518,10 +643,14 @@ const PrayerRequestsManagement = () => {
                   <option value="PRAYED_FOR">Mark Prayed For</option>
                   <option value="ANSWERED">Mark Answered</option>
                 </select>
-                <button 
-                  type="button" 
-                  className="btn rounded-pill px-4 shadow-sm" 
-                  style={{ backgroundColor: '#04003d', color: 'white', border: 'none' }}
+                <button
+                  type="button"
+                  className="btn rounded-pill px-4 shadow-sm"
+                  style={{
+                    backgroundColor: "#04003d",
+                    color: "white",
+                    border: "none",
+                  }}
                   onClick={() => setShowDetailModal(false)}
                 >
                   Close

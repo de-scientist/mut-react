@@ -66,22 +66,38 @@ const MusicMinistryPage = () => {
               <div className="mb-4">
                 <h5 className="text-secondary mb-3">Mandate</h5>
                 <p>
-                  To lead the congregation in authentic, biblical, and excellent worship through music.
+                  To lead the congregation in authentic, biblical, and excellent
+                  worship through music.
                 </p>
               </div>
               <div className="mb-4">
                 <h5 className="text-secondary mb-3">Our Mission</h5>
                 <p className="lead">
-                  The Music Ministry of MUTCU is dedicated to leading the Union in vibrant and spiritually uplifting worship experiences. Through multiple music teams including the choir, band, praise and worship leaders, and instrumentalists, we create an atmosphere where members can connect with God and express their faith through song.
+                  The Music Ministry of MUTCU is dedicated to leading the Union
+                  in vibrant and spiritually uplifting worship experiences.
+                  Through multiple music teams including the choir, band, praise
+                  and worship leaders, and instrumentalists, we create an
+                  atmosphere where members can connect with God and express
+                  their faith through song.
                 </p>
               </div>
               <div>
                 <h5 className="text-secondary mb-3">Our Commitment</h5>
                 <ul>
-                  <li>Ensuring theological depth and doctrinal soundness in all worship</li>
-                  <li>Maintaining excellence in musical quality and presentation</li>
-                  <li>Using music as a powerful tool for worship, evangelism, and edification</li>
-                  <li>Developing musicians and worship leaders for ministry impact</li>
+                  <li>
+                    Ensuring theological depth and doctrinal soundness in all
+                    worship
+                  </li>
+                  <li>
+                    Maintaining excellence in musical quality and presentation
+                  </li>
+                  <li>
+                    Using music as a powerful tool for worship, evangelism, and
+                    edification
+                  </li>
+                  <li>
+                    Developing musicians and worship leaders for ministry impact
+                  </li>
                 </ul>
               </div>
             </div>
@@ -103,9 +119,12 @@ const MusicMinistryPage = () => {
       {/* Ensembles */}
       <section className="py-5 bg-light sub-ministries-section">
         <div className="container">
-          <h2 className="section-title text-center">Our Music Sub-Ministries</h2>
+          <h2 className="section-title text-center">
+            Our Music Sub-Ministries
+          </h2>
           <p className="text-center lead mb-5">
-            The Music Ministry comprises four sub-committees, each dedicated to a specific aspect of worship and musical excellence.
+            The Music Ministry comprises four sub-committees, each dedicated to
+            a specific aspect of worship and musical excellence.
           </p>
 
           <div className="row">
@@ -253,21 +272,27 @@ const MusicMinistryPage = () => {
                   <h3 className="card-title mb-0">Outreach &amp; Production</h3>
                 </div>
                 <p>
-                  This ministry supervises music-related responsibilities outside
-                  the main music ministry, handles recording and production of
-                  music content, and nurtures emerging musical talents through
-                  auditions and mentorship.
+                  This ministry supervises music-related responsibilities
+                  outside the main music ministry, handles recording and
+                  production of music content, and nurtures emerging musical
+                  talents through auditions and mentorship.
                 </p>
                 <h6>Activities:</h6>
                 <ul>
-                  <li>Conducting singing auditions to identify and train talent.</li>
-                  <li>Recording and producing music content in collaboration with Technical &amp; Media Ministry.</li>
+                  <li>
+                    Conducting singing auditions to identify and train talent.
+                  </li>
+                  <li>
+                    Recording and producing music content in collaboration with
+                    Technical &amp; Media Ministry.
+                  </li>
                   <li>Mentoring aspiring musicians in the Union.</li>
                   <li>Managing music-related outreach activities.</li>
                 </ul>
                 <p className="mb-0 text-muted">
                   <i className="fas fa-clock me-2" />
-                  <b>Meeting Times:</b> As scheduled with Technical &amp; Media Ministry.
+                  <b>Meeting Times:</b> As scheduled with Technical &amp; Media
+                  Ministry.
                 </p>
               </div>
             </div>
@@ -349,31 +374,56 @@ const MusicMinistryPage = () => {
         <div className="container text-center" data-aos="zoom-in">
           <h2 className="section-title text-white">Key Responsibilities</h2>
           <p className="lead mb-4 text-white-50">
-            The Music Coordinator provides executive oversight and spiritual direction for all music ministry activities.
+            The Music Coordinator provides executive oversight and spiritual
+            direction for all music ministry activities.
           </p>
           <div className="row justify-content-center">
             <div className="col-md-6 col-lg-4 mb-4">
               <div className="leadership-card bg-white text-dark rounded-3 shadow-sm p-4 h-100">
-                <h5 className="card-title"><i className="fas fa-check-circle text-success me-2"></i>Spiritual Direction</h5>
-                <p>Providing spiritual and artistic leadership for the entire music ministry</p>
+                <h5 className="card-title">
+                  <i className="fas fa-check-circle text-success me-2"></i>
+                  Spiritual Direction
+                </h5>
+                <p>
+                  Providing spiritual and artistic leadership for the entire
+                  music ministry
+                </p>
               </div>
             </div>
             <div className="col-md-6 col-lg-4 mb-4">
               <div className="leadership-card bg-white text-dark rounded-3 shadow-sm p-4 h-100">
-                <h5 className="card-title"><i className="fas fa-check-circle text-success me-2"></i>Quality Assurance</h5>
-                <p>Ensuring overall quality, theological depth, and doctrinal soundness of worship</p>
+                <h5 className="card-title">
+                  <i className="fas fa-check-circle text-success me-2"></i>
+                  Quality Assurance
+                </h5>
+                <p>
+                  Ensuring overall quality, theological depth, and doctrinal
+                  soundness of worship
+                </p>
               </div>
             </div>
             <div className="col-md-6 col-lg-4 mb-4">
               <div className="leadership-card bg-white text-dark rounded-3 shadow-sm p-4 h-100">
-                <h5 className="card-title"><i className="fas fa-check-circle text-success me-2"></i>Team Mentoring</h5>
-                <p>Mentoring and supporting music team leaders for effective ministry</p>
+                <h5 className="card-title">
+                  <i className="fas fa-check-circle text-success me-2"></i>Team
+                  Mentoring
+                </h5>
+                <p>
+                  Mentoring and supporting music team leaders for effective
+                  ministry
+                </p>
               </div>
             </div>
             <div className="col-md-6 col-lg-4 mb-4">
               <div className="leadership-card bg-white text-dark rounded-3 shadow-sm p-4 h-100">
-                <h5 className="card-title"><i className="fas fa-check-circle text-success me-2"></i>Coordination</h5>
-                <p>Coordinating the overall music schedule and serving as the link to Executive Council</p>
+                <h5 className="card-title">
+                  <i className="fas fa-check-circle text-success me-2"></i>
+                  Coordination
+                </h5>
+                <p>
+                  Coordinating the overall music schedule and serving as the
+                  link to Executive Council
+                </p>
               </div>
             </div>
           </div>
@@ -385,7 +435,9 @@ const MusicMinistryPage = () => {
         <div className="container text-center" data-aos="zoom-in">
           <h2 className="section-title text-white">Join Our Music Ministry!</h2>
           <p className="lead mb-4 text-white-50">
-            If you have a passion for worship through music and want to lead others in encountering God, we invite you to join one of our music sub-ministries.
+            If you have a passion for worship through music and want to lead
+            others in encountering God, we invite you to join one of our music
+            sub-ministries.
           </p>
           <div className="row justify-content-center">
             <div className="col-md-8 text-start">
@@ -437,16 +489,21 @@ const MusicMinistryPage = () => {
                       <option value="" disabled>
                         Select an area
                       </option>
-                      <option value="praise-worship">Praise &amp; Worship Ministry</option>
+                      <option value="praise-worship">
+                        Praise &amp; Worship Ministry
+                      </option>
                       <option value="choir">Choir Ministry</option>
                       <option value="band">Band Ministry</option>
-                      <option value="outreach">Outreach &amp; Production Ministry</option>
+                      <option value="outreach">
+                        Outreach &amp; Production Ministry
+                      </option>
                       <option value="general">General Interest</option>
                     </select>
                   </div>
                   <div className="mb-3">
                     <label htmlFor="joinMessage" className="form-label">
-                      Tell us about your musical experience or passion (Optional)
+                      Tell us about your musical experience or passion
+                      (Optional)
                     </label>
                     <textarea
                       className="form-control"

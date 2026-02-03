@@ -59,17 +59,24 @@ const CreativeArtsMinistryPage = () => {
               data-aos="fade-right"
               data-aos-delay="100"
             >
-              <h2 className="section-title text-start">About the Creative Arts Ministry</h2>
+              <h2 className="section-title text-start">
+                About the Creative Arts Ministry
+              </h2>
               <div className="mb-4">
                 <h5 className="text-secondary mb-3">Mandate</h5>
                 <p>
-                  To use diverse artistic gifts to glorify God, edify the church, and communicate the gospel in a compelling way.
+                  To use diverse artistic gifts to glorify God, edify the
+                  church, and communicate the gospel in a compelling way.
                 </p>
               </div>
               <div className="mb-4">
                 <h5 className="text-secondary mb-3">Our Mission</h5>
                 <p className="lead">
-                  The Creative Arts Ministry uses drama, dance, spoken word, poetry, fine arts, and modeling to express faith and reach our community with the Gospel. We believe that artistic expression is a powerful medium for worship, evangelism, and spiritual growth.
+                  The Creative Arts Ministry uses drama, dance, spoken word,
+                  poetry, fine arts, and modeling to express faith and reach our
+                  community with the Gospel. We believe that artistic expression
+                  is a powerful medium for worship, evangelism, and spiritual
+                  growth.
                 </p>
               </div>
               <div>
@@ -100,9 +107,12 @@ const CreativeArtsMinistryPage = () => {
 
       <section className="py-5 bg-light sub-ministries-section">
         <div className="container">
-          <h2 className="section-title text-center">Our Creative Arts Sub-Ministries</h2>
+          <h2 className="section-title text-center">
+            Our Creative Arts Sub-Ministries
+          </h2>
           <p className="text-center lead mb-5">
-            The Creative Arts Ministry comprises four sub-committees, each dedicated to a unique form of artistic expression and worship.
+            The Creative Arts Ministry comprises four sub-committees, each
+            dedicated to a unique form of artistic expression and worship.
           </p>
 
           <div className="row">
@@ -133,11 +143,14 @@ const CreativeArtsMinistryPage = () => {
                 <ul>
                   <li>Scriptwriting and directing original dramas.</li>
                   <li>Character development and acting skill training.</li>
-                  <li>Performing during services, events, and special occasions.</li>
+                  <li>
+                    Performing during services, events, and special occasions.
+                  </li>
                 </ul>
                 <p className="mb-0 text-muted">
                   <i className="fas fa-clock me-2" />
-                  <b>Meeting Times:</b> Wednesdays and Thursdays 7.00pm to 9.00pm.
+                  <b>Meeting Times:</b> Wednesdays and Thursdays 7.00pm to
+                  9.00pm.
                 </p>
               </div>
             </div>
@@ -173,7 +186,8 @@ const CreativeArtsMinistryPage = () => {
                 </ul>
                 <p className="mb-0 text-muted">
                   <i className="fas fa-clock me-2" />
-                  <b>Meeting Times:</b> Wednesdays 7.00pm to 9.00pm and Saturdays 4pm to 6pm.
+                  <b>Meeting Times:</b> Wednesdays 7.00pm to 9.00pm and
+                  Saturdays 4pm to 6pm.
                 </p>
               </div>
             </div>
@@ -197,9 +211,9 @@ const CreativeArtsMinistryPage = () => {
                   <h3 className="card-title mb-0">SPARCS Ministry</h3>
                 </div>
                 <p>
-                  Spoken Word, Poetry, Arts &amp; Creative Skits - expresses faith
-                  through creative writing, poetry, and fine arts presentations
-                  that inspire and challenge audiences.
+                  Spoken Word, Poetry, Arts &amp; Creative Skits - expresses
+                  faith through creative writing, poetry, and fine arts
+                  presentations that inspire and challenge audiences.
                 </p>
                 <h6>Activities:</h6>
                 <ul>
@@ -260,8 +274,8 @@ const CreativeArtsMinistryPage = () => {
             Featured Events &amp; Highlights
           </h2>
           <p className="text-center lead mb-5 text-white-50">
-            The Creative Arts Ministry plays a vital role in some of MUTCU&apos;s most
-            anticipated events and transformation initiatives.
+            The Creative Arts Ministry plays a vital role in some of
+            MUTCU&apos;s most anticipated events and transformation initiatives.
           </p>
           <div className="row justify-content-center">
             <div
@@ -277,7 +291,8 @@ const CreativeArtsMinistryPage = () => {
                   presenting drama, dance, SPARCS, and modeling performances.
                 </p>
                 <p className="mb-0 text-muted">
-                  <i className="fas fa-calendar-alt me-2" /> Major event showcasing all talents.
+                  <i className="fas fa-calendar-alt me-2" /> Major event
+                  showcasing all talents.
                 </p>
               </div>
             </div>
@@ -291,10 +306,12 @@ const CreativeArtsMinistryPage = () => {
                 <h4 className="card-title">Transformation Campaigns</h4>
                 <p>
                   Social action and advocacy initiatives led by Models Ministry,
-                  using creative expression to promote Christian values and societal change.
+                  using creative expression to promote Christian values and
+                  societal change.
                 </p>
                 <p className="mb-0 text-muted">
-                  <i className="fas fa-calendar-alt me-2" /> Throughout the year.
+                  <i className="fas fa-calendar-alt me-2" /> Throughout the
+                  year.
                 </p>
               </div>
             </div>
@@ -308,7 +325,8 @@ const CreativeArtsMinistryPage = () => {
                 <h4 className="card-title">Christmas Cantata</h4>
                 <p>
                   A collaborative worship experience with the Music Ministry,
-                  celebrating the birth of Jesus through creative drama and artistic expression.
+                  celebrating the birth of Jesus through creative drama and
+                  artistic expression.
                 </p>
                 <p className="mb-0 text-muted">
                   <i className="fas fa-calendar-alt me-2" /> December annually.
@@ -330,7 +348,9 @@ const CreativeArtsMinistryPage = () => {
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            The Creative Arts Ministry is structured with dedicated coordinators for each sub-ministry to ensure excellence and biblically sound presentations.
+            The Creative Arts Ministry is structured with dedicated coordinators
+            for each sub-ministry to ensure excellence and biblically sound
+            presentations.
           </p>
           <div className="row">
             <div
@@ -342,7 +362,8 @@ const CreativeArtsMinistryPage = () => {
                 <i className="fas fa-theater-masks leadership-icon mb-3" />
                 <h5 className="card-title">Drama Coordinator</h5>
                 <p className="small text-muted">
-                  Directs drama productions, oversees scriptwriting, and develops acting skills
+                  Directs drama productions, oversees scriptwriting, and
+                  develops acting skills
                 </p>
               </div>
             </div>
@@ -355,7 +376,8 @@ const CreativeArtsMinistryPage = () => {
                 <i className="fas fa-person-dancing leadership-icon mb-3" />
                 <h5 className="card-title">Dance Coordinator</h5>
                 <p className="small text-muted">
-                  Leads choreography, ensures theologically appropriate movements, mentors dancers
+                  Leads choreography, ensures theologically appropriate
+                  movements, mentors dancers
                 </p>
               </div>
             </div>
@@ -381,7 +403,8 @@ const CreativeArtsMinistryPage = () => {
                 <i className="fas fa-crown leadership-icon mb-3" />
                 <h5 className="card-title">Models Ministry</h5>
                 <p className="small text-muted">
-                  Mr. &amp; Miss MUTCU serve as ambassadors and transformation campaign leaders
+                  Mr. &amp; Miss MUTCU serve as ambassadors and transformation
+                  campaign leaders
                 </p>
               </div>
             </div>
@@ -392,7 +415,10 @@ const CreativeArtsMinistryPage = () => {
       {/* Join CTA */}
       <section className="py-5 cta-section text-white">
         <div className="container">
-          <h2 className="section-title text-center text-white mb-5" data-aos="fade-up">
+          <h2
+            className="section-title text-center text-white mb-5"
+            data-aos="fade-up"
+          >
             Join the Creative Arts Ministry
           </h2>
           <div className="row justify-content-center">
@@ -456,9 +482,13 @@ const CreativeArtsMinistryPage = () => {
               </form>
 
               {showSuccess && (
-                <div className="alert alert-success alert-dismissible fade show" role="alert">
+                <div
+                  className="alert alert-success alert-dismissible fade show"
+                  role="alert"
+                >
                   <i className="fas fa-check-circle me-2" />
-                  <strong>Thank you!</strong> We&apos;ve received your interest. The Creative Arts Ministry team will be in touch soon!
+                  <strong>Thank you!</strong> We&apos;ve received your interest.
+                  The Creative Arts Ministry team will be in touch soon!
                   <button
                     type="button"
                     className="btn-close btn-close-white"
@@ -469,12 +499,19 @@ const CreativeArtsMinistryPage = () => {
 
               <div className="row mt-4 text-center">
                 <div className="col-md-6 mb-2">
-                  <Link to="/ministries" className="btn btn-outline-light btn-lg w-100">
-                    View All Ministries <i className="fas fa-arrow-right ms-2" />
+                  <Link
+                    to="/ministries"
+                    className="btn btn-outline-light btn-lg w-100"
+                  >
+                    View All Ministries{" "}
+                    <i className="fas fa-arrow-right ms-2" />
                   </Link>
                 </div>
                 <div className="col-md-6 mb-2">
-                  <Link to="/events" className="btn btn-outline-light btn-lg w-100">
+                  <Link
+                    to="/events"
+                    className="btn btn-outline-light btn-lg w-100"
+                  >
                     View Events <i className="fas fa-calendar ms-2" />
                   </Link>
                 </div>

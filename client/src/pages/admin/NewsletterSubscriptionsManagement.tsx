@@ -77,28 +77,28 @@ const NewsletterSubscriptionsManagement = () => {
   );
 
   // Export functions
-  const exportSubscriptions = async (format: 'csv' | 'word' | 'pdf') => {
+  const exportSubscriptions = async (format: "csv" | "word" | "pdf") => {
     try {
       const exportData = exportHelper.prepareExportData(
         subscriptions,
         {
-          email: 'Email',
-          isActive: 'Status',
-          createdAt: 'Subscribed Date',
-          updatedAt: 'Updated Date'
+          email: "Email",
+          isActive: "Status",
+          createdAt: "Subscribed Date",
+          updatedAt: "Updated Date",
         },
-        'Newsletter Subscriptions Export',
-        `Export of all newsletter subscribers (${subscriptions.length} total)`
+        "Newsletter Subscriptions Export",
+        `Export of all newsletter subscribers (${subscriptions.length} total)`,
       );
 
       await exportHelper.export(exportData, format, {
         filename: `newsletter-subscriptions`,
         includeLogo: true,
-        includeTimestamp: true
+        includeTimestamp: true,
       });
     } catch (error) {
-      setError('Failed to export subscriptions');
-      console.error('Export error:', error);
+      setError("Failed to export subscriptions");
+      console.error("Export error:", error);
     }
   };
 
@@ -108,39 +108,42 @@ const NewsletterSubscriptionsManagement = () => {
       const shareableSubscriptions = sharingHelper.prepareShareData(
         subscriptions,
         {
-          itemTitleField: 'email',
-          itemDescriptionField: 'isActive',
-          itemUrlField: 'id',
-          itemType: 'newsletter'
-        }
+          itemTitleField: "email",
+          itemDescriptionField: "isActive",
+          itemUrlField: "id",
+          itemType: "newsletter",
+        },
       );
 
       await sharingHelper.shareBulk(shareableSubscriptions, {
-        bulkTitle: 'Newsletter Subscribers Directory',
-        method: 'native'
+        bulkTitle: "Newsletter Subscribers Directory",
+        method: "native",
       });
     } catch (error) {
-      setError('Failed to share subscriptions');
-      console.error('Share error:', error);
+      setError("Failed to share subscriptions");
+      console.error("Share error:", error);
     }
   };
 
   const shareSingleSubscription = async (subscription: Subscription) => {
     try {
-      await sharingHelper.shareItem({
-        ...subscription,
-        title: subscription.email,
-        description: subscription.isActive ? 'Active' : 'Inactive'
-      }, {
-        formatTemplate: (item) => ({
-          title: item.email,
-          text: `Status: ${item.isActive ? 'Active' : 'Inactive'}`,
-          url: `mailto:${item.email}`
-        })
-      });
+      await sharingHelper.shareItem(
+        {
+          ...subscription,
+          title: subscription.email,
+          description: subscription.isActive ? "Active" : "Inactive",
+        },
+        {
+          formatTemplate: (item) => ({
+            title: item.email,
+            text: `Status: ${item.isActive ? "Active" : "Inactive"}`,
+            url: `mailto:${item.email}`,
+          }),
+        },
+      );
     } catch (error) {
-      setError('Failed to share subscription');
-      console.error('Share error:', error);
+      setError("Failed to share subscription");
+      console.error("Share error:", error);
     }
   };
 
@@ -290,17 +293,26 @@ const NewsletterSubscriptionsManagement = () => {
                     </button>
                     <ul className="dropdown-menu">
                       <li>
-                        <button className="dropdown-item" onClick={() => exportSubscriptions('csv')}>
+                        <button
+                          className="dropdown-item"
+                          onClick={() => exportSubscriptions("csv")}
+                        >
                           <FileText size={16} className="me-2" /> Export as CSV
                         </button>
                       </li>
                       <li>
-                        <button className="dropdown-item" onClick={() => exportSubscriptions('word')}>
+                        <button
+                          className="dropdown-item"
+                          onClick={() => exportSubscriptions("word")}
+                        >
                           <FileText size={16} className="me-2" /> Export as Word
                         </button>
                       </li>
                       <li>
-                        <button className="dropdown-item" onClick={() => exportSubscriptions('pdf')}>
+                        <button
+                          className="dropdown-item"
+                          onClick={() => exportSubscriptions("pdf")}
+                        >
                           <FileText size={16} className="me-2" /> Export as PDF
                         </button>
                       </li>
@@ -385,9 +397,11 @@ const NewsletterSubscriptionsManagement = () => {
                       </td>
                       <td className="px-4 text-end">
                         <div className="d-flex justify-content-end gap-2">
-                          <button 
+                          <button
                             className="btn btn-sm btn-light rounded-pill px-3 fw-bold"
-                            onClick={() => shareSingleSubscription(subscription)}
+                            onClick={() =>
+                              shareSingleSubscription(subscription)
+                            }
                             title="Share this subscription"
                           >
                             <Share2 size={14} className="me-1" /> Share

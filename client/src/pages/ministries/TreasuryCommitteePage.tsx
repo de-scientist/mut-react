@@ -27,9 +27,9 @@ const TreasuryCommitteePage = () => {
                 accountability for all union operations.
               </p>
               <p className="text-muted">
-                We work closely with leadership and relevant committees to ensure
-                finances support ministry, welfare, missions, and union programs
-                responsibly.
+                We work closely with leadership and relevant committees to
+                ensure finances support ministry, welfare, missions, and union
+                programs responsibly.
               </p>
               <Link to="/contact" className="btn btn-primary me-3">
                 Contact Treasury <i className="fas fa-envelope ms-2" />

@@ -140,52 +140,49 @@ const UsersManagement = () => {
   };
 
   // Export functions
-  const exportUsers = async (format: 'csv' | 'word' | 'pdf') => {
+  const exportUsers = async (format: "csv" | "word" | "pdf") => {
     try {
       const exportData = exportHelper.prepareExportData(
         users,
         {
-          email: 'Email',
-          name: 'Name',
-          role: 'Role',
-          isActive: 'Status',
-          createdAt: 'Joined Date'
+          email: "Email",
+          name: "Name",
+          role: "Role",
+          isActive: "Status",
+          createdAt: "Joined Date",
         },
-        'Users Export',
-        `Export of all users (${users.length} total)`
+        "Users Export",
+        `Export of all users (${users.length} total)`,
       );
 
       await exportHelper.export(exportData, format, {
         filename: `users`,
         includeLogo: true,
-        includeTimestamp: true
+        includeTimestamp: true,
       });
     } catch (error) {
-      setError('Failed to export users');
-      console.error('Export error:', error);
+      setError("Failed to export users");
+      console.error("Export error:", error);
     }
   };
 
   // Sharing functions
   const shareAllUsers = async () => {
     try {
-      const shareableUsers = sharingHelper.prepareShareData(
-        users,
-        {
-          // itemTitleField: 'email',
-          itemDescriptionField: 'name',
-          itemUrlField: 'id',
-          // itemType: 'users'
-        }
-      );
+      const shareableUsers = sharingHelper.prepareShareData(users, {
+        // itemTitleField: 'email',
+        itemDescriptionField: "name",
+        itemUrlField: "id",
+        // itemType: 'users'
+      });
 
       await sharingHelper.shareBulk(shareableUsers, {
-        bulkTitle: 'Users Directory',
-        method: 'native'
+        bulkTitle: "Users Directory",
+        method: "native",
       });
     } catch (error) {
-      setError('Failed to share users');
-      console.error('Share error:', error);
+      setError("Failed to share users");
+      console.error("Share error:", error);
     }
   };
 
@@ -194,13 +191,13 @@ const UsersManagement = () => {
       await sharingHelper.shareItem(user, {
         formatTemplate: (item) => ({
           title: item.name || item.email,
-          text: `${item.role} - ${item.isActive ? 'Active' : 'Inactive'}`,
-          url: `mailto:${item.email}`
-        })
+          text: `${item.role} - ${item.isActive ? "Active" : "Inactive"}`,
+          url: `mailto:${item.email}`,
+        }),
       });
     } catch (error) {
-      setError('Failed to share user');
-      console.error('Share error:', error);
+      setError("Failed to share user");
+      console.error("Share error:", error);
     }
   };
 
@@ -243,7 +240,7 @@ const UsersManagement = () => {
           >
             <ArrowLeft size={18} /> Dashboard
           </button>
-          
+
           {/* Export Dropdown */}
           <div className="dropdown">
             <button
@@ -256,17 +253,26 @@ const UsersManagement = () => {
             </button>
             <ul className="dropdown-menu">
               <li>
-                <button className="dropdown-item" onClick={() => exportUsers('csv')}>
+                <button
+                  className="dropdown-item"
+                  onClick={() => exportUsers("csv")}
+                >
                   Export as CSV
                 </button>
               </li>
               <li>
-                <button className="dropdown-item" onClick={() => exportUsers('word')}>
+                <button
+                  className="dropdown-item"
+                  onClick={() => exportUsers("word")}
+                >
                   Export as Word
                 </button>
               </li>
               <li>
-                <button className="dropdown-item" onClick={() => exportUsers('pdf')}>
+                <button
+                  className="dropdown-item"
+                  onClick={() => exportUsers("pdf")}
+                >
                   Export as PDF
                 </button>
               </li>

@@ -63,19 +63,29 @@ const WelfareCommitteePage = () => {
               <div className="mb-4">
                 <h5 className="text-secondary mb-3">Mandate</h5>
                 <p>
-                  To demonstrate Christ&apos;s love by providing practical, emotional, and spiritual support to members in need.
+                  To demonstrate Christ&apos;s love by providing practical,
+                  emotional, and spiritual support to members in need.
                 </p>
               </div>
               <div className="mb-4">
                 <h5 className="text-secondary mb-3">Our Mission</h5>
                 <p className="lead">
-                  The Welfare Committee actively embodies the Union&apos;s commitment to community and mutual support. We are dedicated to assisting members facing various difficulties and providing tangible expressions of God&apos;s love and solidarity. Through fundraising, need assessment, and organized support initiatives, we ensure that no member feels left behind, fostering a truly supportive family environment within MUTCU.
+                  The Welfare Committee actively embodies the Union&apos;s
+                  commitment to community and mutual support. We are dedicated
+                  to assisting members facing various difficulties and providing
+                  tangible expressions of God&apos;s love and solidarity.
+                  Through fundraising, need assessment, and organized support
+                  initiatives, we ensure that no member feels left behind,
+                  fostering a truly supportive family environment within MUTCU.
                 </p>
               </div>
               <div>
                 <h5 className="text-secondary mb-3">Our Commitment</h5>
                 <ul>
-                  <li>Swift identification and compassionate response to welfare needs</li>
+                  <li>
+                    Swift identification and compassionate response to welfare
+                    needs
+                  </li>
                   <li>Confidential handling of sensitive member situations</li>
                   <li>Holistic support—financial, emotional, and spiritual</li>
                   <li>Building a culture of mutual care and accountability</li>
@@ -104,8 +114,13 @@ const WelfareCommitteePage = () => {
           <h2 className="section-title text-center" data-aos="fade-up">
             Our Support Programs &amp; Initiatives
           </h2>
-          <p className="text-center lead mb-5" data-aos="fade-up" data-aos-delay="100">
-            The Welfare Committee provides comprehensive support across multiple dimensions of member wellbeing.
+          <p
+            className="text-center lead mb-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            The Welfare Committee provides comprehensive support across multiple
+            dimensions of member wellbeing.
           </p>
 
           <div className="row">
@@ -121,14 +136,22 @@ const WelfareCommitteePage = () => {
                   <h3 className="card-title mb-0">Financial Support</h3>
                 </div>
                 <p>
-                  MUTCU mobilizes for financial support by engaging students in community fundraising initiatives to assist members facing critical financial needs. The Union provides direct support according to set policies, supplementing efforts by students to raise funds for tuition fees, emergency situations, and medical expenses.
+                  MUTCU mobilizes for financial support by engaging students in
+                  community fundraising initiatives to assist members facing
+                  critical financial needs. The Union provides direct support
+                  according to set policies, supplementing efforts by students
+                  to raise funds for tuition fees, emergency situations, and
+                  medical expenses.
                 </p>
                 <h6 className="text-secondary mb-2">Support Services:</h6>
                 <ul>
                   <li>Community-driven fundraising initiatives</li>
                   <li>Student engagement in financial mobilization</li>
                   <li>Direct Union support as per organizational policies</li>
-                  <li>Coordination of tuition fee and emergency financial assistance</li>
+                  <li>
+                    Coordination of tuition fee and emergency financial
+                    assistance
+                  </li>
                 </ul>
               </div>
             </div>
@@ -142,10 +165,14 @@ const WelfareCommitteePage = () => {
               <div className="sub-ministry-card p-4 rounded-3 shadow-sm h-100">
                 <div className="d-flex align-items-center mb-3">
                   <i className="fas fa-heart praise-icon me-3" />
-                  <h3 className="card-title mb-0">Pastoral &amp; Emotional Care</h3>
+                  <h3 className="card-title mb-0">
+                    Pastoral &amp; Emotional Care
+                  </h3>
                 </div>
                 <p>
-                  Offering confidential counsel, emotional support, and spiritual guidance through trained counsellors who understand the unique challenges students face.
+                  Offering confidential counsel, emotional support, and
+                  spiritual guidance through trained counsellors who understand
+                  the unique challenges students face.
                 </p>
                 <h6 className="text-secondary mb-2">Care Services:</h6>
                 <ul>
@@ -166,10 +193,14 @@ const WelfareCommitteePage = () => {
               <div className="sub-ministry-card p-4 rounded-3 shadow-sm h-100">
                 <div className="d-flex align-items-center mb-3">
                   <i className="fas fa-people-group band-icon me-3" />
-                  <h3 className="card-title mb-0">Mentorship &amp; Accountability</h3>
+                  <h3 className="card-title mb-0">
+                    Mentorship &amp; Accountability
+                  </h3>
                 </div>
                 <p>
-                  Pairing members with mentors for personalized support, guidance through difficult seasons, and accountability in spiritual and personal growth.
+                  Pairing members with mentors for personalized support,
+                  guidance through difficult seasons, and accountability in
+                  spiritual and personal growth.
                 </p>
                 <h6 className="text-secondary mb-2">Mentorship Activities:</h6>
                 <ul>
@@ -190,12 +221,18 @@ const WelfareCommitteePage = () => {
               <div className="sub-ministry-card p-4 rounded-3 shadow-sm h-100">
                 <div className="d-flex align-items-center mb-3">
                   <i className="fas fa-handshake instrumentalist-icon me-3" />
-                  <h3 className="card-title mb-0">Ladies&apos; &amp; Gents&apos; Initiatives</h3>
+                  <h3 className="card-title mb-0">
+                    Ladies&apos; &amp; Gents&apos; Initiatives
+                  </h3>
                 </div>
                 <p>
-                  Gender-specific support programs that address unique challenges and needs, with dedicated sub-committees for ladies and gents providing targeted mentorship.
+                  Gender-specific support programs that address unique
+                  challenges and needs, with dedicated sub-committees for ladies
+                  and gents providing targeted mentorship.
                 </p>
-                <h6 className="text-secondary mb-2">Sub-Committee Activities:</h6>
+                <h6 className="text-secondary mb-2">
+                  Sub-Committee Activities:
+                </h6>
                 <ul>
                   <li>Women&apos;s health and wellbeing programs</li>
                   <li>Gents&apos; character and leadership development</li>
@@ -214,43 +251,68 @@ const WelfareCommitteePage = () => {
           <h2 className="section-title text-center" data-aos="fade-up">
             Committee Structure &amp; Leadership Roles
           </h2>
-          <p className="text-center lead mb-5" data-aos="fade-up" data-aos-delay="100">
-            Our dedicated leaders ensure compassionate, efficient, and confidential member support.
+          <p
+            className="text-center lead mb-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            Our dedicated leaders ensure compassionate, efficient, and
+            confidential member support.
           </p>
           <div className="row">
-            <div className="col-md-6 col-lg-3 mb-4" data-aos="zoom-in" data-aos-delay="100">
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
               <div className="leadership-card text-center p-4 rounded-3 shadow-sm h-100">
                 <i className="fas fa-chair leadership-icon mb-3" />
                 <h5 className="card-title">Welfare Coordinator</h5>
                 <p className="small text-muted">
-                  Oversees all welfare operations, identifies needs, manages support delivery with utmost confidentiality
+                  Oversees all welfare operations, identifies needs, manages
+                  support delivery with utmost confidentiality
                 </p>
               </div>
             </div>
-            <div className="col-md-6 col-lg-3 mb-4" data-aos="zoom-in" data-aos-delay="200">
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="200"
+            >
               <div className="leadership-card text-center p-4 rounded-3 shadow-sm h-100">
                 <i className="fas fa-heart leadership-icon mb-3" />
                 <h5 className="card-title">Counselling Coordinators</h5>
                 <p className="small text-muted">
-                  Provide pastoral care, emotional support, and guide members to professional services when needed
+                  Provide pastoral care, emotional support, and guide members to
+                  professional services when needed
                 </p>
               </div>
             </div>
-            <div className="col-md-6 col-lg-3 mb-4" data-aos="zoom-in" data-aos-delay="300">
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="300"
+            >
               <div className="leadership-card text-center p-4 rounded-3 shadow-sm h-100">
                 <i className="fas fa-users leadership-icon mb-3" />
                 <h5 className="card-title">Ladies&apos; Sub-Committee Lead</h5>
                 <p className="small text-muted">
-                  Coordinates women-specific support, mentorship, and community-focused initiatives
+                  Coordinates women-specific support, mentorship, and
+                  community-focused initiatives
                 </p>
               </div>
             </div>
-            <div className="col-md-6 col-lg-3 mb-4" data-aos="zoom-in" data-aos-delay="400">
+            <div
+              className="col-md-6 col-lg-3 mb-4"
+              data-aos="zoom-in"
+              data-aos-delay="400"
+            >
               <div className="leadership-card text-center p-4 rounded-3 shadow-sm h-100">
                 <i className="fas fa-people-group leadership-icon mb-3" />
                 <h5 className="card-title">Gents&apos; Sub-Committee Lead</h5>
                 <p className="small text-muted">
-                  Oversees male mentorship, character development, and brotherhood initiatives
+                  Oversees male mentorship, character development, and
+                  brotherhood initiatives
                 </p>
               </div>
             </div>
@@ -261,7 +323,10 @@ const WelfareCommitteePage = () => {
       {/* Join CTA */}
       <section className="py-5 cta-section text-white">
         <div className="container">
-          <h2 className="section-title text-center text-white mb-5" data-aos="fade-up">
+          <h2
+            className="section-title text-center text-white mb-5"
+            data-aos="fade-up"
+          >
             Get Involved in the Welfare Ministry
           </h2>
           <div className="row justify-content-center">
@@ -295,10 +360,18 @@ const WelfareCommitteePage = () => {
                       onChange={(e) => setAreaOfInterest(e.target.value)}
                     >
                       <option value="">Select Your Interest...</option>
-                      <option value="Financial Support">Financial Support Programs</option>
-                      <option value="Pastoral Care">Pastoral &amp; Emotional Care</option>
-                      <option value="Mentorship">Mentorship &amp; Counselling</option>
-                      <option value="Fundraising">Fundraising &amp; Volunteering</option>
+                      <option value="Financial Support">
+                        Financial Support Programs
+                      </option>
+                      <option value="Pastoral Care">
+                        Pastoral &amp; Emotional Care
+                      </option>
+                      <option value="Mentorship">
+                        Mentorship &amp; Counselling
+                      </option>
+                      <option value="Fundraising">
+                        Fundraising &amp; Volunteering
+                      </option>
                       <option value="General Interest">General Interest</option>
                     </select>
                   </div>
@@ -325,9 +398,13 @@ const WelfareCommitteePage = () => {
               </form>
 
               {showSuccess && (
-                <div className="alert alert-success alert-dismissible fade show" role="alert">
+                <div
+                  className="alert alert-success alert-dismissible fade show"
+                  role="alert"
+                >
                   <i className="fas fa-check-circle me-2" />
-                  <strong>Thank you!</strong> We&apos;ve received your interest. The Welfare Committee will reach out soon!
+                  <strong>Thank you!</strong> We&apos;ve received your interest.
+                  The Welfare Committee will reach out soon!
                   <button
                     type="button"
                     className="btn-close btn-close-white"
@@ -338,13 +415,21 @@ const WelfareCommitteePage = () => {
 
               <div className="row mt-4 text-center">
                 <div className="col-md-6 mb-2">
-                  <Link to="/ministries" className="btn btn-outline-light btn-lg w-100">
-                    View All Ministries <i className="fas fa-arrow-right ms-2" />
+                  <Link
+                    to="/ministries"
+                    className="btn btn-outline-light btn-lg w-100"
+                  >
+                    View All Ministries{" "}
+                    <i className="fas fa-arrow-right ms-2" />
                   </Link>
                 </div>
                 <div className="col-md-6 mb-2">
-                  <Link to="/contact" className="btn btn-outline-light btn-lg w-100">
-                    Report a Need <i className="fas fa-hand-holding-heart ms-2" />
+                  <Link
+                    to="/contact"
+                    className="btn btn-outline-light btn-lg w-100"
+                  >
+                    Report a Need{" "}
+                    <i className="fas fa-hand-holding-heart ms-2" />
                   </Link>
                 </div>
               </div>
