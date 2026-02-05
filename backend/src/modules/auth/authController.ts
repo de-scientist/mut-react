@@ -100,8 +100,12 @@ export const login = async (req: Request, res: Response) => {
       .limit(1);
     const user = usersArr[0];
 
-    if (!user || !user.isActive) {
+    if (!user) {
       return errorResponse(res, "Invalid credentials", 401);
+    }
+
+    if (!user.isActive) {
+      return errorResponse(res, "User account is inactive", 403);
     }
 
     // Verify password
@@ -111,7 +115,53 @@ export const login = async (req: Request, res: Response) => {
       return errorResponse(res, "Invalid credentials", 401);
     }
 
-    // Generate token
+    // NEW: Get admin access for this email
+    const { getAdminAccess } = await import("../../config/adminMapping.js");
+    const adminAccess = getAdminAccess(email);
+
+    // If email is in admin mapping, update user role
+    if (adminAccess) {
+      await db
+        .update(users)
+        .set({
+          role: adminAccess.role === "SUPER_ADMIN" ? "SUPER_ADMIN" : "ADMIN",
+          adminRole: adminAccess.role,
+          privileges: JSON.stringify(adminAccess.permissions),
+          updatedAt: new Date(),
+        })
+        .where(eq(users.id, user.id));
+
+      // Refresh user data
+      const updatedUsersArr = await db
+        .select()
+        .from(users)
+        .where(eq(users.id, user.id))
+        .limit(1);
+      const updatedUser = updatedUsersArr[0];
+
+      // Generate token
+      const token = jwt.sign({ userId: updatedUser.id }, env.jwtSecret, {
+        expiresIn: env.jwtExpire,
+      });
+
+      return successResponse(
+        res,
+        {
+          user: {
+            id: updatedUser.id,
+            email: updatedUser.email,
+            name: updatedUser.name,
+            role: updatedUser.role,
+            adminRole: updatedUser.adminRole,
+            privileges: updatedUser.privileges,
+          },
+          token,
+        },
+        "Login successful",
+      );
+    }
+
+    // Regular user login
     const token = jwt.sign({ userId: user.id }, env.jwtSecret, {
       expiresIn: env.jwtExpire,
     });
