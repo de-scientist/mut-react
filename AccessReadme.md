@@ -12,19 +12,27 @@ This guide explains how to implement role-based and email-specific access contro
 
 Your application already has:
 
-1. **User Model** (in `prisma/schema.prisma`):
+1. **User Table** (in `backend/src/db/schema.ts`):
    - `email`: Unique email identifier
+   - `password`: Hashed password
    - `role`: USER, ADMIN, or SUPER_ADMIN
    - `adminRole`: Additional admin role field (SUPER_ADMIN, ADMIN, MODERATOR)
    - `privileges`: JSON string for granular permissions
+   - `accessLevel`: Specific access level descriptor
 
-2. **Auth Middleware** (in `src/middlewares/auth.ts`):
-   - `authenticate`: Verifies JWT tokens
+2. **Database**: PostgreSQL with Drizzle ORM (not Prisma)
+   - Config: `backend/src/config/drizzle.ts`
+   - Schema: `backend/src/db/schema.ts`
+   - Migrations: `backend/drizzle/`
+   - Drizzle Kit Config: `backend/drizzle.config.ts`
+
+3. **Auth Middleware** (in `backend/src/middlewares/auth.ts`):
+   - `authenticate`: Verifies JWT tokens using Drizzle queries
    - `requireAdmin`: Checks if user is ADMIN or SUPER_ADMIN
    - `requireSuperAdmin`: Checks if user is SUPER_ADMIN only
 
-3. **Auth Controller** (in `src/modules/auth/authController.ts`):
-   - Handles login/registration
+4. **Auth Controller** (in `backend/src/modules/auth/authController.ts`):
+   - Handles login/registration using Drizzle
    - Issues JWT tokens after successful authentication
 
 ---
@@ -33,48 +41,38 @@ Your application already has:
 
 ### Step 1: Update Database Schema (Add Admin Permissions)
 
-Update your `prisma/schema.prisma` to include a structured permissions system:
+Update your `backend/src/db/schema.ts` to include admin fields in the users table:
 
-```prisma
-model User {
-  id            String   @id @default(uuid())
-  email         String   @unique
-  password      String
-  name          String?
-  role          UserRole @default(USER)
-  adminRole     String?
-  privileges    String?  // JSON string of permissions
-  accessLevel   String?  // e.g., "MEMBERS", "FINANCE", "COMMUNICATIONS", "MEDIA"
-  isActive      Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+```typescript
+import {
+  pgTable,
+  text,
+  varchar,
+  uuid,
+  timestamp,
+  boolean,
+} from "drizzle-orm/pg-core";
 
-  @@map("users")
-}
-
-enum AdminPermission {
-  VIEW_MEMBERS
-  EDIT_MEMBERS
-  VIEW_FINANCE
-  EDIT_FINANCE
-  VIEW_COMMUNICATIONS
-  EDIT_COMMUNICATIONS
-  VIEW_MEDIA
-  EDIT_MEDIA
-  VIEW_EVENTS
-  EDIT_EVENTS
-  VIEW_PRAYERS
-  EDIT_PRAYERS
-  MANAGE_USERS
-  MANAGE_ADMINS
-}
+export const users = pgTable("users", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  email: text("email").notNull().unique(),
+  password: text("password").notNull(),
+  name: text("name"),
+  role: text("role").default("USER"), // USER | ADMIN | SUPER_ADMIN
+  adminRole: text("adminRole"), // SUPER_ADMIN | ADMIN | MODERATOR
+  privileges: text("privileges"), // JSON string of permissions
+  accessLevel: text("accessLevel"), // e.g., "MEMBERS", "FINANCE", "COMMUNICATIONS", "MEDIA"
+  isActive: boolean("isActive").default(true),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
 ```
 
-**Run migration:**
+**Create and run migration:**
 ```bash
 cd backend
-npx prisma migrate dev --name add_access_level
-npx prisma generate
+npx drizzle-kit generate  # Generate migration
+npx drizzle-kit migrate   # Run migration
 ```
 
 ---
@@ -165,40 +163,103 @@ export const canAccessPage = (email: string, page: string): boolean => {
 
 ### Step 3: Create Custom Authorization Middleware
 
-Update your `backend/src/middlewares/auth.ts` to add a new middleware:
+Update your `backend/src/middlewares/auth.ts` to add new middleware functions for page and permission-based access using Drizzle:
 
 ```typescript
-// Add this function to auth.ts
+import { eq } from "drizzle-orm";
+import db from "../config/drizzle.js";
+import { users } from "../db/schema.js";
+import type { Request, Response, NextFunction } from "express";
+
+interface AuthRequest extends Request {
+  user?: {
+    id: string;
+    email: string;
+    name: string | null;
+    role: string;
+    adminRole?: string;
+    privileges?: string;
+    isActive: boolean;
+  };
+}
+
+/**
+ * Middleware to verify JWT token (existing)
+ */
+export const authenticate = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const token = req.headers.authorization?.replace("Bearer ", "");
+
+    if (!token) {
+      return res.status(401).json({ error: "Authentication required" });
+    }
+
+    const decoded = jwt.verify(token, env.jwtSecret) as { userId: string };
+    const usersArr = await db
+      .select()
+      .from(users)
+      .where(eq(users.id, decoded.userId))
+      .limit(1);
+    const user = usersArr[0];
+
+    if (!user || !user.isActive) {
+      return res.status(401).json({ error: "Invalid or inactive user" });
+    }
+
+    req.user = user;
+    next();
+  } catch (error) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
+};
+
+/**
+ * Middleware to check if user is admin (existing)
+ */
+export const requireAdmin = (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+) => {
+  if (req.user?.role !== "ADMIN" && req.user?.role !== "SUPER_ADMIN") {
+    return res.status(403).json({ error: "Admin access required" });
+  }
+  next();
+};
 
 /**
  * Middleware to check if user can access a specific admin page
  * Usage: router.get("/members", requireAdminPage("AdminMembersPage"), controller)
  */
 export const requireAdminPage = (requiredPage: string) => {
-  return (req: AuthRequest, res: Response, next: NextFunction) => {
-    // First check if user is authenticated
-    if (!req.user) {
-      return res.status(401).json({ error: "Authentication required" });
-    }
+  return async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      // First check if user is authenticated
+      if (!req.user) {
+        return res.status(401).json({ error: "Authentication required" });
+      }
 
-    // Check if user is admin or super admin
-    if (req.user.role !== "ADMIN" && req.user.role !== "SUPER_ADMIN") {
-      return res
-        .status(403)
-        .json({ error: "Admin access required" });
-    }
+      // Check if user is admin or super admin
+      if (req.user.role !== "ADMIN" && req.user.role !== "SUPER_ADMIN") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
 
-    // Check if user has access to this specific page
-    const { canAccessPage } = await import("../config/adminMapping.js");
-    if (!canAccessPage(req.user.email, requiredPage)) {
-      return res
-        .status(403)
-        .json({
+      // Check if user has access to this specific page
+      const { canAccessPage } = await import("../config/adminMapping.js");
+      if (!canAccessPage(req.user.email, requiredPage)) {
+        return res.status(403).json({
           error: `You do not have access to ${requiredPage}. Contact your administrator.`,
         });
-    }
+      }
 
-    next();
+      next();
+    } catch (error) {
+      return res.status(403).json({ error: "Access denied" });
+    }
   };
 };
 
@@ -208,22 +269,42 @@ export const requireAdminPage = (requiredPage: string) => {
  */
 export const requirePermission = (requiredPermission: string) => {
   return async (req: AuthRequest, res: Response, next: NextFunction) => {
-    if (!req.user) {
-      return res.status(401).json({ error: "Authentication required" });
+    try {
+      if (!req.user) {
+        return res.status(401).json({ error: "Authentication required" });
+      }
+
+      const { getAdminAccess } = await import("../config/adminMapping.js");
+      const access = getAdminAccess(req.user.email);
+
+      if (!access || !access.permissions.includes(requiredPermission)) {
+        return res.status(403).json({
+          error: `Permission '${requiredPermission}' required. Contact your administrator.`,
+        });
+      }
+
+      next();
+    } catch (error) {
+      return res.status(403).json({ error: "Permission denied" });
     }
-
-    const { getAdminAccess } = await import("../config/adminMapping.js");
-    const access = getAdminAccess(req.user.email);
-
-    if (!access || !access.permissions.includes(requiredPermission)) {
-      return res.status(403).json({
-        error: `Permission '${requiredPermission}' required. Contact your administrator.`,
-      });
-    }
-
-    next();
   };
 };
+
+/**
+ * Middleware to check if user is super admin
+ */
+export const requireSuperAdmin = (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction,
+) => {
+  if (req.user?.role !== "SUPER_ADMIN") {
+    return res.status(403).json({ error: "Super admin access required" });
+  }
+  next();
+};
+
+export type { AuthRequest };
 ```
 
 ---
@@ -307,9 +388,14 @@ export default router;
 
 ### Step 5: Update Login Flow to Assign Permissions
 
-Update `backend/src/modules/auth/authController.ts` to assign permissions on login:
+Update `backend/src/modules/auth/authController.ts` to assign permissions on login using Drizzle:
 
 ```typescript
+import { eq } from "drizzle-orm";
+import db from "../../config/drizzle.js";
+import { users } from "../../db/schema.js";
+import { getAdminAccess } from "../../config/adminMapping.js";
+
 export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
@@ -337,7 +423,6 @@ export const login = async (req: Request, res: Response) => {
     }
 
     // NEW: Get admin access for this email
-    const { getAdminAccess } = await import("../../config/adminMapping.js");
     const adminAccess = getAdminAccess(email);
 
     // If email is in admin mapping, update user role
@@ -348,6 +433,7 @@ export const login = async (req: Request, res: Response) => {
           role: adminAccess.role === "SUPER_ADMIN" ? "SUPER_ADMIN" : "ADMIN",
           adminRole: adminAccess.role,
           privileges: JSON.stringify(adminAccess.permissions),
+          updatedAt: new Date(),
         })
         .where(eq(users.id, user.id));
 
@@ -456,16 +542,17 @@ import AdminMembersPage from "../pages/AdminMembersPage";
 
 You can manually insert admin users or create a seeding script.
 
-Create `backend/prisma/seedAdmin.ts`:
+Create `backend/src/scripts/seedAdmin.ts`:
 
 ```typescript
-import { PrismaClient } from "@prisma/client";
+import db from "../config/drizzle.js";
+import { users } from "../db/schema.js";
 import bcrypt from "bcryptjs";
-
-const prisma = new PrismaClient();
+import { eq } from "drizzle-orm";
+import { ADMIN_EMAIL_MAPPING } from "../config/adminMapping.js";
 
 async function seedAdmins() {
-  const admins = [
+  const adminsToSeed = [
     {
       email: "secretary@mutcu.org",
       password: "secretaryMUTCU",
@@ -496,46 +583,69 @@ async function seedAdmins() {
     },
   ];
 
-  for (const admin of admins) {
-    const hashedPassword = await bcrypt.hash(admin.password, 10);
+  for (const admin of adminsToSeed) {
+    try {
+      // Check if user already exists
+      const existingArr = await db
+        .select()
+        .from(users)
+        .where(eq(users.email, admin.email))
+        .limit(1);
 
-    await prisma.user.upsert({
-      where: { email: admin.email },
-      update: {
-        password: hashedPassword,
-        role: admin.role,
-        adminRole: admin.adminRole,
-        isActive: true,
-      },
-      create: {
-        email: admin.email,
-        password: hashedPassword,
-        name: admin.name,
-        role: admin.role,
-        adminRole: admin.adminRole,
-        isActive: true,
-      },
-    });
+      const hashedPassword = await bcrypt.hash(admin.password, 10);
+      const adminAccess = ADMIN_EMAIL_MAPPING[admin.email];
 
-    console.log(`✓ Seeded ${admin.email}`);
+      if (existingArr.length > 0) {
+        // Update existing user
+        await db
+          .update(users)
+          .set({
+            password: hashedPassword,
+            role: admin.role,
+            adminRole: admin.adminRole,
+            privileges: JSON.stringify(adminAccess?.permissions || []),
+            isActive: true,
+            updatedAt: new Date(),
+          })
+          .where(eq(users.email, admin.email));
+
+        console.log(`✓ Updated ${admin.email}`);
+      } else {
+        // Insert new user
+        await db.insert(users).values({
+          id: crypto.randomUUID(),
+          email: admin.email,
+          password: hashedPassword,
+          name: admin.name,
+          role: admin.role,
+          adminRole: admin.adminRole,
+          privileges: JSON.stringify(adminAccess?.permissions || []),
+          isActive: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+
+        console.log(`✓ Seeded ${admin.email}`);
+      }
+    } catch (error) {
+      console.error(`✗ Error seeding ${admin.email}:`, error);
+    }
   }
 
   console.log("Admin seeding complete!");
+  process.exit(0);
 }
 
-seedAdmins()
-  .catch((error) => {
-    console.error("Seeding error:", error);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+seedAdmins().catch((error) => {
+  console.error("Seeding error:", error);
+  process.exit(1);
+});
 ```
 
 Run it:
 ```bash
-npx ts-node prisma/seedAdmin.ts
+cd backend
+npx ts-node src/scripts/seedAdmin.ts
 ```
 
 ---
@@ -670,3 +780,67 @@ You now have:
 ✅ Seeding script for admin users  
 
 Each admin can now access only their designated pages after logging in with their email and password!
+
+---
+
+## Drizzle ORM Reference
+
+Your backend uses **Drizzle ORM** for database operations. Here are key patterns used in this implementation:
+
+### Basic Query (SELECT)
+```typescript
+const usersArr = await db
+  .select()
+  .from(users)
+  .where(eq(users.email, email))
+  .limit(1);
+const user = usersArr[0];
+```
+
+### Update
+```typescript
+await db
+  .update(users)
+  .set({
+    role: "ADMIN",
+    privileges: JSON.stringify(permissions),
+    updatedAt: new Date(),
+  })
+  .where(eq(users.id, userId));
+```
+
+### Insert
+```typescript
+await db.insert(users).values({
+  id: crypto.randomUUID(),
+  email: "user@example.com",
+  password: hashedPassword,
+  isActive: true,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+});
+```
+
+### Key Imports Needed
+```typescript
+import { eq } from "drizzle-orm"; // For WHERE conditions
+import db from "../config/drizzle.js"; // Database instance
+import { users } from "../db/schema.js"; // Table schema
+```
+
+### Database Migrations with Drizzle
+
+When you modify `backend/src/db/schema.ts`:
+
+```bash
+# Generate migration files
+npx drizzle-kit generate
+
+# Preview changes
+npx drizzle-kit studio  # Opens UI to see schema
+
+# Apply migration to database
+npx drizzle-kit migrate
+```
+
+Your migrations are stored in `backend/drizzle/` folder as SQL files.
