@@ -11,6 +11,8 @@ interface AuthRequest extends Request {
     email: string;
     name: string | null;
     role: string;
+    adminRole?: string;
+    privileges?: string;
     isActive: boolean;
   };
 }
@@ -61,6 +63,65 @@ export const requireAdmin = (
     return res.status(403).json({ error: "Admin access required" });
   }
   next();
+};
+
+/**
+ * Middleware to check if user can access a specific admin page
+ * Usage: router.get("/members", requireAdminPage("AdminMembersPage"), controller)
+ */
+export const requireAdminPage = (requiredPage: string) => {
+  return async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      // First check if user is authenticated
+      if (!req.user) {
+        return res.status(401).json({ error: "Authentication required" });
+      }
+
+      // Check if user is admin or super admin
+      if (req.user.role !== "ADMIN" && req.user.role !== "SUPER_ADMIN") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+
+      // Check if user has access to this specific page
+      const { canAccessPage } = await import("../config/adminMapping.js");
+      if (!canAccessPage(req.user.email, requiredPage)) {
+        return res.status(403).json({
+          error: `You do not have access to ${requiredPage}. Contact your administrator.`,
+        });
+      }
+
+      next();
+    } catch (error) {
+      return res.status(403).json({ error: "Access denied" });
+    }
+  };
+};
+
+/**
+ * Middleware to check if user has a specific permission
+ * Usage: router.post("/members", requirePermission("EDIT_MEMBERS"), controller)
+ */
+export const requirePermission = (requiredPermission: string) => {
+  return async (req: AuthRequest, res: Response, next: NextFunction) => {
+    try {
+      if (!req.user) {
+        return res.status(401).json({ error: "Authentication required" });
+      }
+
+      const { getAdminAccess } = await import("../config/adminMapping.js");
+      const access = getAdminAccess(req.user.email);
+
+      if (!access || !access.permissions.includes(requiredPermission)) {
+        return res.status(403).json({
+          error: `Permission '${requiredPermission}' required. Contact your administrator.`,
+        });
+      }
+
+      next();
+    } catch (error) {
+      return res.status(403).json({ error: "Permission denied" });
+    }
+  };
 };
 
 /**
