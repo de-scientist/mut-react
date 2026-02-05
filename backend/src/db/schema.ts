@@ -25,10 +25,13 @@ export const blogs = pgTable("blogs", {
 
 export const users = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
-  email: text("email").notNull(),
+  email: text("email").notNull().unique(),
   password: text("password").notNull(),
   name: text("name"),
-  role: text("role").default("USER"),
+  role: text("role").default("USER"), // USER | ADMIN | SUPER_ADMIN
+  adminRole: text("adminRole"), // SUPER_ADMIN | ADMIN | MODERATOR
+  privileges: text("privileges"), // JSON string of permissions
+  accessLevel: text("accessLevel"), // e.g., "MEMBERS", "FINANCE", "COMMUNICATIONS", "MEDIA"
   isActive: boolean("isActive").default(true),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
