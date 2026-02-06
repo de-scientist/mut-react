@@ -288,29 +288,18 @@ ${event.description || ""}`;
               Schedule, update, and manage community activities.
             </p>
           </div>
-          <div className="d-flex gap-2">
+          <div className="admin-actions">
             <button
               onClick={() => navigate("/admin")}
-              className="btn btn-white border shadow-sm d-flex align-items-center gap-2"
+              className="btn btn-white border shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-dashboard-btn"
               title="Return to Dashboard"
               aria-label="Back to Dashboard"
             >
               <ArrowLeft size={18} /> Dashboard
             </button>
-            <button
-              onClick={() => {
-                resetForm();
-                setEditingEvent(null);
-                setShowForm(true);
-              }}
-              className="btn btn-primary shadow-sm d-flex align-items-center gap-2"
-              title="Create a new event"
-            >
-              <Plus size={18} /> Add New Event
-            </button>
             <div className="dropdown">
               <button
-                className="btn btn-outline-secondary shadow-sm dropdown-toggle"
+                className="btn btn-outline-secondary shadow-sm dropdown-toggle admin-action-btn admin-export-btn"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
@@ -331,10 +320,14 @@ ${event.description || ""}`;
                   </button>
                 </li>
               </ul>
-              <button className="dropdown-item" onClick={shareAllEvents}>
-                Share All Events
-              </button>
             </div>
+            <button
+              className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-share-btn"
+              onClick={shareAllEvents}
+              title="Share all events"
+            >
+              <Share2 size={18} /> Share All
+            </button>
           </div>
         </div>
 
