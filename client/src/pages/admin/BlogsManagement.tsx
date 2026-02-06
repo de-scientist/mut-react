@@ -290,7 +290,7 @@ const BlogsManagement = () => {
               Create, edit, and publish blog posts.
             </p>
           </div>
-          <div className="d-flex gap-2">
+          <div className="admin-actions">
             <button
               className="btn btn-light btn-sm"
               onClick={() => loadBlogs(pagination?.page || 1)}
@@ -302,7 +302,7 @@ const BlogsManagement = () => {
             {/* Export Dropdown */}
             <div className="dropdown">
               <button
-                className="btn btn-outline-light btn-sm dropdown-toggle"
+                className="btn btn-outline-light btn-sm dropdown-toggle admin-action-btn admin-export-btn"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -339,7 +339,7 @@ const BlogsManagement = () => {
 
             {/* Share Button */}
             <button
-              className="btn btn-outline-info btn-sm"
+              className="btn btn-outline-info btn-sm admin-action-btn admin-share-btn"
               onClick={shareAllBlogs}
               title="Share all blog posts"
             >
@@ -347,7 +347,7 @@ const BlogsManagement = () => {
             </button>
 
             <button
-              className="btn btn-outline-light btn-sm"
+              className="btn btn-outline-light btn-sm admin-action-btn admin-dashboard-btn"
               onClick={() => navigate("/admin")}
             >
               Back to Dashboard
