@@ -243,10 +243,10 @@ const MediaManagement = () => {
               Manage images and media for your community.
             </p>
           </div>
-          <div className="d-flex gap-2">
+          <div className="admin-actions">
             <button
               aria-label="Back to Dashboard"
-              className="btn btn-white border shadow-sm d-flex align-items-center gap-2"
+              className="btn btn-white border shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-dashboard-btn"
               onClick={() => navigate("/admin")}
             >
               <ArrowLeft size={18} /> Dashboard
@@ -255,7 +255,7 @@ const MediaManagement = () => {
             {/* Export Dropdown */}
             <div className="dropdown">
               <button
-                className="btn btn-outline-secondary shadow-sm dropdown-toggle d-flex align-items-center gap-2"
+                className="btn btn-outline-secondary shadow-sm dropdown-toggle d-flex align-items-center gap-2 admin-action-btn admin-export-btn"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -292,7 +292,7 @@ const MediaManagement = () => {
 
             {/* Share Button */}
             <button
-              className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2"
+              className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-share-btn"
               onClick={shareAllMedia}
               title="Share media gallery"
             >
