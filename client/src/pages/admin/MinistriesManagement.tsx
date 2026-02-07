@@ -56,6 +56,17 @@ const MinistriesManagement = () => {
     isActive: true,
   });
 
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      description: "",
+      icon: "",
+      imageUrl: "",
+      slug: "",
+      isActive: true,
+    });
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -147,7 +158,7 @@ const MinistriesManagement = () => {
     URL.revokeObjectURL(url);
   };
 
-  async () => {
+  const shareAllMinistries = async () => {
     if (!ministries.length) {
       setError("No ministries to share");
       return;
@@ -177,7 +188,7 @@ const MinistriesManagement = () => {
     }
   };
 
-  async (ministry: Ministry) => {
+  const shareSingleMinistry = async (ministry: Ministry) => {
     const shareText = `${ministry.name}
 🔗 ${ministry.slug}
 ${ministry.description || ""}`;
@@ -316,17 +327,20 @@ ${ministry.description || ""}`;
                 </li>
               </ul>
             </div>
-            <button className="btn btn-outline-secondary rounded-pill admin-action-btn admin-share-btn">
+            <button
+              className="btn btn-outline-secondary rounded-pill admin-action-btn admin-share-btn"
+              onClick={shareAllMinistries}
+            >
               <Share2 size={16} className="me-1" /> Share All
             </button>
             <button
               onClick={() => {
+                resetForm();
                 setEditingMinistry(null);
                 setShowForm(true);
               }}
-              className="btn btn-link text-decoration-none d-flex align-items-center gap-1 px-2"
+              className="btn d-flex align-items-center gap-1 admin-add-btn"
               title="Create a new ministry"
-              style={{ color: '#04003d', fontSize: '0.9rem' }}
             >
               <Plus size={16} /> Add Ministry
             </button>
@@ -408,7 +422,7 @@ ${ministry.description || ""}`;
         />
 
         {showForm && (
-          <div className="card border-0 shadow-lg mb-4 rounded-4 animate-fade-in border-top border-primary border-4">
+          <div className="card border-0 shadow-lg mb-4 rounded-4 animate-fade-in border-top border-primary border-4 admin-form-soft">
             <div className="card-body p-4">
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <h5 className="fw-bold mb-0">
@@ -418,7 +432,11 @@ ${ministry.description || ""}`;
                 </h5>
                 <button
                   className="btn-close"
-                  onClick={() => setShowForm(false)}
+                  onClick={() => {
+                    setShowForm(false);
+                    setEditingMinistry(null);
+                    resetForm();
+                  }}
                   title="Close form"
                 ></button>
               </div>
@@ -538,7 +556,11 @@ ${ministry.description || ""}`;
                   <button
                     type="button"
                     className="btn btn-outline-secondary px-4 rounded-pill"
-                    onClick={() => setShowForm(false)}
+                    onClick={() => {
+                      setShowForm(false);
+                      setEditingMinistry(null);
+                      resetForm();
+                    }}
                   >
                     Discard
                   </button>
