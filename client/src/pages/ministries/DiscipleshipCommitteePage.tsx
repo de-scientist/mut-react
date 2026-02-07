@@ -50,7 +50,6 @@ const DiscipleshipCommitteePage = () => {
           </p>
         </div>
       </section>
-
       {/* Intro */}
       <section className="py-5 ministry-intro-section">
         <div className="container">
@@ -66,23 +65,44 @@ const DiscipleshipCommitteePage = () => {
               <div className="mb-4">
                 <h5 className="text-secondary mb-3">Mandate</h5>
                 <p>
-                  To intentionally guide members at every stage of their faith journey, from their first decision (nurturing) to relational growth (fellowships) and personal discipleship.
+                  To intentionally guide members at every stage of their faith
+                  journey, from their first decision (nurturing) to relational
+                  growth (fellowships) and personal discipleship.
                 </p>
               </div>
               <div className="mb-4">
                 <h5 className="text-secondary mb-3">Our Mission</h5>
                 <p className="lead">
-                  The Discipleship Committee facilitates comprehensive spiritual growth and maturation of Union members through structured pathways. We coordinate nurturing for new believers, foster community through years fellowships, establish accountability for personal holiness, and develop discipleship classes for deeper spiritual formation. We believe every member can grow from a new believer into a mature, accountable disciple of Christ.
+                  The Discipleship Committee facilitates comprehensive spiritual
+                  growth and maturation of Union members through structured
+                  pathways. We coordinate nurturing for new believers, foster
+                  community through years fellowships, establish accountability
+                  for personal holiness, and develop discipleship classes for
+                  deeper spiritual formation. We believe every member can grow
+                  from a new believer into a mature, accountable disciple of
+                  Christ.
                 </p>
               </div>
               <div>
                 <h5 className="text-secondary mb-3">Our Commitment</h5>
                 <ul>
                   <li>Providing foundational teachings for new believers</li>
-                  <li>Building community through year-based fellowships and peer mentorship</li>
-                  <li>Establishing accountability systems for spiritual growth and holiness</li>
-                  <li>Offering structured classes for deeper biblical knowledge and leadership development</li>
-                  <li>Tracking member progression from new belief to mature discipleship</li>
+                  <li>
+                    Building community through year-based fellowships and peer
+                    mentorship
+                  </li>
+                  <li>
+                    Establishing accountability systems for spiritual growth and
+                    holiness
+                  </li>
+                  <li>
+                    Offering structured classes for deeper biblical knowledge
+                    and leadership development
+                  </li>
+                  <li>
+                    Tracking member progression from new belief to mature
+                    discipleship
+                  </li>
                 </ul>
               </div>
             </div>
@@ -100,13 +120,15 @@ const DiscipleshipCommitteePage = () => {
           </div>
         </div>
       </section>
-
       {/* Sub-Programs */}
       <section className="py-5 bg-light sub-ministries-section">
         <div className="container">
-          <h2 className="section-title text-center">Our Discipleship Pathways</h2>
+          <h2 className="section-title text-center">
+            Our Discipleship Pathways
+          </h2>
           <p className="text-center lead mb-5">
-            Four distinct programs guiding members through every stage of spiritual maturity.
+            Four distinct programs guiding members through every stage of
+            spiritual maturity.
           </p>
 
           <div className="row">
@@ -129,7 +151,10 @@ const DiscipleshipCommitteePage = () => {
                   <h3 className="card-title mb-0">Nurturing Program</h3>
                 </div>
                 <p>
-                  Foundational teaching and mentorship for new believers. Our nurturing classes help new members understand the basics of Christian faith, assurance in Christ, biblical doctrine, and smooth integration into the CU family.
+                  Foundational teaching and mentorship for new believers. Our
+                  nurturing classes help new members understand the basics of
+                  Christian faith, assurance in Christ, biblical doctrine, and
+                  smooth integration into the CU family.
                 </p>
                 <h6>Key Features:</h6>
                 <ul>
@@ -164,7 +189,10 @@ const DiscipleshipCommitteePage = () => {
                   <h3 className="card-title mb-0">Years Fellowships</h3>
                 </div>
                 <p>
-                  Community building and peer mentorship within each academic year (Anza FYT, Endelea One, Endelea Two, VUKA FiT). These fellowships foster spiritual support, leadership development, and meaningful relationships among members.
+                  Community building and peer mentorship within each academic
+                  year (Anza FYT, Endelea One, Endelea Two, VUKA FiT). These
+                  fellowships foster spiritual support, leadership development,
+                  and meaningful relationships among members.
                 </p>
                 <h6>Key Features:</h6>
                 <ul>
@@ -199,7 +227,10 @@ const DiscipleshipCommitteePage = () => {
                   <h3 className="card-title mb-0">Accountability Groups</h3>
                 </div>
                 <p>
-                  Small circles of believers committed to personal holiness, discipline, and mutual spiritual growth. These groups provide a safe space for members to be honest about struggles, encourage one another, and grow in Christ.
+                  Small circles of believers committed to personal holiness,
+                  discipline, and mutual spiritual growth. These groups provide
+                  a safe space for members to be honest about struggles,
+                  encourage one another, and grow in Christ.
                 </p>
                 <h6>Key Features:</h6>
                 <ul>
@@ -234,7 +265,10 @@ const DiscipleshipCommitteePage = () => {
                   <h3 className="card-title mb-0">Discipleship Classes</h3>
                 </div>
                 <p>
-                  Structured, in-depth classes on foundational Christian doctrines, spiritual disciplines, and practical Christian living. These classes develop mature disciples and future leaders equipped to serve the kingdom effectively.
+                  Structured, in-depth classes on foundational Christian
+                  doctrines, spiritual disciplines, and practical Christian
+                  living. These classes develop mature disciples and future
+                  leaders equipped to serve the kingdom effectively.
                 </p>
                 <h6>Key Features:</h6>
                 <ul>
@@ -251,15 +285,23 @@ const DiscipleshipCommitteePage = () => {
             </div>
           </div>
         </div>
-      </section>      {/* Committee Structure */}
+      </section>{" "}
+      {/* Committee Structure */}
       <section className="py-5 bg-white roles-responsibilities-section">
         <div className="container">
-          <h2 className="section-title text-center">Committee Structure &amp; Leadership</h2>
+          <h2 className="section-title text-center">
+            Committee Structure &amp; Leadership
+          </h2>
           <p className="text-center lead mb-5">
-            The Discipleship Committee comprises dedicated leaders responsible for oversight of each pathway.
+            The Discipleship Committee comprises dedicated leaders responsible
+            for oversight of each pathway.
           </p>
           <div className="row g-4 justify-content-center">
-            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div
+              className="col-lg-6 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
               <div className="card h-100 border-0 shadow-sm">
                 <div className="card-body">
                   <h5 className="card-title text-secondary">
@@ -267,12 +309,19 @@ const DiscipleshipCommitteePage = () => {
                     Discipleship Coordinator (Chairperson)
                   </h5>
                   <p className="card-text small">
-                    Oversees all discipleship pathways and coordinates with sub-program leaders. Responsible for ensuring theological consistency, tracking member progression, and maintaining the overall health of the discipleship pipeline.
+                    Oversees all discipleship pathways and coordinates with
+                    sub-program leaders. Responsible for ensuring theological
+                    consistency, tracking member progression, and maintaining
+                    the overall health of the discipleship pipeline.
                   </p>
                 </div>
               </div>
             </div>
-            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div
+              className="col-lg-6 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <div className="card h-100 border-0 shadow-sm">
                 <div className="card-body">
                   <h5 className="card-title text-secondary">
@@ -280,12 +329,19 @@ const DiscipleshipCommitteePage = () => {
                     Secretary/Treasurer
                   </h5>
                   <p className="card-text small">
-                    Maintains records of member progress and committee activities. Coordinates scheduling, manages committee finances and resources, and documents growth milestones and outcomes.
+                    Maintains records of member progress and committee
+                    activities. Coordinates scheduling, manages committee
+                    finances and resources, and documents growth milestones and
+                    outcomes.
                   </p>
                 </div>
               </div>
             </div>
-            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div
+              className="col-lg-6 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
               <div className="card h-100 border-0 shadow-sm">
                 <div className="card-body">
                   <h5 className="card-title text-secondary">
@@ -293,12 +349,19 @@ const DiscipleshipCommitteePage = () => {
                     Nurturing Coordinator &amp; Assistant
                   </h5>
                   <p className="card-text small">
-                    In charge of new believer nurturing classes. Chairs the Nurturing sub-committee, ensures effective follow-up of new believers with assigned mentors, and oversees baptism preparation activities.
+                    In charge of new believer nurturing classes. Chairs the
+                    Nurturing sub-committee, ensures effective follow-up of new
+                    believers with assigned mentors, and oversees baptism
+                    preparation activities.
                   </p>
                 </div>
               </div>
             </div>
-            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div
+              className="col-lg-6 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
               <div className="card h-100 border-0 shadow-sm">
                 <div className="card-body">
                   <h5 className="card-title text-secondary">
@@ -306,12 +369,19 @@ const DiscipleshipCommitteePage = () => {
                     Years Fellowship Coordinator &amp; Assistant
                   </h5>
                   <p className="card-text small">
-                    Ensures all year fellowships run effectively and are well-coordinated. Works with year fellowship leaders to plan topics and activities, and fosters cooperation and unity among all year groups.
+                    Ensures all year fellowships run effectively and are
+                    well-coordinated. Works with year fellowship leaders to plan
+                    topics and activities, and fosters cooperation and unity
+                    among all year groups.
                   </p>
                 </div>
               </div>
             </div>
-            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div
+              className="col-lg-6 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
               <div className="card h-100 border-0 shadow-sm">
                 <div className="card-body">
                   <h5 className="card-title text-secondary">
@@ -319,12 +389,19 @@ const DiscipleshipCommitteePage = () => {
                     Accountability Coordinator &amp; Assistant
                   </h5>
                   <p className="card-text small">
-                    Champions the importance of personal accountability for spiritual growth. Develops resources and systems for healthy accountability groups and provides training to group leaders.
+                    Champions the importance of personal accountability for
+                    spiritual growth. Develops resources and systems for healthy
+                    accountability groups and provides training to group
+                    leaders.
                   </p>
                 </div>
               </div>
             </div>
-            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div
+              className="col-lg-6 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="600"
+            >
               <div className="card h-100 border-0 shadow-sm">
                 <div className="card-body">
                   <h5 className="card-title text-secondary">
@@ -332,7 +409,10 @@ const DiscipleshipCommitteePage = () => {
                     Discipleship Class Coordinator &amp; Assistant
                   </h5>
                   <p className="card-text small">
-                    Organizes and runs structured discipleship classes on Christian doctrines and spiritual disciplines. Recruits mature facilitators and ensures all classes are biblically sound and practically applied.
+                    Organizes and runs structured discipleship classes on
+                    Christian doctrines and spiritual disciplines. Recruits
+                    mature facilitators and ensures all classes are biblically
+                    sound and practically applied.
                   </p>
                 </div>
               </div>
@@ -340,7 +420,6 @@ const DiscipleshipCommitteePage = () => {
           </div>
         </div>
       </section>
-
       {/* Current Leader */}
       <section className="py-5 bg-light">
         <div className="container">
@@ -359,14 +438,16 @@ const DiscipleshipCommitteePage = () => {
                   <strong>Discipleship Coordinator</strong>
                 </p>
                 <p className="card-text text-muted">
-                  Providing visionary leadership and spiritual oversight for the Discipleship Committee, guiding members through every stage of their faith journey from new belief to mature discipleship and servant leadership.
+                  Providing visionary leadership and spiritual oversight for the
+                  Discipleship Committee, guiding members through every stage of
+                  their faith journey from new belief to mature discipleship and
+                  servant leadership.
                 </p>
               </div>
             </div>
           </div>
         </div>
       </section>
-
       {/* Join CTA */}
       <section className="py-5 cta-section text-white">
         <div className="container">
@@ -375,7 +456,9 @@ const DiscipleshipCommitteePage = () => {
               Join the Discipleship Committee!
             </h2>
             <p className="lead text-white-50">
-              Whether you&apos;re a new believer seeking guidance or a mature disciple ready to invest in others, there&apos;s a place for you in one of our pathways.
+              Whether you&apos;re a new believer seeking guidance or a mature
+              disciple ready to invest in others, there&apos;s a place for you
+              in one of our pathways.
             </p>
           </div>
           <div className="row justify-content-center">
@@ -410,7 +493,10 @@ const DiscipleshipCommitteePage = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="areaOfInterest" className="form-label text-white">
+                  <label
+                    htmlFor="areaOfInterest"
+                    className="form-label text-white"
+                  >
                     Which pathway interests you?
                   </label>
                   <select
@@ -431,7 +517,10 @@ const DiscipleshipCommitteePage = () => {
                   </select>
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="joinMessage" className="form-label text-white">
+                  <label
+                    htmlFor="joinMessage"
+                    className="form-label text-white"
+                  >
                     Tell us about your interests (Optional)
                   </label>
                   <textarea
@@ -453,7 +542,8 @@ const DiscipleshipCommitteePage = () => {
                   role="alert"
                 >
                   <span>
-                    Thank you for your interest! We&apos;ll get in touch with you soon.
+                    Thank you for your interest! We&apos;ll get in touch with
+                    you soon.
                   </span>
                   <button
                     type="button"
@@ -466,12 +556,20 @@ const DiscipleshipCommitteePage = () => {
             </div>
           </div>
           <div className="row mt-5 justify-content-center">
-            <div className="col-md-4 text-center" data-aos="fade-up" data-aos-delay="300">
+            <div
+              className="col-md-4 text-center"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
               <Link to="/ministries" className="btn btn-primary btn-lg">
                 View All Ministries <i className="fas fa-arrow-right ms-2" />
               </Link>
             </div>
-            <div className="col-md-4 text-center" data-aos="fade-up" data-aos-delay="400">
+            <div
+              className="col-md-4 text-center"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
               <Link to="/events" className="btn btn-secondary btn-lg">
                 Upcoming Events <i className="fas fa-calendar ms-2" />
               </Link>

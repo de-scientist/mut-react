@@ -57,20 +57,30 @@ const HospitalityMinistryPage = () => {
               <div data-aos="fade-right" data-aos-delay="100">
                 <h5 className="text-secondary mb-3">Mandate</h5>
                 <p>
-                  To model the love of Christ by creating a welcoming environment, caring for guests and members, and managing the CU office resources.
+                  To model the love of Christ by creating a welcoming
+                  environment, caring for guests and members, and managing the
+                  CU office resources.
                 </p>
               </div>
               <div data-aos="fade-right" data-aos-delay="200">
                 <h5 className="text-secondary mb-3">Our Mission</h5>
                 <p>
-                  The Hospitality Committee reflects Christ's love through warmth, welcome, and genuine care. We create a welcoming environment for all members and visitors, demonstrating compassion through thoughtful service and excellent hospitality.
+                  The Hospitality Committee reflects Christ's love through
+                  warmth, welcome, and genuine care. We create a welcoming
+                  environment for all members and visitors, demonstrating
+                  compassion through thoughtful service and excellent
+                  hospitality.
                 </p>
               </div>
               <div data-aos="fade-right" data-aos-delay="300">
                 <h5 className="text-secondary mb-3">Our Focus</h5>
                 <ul>
-                  <li>Creating welcoming environments for all members and guests</li>
-                  <li>Managing office resources and supplies with stewardship</li>
+                  <li>
+                    Creating welcoming environments for all members and guests
+                  </li>
+                  <li>
+                    Managing office resources and supplies with stewardship
+                  </li>
                   <li>New member integration and care</li>
                   <li>Guest reception and refreshment provision</li>
                   <li>Fostering genuine community and fellowship</li>

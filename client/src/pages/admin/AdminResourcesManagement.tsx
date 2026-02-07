@@ -173,96 +173,53 @@ const AdminResourcesManagement = () => {
     );
   }
 
-  const exportResourcesCSV = () => {
-    if (!resources.length) return;
-
-    const headers = [
-      "Title",
-      "Description",
-      "Type",
-      "URL",
-      "Status",
-      "Created At",
-      "Updated At",
-    ];
-
-    const rows = resources.map((r) => [
-      r.title,
-      r.description || "",
-      r.type || "",
-      r.url || "",
-      r.isActive ? "Active" : "Hidden",
-      new Date(r.createdAt).toLocaleString(),
-      new Date(r.updatedAt).toLocaleString(),
-    ]);
-
-    const csv = [headers, ...rows]
-      .map((row) =>
-        row.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(","),
-      )
-      .join("\n");
-
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `resources_${new Date().toISOString().split("T")[0]}.csv`;
-    link.click();
-
-    URL.revokeObjectURL(url);
-  };
-
   // Enhanced export functions using centralized helper
-  const exportResources = async (format: 'csv' | 'word' | 'pdf') => {
+  const exportResources = async (format: "csv" | "word" | "pdf") => {
     try {
       const exportData = exportHelper.prepareExportData(
         resources,
         {
-          title: 'Title',
-          description: 'Description',
-          type: 'Type',
-          url: 'URL',
-          imageUrl: 'Image URL',
-          isActive: 'Status',
-          createdAt: 'Created Date',
-          updatedAt: 'Updated Date'
+          title: "Title",
+          description: "Description",
+          type: "Type",
+          url: "URL",
+          imageUrl: "Image URL",
+          isActive: "Status",
+          createdAt: "Created Date",
+          updatedAt: "Updated Date",
         },
-        'Resources Export',
-        `Export of all resources (${resources.length} total)`
+        "Resources Export",
+        `Export of all resources (${resources.length} total)`,
       );
 
       await exportHelper.export(exportData, format, {
         filename: `resources`,
         includeLogo: true,
-        includeTimestamp: true
+        includeTimestamp: true,
       });
     } catch (error) {
-      setError('Failed to export resources');
-      console.error('Export error:', error);
+      setError("Failed to export resources");
+      console.error("Export error:", error);
     }
   };
 
   // Enhanced sharing functions
   const shareAllResources = async () => {
     try {
-      const shareableResources = sharingHelper.prepareShareData(
-        resources,
-        {
-          itemTitleField: 'title',
-          itemDescriptionField: 'description',
-          itemUrlField: 'url',
-          itemType: 'resource'
-        }
-      );
+      const shareableResources = sharingHelper.prepareShareData(resources, {
+        itemTitleField: "title",
+        itemDescriptionField: "description",
+        itemUrlField: "url",
+        itemType: "resource",
+      });
 
       await sharingHelper.shareBulk(shareableResources, {
-        bulkTitle: 'Resources Directory',
-        method: 'native'
+        bulkTitle: "Resources Directory",
+        method: "native",
       });
     } catch (error) {
-      setError('Failed to share resources');
-      console.error('Share error:', error);
+      setError("Failed to share resources");
+      console.error("Share error:", error);
     }
   };
 
@@ -271,13 +228,13 @@ const AdminResourcesManagement = () => {
       await sharingHelper.shareItem(resource, {
         formatTemplate: (item) => ({
           title: item.title,
-          text: `${item.type || 'Resource'} - ${item.description || ''}`,
-          url: item.url || item.imageUrl
-        })
+          text: `${item.type || "Resource"} - ${item.description || ""}`,
+          url: item.url || item.imageUrl,
+        }),
       });
     } catch (error) {
-      setError('Failed to share resource');
-      console.error('Share error:', error);
+      setError("Failed to share resource");
+      console.error("Share error:", error);
     }
   };
 
@@ -317,10 +274,10 @@ ${r.url ? `Link: ${r.url}` : ""}
               Manage sermons, devotionals, documents, and downloads.
             </p>
           </div>
-          <div className="d-flex gap-2">
+          <div className="admin-actions">
             <button
               onClick={() => navigate("/admin")}
-              className="btn btn-white border shadow-sm d-flex align-items-center gap-2"
+              className="btn btn-white border shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-dashboard-btn"
             >
               <ArrowLeft size={18} /> Dashboard
             </button>
@@ -328,7 +285,7 @@ ${r.url ? `Link: ${r.url}` : ""}
             {/* Export Dropdown */}
             <div className="dropdown">
               <button
-                className="btn btn-outline-secondary shadow-sm dropdown-toggle d-flex align-items-center gap-2"
+                className="btn btn-outline-secondary shadow-sm dropdown-toggle d-flex align-items-center gap-2 admin-action-btn admin-export-btn"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -337,17 +294,26 @@ ${r.url ? `Link: ${r.url}` : ""}
               </button>
               <ul className="dropdown-menu">
                 <li>
-                  <button className="dropdown-item" onClick={() => exportResources('csv')}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportResources("csv")}
+                  >
                     <FileText size={16} className="me-2" /> Export as CSV
                   </button>
                 </li>
                 <li>
-                  <button className="dropdown-item" onClick={() => exportResources('word')}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportResources("word")}
+                  >
                     <FileText size={16} className="me-2" /> Export as Word
                   </button>
                 </li>
                 <li>
-                  <button className="dropdown-item" onClick={() => exportResources('pdf')}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportResources("pdf")}
+                  >
                     <FileText size={16} className="me-2" /> Export as PDF
                   </button>
                 </li>
@@ -356,10 +322,17 @@ ${r.url ? `Link: ${r.url}` : ""}
 
             {/* Share Button */}
             <button
-              className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2"
+              className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-share-btn"
               onClick={shareAllResources}
             >
               <Share2 size={18} /> Share
+            </button>
+
+            <button
+              className="btn btn-outline-secondary shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-share-btn"
+              onClick={shareResources}
+            >
+              <Share2 size={18} /> Quick Share (Text)
             </button>
 
             <button
@@ -368,9 +341,10 @@ ${r.url ? `Link: ${r.url}` : ""}
                 setEditingResource(null);
                 setShowForm(true);
               }}
-              className="btn btn-primary shadow-sm d-flex align-items-center gap-2"
+              className="btn d-flex align-items-center gap-1 admin-add-btn"
+              title="Create a new resource"
             >
-              <Plus size={18} /> Add Resource
+              <Plus size={16} /> Add Resource
             </button>
           </div>
         </div>
@@ -386,7 +360,7 @@ ${r.url ? `Link: ${r.url}` : ""}
 
         {/* Form */}
         {showForm && (
-          <div className="card border-0 shadow-lg mb-5 rounded-4">
+          <div className="card border-0 shadow-lg mb-5 rounded-4 admin-form-soft">
             <div className="card-body p-4">
               <h5 className="fw-bold mb-4">
                 {editingResource ? "Edit Resource" : "Create Resource"}

@@ -219,7 +219,8 @@ export default function MinistriesPage() {
         >
           <h1 className="display-3 mb-3">Our Committees</h1>
           <p className="lead">
-            Explore the 10 core committees of MUTCU — then view sub-ministries inside each one.
+            Explore the 10 core committees of MUTCU — then view sub-ministries
+            inside each one.
           </p>
         </div>
       </section>
@@ -325,7 +326,10 @@ export default function MinistriesPage() {
 
               {/* Optional link to special committees page */}
               <div className="text-center mt-4">
-                <Link to="/special-committees" className="btn btn-secondary btn-lg">
+                <Link
+                  to="/special-committees"
+                  className="btn btn-secondary btn-lg"
+                >
                   View Special Committees <i className="fas fa-users ms-2" />
                 </Link>
               </div>
@@ -337,9 +341,12 @@ export default function MinistriesPage() {
       {/* CTA */}
       <section className="py-5 cta-section text-white">
         <div className="container text-center" data-aos="zoom-in">
-          <h2 className="section-title text-white">Find Your Place to Serve!</h2>
+          <h2 className="section-title text-white">
+            Find Your Place to Serve!
+          </h2>
           <p className="lead mb-4 text-white-50">
-            There’s a committee for every passion and gift. Join us in making a difference.
+            There’s a committee for every passion and gift. Join us in making a
+            difference.
           </p>
           <Link to="/contact" className="btn btn-primary btn-lg me-3">
             Get Involved

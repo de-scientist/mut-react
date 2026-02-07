@@ -16,6 +16,7 @@ import {
   CheckCircle,
   XCircle,
   Download,
+  Share2,
 } from "lucide-react";
 import "../../styles/adminForms.css";
 
@@ -54,6 +55,17 @@ const MinistriesManagement = () => {
     slug: "",
     isActive: true,
   });
+
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      description: "",
+      icon: "",
+      imageUrl: "",
+      slug: "",
+      isActive: true,
+    });
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -105,102 +117,99 @@ const MinistriesManagement = () => {
       .replace(/(^-|-$)/g, "");
   };
 
-const exportMinistriesAsCSV = () => {
-  if (!ministries.length) return;
+  const exportMinistriesAsCSV = () => {
+    if (!ministries.length) return;
 
-  const headers = ["Name", "Slug", "Description", "Active"];
-  const rows = ministries.map((m) => [
-    m.name,
-    m.slug,
-    m.description || "",
-    m.isActive ? "Yes" : "No",
-  ]);
+    const headers = ["Name", "Slug", "Description", "Active"];
+    const rows = ministries.map((m) => [
+      m.name,
+      m.slug,
+      m.description || "",
+      m.isActive ? "Yes" : "No",
+    ]);
 
-  const csvContent =
-    [headers, ...rows].map((row) => row.join(",")).join("\n");
+    const csvContent = [headers, ...rows]
+      .map((row) => row.join(","))
+      .join("\n");
 
-  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-  const url = URL.createObjectURL(blob);
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
 
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "ministries.csv";
-  link.click();
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "ministries.csv";
+    link.click();
 
-  URL.revokeObjectURL(url);
-};
+    URL.revokeObjectURL(url);
+  };
 
-const exportMinistriesAsJSON = () => {
-  const blob = new Blob([JSON.stringify(ministries, null, 2)], {
-    type: "application/json",
-  });
+  const exportMinistriesAsJSON = () => {
+    const blob = new Blob([JSON.stringify(ministries, null, 2)], {
+      type: "application/json",
+    });
 
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
 
-  link.href = url;
-  link.download = "ministries.json";
-  link.click();
+    link.href = url;
+    link.download = "ministries.json";
+    link.click();
 
-  URL.revokeObjectURL(url);
-};
+    URL.revokeObjectURL(url);
+  };
 
- async () => {
-  if (!ministries.length) {
-    setError("No ministries to share");
-    return;
-  }
-
-  const shareText = ministries
-    .map(
-      (m) =>
-        `${m.name} (${m.slug}) - ${
-          m.isActive ? "Active" : "Inactive"
-        }`
-    )
-    .join("\n");
-
-  const shareUrl = `${window.location.origin}/ministries`;
-
-  try {
-    if (navigator.share) {
-      await navigator.share({
-        title: "Church Ministries",
-        text: shareText,
-        url: shareUrl,
-      });
-    } else {
-      await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
-      setSuccessMessage("Ministries copied to clipboard!");
+  const shareAllMinistries = async () => {
+    if (!ministries.length) {
+      setError("No ministries to share");
+      return;
     }
-  } catch {
-    setError("Unable to share ministries");
-  }
-};
 
- async (ministry: Ministry) => {
-  const shareText = `${ministry.name}
+    const shareText = ministries
+      .map(
+        (m) => `${m.name} (${m.slug}) - ${m.isActive ? "Active" : "Inactive"}`,
+      )
+      .join("\n");
+
+    const shareUrl = `${window.location.origin}/ministries`;
+
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: "Church Ministries",
+          text: shareText,
+          url: shareUrl,
+        });
+      } else {
+        await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+        setSuccessMessage("Ministries copied to clipboard!");
+      }
+    } catch {
+      setError("Unable to share ministries");
+    }
+  };
+
+  const shareSingleMinistry = async (ministry: Ministry) => {
+    const shareText = `${ministry.name}
 🔗 ${ministry.slug}
 ${ministry.description || ""}`;
 
-  const shareUrl = `${window.location.origin}/ministries/${ministry.slug}`;
+    const shareUrl = `${window.location.origin}/ministries/${ministry.slug}`;
 
-  try {
-    if (navigator.share) {
-      await navigator.share({
-        title: ministry.name,
-        text: shareText,
-        url: shareUrl,
-      });
-    } else {
-      await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
-      setSuccessMessage("Ministry link copied to clipboard!");
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: ministry.name,
+          text: shareText,
+          url: shareUrl,
+        });
+      } else {
+        await navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+        setSuccessMessage("Ministry link copied to clipboard!");
+      }
+    } catch {
+      setError("Unable to share ministry");
     }
-  } catch {
-    setError("Unable to share ministry");
-  }
-};
-
+  };
 
   const handleDelete = async () => {
     if (!selectedMinistry) return;
@@ -280,21 +289,66 @@ ${ministry.description || ""}`;
       `}</style>
 
       <div className="container">
-        <div className="row align-items-center mb-4 g-3">
-          <div className="col-md-6">
-            <button
-              onClick={() => navigate("/admin")}
-              className="btn btn-link text-decoration-none text-muted p-0 mb-2 d-flex align-items-center gap-1"
-              title="Return to Dashboard"
-            >
-              <ArrowLeft size={14} /> Back to Dashboard
-            </button>
-            <h2 className="fw-bold text-dark mb-0">Ministries</h2>
-            <p className="text-muted small">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+          <div>
+            <h2 className="fw-bold text-dark mb-1">Ministries</h2>
+            <p className="text-muted mb-0">
               Configure and manage church departments.
             </p>
           </div>
-          <div className="col-md-6 text-md-end">
+          <div className="admin-actions">
+            <button
+              onClick={() => navigate("/admin")}
+              className="btn btn-white border shadow-sm d-inline-flex align-items-center gap-2 admin-action-btn admin-dashboard-btn"
+              title="Return to Dashboard"
+            >
+              <ArrowLeft size={18} /> Dashboard
+            </button>
+            <div className="dropdown">
+              <button
+                className="btn btn-outline-secondary dropdown-toggle rounded-pill admin-action-btn admin-export-btn"
+                data-bs-toggle="dropdown"
+              >
+                <Download size={16} className="me-1" /> Export
+              </button>
+              <ul className="dropdown-menu">
+                <li>
+                  <button className="dropdown-item" onClick={exportMinistriesAsCSV}>
+                    Export as CSV
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="dropdown-item"
+                    onClick={exportMinistriesAsJSON}
+                  >
+                    Export as JSON
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <button
+              className="btn btn-outline-secondary rounded-pill admin-action-btn admin-share-btn"
+              onClick={shareAllMinistries}
+            >
+              <Share2 size={16} className="me-1" /> Share All
+            </button>
+            <button
+              onClick={() => {
+                resetForm();
+                setEditingMinistry(null);
+                setShowForm(true);
+              }}
+              className="btn d-flex align-items-center gap-1 admin-add-btn"
+              title="Create a new ministry"
+            >
+              <Plus size={16} /> Add Ministry
+            </button>
+          </div>
+        </div>
+
+        <div className="row g-3 mb-4">
+          <div className="col-md-12">
             <div className="d-inline-flex gap-3 bg-white p-2 px-3 rounded-4 shadow-sm border">
               <div className="text-center border-end pe-3">
                 <span className="d-block fw-bold text-primary">
@@ -324,35 +378,6 @@ ${ministry.description || ""}`;
           </div>
         </div>
 
-<div className="dropdown">
-  <button
-    className="btn btn-outline-secondary dropdown-toggle rounded-pill"
-    data-bs-toggle="dropdown"
-  >
-    <Download size={16} className="me-1" /> Export
-  </button>
-
-  <ul className="dropdown-menu">
-    <li>
-      <button className="dropdown-item" onClick={exportMinistriesAsCSV}>
-        Export as CSV
-      </button>
-    </li>
-    <li>
-      <button className="dropdown-item" onClick={exportMinistriesAsJSON}>
-        Export as JSON
-      </button>
-    </li>
-  </ul>
-  <button
-    className="btn btn-outline-secondary dropdown-toggle rounded-pill"
-  >
-    <Download size={16} className="me-1" /> Share All Ministries
-        
-      </button>
-</div>
-
-
         <div className="card border-0 shadow-sm mb-4 rounded-4">
           <div className="card-body p-3">
             <div className="row g-3 align-items-center">
@@ -369,18 +394,6 @@ ${ministry.description || ""}`;
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
-              </div>
-              <div className="col-md-4 text-md-end">
-                <button
-                  onClick={() => {
-                    setEditingMinistry(null);
-                    setShowForm(true);
-                  }}
-                  className="btn btn-primary w-100 w-md-auto px-4 rounded-pill d-flex align-items-center justify-content-center gap-2"
-                  title="Create a new ministry"
-                >
-                  <Plus size={18} /> New Ministry
-                </button>
               </div>
             </div>
           </div>
@@ -409,7 +422,7 @@ ${ministry.description || ""}`;
         />
 
         {showForm && (
-          <div className="card border-0 shadow-lg mb-4 rounded-4 animate-fade-in border-top border-primary border-4">
+          <div className="card border-0 shadow-lg mb-4 rounded-4 animate-fade-in border-top border-primary border-4 admin-form-soft">
             <div className="card-body p-4">
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <h5 className="fw-bold mb-0">
@@ -419,7 +432,11 @@ ${ministry.description || ""}`;
                 </h5>
                 <button
                   className="btn-close"
-                  onClick={() => setShowForm(false)}
+                  onClick={() => {
+                    setShowForm(false);
+                    setEditingMinistry(null);
+                    resetForm();
+                  }}
                   title="Close form"
                 ></button>
               </div>
@@ -539,7 +556,11 @@ ${ministry.description || ""}`;
                   <button
                     type="button"
                     className="btn btn-outline-secondary px-4 rounded-pill"
-                    onClick={() => setShowForm(false)}
+                    onClick={() => {
+                      setShowForm(false);
+                      setEditingMinistry(null);
+                      resetForm();
+                    }}
                   >
                     Discard
                   </button>
@@ -579,7 +600,12 @@ ${ministry.description || ""}`;
                       <td className="px-4">
                         <div className="d-flex align-items-center gap-3 py-1">
                           <div className="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold icon-box">
-                            {ministry.icon && !ministry.icon.startsWith('fa-') ? ministry.icon : <Layout size={18} />}
+                            {ministry.icon &&
+                            !ministry.icon.startsWith("fa-") ? (
+                              ministry.icon
+                            ) : (
+                              <Layout size={18} />
+                            )}
                           </div>
                           <div>
                             <div className="fw-bold text-dark">

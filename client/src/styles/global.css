@@ -88,7 +88,6 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
-
 body {
   font-family:
     "Lato",
@@ -207,5 +206,81 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+.admin-action-btn {
+  border-radius: 999px;
+  padding: 0.5rem 0.95rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  background-color: #ffffff;
+  color: var(--brand-ink);
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  box-shadow: none;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.admin-action-btn:hover {
+  transform: translateY(-1px);
+  background-color: rgba(15, 23, 42, 0.04);
+}
+
+.admin-dashboard-btn {
+  background-color: #ffffff !important;
+  color: var(--brand-ink) !important;
+  border-color: rgba(15, 23, 42, 0.16) !important;
+  box-shadow: none;
+}
+
+.admin-export-btn {
+  background-color: var(--brand-orange) !important;
+  color: #ffffff !important;
+  border-color: var(--brand-orange) !important;
+  box-shadow: none;
+}
+
+.admin-export-btn:hover,
+.admin-export-btn:focus-visible {
+  background-color: #e68a00 !important;
+  color: #ffffff !important;
+  border-color: #e68a00 !important;
+  transform: translateY(-2px);
+}
+
+.admin-share-btn {
+  background-color: transparent !important;
+  color: #04003d !important;
+  border-color: rgba(4, 0, 61, 0.2) !important;
+  box-shadow: none;
+}
+
+.admin-share-btn:hover,
+.admin-share-btn:focus-visible {
+  background-color: rgba(4, 0, 61, 0.06) !important;
+  color: #04003d !important;
+  border-color: rgba(4, 0, 61, 0.35) !important;
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .admin-actions {
+    width: 100%;
+    justify-content: flex-start;
   }
 }

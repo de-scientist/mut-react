@@ -34,7 +34,8 @@ const BibleStudyTrainingCommitteePage = () => {
               </p>
 
               <Link to="/contact" className="btn btn-primary me-3">
-                Join Bible Study &amp; Training <i className="fas fa-users ms-2" />
+                Join Bible Study &amp; Training{" "}
+                <i className="fas fa-users ms-2" />
               </Link>
               <Link to="/ministries" className="btn btn-secondary">
                 Back to Committees <i className="fas fa-arrow-left ms-2" />

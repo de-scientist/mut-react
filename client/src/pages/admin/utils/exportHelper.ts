@@ -19,25 +19,25 @@ interface ExportOptions {
 }
 
 class ExportHelper {
-  private static readonly LOGO_PATH = '/Full Logo.png';
-  private static readonly ORGANIZATION_NAME = 'Admin Dashboard';
+  private static readonly LOGO_PATH = "/Full Logo.png";
+  private static readonly ORGANIZATION_NAME = "Admin Dashboard";
 
   /**
    * Export data to CSV format
    */
   static async exportToCSV(
     data: ExportData,
-    options: ExportOptions = {}
+    options: ExportOptions = {},
   ): Promise<void> {
     const {
-      filename = 'export',
+      filename = "export",
       includeTimestamp = true,
-      customHeader = '',
-      customFooter = ''
+      customHeader = "",
+      customFooter = "",
     } = options;
 
     try {
-      let csvContent = '';
+      let csvContent = "";
 
       // Add custom header if provided
       if (customHeader) {
@@ -60,12 +60,17 @@ class ExportHelper {
       }
 
       // Add headers
-      csvContent += data.headers.map(header => `"${header}"`).join(',') + '\n';
+      csvContent +=
+        data.headers.map((header) => `"${header}"`).join(",") + "\n";
 
       // Add data rows
-      csvContent += data.rows.map(row => 
-        row.map(field => `"${String(field).replace(/"/g, '""')}"`).join(',')
-      ).join('\n');
+      csvContent += data.rows
+        .map((row) =>
+          row
+            .map((field) => `"${String(field).replace(/"/g, '""')}"`)
+            .join(","),
+        )
+        .join("\n");
 
       // Add custom footer if provided
       if (customFooter) {
@@ -73,17 +78,16 @@ class ExportHelper {
       }
 
       // Create and download file
-      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
-      link.download = `${filename}_${includeTimestamp ? new Date().toISOString().split('T')[0] : ''}.csv`;
+      link.download = `${filename}_${includeTimestamp ? new Date().toISOString().split("T")[0] : ""}.csv`;
       link.click();
       URL.revokeObjectURL(url);
-
     } catch (error) {
-      console.error('Error exporting CSV:', error);
-      throw new Error('Failed to export CSV file');
+      console.error("Error exporting CSV:", error);
+      throw new Error("Failed to export CSV file");
     }
   }
 
@@ -92,14 +96,14 @@ class ExportHelper {
    */
   static async exportToWord(
     data: ExportData,
-    options: ExportOptions = {}
+    options: ExportOptions = {},
   ): Promise<void> {
     const {
-      filename = 'export',
+      filename = "export",
       includeLogo = true,
       includeTimestamp = true,
-      customHeader = '',
-      customFooter = ''
+      customHeader = "",
+      customFooter = "",
     } = options;
 
     try {
@@ -109,7 +113,7 @@ class ExportHelper {
         <html>
         <head>
           <meta charset="utf-8">
-          <title>${data.title || 'Export'}</title>
+          <title>${data.title || "Export"}</title>
           <style>
             body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
             .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #04003d; padding-bottom: 20px; }
@@ -126,48 +130,53 @@ class ExportHelper {
         </head>
         <body>
           <div class="header">
-            ${includeLogo ? `<img src="${this.LOGO_PATH}" alt="Logo" class="logo" /><br>` : ''}
-            <div class="title">${data.title || 'Export Report'}</div>
-            ${data.description ? `<div class="description">${data.description}</div>` : ''}
-            ${includeTimestamp ? `<div class="timestamp">Generated on: ${new Date().toLocaleString()}</div>` : ''}
-            ${customHeader ? `<div class="description">${customHeader}</div>` : ''}
+            ${includeLogo ? `<img src="${this.LOGO_PATH}" alt="Logo" class="logo" /><br>` : ""}
+            <div class="title">${data.title || "Export Report"}</div>
+            ${data.description ? `<div class="description">${data.description}</div>` : ""}
+            ${includeTimestamp ? `<div class="timestamp">Generated on: ${new Date().toLocaleString()}</div>` : ""}
+            ${customHeader ? `<div class="description">${customHeader}</div>` : ""}
           </div>
 
           <table>
             <thead>
               <tr>
-                ${data.headers.map(header => `<th>${header}</th>`).join('')}
+                ${data.headers.map((header) => `<th>${header}</th>`).join("")}
               </tr>
             </thead>
             <tbody>
-              ${data.rows.map(row => `
+              ${data.rows
+                .map(
+                  (row) => `
                 <tr>
-                  ${row.map(field => `<td>${String(field).replace(/</g, '&lt;').replace(/>/g, '&gt;')}</td>`).join('')}
+                  ${row.map((field) => `<td>${String(field).replace(/</g, "&lt;").replace(/>/g, "&gt;")}</td>`).join("")}
                 </tr>
-              `).join('')}
+              `,
+                )
+                .join("")}
             </tbody>
           </table>
 
-          ${customFooter ? `<div class="footer">${customFooter}</div>` : ''}
+          ${customFooter ? `<div class="footer">${customFooter}</div>` : ""}
           <div class="footer">
-            Generated by ${this.ORGANIZATION_NAME} | Page ${data.title || 'Export'}
+            Generated by ${this.ORGANIZATION_NAME} | Page ${data.title || "Export"}
           </div>
         </body>
         </html>
       `;
 
       // Create and download file
-      const blob = new Blob([htmlContent], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      const blob = new Blob([htmlContent], {
+        type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      });
       const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
-      link.download = `${filename}_${includeTimestamp ? new Date().toISOString().split('T')[0] : ''}.docx`;
+      link.download = `${filename}_${includeTimestamp ? new Date().toISOString().split("T")[0] : ""}.docx`;
       link.click();
       URL.revokeObjectURL(url);
-
     } catch (error) {
-      console.error('Error exporting Word:', error);
-      throw new Error('Failed to export Word document');
+      console.error("Error exporting Word:", error);
+      throw new Error("Failed to export Word document");
     }
   }
 
@@ -176,14 +185,14 @@ class ExportHelper {
    */
   static async exportToPDF(
     data: ExportData,
-    options: ExportOptions = {}
+    options: ExportOptions = {},
   ): Promise<void> {
     const {
-      filename = 'export',
+      filename = "export",
       includeLogo = true,
       includeTimestamp = true,
-      customHeader = '',
-      customFooter = ''
+      customHeader = "",
+      customFooter = "",
     } = options;
 
     try {
@@ -193,7 +202,7 @@ class ExportHelper {
         <html>
         <head>
           <meta charset="utf-8">
-          <title>${data.title || 'Export'}</title>
+          <title>${data.title || "Export"}</title>
           <style>
             @page { margin: 20mm; size: A4; }
             body { font-family: Arial, sans-serif; margin: 0; padding: 20px; line-height: 1.6; }
@@ -212,42 +221,46 @@ class ExportHelper {
         </head>
         <body>
           <div class="header">
-            ${includeLogo ? `<img src="${this.LOGO_PATH}" alt="Logo" class="logo" /><br>` : ''}
-            <div class="title">${data.title || 'Export Report'}</div>
-            ${data.description ? `<div class="description">${data.description}</div>` : ''}
-            ${includeTimestamp ? `<div class="timestamp">Generated on: ${new Date().toLocaleString()}</div>` : ''}
-            ${customHeader ? `<div class="description">${customHeader}</div>` : ''}
+            ${includeLogo ? `<img src="${this.LOGO_PATH}" alt="Logo" class="logo" /><br>` : ""}
+            <div class="title">${data.title || "Export Report"}</div>
+            ${data.description ? `<div class="description">${data.description}</div>` : ""}
+            ${includeTimestamp ? `<div class="timestamp">Generated on: ${new Date().toLocaleString()}</div>` : ""}
+            ${customHeader ? `<div class="description">${customHeader}</div>` : ""}
           </div>
 
           <table>
             <thead>
               <tr>
-                ${data.headers.map(header => `<th>${header}</th>`).join('')}
+                ${data.headers.map((header) => `<th>${header}</th>`).join("")}
               </tr>
             </thead>
             <tbody>
-              ${data.rows.map(row => `
+              ${data.rows
+                .map(
+                  (row) => `
                 <tr>
-                  ${row.map(field => `<td>${String(field).replace(/</g, '&lt;').replace(/>/g, '&gt;')}</td>`).join('')}
+                  ${row.map((field) => `<td>${String(field).replace(/</g, "&lt;").replace(/>/g, "&gt;")}</td>`).join("")}
                 </tr>
-              `).join('')}
+              `,
+                )
+                .join("")}
             </tbody>
           </table>
 
-          ${customFooter ? `<div class="footer">${customFooter}</div>` : ''}
+          ${customFooter ? `<div class="footer">${customFooter}</div>` : ""}
           <div class="footer">
-            Generated by ${this.ORGANIZATION_NAME} | Page ${data.title || 'Export'}
+            Generated by ${this.ORGANIZATION_NAME} | Page ${data.title || "Export"}
           </div>
         </body>
         </html>
       `;
 
       // Create a temporary window for printing
-      const printWindow = window.open('', '_blank');
+      const printWindow = window.open("", "_blank");
       if (printWindow) {
         printWindow.document.write(htmlContent);
         printWindow.document.close();
-        
+
         // Wait for content to load, then print
         setTimeout(() => {
           printWindow.print();
@@ -255,18 +268,17 @@ class ExportHelper {
         }, 500);
       } else {
         // Fallback: create blob and download
-        const blob = new Blob([htmlContent], { type: 'text/html' });
+        const blob = new Blob([htmlContent], { type: "text/html" });
         const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = url;
-        link.download = `${filename}_${includeTimestamp ? new Date().toISOString().split('T')[0] : ''}.html`;
+        link.download = `${filename}_${includeTimestamp ? new Date().toISOString().split("T")[0] : ""}.html`;
         link.click();
         URL.revokeObjectURL(url);
       }
-
     } catch (error) {
-      console.error('Error exporting PDF:', error);
-      throw new Error('Failed to export PDF file');
+      console.error("Error exporting PDF:", error);
+      throw new Error("Failed to export PDF file");
     }
   }
 
@@ -275,16 +287,16 @@ class ExportHelper {
    */
   static async export(
     data: ExportData,
-    format: 'csv' | 'word' | 'pdf',
-    options: ExportOptions = {}
+    format: "csv" | "word" | "pdf",
+    options: ExportOptions = {},
   ): Promise<void> {
     switch (format.toLowerCase()) {
-      case 'csv':
+      case "csv":
         return this.exportToCSV(data, options);
-      case 'word':
-      case 'docx':
+      case "word":
+      case "docx":
         return this.exportToWord(data, options);
-      case 'pdf':
+      case "pdf":
         return this.exportToPDF(data, options);
       default:
         throw new Error(`Unsupported export format: ${format}`);
@@ -298,38 +310,38 @@ class ExportHelper {
     items: T[],
     columnMapping: Partial<Record<keyof T, string>>,
     title?: string,
-    description?: string
+    description?: string,
   ): ExportData {
     if (!items.length) {
       return {
-        headers: ['No Data'],
-        rows: [['No records found']],
+        headers: ["No Data"],
+        rows: [["No records found"]],
         title,
-        description
+        description,
       };
     }
 
     // Get headers from column mapping or use keys
-    const headers = Object.keys(items[0]).map(key => 
-      columnMapping[key as keyof T] || key
+    const headers = Object.keys(items[0]).map(
+      (key) => columnMapping[key as keyof T] || key,
     );
 
     // Convert items to rows
-    const rows = items.map(item => 
-      Object.keys(item).map(key => {
+    const rows = items.map((item) =>
+      Object.keys(item).map((key) => {
         const value = item[key];
-        if (value === null || value === undefined) return '';
-        if (typeof value === 'boolean') return value ? 'Yes' : 'No';
+        if (value === null || value === undefined) return "";
+        if (typeof value === "boolean") return value ? "Yes" : "No";
         if (value instanceof Date) return value.toLocaleString();
         return String(value);
-      })
+      }),
     );
 
     return {
       headers,
       rows,
       title,
-      description
+      description,
     };
   }
 }

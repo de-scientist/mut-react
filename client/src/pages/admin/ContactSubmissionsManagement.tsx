@@ -2,7 +2,16 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { contactAPI } from "../../services/api";
 import Toast from "../../components/Toast";
-import { Search, ArrowLeft, Mail, ExternalLink, Filter, Download, Share2, FileText } from "lucide-react";
+import {
+  Search,
+  ArrowLeft,
+  Mail,
+  ExternalLink,
+  Filter,
+  Download,
+  Share2,
+  FileText,
+} from "lucide-react";
 import exportHelper from "./utils/exportHelper";
 import sharingHelper from "./utils/sharingHelper";
 
@@ -106,133 +115,74 @@ const ContactSubmissionsManagement = () => {
     );
   }
 
-  // Export contact submissions as CSV
-  const exportContactsCSV = () => {
-    if (!submissions.length) return;
-
-    const headers = [
-      "Name",
-      "Email",
-      "Subject",
-      "Message",
-      "Status",
-      "Created At",
-    ];
-
-    const rows = submissions.map((s) => [
-      s.name,
-      s.email,
-      s.subject,
-      s.message,
-      s.status,
-      new Date(s.createdAt).toLocaleString(),
-    ]);
-
-    const csvContent = [headers, ...rows]
-      .map((row) =>
-        row.map((field) => `"${String(field).replace(/"/g, '""')}"`).join(","),
-      )
-      .join("\n");
-
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `contact_submissions_${new Date().toISOString().split("T")[0]}.csv`;
-    link.click();
-
-    URL.revokeObjectURL(url);
-  };
-
   // Enhanced export functions using centralized helper
-  const exportContacts = async (format: 'csv' | 'word' | 'pdf') => {
+  const exportContacts = async (format: "csv" | "word" | "pdf") => {
     try {
       const exportData = exportHelper.prepareExportData(
         submissions,
         {
-          name: 'Name',
-          email: 'Email',
-          subject: 'Subject',
-          message: 'Message',
-          status: 'Status',
-          createdAt: 'Created Date',
-          updatedAt: 'Updated Date'
+          name: "Name",
+          email: "Email",
+          subject: "Subject",
+          message: "Message",
+          status: "Status",
+          createdAt: "Created Date",
+          updatedAt: "Updated Date",
         },
-        'Contact Submissions Export',
-        `Export of all contact submissions (${submissions.length} total)`
+        "Contact Submissions Export",
+        `Export of all contact submissions (${submissions.length} total)`,
       );
 
       await exportHelper.export(exportData, format, {
         filename: `contact-submissions`,
         includeLogo: true,
-        includeTimestamp: true
+        includeTimestamp: true,
       });
     } catch (error) {
-      setError('Failed to export contact submissions');
-      console.error('Export error:', error);
+      setError("Failed to export contact submissions");
+      console.error("Export error:", error);
     }
   };
 
   // Enhanced sharing functions
   const shareAllContacts = async () => {
     try {
-      const shareableContacts = sharingHelper.prepareShareData(
-        submissions,
-        {
-          itemTitleField: 'name',
-          itemDescriptionField: 'subject',
-          itemUrlField: 'email',
-          itemType: 'contact'
-        }
-      );
+      const shareableContacts = sharingHelper.prepareShareData(submissions, {
+        itemTitleField: "name",
+        itemDescriptionField: "subject",
+        itemUrlField: "email",
+        itemType: "contact",
+      });
 
       await sharingHelper.shareBulk(shareableContacts, {
-        bulkTitle: 'Contact Submissions Directory',
-        method: 'native'
+        bulkTitle: "Contact Submissions Directory",
+        method: "native",
       });
     } catch (error) {
-      setError('Failed to share contact submissions');
-      console.error('Share error:', error);
+      setError("Failed to share contact submissions");
+      console.error("Share error:", error);
     }
   };
 
   const shareSingleContact = async (submission: ContactSubmission) => {
     try {
-      await sharingHelper.shareItem({
-        ...submission,
-        title: `${submission.name} - ${submission.subject}`,
-        description: submission.message.substring(0, 100) + '...'
-      }, {
-        formatTemplate: (item) => ({
-          title: `${item.name} - ${item.subject}`,
-          text: `${item.status} - ${item.message.substring(0, 100)}...`,
-          url: `mailto:${item.email}`
-        })
-      });
+      await sharingHelper.shareItem(
+        {
+          ...submission,
+          title: `${submission.name} - ${submission.subject}`,
+          description: submission.message.substring(0, 100) + "...",
+        },
+        {
+          formatTemplate: (item) => ({
+            title: `${item.name} - ${item.subject}`,
+            text: `${item.status} - ${item.message.substring(0, 100)}...`,
+            url: `mailto:${item.email}`,
+          }),
+        },
+      );
     } catch (error) {
-      setError('Failed to share contact submission');
-      console.error('Share error:', error);
-    }
-  };
-
-  // Share contact submissions
-  const shareContacts = async () => {
-    const text = submissions
-      .map(
-        (s) =>
-          `${s.name} (${s.email})\nSubject: ${s.subject}\nStatus: ${s.status}\n---`,
-      )
-      .join("\n");
-
-    if (navigator.share) {
-      await navigator.share({
-        title: "Contact Submissions",
-        text,
-      });
-    } else {
-      await navigator.clipboard.writeText(text);
-      alert("Contact submissions copied to clipboard");
+      setError("Failed to share contact submission");
+      console.error("Share error:", error);
     }
   };
 
@@ -245,7 +195,7 @@ const ContactSubmissionsManagement = () => {
             <div className="d-flex align-items-center gap-2 mb-1">
               <button
                 onClick={() => navigate("/admin")}
-                className="btn btn-white btn-sm border shadow-sm rounded-circle p-2"
+                className="btn btn-white btn-sm border shadow-sm d-inline-flex align-items-center gap-2 admin-action-btn admin-dashboard-btn"
                 title="Back to Dashboard"
                 aria-label="Back to Dashboard"
               >
@@ -260,11 +210,11 @@ const ContactSubmissionsManagement = () => {
             </p>
           </div>
 
-          <div className="d-flex gap-2 flex-wrap">
+          <div className="admin-actions">
             {/* Export Dropdown */}
             <div className="dropdown">
               <button
-                className="btn btn-outline-primary btn-sm rounded-pill shadow-sm dropdown-toggle"
+                className="btn btn-outline-primary btn-sm rounded-pill shadow-sm dropdown-toggle admin-action-btn admin-export-btn"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -274,17 +224,26 @@ const ContactSubmissionsManagement = () => {
               </button>
               <ul className="dropdown-menu">
                 <li>
-                  <button className="dropdown-item" onClick={() => exportContacts('csv')}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportContacts("csv")}
+                  >
                     <FileText size={16} className="me-2" /> Export as CSV
                   </button>
                 </li>
                 <li>
-                  <button className="dropdown-item" onClick={() => exportContacts('word')}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportContacts("word")}
+                  >
                     <FileText size={16} className="me-2" /> Export as Word
                   </button>
                 </li>
                 <li>
-                  <button className="dropdown-item" onClick={() => exportContacts('pdf')}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportContacts("pdf")}
+                  >
                     <FileText size={16} className="me-2" /> Export as PDF
                   </button>
                 </li>
@@ -293,7 +252,7 @@ const ContactSubmissionsManagement = () => {
 
             {/* Share Button */}
             <button
-              className="btn btn-outline-secondary btn-sm rounded-pill shadow-sm"
+              className="btn btn-outline-secondary btn-sm rounded-pill shadow-sm admin-action-btn admin-share-btn"
               onClick={shareAllContacts}
               title="Share contact submissions"
             >
@@ -465,7 +424,7 @@ const ContactSubmissionsManagement = () => {
       {selectedSubmission && (
         <div
           className="modal fade show d-block"
-          style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
           tabIndex={-1}
           onClick={() => setSelectedSubmission(null)}
         >
@@ -474,8 +433,18 @@ const ContactSubmissionsManagement = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-content border-0 shadow-lg rounded-4">
-              <div className="modal-header" style={{ backgroundColor: '#04003d', color: 'white', borderRadius: '1rem 1rem 0 0' }}>
-                <h5 className="modal-title d-flex align-items-center gap-2 fw-bold" style={{ color: '#e8e8e8' }}>
+              <div
+                className="modal-header"
+                style={{
+                  backgroundColor: "#04003d",
+                  color: "white",
+                  borderRadius: "1rem 1rem 0 0",
+                }}
+              >
+                <h5
+                  className="modal-title d-flex align-items-center gap-2 fw-bold"
+                  style={{ color: "#e8e8e8" }}
+                >
                   <Mail size={20} /> Contact Inquiry Details
                 </h5>
                 <button
@@ -488,50 +457,118 @@ const ContactSubmissionsManagement = () => {
               <div className="modal-body p-4">
                 <div className="row g-4">
                   <div className="col-md-6">
-                    <label className="text-uppercase mb-2" style={{ fontSize: '0.7rem', color: '#6c757d', fontWeight: '600', letterSpacing: '1px' }}>
+                    <label
+                      className="text-uppercase mb-2"
+                      style={{
+                        fontSize: "0.7rem",
+                        color: "#6c757d",
+                        fontWeight: "600",
+                        letterSpacing: "1px",
+                      }}
+                    >
                       From
                     </label>
-                    <div style={{ color: '#04003d', fontSize: '1.1rem', fontWeight: '600' }}>
+                    <div
+                      style={{
+                        color: "#04003d",
+                        fontSize: "1.1rem",
+                        fontWeight: "600",
+                      }}
+                    >
                       {selectedSubmission.name}
                     </div>
                     <a
                       href={`mailto:${selectedSubmission.email}`}
                       className="text-decoration-none d-flex align-items-center gap-1 mt-1"
-                      style={{ color: '#30d5c8', fontWeight: '500', fontSize: '0.9rem' }}
+                      style={{
+                        color: "#30d5c8",
+                        fontWeight: "500",
+                        fontSize: "0.9rem",
+                      }}
                     >
                       <Mail size={14} />
                       {selectedSubmission.email}
                     </a>
                   </div>
                   <div className="col-md-6">
-                    <label className="text-uppercase mb-2" style={{ fontSize: '0.7rem', color: '#6c757d', fontWeight: '600', letterSpacing: '1px' }}>
+                    <label
+                      className="text-uppercase mb-2"
+                      style={{
+                        fontSize: "0.7rem",
+                        color: "#6c757d",
+                        fontWeight: "600",
+                        letterSpacing: "1px",
+                      }}
+                    >
                       Status
                     </label>
                     <div>
                       <span
                         className={getStatusBadge(selectedSubmission.status)}
                       >
-                        {selectedSubmission.status.replace('_', ' ')}
+                        {selectedSubmission.status.replace("_", " ")}
                       </span>
                     </div>
                   </div>
                   <div className="col-12">
-                    <label className="text-uppercase mb-2" style={{ fontSize: '0.7rem', color: '#6c757d', fontWeight: '600', letterSpacing: '1px' }}>
+                    <label
+                      className="text-uppercase mb-2"
+                      style={{
+                        fontSize: "0.7rem",
+                        color: "#6c757d",
+                        fontWeight: "600",
+                        letterSpacing: "1px",
+                      }}
+                    >
                       Subject
                     </label>
-                    <div className="p-3 rounded-3" style={{ backgroundColor: '#ffffff', color: '#04003d', fontWeight: '500', border: '2px solid #e0e0e0', fontSize: '1rem' }}>
+                    <div
+                      className="p-3 rounded-3"
+                      style={{
+                        backgroundColor: "#ffffff",
+                        color: "#04003d",
+                        fontWeight: "500",
+                        border: "2px solid #e0e0e0",
+                        fontSize: "1rem",
+                      }}
+                    >
                       {selectedSubmission.subject}
                     </div>
                   </div>
                   <div className="col-12">
-                    <label className="text-uppercase mb-2" style={{ fontSize: '0.7rem', color: '#6c757d', fontWeight: '600', letterSpacing: '1px' }}>
+                    <label
+                      className="text-uppercase mb-2"
+                      style={{
+                        fontSize: "0.7rem",
+                        color: "#6c757d",
+                        fontWeight: "600",
+                        letterSpacing: "1px",
+                      }}
+                    >
                       Message
                     </label>
-                    <div className="p-4 rounded-3" style={{ backgroundColor: '#ffffff', border: '2px solid #30d5c8', color: '#212529', whiteSpace: 'pre-wrap', lineHeight: '1.8', fontSize: '0.95rem' }}>
+                    <div
+                      className="p-4 rounded-3"
+                      style={{
+                        backgroundColor: "#ffffff",
+                        border: "2px solid #30d5c8",
+                        color: "#212529",
+                        whiteSpace: "pre-wrap",
+                        lineHeight: "1.8",
+                        fontSize: "0.95rem",
+                      }}
+                    >
                       {selectedSubmission.message}
                     </div>
                   </div>
-                  <div className="col-12" style={{ color: '#6c757d', fontSize: '0.85rem', fontWeight: '500' }}>
+                  <div
+                    className="col-12"
+                    style={{
+                      color: "#6c757d",
+                      fontSize: "0.85rem",
+                      fontWeight: "500",
+                    }}
+                  >
                     Received on{" "}
                     {new Date(selectedSubmission.createdAt).toLocaleString()}
                   </div>
@@ -541,7 +578,12 @@ const ContactSubmissionsManagement = () => {
                 <button
                   type="button"
                   className="btn rounded-pill px-4"
-                  style={{ backgroundColor: '#e9ecef', color: '#04003d', border: 'none', fontWeight: '500' }}
+                  style={{
+                    backgroundColor: "#e9ecef",
+                    color: "#04003d",
+                    border: "none",
+                    fontWeight: "500",
+                  }}
                   onClick={() => setSelectedSubmission(null)}
                 >
                   Close
@@ -549,7 +591,12 @@ const ContactSubmissionsManagement = () => {
                 <a
                   href={`mailto:${selectedSubmission.email}`}
                   className="btn rounded-pill px-4 shadow-sm d-flex align-items-center gap-2"
-                  style={{ backgroundColor: '#ff9700', color: 'white', border: 'none', fontWeight: '600' }}
+                  style={{
+                    backgroundColor: "#ff9700",
+                    color: "white",
+                    border: "none",
+                    fontWeight: "600",
+                  }}
                 >
                   <Mail size={16} />
                   Reply via Email

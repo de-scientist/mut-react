@@ -60,19 +60,16 @@ const Footer = () => {
             <h6 className="footer-title">Quick Links</h6>
             <ul className="list-unstyled">
               {[
-                "Home",
-                "About Us",
-                "Ministries",
-                "Events",
-                "Blog",
-                "Resources",
+                { label: "Home", to: "/" },
+                { label: "About Us", to: "/about" },
+                { label: "Ministries", to: "/ministries" },
+                { label: "Events", to: "/events" },
+                { label: "Blog", to: "/blogs" },
+                { label: "Resources", to: "/resources" },
               ].map((item) => (
-                <li key={item} className="mb-2">
-                  <Link
-                    to={`/${item.toLowerCase().replace(" ", "")}`}
-                    className="footer-link"
-                  >
-                    {item}
+                <li key={item.label} className="mb-2">
+                  <Link to={item.to} className="footer-link">
+                    {item.label}
                   </Link>
                 </li>
               ))}
@@ -93,7 +90,10 @@ const Footer = () => {
               </div>
               <div className="d-flex">
                 <i className="fas fa-envelope text-red me-3" />
-                <a href="mailto:mutcunion@gmail.com" className="footer-email-link">
+                <a
+                  href="mailto:mutcunion@gmail.com"
+                  className="footer-email-link"
+                >
                   mutcunion@gmail.com
                 </a>
               </div>
@@ -105,7 +105,12 @@ const Footer = () => {
             <h6 className="footer-title">Weekly Services</h6>
             <div className="schedule-card">
               <div className="mb-3">
-                <p className="mb-2 fw-bold text-white" style={{ fontSize: '0.9rem' }}>Sunday Services:</p>
+                <p
+                  className="mb-2 fw-bold text-white"
+                  style={{ fontSize: "0.9rem" }}
+                >
+                  Sunday Services:
+                </p>
                 <div className="ms-2 small">
                   <div className="mb-1">1st Service: 7:00 AM - 9:30 AM</div>
                   <div className="mb-1">2nd Service: 9:30 AM - 12:30 PM</div>
@@ -113,14 +118,24 @@ const Footer = () => {
               </div>
 
               <div className="mb-3">
-                <p className="mb-2 fw-bold text-white" style={{ fontSize: '0.9rem' }}>Friday Services:</p>
+                <p
+                  className="mb-2 fw-bold text-white"
+                  style={{ fontSize: "0.9rem" }}
+                >
+                  Friday Services:
+                </p>
                 <div className="ms-2 small">
                   <div>7:00 PM - 9:30 PM</div>
                 </div>
               </div>
 
               <div className="mb-3">
-                <p className="mb-2 fw-bold text-white" style={{ fontSize: '0.9rem' }}>Daily Prayers:</p>
+                <p
+                  className="mb-2 fw-bold text-white"
+                  style={{ fontSize: "0.9rem" }}
+                >
+                  Daily Prayers:
+                </p>
                 <div className="ms-2 small">
                   <div className="mb-1">Morning: 6:00 AM - 6:50 AM</div>
                   <div>Evening: 9:00 PM - 9:30 PM</div>
@@ -128,7 +143,12 @@ const Footer = () => {
               </div>
 
               <div>
-                <p className="mb-2 fw-bold text-white" style={{ fontSize: '0.9rem' }}>Bible Study:</p>
+                <p
+                  className="mb-2 fw-bold text-white"
+                  style={{ fontSize: "0.9rem" }}
+                >
+                  Bible Study:
+                </p>
                 <div className="ms-2 small">
                   <div>Monday: 5:00 PM - 6:30 PM</div>
                 </div>

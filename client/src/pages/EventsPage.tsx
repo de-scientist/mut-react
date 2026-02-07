@@ -157,9 +157,9 @@ const EventsPage = () => {
 
   // Program UI state
   const [tab, setTab] = useState<"PROGRAM" | "SPECIAL">("PROGRAM");
-  const [programFilter, setProgramFilter] = useState<"ALL" | "SUNDAY" | "FRIDAY">(
-    "ALL",
-  );
+  const [programFilter, setProgramFilter] = useState<
+    "ALL" | "SUNDAY" | "FRIDAY"
+  >("ALL");
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -184,7 +184,9 @@ const EventsPage = () => {
     const q = search.trim().toLowerCase();
 
     return programSchedule
-      .filter((p) => (programFilter === "ALL" ? true : p.serviceType === programFilter))
+      .filter((p) =>
+        programFilter === "ALL" ? true : p.serviceType === programFilter,
+      )
       .filter((p) => {
         if (!q) return true;
         const hay = [
@@ -212,7 +214,11 @@ const EventsPage = () => {
         style={{ backgroundImage: "url('/assets/images/church2.jpg')" }}
       >
         <div className="hero-overlay" />
-        <div className="container position-relative" data-aos="fade-up" data-aos-duration="1000">
+        <div
+          className="container position-relative"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+        >
           <h1 className="display-3 mb-3">Programs & Events</h1>
           <p className="lead">
             View our Sunday Services, Friday Fellowships, and special events.
@@ -249,7 +255,11 @@ const EventsPage = () => {
               </div>
 
               <div className="d-flex gap-2 flex-wrap align-items-center">
-                <div className="btn-group" role="group" aria-label="Program filter">
+                <div
+                  className="btn-group"
+                  role="group"
+                  aria-label="Program filter"
+                >
                   <button
                     type="button"
                     className={`btn ${programFilter === "ALL" ? "btn-primary" : "btn-outline-primary"}`}
@@ -286,7 +296,9 @@ const EventsPage = () => {
             {filteredProgram.length === 0 ? (
               <div className="text-center py-5">
                 <div className="opacity-50 mb-2">📅</div>
-                <p className="text-muted">No program entries match your filters.</p>
+                <p className="text-muted">
+                  No program entries match your filters.
+                </p>
               </div>
             ) : (
               <div className="row g-4">
@@ -313,14 +325,19 @@ const EventsPage = () => {
                             <tbody>
                               {sunday.length === 0 ? (
                                 <tr>
-                                  <td colSpan={3} className="text-center py-4 text-muted">
+                                  <td
+                                    colSpan={3}
+                                    className="text-center py-4 text-muted"
+                                  >
                                     No Sunday entries.
                                   </td>
                                 </tr>
                               ) : (
                                 sunday.map((p) => (
                                   <tr key={p.id}>
-                                    <td className="px-3 fw-bold">{prettyDate(p.date)}</td>
+                                    <td className="px-3 fw-bold">
+                                      {prettyDate(p.date)}
+                                    </td>
                                     <td>
                                       <div className="fw-bold">{p.topic}</div>
                                       {p.notes?.length ? (
@@ -330,7 +347,9 @@ const EventsPage = () => {
                                       ) : null}
                                     </td>
                                     <td className="small">
-                                      {p.speakers?.length ? p.speakers.join(", ") : "—"}
+                                      {p.speakers?.length
+                                        ? p.speakers.join(", ")
+                                        : "—"}
                                     </td>
                                   </tr>
                                 ))
@@ -340,7 +359,10 @@ const EventsPage = () => {
                         </div>
                       </div>
                       <div className="card-footer bg-white border-top d-flex justify-content-end">
-                        <Link to="/contact" className="btn btn-outline-primary btn-sm">
+                        <Link
+                          to="/contact"
+                          className="btn btn-outline-primary btn-sm"
+                        >
                           Need more info? Contact Us
                         </Link>
                       </div>
@@ -371,14 +393,19 @@ const EventsPage = () => {
                             <tbody>
                               {friday.length === 0 ? (
                                 <tr>
-                                  <td colSpan={3} className="text-center py-4 text-muted">
+                                  <td
+                                    colSpan={3}
+                                    className="text-center py-4 text-muted"
+                                  >
                                     No Friday entries.
                                   </td>
                                 </tr>
                               ) : (
                                 friday.map((p) => (
                                   <tr key={p.id}>
-                                    <td className="px-3 fw-bold">{prettyDate(p.date)}</td>
+                                    <td className="px-3 fw-bold">
+                                      {prettyDate(p.date)}
+                                    </td>
                                     <td>
                                       <div className="fw-bold">{p.topic}</div>
                                       {p.notes?.length ? (
@@ -388,7 +415,9 @@ const EventsPage = () => {
                                       ) : null}
                                     </td>
                                     <td className="small">
-                                      {p.speakers?.length ? p.speakers.join(", ") : "—"}
+                                      {p.speakers?.length
+                                        ? p.speakers.join(", ")
+                                        : "—"}
                                     </td>
                                   </tr>
                                 ))
@@ -398,7 +427,10 @@ const EventsPage = () => {
                         </div>
                       </div>
                       <div className="card-footer bg-white border-top d-flex justify-content-end">
-                        <Link to="/contact" className="btn btn-outline-primary btn-sm">
+                        <Link
+                          to="/contact"
+                          className="btn btn-outline-primary btn-sm"
+                        >
                           Need more info? Contact Us
                         </Link>
                       </div>
@@ -426,13 +458,17 @@ const EventsPage = () => {
           <div className="container">
             <h2 className="section-title text-center">Special Events</h2>
             <p className="text-center lead mb-5">
-              Announcements for special services, missions, conferences, and union-wide activities.
+              Announcements for special services, missions, conferences, and
+              union-wide activities.
             </p>
 
             <div className="row justify-content-center">
               {loading && (
                 <div className="col-12 text-center py-5">
-                  <div className="spinner-border text-primary mb-3" role="status"></div>
+                  <div
+                    className="spinner-border text-primary mb-3"
+                    role="status"
+                  ></div>
                   <p className="text-muted">Loading special events...</p>
                 </div>
               )}
@@ -465,7 +501,11 @@ const EventsPage = () => {
                   >
                     <div className="card event-card h-100 shadow-sm">
                       {event.imageUrl ? (
-                        <img src={event.imageUrl} className="card-img-top" alt={event.title} />
+                        <img
+                          src={event.imageUrl}
+                          className="card-img-top"
+                          alt={event.title}
+                        />
                       ) : (
                         <div
                           className="card-img-top bg-light d-flex align-items-center justify-content-center"
@@ -493,9 +533,14 @@ const EventsPage = () => {
                             <strong>Location:</strong> {event.location}
                           </p>
                         )}
-                        {event.description && <p className="card-text">{event.description}</p>}
+                        {event.description && (
+                          <p className="card-text">{event.description}</p>
+                        )}
 
-                        <Link to="/contact" className="btn btn-primary btn-sm mt-2">
+                        <Link
+                          to="/contact"
+                          className="btn btn-primary btn-sm mt-2"
+                        >
                           Ask / RSVP
                         </Link>
                       </div>
@@ -512,13 +557,15 @@ const EventsPage = () => {
         <div className="container text-center" data-aos="zoom-in">
           <h2 className="section-title text-white">Stay Connected</h2>
           <p className="lead mb-4 text-white-50">
-            Want to be notified about updates? Contact us or subscribe to our newsletter.
+            Want to be notified about updates? Contact us or subscribe to our
+            newsletter.
           </p>
           <Link to="/contact" className="btn btn-primary btn-lg me-3">
             Contact Us <i className="fas fa-envelope ms-2" />
           </Link>
           <Link to="/" className="btn btn-secondary btn-lg">
-            Subscribe to Newsletter <i className="fas fa-envelope-open-text ms-2" />
+            Subscribe to Newsletter{" "}
+            <i className="fas fa-envelope-open-text ms-2" />
           </Link>
         </div>
       </section>

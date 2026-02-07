@@ -57,21 +57,36 @@ const MissionsEvangelismMinistryPage = () => {
               <div data-aos="fade-right" data-aos-delay="100">
                 <h5 className="text-secondary mb-3">Mandate</h5>
                 <p>
-                  To equip and mobilize the CU to faithfully proclaim the gospel in word and deed, both on campus and beyond, ensuring that every member is engaged in the Great Commission.
+                  To equip and mobilize the CU to faithfully proclaim the gospel
+                  in word and deed, both on campus and beyond, ensuring that
+                  every member is engaged in the Great Commission.
                 </p>
               </div>
               <div data-aos="fade-right" data-aos-delay="200">
                 <h5 className="text-secondary mb-3">Our Mission</h5>
                 <p>
-                  The Missions &amp; Evangelism Ministry is committed to spreading the Gospel and serving communities. Through evangelism, community service, and discipleship, we seek to reach the lost, establish new believers in faith, and demonstrate Christ&apos;s love through compassionate action.
+                  The Missions &amp; Evangelism Ministry is committed to
+                  spreading the Gospel and serving communities. Through
+                  evangelism, community service, and discipleship, we seek to
+                  reach the lost, establish new believers in faith, and
+                  demonstrate Christ&apos;s love through compassionate action.
                 </p>
               </div>
               <div data-aos="fade-right" data-aos-delay="300">
                 <h5 className="text-secondary mb-3">Our Three Focus Areas</h5>
                 <ul>
-                  <li><strong>Evangelism:</strong> Campus-wide and community evangelistic efforts</li>
-                  <li><strong>Hope Ministry:</strong> Compassionate outreach to vulnerable groups</li>
-                  <li><strong>Integral Ministry:</strong> Strategic outreach to high schools and community service</li>
+                  <li>
+                    <strong>Evangelism:</strong> Campus-wide and community
+                    evangelistic efforts
+                  </li>
+                  <li>
+                    <strong>Hope Ministry:</strong> Compassionate outreach to
+                    vulnerable groups
+                  </li>
+                  <li>
+                    <strong>Integral Ministry:</strong> Strategic outreach to
+                    high schools and community service
+                  </li>
                 </ul>
               </div>
             </div>
@@ -102,7 +117,8 @@ const MissionsEvangelismMinistryPage = () => {
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            The ministry operates through three specialized sub-committees, each with a distinct focus and leadership.
+            The ministry operates through three specialized sub-committees, each
+            with a distinct focus and leadership.
           </p>
           <div className="row">
             {/* Evangelism Sub-Committee */}
@@ -126,7 +142,8 @@ const MissionsEvangelismMinistryPage = () => {
                     <li>Training in personal evangelism</li>
                   </ul>
                   <p className="text-muted small">
-                    <i className="fas fa-calendar-alt me-2" /> Regular activities
+                    <i className="fas fa-calendar-alt me-2" /> Regular
+                    activities
                   </p>
                 </div>
               </div>
@@ -168,7 +185,9 @@ const MissionsEvangelismMinistryPage = () => {
               <div className="sub-ministry-card">
                 <div className="card-body">
                   <i className="fas fa-globe praise-icon mb-3" />
-                  <h4 className="card-title">Integral Ministry Sub-Committee</h4>
+                  <h4 className="card-title">
+                    Integral Ministry Sub-Committee
+                  </h4>
                   <p className="card-text">
                     Strategic outreach to specific groups and community service.
                   </p>
@@ -180,7 +199,8 @@ const MissionsEvangelismMinistryPage = () => {
                     <li>CSR street evangelism</li>
                   </ul>
                   <p className="text-muted small">
-                    <i className="fas fa-calendar-alt me-2" /> Ongoing partnerships
+                    <i className="fas fa-calendar-alt me-2" /> Ongoing
+                    partnerships
                   </p>
                 </div>
               </div>
@@ -200,7 +220,8 @@ const MissionsEvangelismMinistryPage = () => {
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            Our leadership structure ensures doctrinal soundness and effective coordination across all outreach activities.
+            Our leadership structure ensures doctrinal soundness and effective
+            coordination across all outreach activities.
           </p>
           <div className="row">
             <div
@@ -212,10 +233,10 @@ const MissionsEvangelismMinistryPage = () => {
                 <div className="card-body text-center">
                   <i className="fas fa-user-tie event-icon" />
                   <h5 className="card-title">Chairperson</h5>
-                  <p className="card-text">
-                    M&amp;E Coordinator
-                  </p>
-                  <small className="text-muted">Strategic leadership &amp; oversight</small>
+                  <p className="card-text">M&amp;E Coordinator</p>
+                  <small className="text-muted">
+                    Strategic leadership &amp; oversight
+                  </small>
                 </div>
               </div>
             </div>
@@ -228,10 +249,10 @@ const MissionsEvangelismMinistryPage = () => {
                 <div className="card-body text-center">
                   <i className="fas fa-users event-icon" />
                   <h5 className="card-title">Evangelism Leader</h5>
-                  <p className="card-text">
-                    Campus &amp; Outreach
-                  </p>
-                  <small className="text-muted">Leads campus-wide evangelism</small>
+                  <p className="card-text">Campus &amp; Outreach</p>
+                  <small className="text-muted">
+                    Leads campus-wide evangelism
+                  </small>
                 </div>
               </div>
             </div>
@@ -244,10 +265,10 @@ const MissionsEvangelismMinistryPage = () => {
                 <div className="card-body text-center">
                   <i className="fas fa-heart event-icon" />
                   <h5 className="card-title">Hope Leader</h5>
-                  <p className="card-text">
-                    Vulnerable Groups Ministry
-                  </p>
-                  <small className="text-muted">Compassionate community care</small>
+                  <p className="card-text">Vulnerable Groups Ministry</p>
+                  <small className="text-muted">
+                    Compassionate community care
+                  </small>
                 </div>
               </div>
             </div>
@@ -260,10 +281,10 @@ const MissionsEvangelismMinistryPage = () => {
                 <div className="card-body text-center">
                   <i className="fas fa-globe event-icon" />
                   <h5 className="card-title">Integral Leader</h5>
-                  <p className="card-text">
-                    Strategic Outreach
-                  </p>
-                  <small className="text-muted">High schools &amp; CSR initiatives</small>
+                  <p className="card-text">Strategic Outreach</p>
+                  <small className="text-muted">
+                    High schools &amp; CSR initiatives
+                  </small>
                 </div>
               </div>
             </div>
@@ -282,31 +303,72 @@ const MissionsEvangelismMinistryPage = () => {
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            Our leadership is committed to spreading the gospel with excellence and integrity.
+            Our leadership is committed to spreading the gospel with excellence
+            and integrity.
           </p>
           <div className="row">
-            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div
+              className="col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <div className="leadership-card">
-                <h5><i className="fas fa-check-circle text-success me-2"></i>Strategic Planning</h5>
-                <p>Developing overall outreach strategy aligned with MUTCU&apos;s vision and doctrinal basis</p>
+                <h5>
+                  <i className="fas fa-check-circle text-success me-2"></i>
+                  Strategic Planning
+                </h5>
+                <p>
+                  Developing overall outreach strategy aligned with MUTCU&apos;s
+                  vision and doctrinal basis
+                </p>
               </div>
             </div>
-            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div
+              className="col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
               <div className="leadership-card">
-                <h5><i className="fas fa-check-circle text-success me-2"></i>Team Training</h5>
-                <p>Ensuring all outreach teams are well-trained and grounded in biblical evangelism</p>
+                <h5>
+                  <i className="fas fa-check-circle text-success me-2"></i>Team
+                  Training
+                </h5>
+                <p>
+                  Ensuring all outreach teams are well-trained and grounded in
+                  biblical evangelism
+                </p>
               </div>
             </div>
-            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+            <div
+              className="col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
               <div className="leadership-card">
-                <h5><i className="fas fa-check-circle text-success me-2"></i>Resource Provision</h5>
-                <p>Ensuring outreach teams are adequately resourced for effective ministry</p>
+                <h5>
+                  <i className="fas fa-check-circle text-success me-2"></i>
+                  Resource Provision
+                </h5>
+                <p>
+                  Ensuring outreach teams are adequately resourced for effective
+                  ministry
+                </p>
               </div>
             </div>
-            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="500">
+            <div
+              className="col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
               <div className="leadership-card">
-                <h5><i className="fas fa-check-circle text-success me-2"></i>Doctrinal Oversight</h5>
-                <p>Maintaining alignment with MUTCU&apos;s doctrinal basis in all evangelism activities</p>
+                <h5>
+                  <i className="fas fa-check-circle text-success me-2"></i>
+                  Doctrinal Oversight
+                </h5>
+                <p>
+                  Maintaining alignment with MUTCU&apos;s doctrinal basis in all
+                  evangelism activities
+                </p>
               </div>
             </div>
           </div>
@@ -324,7 +386,9 @@ const MissionsEvangelismMinistryPage = () => {
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            If you are passionate about sharing the Gospel and serving others, join us in reaching our campus and communities with the Good News of Jesus Christ.
+            If you are passionate about sharing the Gospel and serving others,
+            join us in reaching our campus and communities with the Good News of
+            Jesus Christ.
           </p>
           <div className="row justify-content-center">
             <div className="col-md-8" data-aos="fade-up" data-aos-delay="200">

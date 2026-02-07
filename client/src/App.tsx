@@ -135,11 +135,23 @@ function App() {
 
         {/* Special committees */}
         <Route path="/special-committees" element={<SpecialCommitteesPage />} />
-        <Route path="/special-committees/advisory-board" element={<AdvisoryBoardPage />} />
-        <Route path="/special-committees/auditing" element={<AuditingCommitteePage />} />
+        <Route
+          path="/special-committees/advisory-board"
+          element={<AdvisoryBoardPage />}
+        />
+        <Route
+          path="/special-committees/auditing"
+          element={<AuditingCommitteePage />}
+        />
         <Route path="/special-committees/rmc" element={<RMCPage />} />
-        <Route path="/special-committees/associates" element={<AssociatesCommitteePage />} />
-        <Route path="/special-committees/interim-exco" element={<InterimExecutiveCouncilPage />} />
+        <Route
+          path="/special-committees/associates"
+          element={<AssociatesCommitteePage />}
+        />
+        <Route
+          path="/special-committees/interim-exco"
+          element={<InterimExecutiveCouncilPage />}
+        />
 
         {/* Committee routes */}
         <Route path="committees/chairman" element={<ChairmanPage />} />

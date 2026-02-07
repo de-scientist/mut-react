@@ -213,57 +213,62 @@ const BlogsManagement = () => {
     setEditingId(null);
     setMessage(null);
     setError(null);
+    requestAnimationFrame(() => {
+      contentRef.current?.blur();
+    });
+  };
+
+  const handleClearForm = () => {
+    resetForm();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // Export functions
-  const exportBlogs = async (format: 'csv' | 'word' | 'pdf') => {
+  const exportBlogs = async (format: "csv" | "word" | "pdf") => {
     try {
       const exportData = exportHelper.prepareExportData(
         blogs,
         {
-          title: 'Title',
-          slug: 'Slug',
-          excerpt: 'Excerpt',
-          author: 'Author',
-          status: 'Status',
-          createdAt: 'Created Date',
-          publishedAt: 'Published Date'
+          title: "Title",
+          slug: "Slug",
+          excerpt: "Excerpt",
+          author: "Author",
+          status: "Status",
+          createdAt: "Created Date",
+          publishedAt: "Published Date",
         },
-        'Blogs Export',
-        `Export of all blog posts (${blogs.length} total)`
+        "Blogs Export",
+        `Export of all blog posts (${blogs.length} total)`,
       );
 
       await exportHelper.export(exportData, format, {
         filename: `blogs`,
         includeLogo: true,
-        includeTimestamp: true
+        includeTimestamp: true,
       });
     } catch (error) {
-      setError('Failed to export blogs');
-      console.error('Export error:', error);
+      setError("Failed to export blogs");
+      console.error("Export error:", error);
     }
   };
 
   // Sharing functions
   const shareAllBlogs = async () => {
     try {
-      const shareableBlogs = sharingHelper.prepareShareData(
-        blogs,
-        {
-          itemTitleField: 'title',
-          itemDescriptionField: 'excerpt',
-          itemUrlField: 'slug',
-          itemType: 'blog'
-        }
-      );
+      const shareableBlogs = sharingHelper.prepareShareData(blogs, {
+        itemTitleField: "title",
+        itemDescriptionField: "excerpt",
+        itemUrlField: "slug",
+        itemType: "blog",
+      });
 
       await sharingHelper.shareBulk(shareableBlogs, {
-        bulkTitle: 'Blog Posts Directory',
-        method: 'native'
+        bulkTitle: "Blog Posts Directory",
+        method: "native",
       });
     } catch (error) {
-      setError('Failed to share blogs');
-      console.error('Share error:', error);
+      setError("Failed to share blogs");
+      console.error("Share error:", error);
     }
   };
 
@@ -272,28 +277,28 @@ const BlogsManagement = () => {
       await sharingHelper.shareItem(blog, {
         formatTemplate: (item) => ({
           title: item.title,
-          text: `${item.excerpt || ''}\nStatus: ${item.status}`,
-          url: `/blog/${item.slug}`
-        })
+          text: `${item.excerpt || ""}\nStatus: ${item.status}`,
+          url: `/blog/${item.slug}`,
+        }),
       });
     } catch (error) {
-      setError('Failed to share blog');
-      console.error('Share error:', error);
+      setError("Failed to share blog");
+      console.error("Share error:", error);
     }
   };
 
   return (
     <div className="admin-management bg-light min-vh-100 pb-5">
-      <header className="bg-primary-dark text-white py-4 shadow-sm sticky-top">
+      <header className="bg-primary-dark text-white py-4 shadow-sm sticky-top blog-admin-header">
         <div className="container d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
           <div>
             <p className="text-uppercase small mb-1 letter-space-1">Admin</p>
-            <h2 className="fw-bold mb-0">Blog Management</h2>
+            <h2 className="fw-bold mb-0 text-white">Blog Management</h2>
             <p className="mb-0 text-white-50">
               Create, edit, and publish blog posts.
             </p>
           </div>
-          <div className="d-flex gap-2">
+          <div className="admin-actions">
             <button
               className="btn btn-light btn-sm"
               onClick={() => loadBlogs(pagination?.page || 1)}
@@ -301,11 +306,11 @@ const BlogsManagement = () => {
               <i className="fas fa-rotate me-2" aria-hidden="true" />
               Refresh
             </button>
-            
+
             {/* Export Dropdown */}
             <div className="dropdown">
               <button
-                className="btn btn-outline-light btn-sm dropdown-toggle"
+                className="btn btn-outline-light btn-sm dropdown-toggle admin-action-btn admin-export-btn"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -314,17 +319,26 @@ const BlogsManagement = () => {
               </button>
               <ul className="dropdown-menu">
                 <li>
-                  <button className="dropdown-item" onClick={() => exportBlogs('csv')}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportBlogs("csv")}
+                  >
                     <FileText size={16} className="me-2" /> Export as CSV
                   </button>
                 </li>
                 <li>
-                  <button className="dropdown-item" onClick={() => exportBlogs('word')}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportBlogs("word")}
+                  >
                     <FileText size={16} className="me-2" /> Export as Word
                   </button>
                 </li>
                 <li>
-                  <button className="dropdown-item" onClick={() => exportBlogs('pdf')}>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportBlogs("pdf")}
+                  >
                     <FileText size={16} className="me-2" /> Export as PDF
                   </button>
                 </li>
@@ -333,15 +347,15 @@ const BlogsManagement = () => {
 
             {/* Share Button */}
             <button
-              className="btn btn-outline-info btn-sm"
+              className="btn btn-outline-info btn-sm admin-action-btn admin-share-btn"
               onClick={shareAllBlogs}
               title="Share all blog posts"
             >
               <Share2 size={16} className="me-1" /> Share All
             </button>
-            
+
             <button
-              className="btn btn-outline-light btn-sm"
+              className="btn btn-outline-light btn-sm admin-action-btn admin-dashboard-btn"
               onClick={() => navigate("/admin")}
             >
               Back to Dashboard
@@ -364,7 +378,7 @@ const BlogsManagement = () => {
 
         <div className="row g-4">
           <div className="col-lg-5">
-            <div className="admin-form-container shadow-sm">
+            <div className="admin-form-container shadow-sm admin-form-soft">
               <div className="card-header d-flex justify-content-between align-items-center">
                 <h5 className="mb-0">
                   {editingId ? "Edit Blog Post" : "Create Blog Post"}
@@ -527,7 +541,7 @@ const BlogsManagement = () => {
                   <div className="col-12 d-flex gap-2">
                     <button
                       type="submit"
-                      className="btn btn-primary"
+                      className="btn btn-primary admin-add-btn"
                       disabled={saving}
                     >
                       {saving
@@ -539,7 +553,7 @@ const BlogsManagement = () => {
                     <button
                       type="button"
                       className="btn btn-secondary"
-                      onClick={resetForm}
+                      onClick={handleClearForm}
                     >
                       Clear
                     </button>

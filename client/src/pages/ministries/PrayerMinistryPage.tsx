@@ -38,7 +38,8 @@ const PrayerMinistryPage = () => {
       setExperience("");
       showSuccessMessage();
     } catch (apiError: any) {
-      const message = apiError?.message || "Unable to submit right now. Please try again.";
+      const message =
+        apiError?.message || "Unable to submit right now. Please try again.";
       setError(message);
     } finally {
       setSubmitting(false);
@@ -73,23 +74,41 @@ const PrayerMinistryPage = () => {
               <div data-aos="fade-right" data-aos-delay="100">
                 <h5 className="text-secondary mb-3">Mandate</h5>
                 <p>
-                  To mobilize and lead the Christian Union in consistent, fervent, and effective prayer.
+                  To mobilize and lead the Christian Union in consistent,
+                  fervent, and effective prayer.
                 </p>
               </div>
               <div data-aos="fade-right" data-aos-delay="200">
                 <h5 className="text-secondary mb-3">Our Mission</h5>
                 <p>
-                  The Prayer Ministry is the spiritual engine of MUTCU, dedicated to cultivating a deep culture of prayer and intercession among members. We believe that prayer is foundational to all ministry and that consistent, fervent intercession is key to spiritual breakthroughs and fulfilling the Union&apos;s vision and mission.
+                  The Prayer Ministry is the spiritual engine of MUTCU,
+                  dedicated to cultivating a deep culture of prayer and
+                  intercession among members. We believe that prayer is
+                  foundational to all ministry and that consistent, fervent
+                  intercession is key to spiritual breakthroughs and fulfilling
+                  the Union&apos;s vision and mission.
                 </p>
               </div>
               <div data-aos="fade-right" data-aos-delay="300">
                 <h5 className="text-secondary mb-3">Our Focus</h5>
                 <ul>
-                  <li>Planning and coordinating all corporate prayer meetings</li>
-                  <li>Organizing prayer weeks, fasts, and special prayer events</li>
-                  <li>Identifying and communicating key prayer points for the CU</li>
-                  <li>Building accountability and personal prayer disciplines among members</li>
-                  <li>Mobilizing year-based prayer coordinators to lead within their groups</li>
+                  <li>
+                    Planning and coordinating all corporate prayer meetings
+                  </li>
+                  <li>
+                    Organizing prayer weeks, fasts, and special prayer events
+                  </li>
+                  <li>
+                    Identifying and communicating key prayer points for the CU
+                  </li>
+                  <li>
+                    Building accountability and personal prayer disciplines
+                    among members
+                  </li>
+                  <li>
+                    Mobilizing year-based prayer coordinators to lead within
+                    their groups
+                  </li>
                 </ul>
               </div>
             </div>
@@ -120,7 +139,8 @@ const PrayerMinistryPage = () => {
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            The Prayer Ministry facilitates multiple opportunities for corporate and personal prayer throughout the spiritual year.
+            The Prayer Ministry facilitates multiple opportunities for corporate
+            and personal prayer throughout the spiritual year.
           </p>
           <div className="row">
             <div
@@ -137,8 +157,12 @@ const PrayerMinistryPage = () => {
                   </p>
                   <h6 className="text-secondary mb-2">Prayer Times</h6>
                   <ul className="small mb-3">
-                    <li><strong>Morning Prayer:</strong> 6:00 AM - 6:50 AM</li>
-                    <li><strong>Evening Prayer:</strong> 9:00 PM - 9:30 PM</li>
+                    <li>
+                      <strong>Morning Prayer:</strong> 6:00 AM - 6:50 AM
+                    </li>
+                    <li>
+                      <strong>Evening Prayer:</strong> 9:00 PM - 9:30 PM
+                    </li>
                   </ul>
                   <h6 className="text-secondary mb-2">Activities</h6>
                   <ul>
@@ -167,8 +191,10 @@ const PrayerMinistryPage = () => {
                   </p>
                   <h6 className="text-secondary mb-2">Fasting Schedule</h6>
                   <p className="small mb-3">
-                    <strong>Every Fortnight</strong><br/>
-                    <i className="fas fa-calendar-day me-2" />Wednesdays
+                    <strong>Every Fortnight</strong>
+                    <br />
+                    <i className="fas fa-calendar-day me-2" />
+                    Wednesdays
                   </p>
                   <h6 className="text-secondary mb-2">Activities</h6>
                   <ul>
@@ -177,7 +203,8 @@ const PrayerMinistryPage = () => {
                     <li>Intercession moments</li>
                   </ul>
                   <p className="text-muted small">
-                    <i className="fas fa-calendar-alt me-2" /> Scheduled throughout the year
+                    <i className="fas fa-calendar-alt me-2" /> Scheduled
+                    throughout the year
                   </p>
                 </div>
               </div>
@@ -218,7 +245,8 @@ const PrayerMinistryPage = () => {
                   <i className="fas fa-hands-praying band-icon mb-3" />
                   <h4 className="card-title">Year Fellowship Prayer Groups</h4>
                   <p className="card-text">
-                    Prayer coordinators mobilizing intercession within each year group.
+                    Prayer coordinators mobilizing intercession within each year
+                    group.
                   </p>
                   <h6>Activities</h6>
                   <ul>
@@ -227,7 +255,8 @@ const PrayerMinistryPage = () => {
                     <li>Prayer report sharing</li>
                   </ul>
                   <p className="text-muted small">
-                    <i className="fas fa-calendar-alt me-2" /> During fellowship meetings
+                    <i className="fas fa-calendar-alt me-2" /> During fellowship
+                    meetings
                   </p>
                 </div>
               </div>
@@ -243,7 +272,8 @@ const PrayerMinistryPage = () => {
                   <i className="fas fa-handshake choir-icon mb-3" />
                   <h4 className="card-title">Prayer Partnerships</h4>
                   <p className="card-text">
-                    Accountability and prayer partner groups for personal growth.
+                    Accountability and prayer partner groups for personal
+                    growth.
                   </p>
                   <h6>Activities</h6>
                   <ul>
@@ -252,7 +282,8 @@ const PrayerMinistryPage = () => {
                     <li>Accountability partnerships</li>
                   </ul>
                   <p className="text-muted small">
-                    <i className="fas fa-calendar-alt me-2" /> Ongoing throughout the year
+                    <i className="fas fa-calendar-alt me-2" /> Ongoing
+                    throughout the year
                   </p>
                 </div>
               </div>
@@ -268,7 +299,8 @@ const PrayerMinistryPage = () => {
                   <i className="fas fa-bullhorn instrumentalists-icon mb-3" />
                   <h4 className="card-title">Prayer Requests &amp; Updates</h4>
                   <p className="card-text">
-                    Communication of prayer points and prayer reports for the CU.
+                    Communication of prayer points and prayer reports for the
+                    CU.
                   </p>
                   <h6>Activities</h6>
                   <ul>
@@ -277,7 +309,8 @@ const PrayerMinistryPage = () => {
                     <li>CU prayer focus updates</li>
                   </ul>
                   <p className="text-muted small">
-                    <i className="fas fa-calendar-alt me-2" /> Regular communication
+                    <i className="fas fa-calendar-alt me-2" /> Regular
+                    communication
                   </p>
                 </div>
               </div>
@@ -297,7 +330,8 @@ const PrayerMinistryPage = () => {
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            The Prayer Ministry is structured with dedicated roles to ensure effective coordination and spiritual leadership.
+            The Prayer Ministry is structured with dedicated roles to ensure
+            effective coordination and spiritual leadership.
           </p>
           <div className="row">
             <div
@@ -309,10 +343,10 @@ const PrayerMinistryPage = () => {
                 <div className="card-body text-center">
                   <i className="fas fa-hands-praying event-icon" />
                   <h5 className="card-title">Chairperson</h5>
-                  <p className="card-text">
-                    Prayer Coordinator
-                  </p>
-                  <small className="text-muted">Provides overall spiritual leadership and coordination</small>
+                  <p className="card-text">Prayer Coordinator</p>
+                  <small className="text-muted">
+                    Provides overall spiritual leadership and coordination
+                  </small>
                 </div>
               </div>
             </div>
@@ -329,7 +363,9 @@ const PrayerMinistryPage = () => {
                   <p className="card-text">
                     Administrative &amp; Financial Support
                   </p>
-                  <small className="text-muted">Handles communications and prayer request distribution</small>
+                  <small className="text-muted">
+                    Handles communications and prayer request distribution
+                  </small>
                 </div>
               </div>
             </div>
@@ -346,7 +382,9 @@ const PrayerMinistryPage = () => {
                   <p className="card-text">
                     Anza, Endelea 1, Endelea 2, VUKA FiT
                   </p>
-                  <small className="text-muted">Mobilize prayer within their year groups</small>
+                  <small className="text-muted">
+                    Mobilize prayer within their year groups
+                  </small>
                 </div>
               </div>
             </div>
@@ -363,7 +401,9 @@ const PrayerMinistryPage = () => {
                   <p className="card-text">
                     Prayer Warriors &amp; Support Team
                   </p>
-                  <small className="text-muted">Active participation in planning and execution</small>
+                  <small className="text-muted">
+                    Active participation in planning and execution
+                  </small>
                 </div>
               </div>
             </div>
@@ -382,31 +422,72 @@ const PrayerMinistryPage = () => {
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            The Prayer Coordinator and leadership team are committed to advancing prayer throughout the CU.
+            The Prayer Coordinator and leadership team are committed to
+            advancing prayer throughout the CU.
           </p>
           <div className="row">
-            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div
+              className="col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <div className="leadership-card">
-                <h5><i className="fas fa-check-circle text-success me-2"></i>Planning &amp; Coordination</h5>
-                <p>Strategically planning all corporate prayer meetings, prayer weeks, and special events</p>
+                <h5>
+                  <i className="fas fa-check-circle text-success me-2"></i>
+                  Planning &amp; Coordination
+                </h5>
+                <p>
+                  Strategically planning all corporate prayer meetings, prayer
+                  weeks, and special events
+                </p>
               </div>
             </div>
-            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div
+              className="col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
               <div className="leadership-card">
-                <h5><i className="fas fa-check-circle text-success me-2"></i>Prayer Direction Setting</h5>
-                <p>Identifying and communicating key prayer points for the CU and beyond</p>
+                <h5>
+                  <i className="fas fa-check-circle text-success me-2"></i>
+                  Prayer Direction Setting
+                </h5>
+                <p>
+                  Identifying and communicating key prayer points for the CU and
+                  beyond
+                </p>
               </div>
             </div>
-            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+            <div
+              className="col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
               <div className="leadership-card">
-                <h5><i className="fas fa-check-circle text-success me-2"></i>Year Group Mobilization</h5>
-                <p>Appointing and supporting prayer coordinators within each year fellowship</p>
+                <h5>
+                  <i className="fas fa-check-circle text-success me-2"></i>Year
+                  Group Mobilization
+                </h5>
+                <p>
+                  Appointing and supporting prayer coordinators within each year
+                  fellowship
+                </p>
               </div>
             </div>
-            <div className="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="500">
+            <div
+              className="col-md-6 mb-4"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
               <div className="leadership-card">
-                <h5><i className="fas fa-check-circle text-success me-2"></i>Prayer Culture Building</h5>
-                <p>Championing a culture of fervent, consistent prayer throughout the entire union</p>
+                <h5>
+                  <i className="fas fa-check-circle text-success me-2"></i>
+                  Prayer Culture Building
+                </h5>
+                <p>
+                  Championing a culture of fervent, consistent prayer throughout
+                  the entire union
+                </p>
               </div>
             </div>
           </div>
@@ -424,7 +505,9 @@ const PrayerMinistryPage = () => {
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            If you have a passion for intercession and believe in the power of prayer, we invite you to join our Prayer Ministry and help mobilize the union in fervent, consistent prayer.
+            If you have a passion for intercession and believe in the power of
+            prayer, we invite you to join our Prayer Ministry and help mobilize
+            the union in fervent, consistent prayer.
           </p>
           <div className="row justify-content-center">
             <div className="col-md-8" data-aos="fade-up" data-aos-delay="200">
@@ -507,8 +590,9 @@ const PrayerMinistryPage = () => {
                 </form>
                 {showSuccess && (
                   <div className="mt-3 text-success animate-pop-in">
-                    Thank you for your interest in the Prayer Ministry! We&apos;ve
-                    received your submission and will get in touch with you soon.
+                    Thank you for your interest in the Prayer Ministry!
+                    We&apos;ve received your submission and will get in touch
+                    with you soon.
                   </div>
                 )}
               </div>
