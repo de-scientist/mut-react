@@ -60,19 +60,16 @@ const Footer = () => {
             <h6 className="footer-title">Quick Links</h6>
             <ul className="list-unstyled">
               {[
-                "Home",
-                "About Us",
-                "Ministries",
-                "Events",
-                "Blog",
-                "Resources",
+                { label: "Home", to: "/" },
+                { label: "About Us", to: "/about" },
+                { label: "Ministries", to: "/ministries" },
+                { label: "Events", to: "/events" },
+                { label: "Blog", to: "/blogs" },
+                { label: "Resources", to: "/resources" },
               ].map((item) => (
-                <li key={item} className="mb-2">
-                  <Link
-                    to={`/${item.toLowerCase().replace(" ", "")}`}
-                    className="footer-link"
-                  >
-                    {item}
+                <li key={item.label} className="mb-2">
+                  <Link to={item.to} className="footer-link">
+                    {item.label}
                   </Link>
                 </li>
               ))}
