@@ -370,7 +370,7 @@ const BlogsManagement = () => {
 
         <div className="row g-4">
           <div className="col-lg-5">
-            <div className="admin-form-container shadow-sm">
+            <div className="admin-form-container shadow-sm admin-form-soft">
               <div className="card-header d-flex justify-content-between align-items-center">
                 <h5 className="mb-0">
                   {editingId ? "Edit Blog Post" : "Create Blog Post"}
@@ -533,7 +533,7 @@ const BlogsManagement = () => {
                   <div className="col-12 d-flex gap-2">
                     <button
                       type="submit"
-                      className="btn btn-primary"
+                      className="btn btn-primary admin-add-btn"
                       disabled={saving}
                     >
                       {saving
