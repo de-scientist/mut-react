@@ -281,11 +281,11 @@ const BlogsManagement = () => {
 
   return (
     <div className="admin-management bg-light min-vh-100 pb-5">
-      <header className="bg-primary-dark text-white py-4 shadow-sm sticky-top">
+      <header className="bg-primary-dark text-white py-4 shadow-sm sticky-top blog-admin-header">
         <div className="container d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
           <div>
             <p className="text-uppercase small mb-1 letter-space-1">Admin</p>
-            <h2 className="fw-bold mb-0">Blog Management</h2>
+            <h2 className="fw-bold mb-0 text-white">Blog Management</h2>
             <p className="mb-0 text-white-50">
               Create, edit, and publish blog posts.
             </p>
