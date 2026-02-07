@@ -188,7 +188,7 @@ const MinistriesManagement = () => {
     }
   };
 
-  const shareSingleMinistry = async (ministry: Ministry) => {
+async (ministry: Ministry) => {
     const shareText = `${ministry.name}
 🔗 ${ministry.slug}
 ${ministry.description || ""}`;
