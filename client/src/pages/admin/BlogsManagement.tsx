@@ -213,6 +213,14 @@ const BlogsManagement = () => {
     setEditingId(null);
     setMessage(null);
     setError(null);
+    requestAnimationFrame(() => {
+      contentRef.current?.blur();
+    });
+  };
+
+  const handleClearForm = () => {
+    resetForm();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // Export functions
@@ -545,7 +553,7 @@ const BlogsManagement = () => {
                     <button
                       type="button"
                       className="btn btn-secondary"
-                      onClick={resetForm}
+                      onClick={handleClearForm}
                     >
                       Clear
                     </button>
