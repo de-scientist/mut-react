@@ -341,9 +341,8 @@ ${r.url ? `Link: ${r.url}` : ""}
                 setEditingResource(null);
                 setShowForm(true);
               }}
-              className="btn btn-link text-decoration-none d-flex align-items-center gap-1 px-2"
+              className="btn d-flex align-items-center gap-1 admin-add-btn"
               title="Create a new resource"
-              style={{ color: '#04003d', fontSize: '0.9rem' }}
             >
               <Plus size={16} /> Add Resource
             </button>
@@ -361,7 +360,7 @@ ${r.url ? `Link: ${r.url}` : ""}
 
         {/* Form */}
         {showForm && (
-          <div className="card border-0 shadow-lg mb-5 rounded-4">
+          <div className="card border-0 shadow-lg mb-5 rounded-4 admin-form-soft">
             <div className="card-body p-4">
               <h5 className="fw-bold mb-4">
                 {editingResource ? "Edit Resource" : "Create Resource"}
