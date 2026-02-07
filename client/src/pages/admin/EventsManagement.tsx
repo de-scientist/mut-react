@@ -328,6 +328,17 @@ ${event.description || ""}`;
             >
               <Share2 size={18} /> Share All
             </button>
+            <button
+              onClick={() => {
+                resetForm();
+                setEditingEvent(null);
+                setShowForm(true);
+              }}
+              className="btn btn-sm shadow-sm d-flex align-items-center gap-2 admin-add-btn"
+              title="Create a new event"
+            >
+              <Plus size={16} /> Add Event
+            </button>
           </div>
         </div>
 
@@ -357,7 +368,7 @@ ${event.description || ""}`;
 
         {/* Form Section */}
         {showForm && (
-          <div className="card border-0 shadow-lg mb-5 rounded-4 overflow-hidden animate-fade-in">
+          <div className="card border-0 shadow-lg mb-5 rounded-4 overflow-hidden animate-fade-in admin-form-soft">
             <div className="card-header bg-white py-3 border-bottom">
               <h5 className="mb-0 fw-bold">
                 {editingEvent ? "📝 Edit Event" : "✨ Create New Event"}
