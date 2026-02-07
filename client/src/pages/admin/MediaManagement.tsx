@@ -301,7 +301,7 @@ const MediaManagement = () => {
 
             <button
               aria-label="Add new media"
-              className="btn btn-primary shadow-sm d-flex align-items-center gap-2"
+              className="btn shadow-sm d-flex align-items-center gap-2 admin-add-btn"
               onClick={() => {
                 resetForm();
                 setEditingItem(null);
@@ -323,7 +323,7 @@ const MediaManagement = () => {
 
         {/* Form */}
         {showForm && (
-          <div className="card mb-5 shadow-sm rounded-4 overflow-hidden">
+          <div className="card mb-5 shadow-sm rounded-4 overflow-hidden admin-form-soft">
             <div className="card-header bg-white py-3 border-bottom">
               <h5 className="mb-0 fw-bold">
                 {editingItem ? "📝 Edit Media" : " Add New Media"}
