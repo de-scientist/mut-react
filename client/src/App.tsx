@@ -175,8 +175,8 @@ function App() {
           element={<TechnicalCoordinatorPage />}
         />
         <Route path="committees/treasurer" element={<TreasurerPage />} />
-        <Route path="committees/vice-chair-1" element={<ViceChair1Page />} />
-        <Route path="committees/vice-chair-2" element={<ViceChair2Page />} />
+        <Route path="committees/vice-chair1" element={<ViceChair1Page />} />
+        <Route path="committees/vice-chair2" element={<ViceChair2Page />} />
         <Route
           path="committees/vice-secretary"
           element={<ViceSecretaryPage />}
