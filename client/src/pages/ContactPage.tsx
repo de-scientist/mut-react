@@ -270,9 +270,9 @@ const ContactPage = () => {
                       </button>
                       <div className="text-center text-md-start mt-2 mt-md-0 d-flex align-items-center justify-content-center">
                         <span className="text-muted me-2">New here?</span>
-                        <a href="/register" className="btn btn-link p-0">
+                        {/* <a href="/register" className="btn btn-link p-0">
                           Join Us
-                        </a>
+                        </a> */}
                       </div>
                     </div>
                   </form>
