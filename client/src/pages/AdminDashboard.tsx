@@ -115,7 +115,7 @@ const AdminDashboard = () => {
   if (!stats) return null;
 
   const barData = [
-    { name: "Users", value: stats.users },
+    { name: "Admins", value: stats.users },
     { name: "Events", value: stats.events },
     { name: "Ministries", value: stats.ministries },
     { name: "Prayers", value: stats.prayerRequests },
@@ -218,7 +218,7 @@ const AdminDashboard = () => {
                 color: "#10b981",
               },
               {
-                label: "Users",
+                label: "Admins",
                 icon: <Users />,
                 link: "/admin/users",
                 color: "#4f46e5",
@@ -274,7 +274,7 @@ const AdminDashboard = () => {
         {/* STAT CARDS */}
         <section className="row g-4 mb-5">
           <StatCard
-            label="Total Users"
+            label="Total Admins"
             value={stats.users}
             icon={<Users />}
             link="/admin/users"

@@ -64,7 +64,7 @@ const UsersManagement = () => {
         navigate("/admin/login");
         return;
       }
-      setError(err.message || "Failed to load users");
+      setError(err.message || "Failed to load admins");
     } finally {
       setLoading(false);
     }
@@ -82,7 +82,7 @@ const UsersManagement = () => {
       setShowModal(false);
       setSelectedUser(null);
     } catch (err: any) {
-      setError(err.message || "Failed to deactivate user");
+      setError(err.message || "Failed to deactivate admin");
     }
   };
 
@@ -103,7 +103,7 @@ const UsersManagement = () => {
       resetForm();
       fetchUsers();
     } catch (err: any) {
-      setError(err.message || "Failed to update user");
+      setError(err.message || "Failed to update admin");
     }
   };
 
@@ -135,7 +135,7 @@ const UsersManagement = () => {
       setShowModal(false);
       setSelectedUser(null);
     } catch (err: any) {
-      setError(err.message || "Failed to deactivate user");
+      setError(err.message || "Failed to deactivate admin");
     }
   };
 
@@ -151,17 +151,17 @@ const UsersManagement = () => {
           isActive: "Status",
           createdAt: "Joined Date",
         },
-        "Users Export",
-        `Export of all users (${users.length} total)`,
+        "Admins Export",
+        `Export of all admins (${users.length} total)`,
       );
 
       await exportHelper.export(exportData, format, {
-        filename: `users`,
+        filename: `admins`,
         includeLogo: true,
         includeTimestamp: true,
       });
     } catch (error) {
-      setError("Failed to export users");
+      setError("Failed to export admins");
       console.error("Export error:", error);
     }
   };
@@ -177,11 +177,11 @@ const UsersManagement = () => {
       });
 
       await sharingHelper.shareBulk(shareableUsers, {
-        bulkTitle: "Users Directory",
+        bulkTitle: "Admins Directory",
         method: "native",
       });
     } catch (error) {
-      setError("Failed to share users");
+      setError("Failed to share admins");
       console.error("Share error:", error);
     }
   };
@@ -196,7 +196,7 @@ const UsersManagement = () => {
         }),
       });
     } catch (error) {
-      setError("Failed to share user");
+      setError("Failed to share admin");
       console.error("Share error:", error);
     }
   };
@@ -215,7 +215,7 @@ const UsersManagement = () => {
       <div className="d-flex align-items-center justify-content-center vh-100 bg-white">
         <div className="text-center">
           <div className="spinner-grow text-primary mb-3" role="status"></div>
-          <p className="text-muted fw-bold">Loading User Directory...</p>
+          <p className="text-muted fw-bold">Loading Admin Directory...</p>
         </div>
       </div>
     );
@@ -227,9 +227,9 @@ const UsersManagement = () => {
         {/* Header Section */}
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 gap-3">
           <div>
-            <h2 className="fw-black text-dark mb-1">Access Control</h2>
+            <h2 className="fw-black text-dark mb-1">Admin Access Control</h2>
             <p className="text-muted mb-0">
-              Manage administrative privileges and user status.
+              Manage administrative privileges and admin status.
             </p>
           </div>
           <div className="admin-actions">
@@ -284,7 +284,7 @@ const UsersManagement = () => {
             <button
               className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-share-btn"
               onClick={shareAllUsers}
-              title="Share users directory"
+              title="Share admins directory"
             >
               <Share2 size={18} /> Share All
             </button>
@@ -301,7 +301,7 @@ const UsersManagement = () => {
               <div>
                 <h3 className="fw-bold mb-0">{stats.total}</h3>
                 <small className="text-muted text-uppercase fw-bold">
-                  Total Users
+                  Total Admins
                 </small>
               </div>
             </div>
@@ -368,7 +368,7 @@ const UsersManagement = () => {
                       id="userName"
                       type="text"
                       className="form-control form-control-lg bg-light"
-                      placeholder="Enter user's name"
+                      placeholder="Enter admin name"
                       value={formData.name}
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
@@ -382,7 +382,7 @@ const UsersManagement = () => {
                     <select
                       id="userRole"
                       className="form-select form-select-lg bg-light"
-                      title="Select user role"
+                      title="Select admin role"
                       value={formData.role}
                       onChange={(e) =>
                         setFormData({
@@ -459,7 +459,7 @@ const UsersManagement = () => {
           </div>
         )}
 
-        {/* Users Table */}
+        {/* Admins Table */}
         <div className="card border-0 shadow-sm rounded-4 overflow-hidden">
           <div className="table-responsive">
             <table className="table table-hover align-middle mb-0">
@@ -476,7 +476,7 @@ const UsersManagement = () => {
                 {users.length === 0 ? (
                   <tr>
                     <td colSpan={5} className="text-center py-5 text-muted">
-                      No users found in directory.
+                      No admins found in directory.
                     </td>
                   </tr>
                 ) : (
@@ -526,7 +526,7 @@ const UsersManagement = () => {
                             className="btn btn-sm btn-white border shadow-sm"
                             onClick={() => openEditForm(user)}
                             title={`Edit ${user.email}`}
-                            aria-label="Edit user"
+                            aria-label="Edit admin"
                           >
                             <Edit3 size={14} className="text-primary" />
                           </button>
@@ -535,7 +535,7 @@ const UsersManagement = () => {
                             className="btn btn-sm btn-white border shadow-sm"
                             onClick={() => shareSingleUser(user)}
                             title={`Share ${user.email}`}
-                            aria-label="Share user"
+                            aria-label="Share admin"
                           >
                             <Share2 size={14} className="text-info" />
                           </button>
@@ -548,7 +548,7 @@ const UsersManagement = () => {
                                 setShowModal(true);
                               }}
                               title={`Deactivate ${user.email}`}
-                              aria-label="Deactivate user"
+                              aria-label="Deactivate admin"
                             >
                               <UserX size={14} className="text-warning" />
                             </button>
