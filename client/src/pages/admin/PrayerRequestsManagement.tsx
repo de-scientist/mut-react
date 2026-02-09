@@ -213,11 +213,19 @@ const PrayerRequestsManagement = () => {
               Review and moderate community prayer requests.
             </p>
           </div>
-          <div className="d-flex gap-2">
+          <div className="admin-actions">
+            <button
+              onClick={() => navigate("/admin")}
+              className="btn btn-white border shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-dashboard-btn"
+              title="Return to Admin Dashboard"
+              aria-label="Back to Dashboard"
+            >
+              <ArrowLeft size={18} /> Dashboard
+            </button>
             {/* Export Dropdown */}
             <div className="dropdown">
               <button
-                className="btn btn-success shadow-sm d-flex align-items-center gap-2 dropdown-toggle"
+                className="btn btn-success shadow-sm d-flex align-items-center gap-2 dropdown-toggle admin-action-btn admin-export-btn"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -256,20 +264,11 @@ const PrayerRequestsManagement = () => {
 
             {/* Share Button */}
             <button
-              className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2"
+              className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-share-btn"
               onClick={shareAllPrayerRequests}
               title="Share all prayer requests"
             >
               <Share2 size={18} /> Share All
-            </button>
-
-            <button
-              onClick={() => navigate("/admin")}
-              className="btn btn-white border shadow-sm d-flex align-items-center gap-2"
-              title="Return to Admin Dashboard"
-              aria-label="Back to Dashboard"
-            >
-              <ArrowLeft size={18} /> Dashboard
             </button>
           </div>
         </div>

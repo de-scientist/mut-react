@@ -163,7 +163,7 @@ const AdminMembersPage = () => {
           <div>
             <button
               onClick={() => navigate("/admin")}
-              className="btn btn-link text-decoration-none text-muted p-0 mb-2 d-flex align-items-center gap-1"
+              className="btn btn-white border shadow-sm d-inline-flex align-items-center gap-2 admin-action-btn admin-dashboard-btn"
               aria-label="Back to Dashboard"
             >
               <ArrowLeft size={16} /> Back to Dashboard
@@ -174,9 +174,9 @@ const AdminMembersPage = () => {
             </p>
           </div>
 
-          <div className="d-flex gap-2 flex-wrap">
+          <div className="admin-actions">
             <button
-              className="btn btn-outline-primary btn-sm rounded-pill shadow-sm"
+              className="btn btn-outline-primary btn-sm rounded-pill shadow-sm admin-action-btn admin-export-btn"
               onClick={exportMembersCSV}
               title="Export all members"
             >
@@ -184,7 +184,7 @@ const AdminMembersPage = () => {
             </button>
 
             <button
-              className="btn btn-outline-secondary btn-sm rounded-pill shadow-sm"
+              className="btn btn-outline-secondary btn-sm rounded-pill shadow-sm admin-action-btn admin-share-btn"
               onClick={shareMembers}
               title="Share members list"
             >

@@ -238,6 +238,117 @@
   font-weight: 600;
 }
 
+/* Soft, consistent admin form styling (Events/Media/Resources/Ministries) */
+.admin-form-soft {
+  border-radius: 18px;
+}
+
+.admin-form-soft .card-header {
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+.admin-form-soft .form-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: none;
+  letter-spacing: 0.2px;
+  color: #1f2430;
+}
+
+.admin-form-soft .form-control,
+.admin-form-soft .form-select,
+.admin-form-soft textarea.form-control {
+  background-color: #f7f8fb !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 14px !important;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #1f2430 !important;
+  padding: 0.7rem 0.95rem;
+}
+
+.admin-form-soft .form-control:focus,
+.admin-form-soft .form-select:focus,
+.admin-form-soft textarea.form-control:focus {
+  background-color: #ffffff !important;
+  border-color: #c7cde6 !important;
+  box-shadow: 0 0 0 0.2rem rgba(4, 0, 61, 0.08) !important;
+  color: #1f2430 !important;
+}
+
+.admin-form-soft .input-group-text {
+  background: #eef1f6 !important;
+  color: #1f2430 !important;
+  border: 1px solid #e5e7eb !important;
+  border-right: none !important;
+  border-radius: 14px 0 0 14px !important;
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+
+.admin-form-soft .form-check {
+  background: #f7f8fb;
+  border-radius: 12px;
+  padding: 0.6rem 0.75rem;
+}
+
+.admin-form-soft .btn-primary,
+.admin-form-soft .btn-outline-secondary,
+.admin-form-soft .btn-light {
+  border-radius: 14px !important;
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+
+.admin-form-container.admin-form-soft {
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(31, 36, 48, 0.08);
+}
+
+.admin-form-container.admin-form-soft .card-header {
+  background: #ffffff;
+  color: #1f2430;
+  border-radius: 18px 18px 0 0 !important;
+  border-bottom: 1px solid #eef1f6;
+}
+
+.admin-form-container.admin-form-soft .card-header h5,
+.admin-form-container.admin-form-soft .card-header h1,
+.admin-form-container.admin-form-soft .card-header h2,
+.admin-form-container.admin-form-soft .card-header h3,
+.admin-form-container.admin-form-soft .card-header h4,
+.admin-form-container.admin-form-soft .card-header h6 {
+  color: #1f2430 !important;
+  font-family: var(--font-body);
+  text-transform: none;
+  letter-spacing: 0.2px;
+}
+
+.admin-form-soft .form-label::after,
+.admin-form-container.admin-form-soft .form-label::after {
+  display: none;
+  content: none;
+}
+
+.admin-add-btn {
+  background: #f4f6ff;
+  border: 1px solid #d8dcee;
+  color: #04003d;
+  border-radius: 14px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  padding: 0.45rem 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.admin-add-btn:hover {
+  background: #e9edff;
+  border-color: #cfd5ee;
+  color: #04003d;
+}
+
 .admin-form-container .input-group .form-control {
   border-left: none;
 }

@@ -173,7 +173,7 @@ const NewsletterSubscriptionsManagement = () => {
           </div>
           <button
             onClick={() => navigate("/admin")}
-            className="btn btn-white border shadow-sm d-flex align-items-center gap-2"
+            className="btn btn-white border shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-dashboard-btn"
             title="Return to Dashboard" // Fixes axe/name-role-value
             aria-label="Back to Dashboard"
           >
@@ -280,11 +280,11 @@ const NewsletterSubscriptionsManagement = () => {
                 </select>
               </div>
               <div className="col-md-5 text-md-end">
-                <div className="d-flex gap-2">
+                <div className="admin-actions">
                   {/* Export Dropdown */}
                   <div className="dropdown">
                     <button
-                      className="btn btn-primary shadow-sm rounded-pill d-inline-flex align-items-center gap-2 dropdown-toggle"
+                      className="btn btn-primary shadow-sm rounded-pill d-inline-flex align-items-center gap-2 dropdown-toggle admin-action-btn admin-export-btn"
                       type="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
@@ -321,7 +321,7 @@ const NewsletterSubscriptionsManagement = () => {
 
                   {/* Share Button */}
                   <button
-                    className="btn btn-outline-info shadow-sm rounded-pill d-inline-flex align-items-center gap-2"
+                    className="btn btn-outline-info shadow-sm rounded-pill d-inline-flex align-items-center gap-2 admin-action-btn admin-share-btn"
                     onClick={shareAllSubscriptions}
                     title="Share all subscribers"
                   >

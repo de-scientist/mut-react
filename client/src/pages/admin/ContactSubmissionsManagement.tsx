@@ -195,7 +195,7 @@ const ContactSubmissionsManagement = () => {
             <div className="d-flex align-items-center gap-2 mb-1">
               <button
                 onClick={() => navigate("/admin")}
-                className="btn btn-white btn-sm border shadow-sm rounded-circle p-2"
+                className="btn btn-white btn-sm border shadow-sm d-inline-flex align-items-center gap-2 admin-action-btn admin-dashboard-btn"
                 title="Back to Dashboard"
                 aria-label="Back to Dashboard"
               >
@@ -210,11 +210,11 @@ const ContactSubmissionsManagement = () => {
             </p>
           </div>
 
-          <div className="d-flex gap-2 flex-wrap">
+          <div className="admin-actions">
             {/* Export Dropdown */}
             <div className="dropdown">
               <button
-                className="btn btn-outline-primary btn-sm rounded-pill shadow-sm dropdown-toggle"
+                className="btn btn-outline-primary btn-sm rounded-pill shadow-sm dropdown-toggle admin-action-btn admin-export-btn"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -252,7 +252,7 @@ const ContactSubmissionsManagement = () => {
 
             {/* Share Button */}
             <button
-              className="btn btn-outline-secondary btn-sm rounded-pill shadow-sm"
+              className="btn btn-outline-secondary btn-sm rounded-pill shadow-sm admin-action-btn admin-share-btn"
               onClick={shareAllContacts}
               title="Share contact submissions"
             >

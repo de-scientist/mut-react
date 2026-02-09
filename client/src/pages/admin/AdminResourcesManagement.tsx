@@ -274,10 +274,10 @@ ${r.url ? `Link: ${r.url}` : ""}
               Manage sermons, devotionals, documents, and downloads.
             </p>
           </div>
-          <div className="d-flex gap-2">
+          <div className="admin-actions">
             <button
               onClick={() => navigate("/admin")}
-              className="btn btn-white border shadow-sm d-flex align-items-center gap-2"
+              className="btn btn-white border shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-dashboard-btn"
             >
               <ArrowLeft size={18} /> Dashboard
             </button>
@@ -285,7 +285,7 @@ ${r.url ? `Link: ${r.url}` : ""}
             {/* Export Dropdown */}
             <div className="dropdown">
               <button
-                className="btn btn-outline-secondary shadow-sm dropdown-toggle d-flex align-items-center gap-2"
+                className="btn btn-outline-secondary shadow-sm dropdown-toggle d-flex align-items-center gap-2 admin-action-btn admin-export-btn"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -322,14 +322,14 @@ ${r.url ? `Link: ${r.url}` : ""}
 
             {/* Share Button */}
             <button
-              className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2"
+              className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-share-btn"
               onClick={shareAllResources}
             >
               <Share2 size={18} /> Share
             </button>
 
             <button
-              className="btn btn-outline-secondary shadow-sm d-flex align-items-center gap-2"
+              className="btn btn-outline-secondary shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-share-btn"
               onClick={shareResources}
             >
               <Share2 size={18} /> Quick Share (Text)
@@ -341,9 +341,10 @@ ${r.url ? `Link: ${r.url}` : ""}
                 setEditingResource(null);
                 setShowForm(true);
               }}
-              className="btn btn-primary shadow-sm d-flex align-items-center gap-2"
+              className="btn d-flex align-items-center gap-1 admin-add-btn"
+              title="Create a new resource"
             >
-              <Plus size={18} /> Add Resource
+              <Plus size={16} /> Add Resource
             </button>
           </div>
         </div>
@@ -359,7 +360,7 @@ ${r.url ? `Link: ${r.url}` : ""}
 
         {/* Form */}
         {showForm && (
-          <div className="card border-0 shadow-lg mb-5 rounded-4">
+          <div className="card border-0 shadow-lg mb-5 rounded-4 admin-form-soft">
             <div className="card-body p-4">
               <h5 className="fw-bold mb-4">
                 {editingResource ? "Edit Resource" : "Create Resource"}

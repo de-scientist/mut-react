@@ -243,10 +243,10 @@ const MediaManagement = () => {
               Manage images and media for your community.
             </p>
           </div>
-          <div className="d-flex gap-2">
+          <div className="admin-actions">
             <button
               aria-label="Back to Dashboard"
-              className="btn btn-white border shadow-sm d-flex align-items-center gap-2"
+              className="btn btn-white border shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-dashboard-btn"
               onClick={() => navigate("/admin")}
             >
               <ArrowLeft size={18} /> Dashboard
@@ -255,7 +255,7 @@ const MediaManagement = () => {
             {/* Export Dropdown */}
             <div className="dropdown">
               <button
-                className="btn btn-outline-secondary shadow-sm dropdown-toggle d-flex align-items-center gap-2"
+                className="btn btn-outline-secondary shadow-sm dropdown-toggle d-flex align-items-center gap-2 admin-action-btn admin-export-btn"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -292,7 +292,7 @@ const MediaManagement = () => {
 
             {/* Share Button */}
             <button
-              className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2"
+              className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-share-btn"
               onClick={shareAllMedia}
               title="Share media gallery"
             >
@@ -301,7 +301,7 @@ const MediaManagement = () => {
 
             <button
               aria-label="Add new media"
-              className="btn btn-primary shadow-sm d-flex align-items-center gap-2"
+              className="btn shadow-sm d-flex align-items-center gap-2 admin-add-btn"
               onClick={() => {
                 resetForm();
                 setEditingItem(null);
@@ -323,7 +323,7 @@ const MediaManagement = () => {
 
         {/* Form */}
         {showForm && (
-          <div className="card mb-5 shadow-sm rounded-4 overflow-hidden">
+          <div className="card mb-5 shadow-sm rounded-4 overflow-hidden admin-form-soft">
             <div className="card-header bg-white py-3 border-bottom">
               <h5 className="mb-0 fw-bold">
                 {editingItem ? "📝 Edit Media" : " Add New Media"}

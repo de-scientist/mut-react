@@ -213,6 +213,14 @@ const BlogsManagement = () => {
     setEditingId(null);
     setMessage(null);
     setError(null);
+    requestAnimationFrame(() => {
+      contentRef.current?.blur();
+    });
+  };
+
+  const handleClearForm = () => {
+    resetForm();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // Export functions
@@ -281,16 +289,16 @@ const BlogsManagement = () => {
 
   return (
     <div className="admin-management bg-light min-vh-100 pb-5">
-      <header className="bg-primary-dark text-white py-4 shadow-sm sticky-top">
+      <header className="bg-primary-dark text-white py-4 shadow-sm sticky-top blog-admin-header">
         <div className="container d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
           <div>
             <p className="text-uppercase small mb-1 letter-space-1">Admin</p>
-            <h2 className="fw-bold mb-0">Blog Management</h2>
+            <h2 className="fw-bold mb-0 text-white">Blog Management</h2>
             <p className="mb-0 text-white-50">
               Create, edit, and publish blog posts.
             </p>
           </div>
-          <div className="d-flex gap-2">
+          <div className="admin-actions">
             <button
               className="btn btn-light btn-sm"
               onClick={() => loadBlogs(pagination?.page || 1)}
@@ -302,7 +310,7 @@ const BlogsManagement = () => {
             {/* Export Dropdown */}
             <div className="dropdown">
               <button
-                className="btn btn-outline-light btn-sm dropdown-toggle"
+                className="btn btn-outline-light btn-sm dropdown-toggle admin-action-btn admin-export-btn"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -339,7 +347,7 @@ const BlogsManagement = () => {
 
             {/* Share Button */}
             <button
-              className="btn btn-outline-info btn-sm"
+              className="btn btn-outline-info btn-sm admin-action-btn admin-share-btn"
               onClick={shareAllBlogs}
               title="Share all blog posts"
             >
@@ -347,7 +355,7 @@ const BlogsManagement = () => {
             </button>
 
             <button
-              className="btn btn-outline-light btn-sm"
+              className="btn btn-outline-light btn-sm admin-action-btn admin-dashboard-btn"
               onClick={() => navigate("/admin")}
             >
               Back to Dashboard
@@ -370,7 +378,7 @@ const BlogsManagement = () => {
 
         <div className="row g-4">
           <div className="col-lg-5">
-            <div className="admin-form-container shadow-sm">
+            <div className="admin-form-container shadow-sm admin-form-soft">
               <div className="card-header d-flex justify-content-between align-items-center">
                 <h5 className="mb-0">
                   {editingId ? "Edit Blog Post" : "Create Blog Post"}
@@ -533,7 +541,7 @@ const BlogsManagement = () => {
                   <div className="col-12 d-flex gap-2">
                     <button
                       type="submit"
-                      className="btn btn-primary"
+                      className="btn btn-primary admin-add-btn"
                       disabled={saving}
                     >
                       {saving
@@ -545,7 +553,7 @@ const BlogsManagement = () => {
                     <button
                       type="button"
                       className="btn btn-secondary"
-                      onClick={resetForm}
+                      onClick={handleClearForm}
                     >
                       Clear
                     </button>

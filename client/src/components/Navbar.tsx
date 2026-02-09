@@ -5,6 +5,14 @@ import logo from "../assets/mut/images/best logo.png";
 const Navbar = () => {
   const isScrolled = useNavbarScroll(50);
 
+  const handleNavLinkClick = () => {
+    const navbarCollapse = document.getElementById('navbarNav');
+    const navbarToggler = document.querySelector('.navbar-toggler') as HTMLButtonElement;
+    if (navbarCollapse?.classList.contains('show')) {
+      navbarToggler?.click();
+    }
+  };
+
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `nav-link px-2 fw-semibold transition-all ${isActive ? "active-link" : "text-nav-idle"}`;
 
@@ -57,7 +65,8 @@ const Navbar = () => {
                   end={link.end}
                   to={link.path}
                   className={navLinkClass}
-                  style={{ fontSize: "0.92rem" }} // Slightly smaller font for better fit
+                  style={{ fontSize: "0.92rem" }}
+                  onClick={handleNavLinkClick}
                 >
                   {link.label}
                 </NavLink>
@@ -69,6 +78,7 @@ const Navbar = () => {
                 to="/admin/login"
                 className="btn btn-admin px-3 py-1.5 rounded-pill shadow-sm fw-bold d-inline-flex align-items-center"
                 style={{ fontSize: "0.85rem" }}
+                onClick={handleNavLinkClick}
               >
                 <i className="fas fa-user-shield me-1"></i>
                 <span>CU Portal</span>

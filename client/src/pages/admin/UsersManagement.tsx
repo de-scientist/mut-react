@@ -232,61 +232,63 @@ const UsersManagement = () => {
               Manage administrative privileges and user status.
             </p>
           </div>
-          <button
-            onClick={() => navigate("/admin")}
-            className="btn btn-white border shadow-sm d-flex align-items-center gap-2"
-            title="Return to Dashboard"
-            aria-label="Go back to admin dashboard"
-          >
-            <ArrowLeft size={18} /> Dashboard
-          </button>
-
-          {/* Export Dropdown */}
-          <div className="dropdown">
+          <div className="admin-actions">
             <button
-              className="btn btn-outline-secondary shadow-sm dropdown-toggle d-flex align-items-center gap-2"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
+              onClick={() => navigate("/admin")}
+              className="btn btn-white border shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-dashboard-btn"
+              title="Return to Dashboard"
+              aria-label="Go back to admin dashboard"
             >
-              <Download size={18} /> Export
+              <ArrowLeft size={18} /> Dashboard
             </button>
-            <ul className="dropdown-menu">
-              <li>
-                <button
-                  className="dropdown-item"
-                  onClick={() => exportUsers("csv")}
-                >
-                  Export as CSV
-                </button>
-              </li>
-              <li>
-                <button
-                  className="dropdown-item"
-                  onClick={() => exportUsers("word")}
-                >
-                  Export as Word
-                </button>
-              </li>
-              <li>
-                <button
-                  className="dropdown-item"
-                  onClick={() => exportUsers("pdf")}
-                >
-                  Export as PDF
-                </button>
-              </li>
-            </ul>
-          </div>
 
-          {/* Share Button */}
-          <button
-            className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2"
-            onClick={shareAllUsers}
-            title="Share users directory"
-          >
-            <Share2 size={18} /> Share All
-          </button>
+            {/* Export Dropdown */}
+            <div className="dropdown">
+              <button
+                className="btn btn-outline-secondary shadow-sm dropdown-toggle d-flex align-items-center gap-2 admin-action-btn admin-export-btn"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <Download size={18} /> Export
+              </button>
+              <ul className="dropdown-menu">
+                <li>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportUsers("csv")}
+                  >
+                    Export as CSV
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportUsers("word")}
+                  >
+                    Export as Word
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => exportUsers("pdf")}
+                  >
+                    Export as PDF
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            {/* Share Button */}
+            <button
+              className="btn btn-outline-info shadow-sm d-flex align-items-center gap-2 admin-action-btn admin-share-btn"
+              onClick={shareAllUsers}
+              title="Share users directory"
+            >
+              <Share2 size={18} /> Share All
+            </button>
+          </div>
         </div>
 
         {/* Analytics Cards */}
