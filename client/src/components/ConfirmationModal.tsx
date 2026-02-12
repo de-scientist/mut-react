@@ -19,7 +19,7 @@ const ConfirmationModal = ({
   onConfirm,
   confirmText = "Confirm",
   cancelText = "Cancel",
-  confirmButtonClass = "btn-danger",
+  confirmButtonClass = "btn-primary",
 }: ConfirmationModalProps) => {
   if (!isOpen) return null;
 
@@ -56,7 +56,7 @@ const ConfirmationModal = ({
             <div className="modal-footer border-0 rounded-bottom-3">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-danger"
                 onClick={onClose}
               >
                 {cancelText}

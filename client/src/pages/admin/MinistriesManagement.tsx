@@ -714,7 +714,7 @@ ${ministry.description || ""}`;
         }
         confirmText={action === "delete" ? "Delete" : "Update"}
         cancelText="Cancel"
-        confirmButtonClass={action === "delete" ? "btn-danger" : "btn-primary"}
+        confirmButtonClass="btn-primary"
       />
     </div>
   );
