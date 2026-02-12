@@ -20,7 +20,12 @@ type ProgramItem = {
   date: string; // YYYY-MM-DD (recommended)
   topic: string;
   speakers?: string[];
-  notes?: string[];
+};
+
+type ChurchActivityItem = {
+  id: string;
+  date: string;
+  activity: string;
 };
 
 const normalizeDate = (raw: string) => {
@@ -58,7 +63,7 @@ const prettyDate = (iso: string) => {
  * Admin -> Import Semester Program -> then manage from DB.
  */
 const programSchedule: ProgramItem[] = [
-  // ===== SUNDAY SERVICES (from doc) =====
+  // ===== SUNDAY SERVICES =====
   {
     id: "sun-2026-01-11",
     serviceType: "SUNDAY",
@@ -79,15 +84,13 @@ const programSchedule: ProgramItem[] = [
     date: normalizeDate("25/01/26"),
     topic: "Defending our Faith",
     speakers: ["Mr. Mwangi Chege"],
-    notes: ["Back-up: Stem"],
   },
   {
     id: "sun-2026-02-01",
     serviceType: "SUNDAY",
     date: normalizeDate("01/02/26"),
-    topic: "Bible Study Sunday",
-    speakers: ["FOCUS"],
-    notes: ["Back-ups: Mr. Joel Michiri, Daniel Njumbi"],
+    topic: "Bible Study Sunday - Focus",
+    speakers: ["Mr. Joel Michiri"],
   },
   {
     id: "sun-2026-02-08",
@@ -95,7 +98,6 @@ const programSchedule: ProgramItem[] = [
     date: normalizeDate("08/02/26"),
     topic: "Charity and Compassion (Welfare Sunday)",
     speakers: ["Dr. Tabitha (Assistant Patron)"],
-    notes: ["Back-up: Natasha Amani"],
   },
   {
     id: "sun-2026-02-15",
@@ -103,50 +105,182 @@ const programSchedule: ProgramItem[] = [
     date: normalizeDate("15/02/26"),
     topic: "The Journey of Love",
     speakers: ["Kevin Chege"],
-    notes: ["Back-up: Esther Karemeri"],
+  },
+  {
+    id: "sun-2026-02-22",
+    serviceType: "SUNDAY",
+    date: normalizeDate("22/02/26"),
+    topic: "Healing Through Forgiveness",
+    speakers: ["Carry The Love"],
+  },
+  {
+    id: "sun-2026-03-01",
+    serviceType: "SUNDAY",
+    date: normalizeDate("01/03/26"),
+    topic: "The Grace of God (Associates Sunday)",
+    speakers: ["Associate"],
+  },
+  {
+    id: "sun-2026-03-08",
+    serviceType: "SUNDAY",
+    date: normalizeDate("08/03/26"),
+    topic: "Being the Salt and the Light (Gents Sunday)",
+    speakers: ["Timothy Nyamgero"],
+  },
+  {
+    id: "sun-2026-03-15",
+    serviceType: "SUNDAY",
+    date: normalizeDate("15/03/26"),
+    topic: "Living a Life of Fulfilment (Ladies Sunday)",
+    speakers: ["Caroline Kasaya"],
+  },
+  {
+    id: "sun-2026-03-22",
+    serviceType: "SUNDAY",
+    date: normalizeDate("22/03/26"),
+    topic: "Baptist",
+    speakers: ["Reverend Wahinya"],
+  },
+  {
+    id: "sun-2026-03-29",
+    serviceType: "SUNDAY",
+    date: normalizeDate("29/03/26"),
+    topic: "Christian Disciplines",
+    speakers: ["Peterson Wang'ombe"],
+  },
+  {
+    id: "sun-2026-04-05",
+    serviceType: "SUNDAY",
+    date: normalizeDate("05/04/26"),
+    topic: "Christology",
+    speakers: ["Gilbert Sang"],
+  },
+  {
+    id: "sun-2026-04-12",
+    serviceType: "SUNDAY",
+    date: normalizeDate("12/04/26"),
+    topic: "Eschatology",
+    speakers: ["Danson Ottawa"],
   },
 
-  // ===== FRIDAY FELLOWSHIPS (from doc) =====
+  // ===== FRIDAY FELLOWSHIPS =====
   {
     id: "fri-2026-01-09",
     serviceType: "FRIDAY",
-    date: normalizeDate("9/01/2026"),
+    date: normalizeDate("9/01/26"),
     topic: "True Worship",
     speakers: ["Dr. Ndia"],
-    notes: ["Back-up: Martha Thuuku"],
   },
   {
     id: "fri-2026-01-16",
     serviceType: "FRIDAY",
-    date: normalizeDate("16/01/2026"),
+    date: normalizeDate("16/01/26"),
     topic: "Bible Study Guide Exposition",
+    speakers: ["Emmanuel Vuma (CMF)"],
   },
   {
     id: "fri-2026-01-23",
     serviceType: "FRIDAY",
-    date: normalizeDate("23/01/2026"),
+    date: normalizeDate("23/01/26"),
     topic: "Worship Experience",
+    speakers: ["Music Committee"],
   },
   {
     id: "fri-2026-01-30",
     serviceType: "FRIDAY",
-    date: normalizeDate("30/01/2026"),
+    date: normalizeDate("30/01/26"),
     topic: "Prayer Kesha",
+    speakers: ["Prayer Committee"],
   },
   {
     id: "fri-2026-02-06",
     serviceType: "FRIDAY",
-    date: normalizeDate("6/02/2026"),
+    date: normalizeDate("6/02/26"),
     topic: "Book of Timothy Exposition",
-    speakers: ["Caroline Kasaya"],
-    notes: ["Back-up: Mércy Mutuku"],
+    speakers: ["Shadrach Muidi"],
   },
   {
     id: "fri-2026-02-13",
     serviceType: "FRIDAY",
-    date: normalizeDate("13/02/2026"),
+    date: normalizeDate("13/02/26"),
     topic: "Creative Experience",
+    speakers: ["Creative Committee"],
   },
+  {
+    id: "fri-2026-02-20",
+    serviceType: "FRIDAY",
+    date: normalizeDate("20/02/26"),
+    topic: "Hearing God",
+    speakers: ["Carry The Love"],
+  },
+  {
+    id: "fri-2026-02-27",
+    serviceType: "FRIDAY",
+    date: normalizeDate("27/02/26"),
+    topic: "Mulewo",
+    speakers: ["Music Committee"],
+  },
+  {
+    id: "fri-2026-03-06",
+    serviceType: "FRIDAY",
+    date: normalizeDate("6/03/26"),
+    topic: "Prayer Service",
+    speakers: ["Prayer Committee"],
+  },
+  {
+    id: "fri-2026-03-13",
+    serviceType: "FRIDAY",
+    date: normalizeDate("13/03/26"),
+    topic: "Creative Experience",
+    speakers: ["Creative Committee"],
+  },
+  {
+    id: "fri-2026-03-20",
+    serviceType: "FRIDAY",
+    date: normalizeDate("20/03/26"),
+    topic: "Praise Fest",
+    speakers: ["Music Committee"],
+  },
+  {
+    id: "fri-2026-03-27",
+    serviceType: "FRIDAY",
+    date: normalizeDate("27/03/26"),
+    topic: "Elder's Night",
+  },
+  {
+    id: "fri-2026-04-03",
+    serviceType: "FRIDAY",
+    date: normalizeDate("3/04/26"),
+    topic: "Christology",
+    speakers: ["Gilbert Sang"],
+  },
+  {
+    id: "fri-2026-04-10",
+    serviceType: "FRIDAY",
+    date: normalizeDate("10/4/26"),
+    topic: "Prayer Service",
+    speakers: ["Prayer Committee"],
+  },
+];
+
+const churchActivities: ChurchActivityItem[] = [
+  { id: "act-001", date: normalizeDate("10/01/26"), activity: "Church Prayer Stretch" },
+  { id: "act-002", date: normalizeDate("20/01/26"), activity: "Dance Competition" },
+  { id: "act-003", date: normalizeDate("24/01/26"), activity: "Ladies Initiative / Hike" },
+  { id: "act-004", date: normalizeDate("24/01/26"), activity: "Preva Week (24th - 30th Jan)" },
+  { id: "act-005", date: normalizeDate("2/02/26"), activity: "Mega Play" },
+  { id: "act-006", date: normalizeDate("7/02/26"), activity: "Sports Day" },
+  { id: "act-007", date: normalizeDate("8/02/26"), activity: "Chastity Campaign - Love to the Rescue (8th - 14th Feb)" },
+  { id: "act-008", date: normalizeDate("21/02/26"), activity: "Leaders Prayer Stretch" },
+  { id: "act-009", date: normalizeDate("28/02/26"), activity: "Film Premiere" },
+  { id: "act-010", date: normalizeDate("28/02/26"), activity: "Ladies Initiative" },
+  { id: "act-011", date: normalizeDate("7/03/26"), activity: "Year Fellowship Retreat" },
+  { id: "act-012", date: normalizeDate("8/03/26"), activity: "Gents Sunday Service and Evening Session" },
+  { id: "act-013", date: normalizeDate("14/03/26"), activity: "Business Exposition" },
+  { id: "act-014", date: normalizeDate("15/03/26"), activity: "Ladies Sunday Service and Evening Session" },
+  { id: "act-015", date: normalizeDate("19/03/26"), activity: "Gents Bonfire" },
+  { id: "act-016", date: normalizeDate("21/03/26"), activity: "Church Prayer Stretch" },
+  { id: "act-017", date: normalizeDate("22/03/26"), activity: "Baptism" },
 ];
 
 const EventsPage = () => {
@@ -156,7 +290,7 @@ const EventsPage = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Program UI state
-  const [tab, setTab] = useState<"PROGRAM" | "SPECIAL">("PROGRAM");
+  const [tab, setTab] = useState<"SPECIAL" | "PROGRAM" | "ACTIVITIES">("SPECIAL");
   const [programFilter, setProgramFilter] = useState<
     "ALL" | "SUNDAY" | "FRIDAY"
   >("ALL");
@@ -225,6 +359,13 @@ const EventsPage = () => {
           </p>
           <div className="d-flex justify-content-center gap-2 mt-3 flex-wrap">
             <button
+              className={`btn btn-lg ${tab === "SPECIAL" ? "btn-primary" : "btn-outline-light"}`}
+              onClick={() => setTab("SPECIAL")}
+              type="button"
+            >
+              Special Events
+            </button>
+            <button
               className={`btn btn-lg ${tab === "PROGRAM" ? "btn-primary" : "btn-outline-light"}`}
               onClick={() => setTab("PROGRAM")}
               type="button"
@@ -232,11 +373,11 @@ const EventsPage = () => {
               Service Program
             </button>
             <button
-              className={`btn btn-lg ${tab === "SPECIAL" ? "btn-primary" : "btn-outline-light"}`}
-              onClick={() => setTab("SPECIAL")}
+              className={`btn btn-lg ${tab === "ACTIVITIES" ? "btn-primary" : "btn-outline-light"}`}
+              onClick={() => setTab("ACTIVITIES")}
               type="button"
             >
-              Special Events
+              Church Activities
             </button>
           </div>
         </div>
@@ -340,11 +481,6 @@ const EventsPage = () => {
                                     </td>
                                     <td>
                                       <div className="fw-bold">{p.topic}</div>
-                                      {p.notes?.length ? (
-                                        <div className="small text-muted mt-1">
-                                          {p.notes.join(" • ")}
-                                        </div>
-                                      ) : null}
                                     </td>
                                     <td className="small">
                                       {p.speakers?.length
@@ -408,11 +544,6 @@ const EventsPage = () => {
                                     </td>
                                     <td>
                                       <div className="fw-bold">{p.topic}</div>
-                                      {p.notes?.length ? (
-                                        <div className="small text-muted mt-1">
-                                          {p.notes.join(" • ")}
-                                        </div>
-                                      ) : null}
                                     </td>
                                     <td className="small">
                                       {p.speakers?.length
@@ -547,6 +678,65 @@ const EventsPage = () => {
                     </div>
                   </div>
                 ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* CHURCH ACTIVITIES TAB */}
+      {tab === "ACTIVITIES" && (
+        <section className="py-5 events-section bg-light">
+          <div className="container">
+            <div className="text-center mb-5">
+              <h2 className="section-title mb-1">Church Activities</h2>
+              <p className="text-muted mb-0">
+                Schedule of special activities, fellowships, and union-wide events throughout the semester.
+              </p>
+            </div>
+
+            {churchActivities.length === 0 ? (
+              <div className="text-center py-5">
+                <div className="opacity-50 mb-2">🎉</div>
+                <p className="text-muted">
+                  No activities scheduled at the moment.
+                </p>
+              </div>
+            ) : (
+              <div className="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div className="card-body p-0">
+                  <div className="table-responsive">
+                    <table className="table mb-0 align-middle">
+                      <thead className="bg-light">
+                        <tr>
+                          <th className="px-3 py-3">Date</th>
+                          <th className="py-3">Activity</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {churchActivities
+                          .sort((a, b) => (a.date > b.date ? 1 : -1))
+                          .map((activity) => (
+                            <tr key={activity.id}>
+                              <td className="px-3 fw-bold text-nowrap">
+                                {prettyDate(activity.date)}
+                              </td>
+                              <td>{activity.activity}</td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="text-center mt-4" data-aos="zoom-in">
+              <Link to="/ministries" className="btn btn-primary btn-lg me-2">
+                Serve in a Ministry <i className="fas fa-hands-helping ms-2" />
+              </Link>
+              <Link to="/contact" className="btn btn-secondary btn-lg">
+                Ask for Details <i className="fas fa-question-circle ms-2" />
+              </Link>
             </div>
           </div>
         </section>
