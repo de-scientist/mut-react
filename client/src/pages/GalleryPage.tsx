@@ -190,14 +190,18 @@ const GalleryPage = () => {
         .text-teal { color: var(--brand-teal); }
         
         .badge-pill {
-          background: rgba(54, 209, 196, 0.1);
+          background: none;
           color: var(--brand-teal);
-          padding: 6px 14px;
-          border-radius: 50px;
-          font-weight: 700;
-          font-size: 0.75rem;
+          padding: 4px 12px;
+          border-radius: 4px;
+          font-weight: 400;
+          font-size: 0.7rem;
           text-transform: uppercase;
           display: inline-block;
+          border-left: 3px solid var(--brand-teal);
+          border-right: 3px solid var(--brand-teal);
+          letter-spacing: 2px;
+          opacity: 0.7;
         }
 
         .btn-download-all {
