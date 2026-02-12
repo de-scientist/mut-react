@@ -209,79 +209,97 @@ const HomePage = () => {
     [],
   );
 
-  // ===== Updated Upcoming Highlights from your attached Sunday + Friday programmes (2026) =====
+  // ===== Updated Upcoming Highlights — events from 16 Feb 2026 onwards =====
   const upcomingHighlights: PreviewCard[] = useMemo(
     () => [
       {
-        title: "Sunday Service: Defending our Faith",
-        icon: "fas fa-shield-alt",
-        image: "/assets/images/church1.jpg",
-        description:
-          "Join us for a powerful Sunday service focused on standing firm and answering for the hope we have in Christ.",
-        link: "/events",
-        meta: [
-          { label: "Date", value: "25 Jan 2026", icon: "far fa-calendar-alt" },
-          { label: "Service", value: "Sunday Service", icon: "fas fa-church" },
-        ],
-      },
-      {
-        title: "Friday Fellowship: Prayer Kesha",
-        icon: "fas fa-moon",
+        title: "Friday Fellowship: Hearing God",
+        icon: "fas fa-ear",
         image: "/assets/images/prayer1.jpg",
         description:
-          "A night of prayer, intercession, and spiritual renewal—come labour with us before the Lord.",
+          "A night of intimacy with God—learning to recognize and respond to His voice in our lives.",
         link: "/events",
         meta: [
-          { label: "Date", value: "30 Jan 2026", icon: "far fa-calendar-alt" },
+          { label: "Date", value: "20 Feb 2026", icon: "far fa-calendar-alt" },
           { label: "Service", value: "Friday Fellowship", icon: "fas fa-fire" },
+          { label: "Speaker", value: "Carry The Love", icon: "fas fa-microphone" },
         ],
       },
       {
-        title: "Sunday Service: Bible Study Sunday",
-        icon: "fas fa-bible",
+        title: "Sunday Service: Healing Through Forgiveness",
+        icon: "fas fa-dove",
         image: "/assets/images/bs1.jpg",
         description:
-          "A Sunday dedicated to the Word—learning, growing, and being equipped through Scripture.",
+          "Experience the freedom and peace that comes through forgiveness in Christ.",
         link: "/events",
         meta: [
-          { label: "Date", value: "01 Feb 2026", icon: "far fa-calendar-alt" },
+          { label: "Date", value: "22 Feb 2026", icon: "far fa-calendar-alt" },
           { label: "Service", value: "Sunday Service", icon: "fas fa-church" },
+          { label: "Speaker", value: "Carry The Love", icon: "fas fa-microphone" },
         ],
       },
       {
-        title: "Friday Fellowship: Book of Timothy Exposition",
-        icon: "fas fa-scroll",
+        title: "Friday Fellowship: MULEWO",
+        icon: "fas fa-music",
         image: "/assets/images/church2.jpg",
         description:
-          "Dig deeper into Scripture through an exposition session on the Book of Timothy.",
+          "A vibrant night of worship, music, and fellowship celebrating God's goodness.",
         link: "/events",
         meta: [
-          { label: "Date", value: "06 Feb 2026", icon: "far fa-calendar-alt" },
+          { label: "Date", value: "27 Feb 2026", icon: "far fa-calendar-alt" },
           { label: "Service", value: "Friday Fellowship", icon: "fas fa-fire" },
+          { label: "Time", value: "8:00 PM - 5:30 AM", icon: "fas fa-clock" },
         ],
       },
       {
-        title: "Sunday Service: Charity & Compassion",
-        icon: "fas fa-hands-helping",
-        image: "/assets/images/mission1.jpg",
-        description:
-          "A Sunday focused on Christ-like compassion—living the Gospel through love, mercy, and practical care.",
-        link: "/events",
-        meta: [
-          { label: "Date", value: "08 Feb 2026", icon: "far fa-calendar-alt" },
-          { label: "Service", value: "Sunday Service", icon: "fas fa-church" },
-        ],
-      },
-      {
-        title: "Friday Fellowship: Creative Experience",
-        icon: "fas fa-theater-masks",
+        title: "Film Premiere: Gems in The Ruff - The Salonist",
+        icon: "fas fa-film",
         image: "/assets/images/film1.jpg",
         description:
-          "A creativity-filled fellowship night—ministering the Gospel through arts and expression.",
+          "Premiere screening and discussion of 'Gems in The Ruff: The Salonist'.",
         link: "/events",
         meta: [
-          { label: "Date", value: "13 Feb 2026", icon: "far fa-calendar-alt" },
-          { label: "Service", value: "Friday Fellowship", icon: "fas fa-fire" },
+          { label: "Date", value: "28 Feb 2026", icon: "far fa-calendar-alt" },
+          { label: "Time", value: "4:00 PM - 7:00 PM", icon: "fas fa-clock" },
+          { label: "Location", value: "Assembly Hall", icon: "fas fa-map-marker-alt" },
+        ],
+      },
+      {
+        title: "Sunday Service: The Grace of God (Associates Sunday)",
+        icon: "fas fa-star",
+        image: "/assets/images/mission1.jpg",
+        description:
+          "A Sunday celebrating God's incredible grace and its transforming power in our lives.",
+        link: "/events",
+        meta: [
+          { label: "Date", value: "01 Mar 2026", icon: "far fa-calendar-alt" },
+          { label: "Service", value: "Sunday Service", icon: "fas fa-church" },
+          { label: "Speaker", value: "Associate", icon: "fas fa-microphone" },
+        ],
+      },
+      {
+        title: "Sunday Service: Being the Salt and the Light (Gents Sunday)",
+        icon: "fas fa-fire",
+        image: "/assets/images/film1.jpg",
+        description:
+          "A powerful Sunday for the men—discovering our role as salt and light in a dark world.",
+        link: "/events",
+        meta: [
+          { label: "Date", value: "08 Mar 2026", icon: "far fa-calendar-alt" },
+          { label: "Service", value: "Sunday Service", icon: "fas fa-church" },
+          { label: "Speaker", value: "Timothy Nyamgero", icon: "fas fa-microphone" },
+        ],
+      },
+      {
+        title: "Business Exposition",
+        icon: "fas fa-briefcase",
+        image: "/assets/images/church1.jpg",
+        description: "Explore enterprise and opportunities at our Business Exposition.",
+        link: "/events",
+        meta: [
+          { label: "Date", value: "14 Mar 2026", icon: "far fa-calendar-alt" },
+          { label: "Time", value: "8:00 AM - 4:00 PM", icon: "fas fa-clock" },
+          { label: "Location", value: "MUT Grounds", icon: "fas fa-map-marker-alt" },
         ],
       },
     ],
