@@ -120,6 +120,91 @@ const BlogsPage = () => {
         </div>
       </section>
 
+      {/* Featured external blog links */}
+      <section className="container py-5">
+        <div className="text-center mb-4">
+          <a
+            href="https://blogs.mutcu.org"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="btn btn-primary btn-lg"
+          >
+            Visit Our Blog <i className="fas fa-external-link-alt ms-2" />
+          </a>
+        </div>
+
+        <div className="row g-4 mb-5">
+          <div className="col-md-4">
+            <div className="card h-100">
+              <img
+                src="/assets/images/film1.jpg"
+                className="card-img-top"
+                alt="Definition of Mental Health"
+              />
+              <div className="card-body">
+                <h5 className="card-title">
+                  <a
+                    href="https://blogs.mutcu.org/definition-of-mental-health-to-a-christian/"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="text-decoration-none"
+                  >
+                    Definition of Mental Health to a Christian
+                  </a>
+                </h5>
+                <p className="card-text text-muted">A Christian perspective on mental health and wellbeing.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-4">
+            <div className="card h-100">
+              <img
+                src="/assets/images/mission1.jpg"
+                className="card-img-top"
+                alt="Rooted and Built Up in Christ"
+              />
+              <div className="card-body">
+                <h5 className="card-title">
+                  <a
+                    href="https://blogs.mutcu.org/rooted-and-built-up-in-christ/"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="text-decoration-none"
+                  >
+                    Rooted and Built Up in Christ
+                  </a>
+                </h5>
+                <p className="card-text text-muted">Growing in Christ through discipleship and community.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-4">
+            <div className="card h-100">
+              <img
+                src="/assets/images/church1.jpg"
+                className="card-img-top"
+                alt="Dame of Diligence"
+              />
+              <div className="card-body">
+                <h5 className="card-title">
+                  <a
+                    href="https://blogs.mutcu.org/dame-of-diligence-the-proverbs-31-woman/"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="text-decoration-none"
+                  >
+                    Dame of Diligence — The Proverbs 31 Woman
+                  </a>
+                </h5>
+                <p className="card-text text-muted">A devotional look at godly diligence and character.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* BLOG FEED */}
       <section className="container py-5 mt-n5">
         {error && (
@@ -186,20 +271,29 @@ const BlogsPage = () => {
                         </span>
                       </div>
                       <h3 className="blog-title mb-3">
-                        <Link
-                          to={`/blogs/${blog.slug}`}
+                        <a
+                          href={`https://blogs.mutcu.org/${blog.slug || ""}`}
                           className="stretched-link text-decoration-none"
+                          target="_blank"
+                          rel="noreferrer noopener"
                         >
                           {blog.title}
-                        </Link>
+                        </a>
                       </h3>
                       <p className="blog-excerpt text-muted mb-4">
                         {blog.excerpt ||
                           "Read more about this inspiring update from our community."}
                       </p>
                       <div className="blog-footer-link">
-                        <span>Read More</span>
-                        <i className="fas fa-arrow-right ms-2"></i>
+                        <a
+                          href={`https://blogs.mutcu.org/${blog.slug || ""}`}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="text-decoration-none"
+                        >
+                          <span>Read More</span>
+                          <i className="fas fa-arrow-right ms-2"></i>
+                        </a>
                       </div>
                     </div>
                   </div>
