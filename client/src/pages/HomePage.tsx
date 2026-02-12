@@ -365,7 +365,7 @@ const HomePage = () => {
                   work, and leadership development.
                 </p>
                 <div>
-                  <Link to="/contact" className="btn btn-primary btn-lg me-3">
+                  <Link to="/register" className="btn btn-primary btn-lg me-3">
                     Join Us <i className="fas fa-hand-point-right ms-2" />
                   </Link>
                   <Link to="/resources" className="btn btn-secondary btn-lg">
