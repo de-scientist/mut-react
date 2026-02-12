@@ -15,6 +15,8 @@ interface Ministry {
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [registrationNumber, setRegistrationNumber] = useState("");
   const [yearOfStudy, setYearOfStudy] = useState("");
   const [course, setCourse] = useState("");
   const [ministry1, setMinistry1] = useState("");
@@ -27,6 +29,8 @@ const Register = () => {
   const [errors, setErrors] = useState({
     name: false,
     email: false,
+    phone: false,
+    registrationNumber: false,
     yearOfStudy: false,
     course: false,
     ministry1: false,
@@ -36,6 +40,7 @@ const Register = () => {
   const [modalMessage, setModalMessage] = useState<React.ReactNode>(null);
 
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phonePattern = /^[0-9\+\-\s]{7,20}$/;
   const yearOptions = [
     "Year 1",
     "Year 2",
@@ -74,6 +79,8 @@ const Register = () => {
   const handleChange = (field: string, value: string) => {
     if (field === "name") setName(value);
     if (field === "email") setEmail(value);
+    if (field === "phone") setPhone(value);
+    if (field === "registrationNumber") setRegistrationNumber(value);
     if (field === "yearOfStudy") setYearOfStudy(value);
     if (field === "course") setCourse(value);
     if (field === "ministry1") setMinistry1(value);
@@ -95,6 +102,8 @@ const Register = () => {
     const newErrors = {
       name: !name.trim(),
       email: !email.trim() || !emailPattern.test(email.trim()),
+      phone: !phone.trim() || !phonePattern.test(phone.trim()),
+      registrationNumber: !registrationNumber.trim(),
       yearOfStudy: !yearOfStudy.trim(),
       course: !course.trim(),
       ministry1: false,
@@ -119,6 +128,8 @@ const Register = () => {
       await membersAPI.register({
         name: name.trim(),
         email: email.trim(),
+        phone: phone.trim() || undefined,
+        registrationNumber: registrationNumber.trim() || undefined,
         yearOfStudy: yearOfStudy.trim(),
         course: course.trim(),
         ministry1: ministry1 || undefined,
@@ -142,6 +153,8 @@ const Register = () => {
       // Reset form
       setName("");
       setEmail("");
+      setPhone("");
+      setRegistrationNumber("");
       setYearOfStudy("");
       setCourse("");
       setMinistry1("");
@@ -150,6 +163,8 @@ const Register = () => {
       setErrors({
         name: false,
         email: false,
+        phone: false,
+        registrationNumber: false,
         yearOfStudy: false,
         course: false,
         ministry1: false,
@@ -247,6 +262,44 @@ const Register = () => {
                       {errors.email && (
                         <div className="invalid-feedback">
                           Please enter a valid email address.
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="col-md-6 mb-3">
+                      <label className="form-label">
+                        Phone Number <span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        className={`form-control${errors.phone ? " is-invalid" : ""}`}
+                        value={phone}
+                        onChange={(e) => handleChange("phone", e.target.value)}
+                        placeholder="e.g., +254712345678"
+                        required
+                      />
+                      {errors.phone && (
+                        <div className="invalid-feedback">
+                          Please enter a valid phone number.
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="col-md-6 mb-3">
+                      <label className="form-label">
+                        Student Registration Number <span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        className={`form-control${errors.registrationNumber ? " is-invalid" : ""}`}
+                        value={registrationNumber}
+                        onChange={(e) => handleChange("registrationNumber", e.target.value)}
+                        placeholder="Enter your registration number"
+                        required
+                      />
+                      {errors.registrationNumber && (
+                        <div className="invalid-feedback">
+                          Please enter your student registration number.
                         </div>
                       )}
                     </div>
