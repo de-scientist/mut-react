@@ -283,6 +283,36 @@ const churchActivities: ChurchActivityItem[] = [
   { id: "act-017", date: normalizeDate("22/03/26"), activity: "Baptism" },
 ];
 
+const defaultSpecialEvents: EventItem[] = [
+  {
+    id: "evt-mulewo",
+    title: "MULEWO",
+    date: normalizeDate("27/02/26"),
+    time: "8:00 PM - 5:30 AM",
+    location: "MUT Grounds",
+    description: "A night of music, worship, and fellowship.",
+    isActive: true,
+  },
+  {
+    id: "evt-business-expo",
+    title: "Business Exposition",
+    date: normalizeDate("14/03/26"),
+    time: "8:00 AM - 4:00 PM",
+    location: "MUT Grounds",
+    description: "Explore business opportunities and entrepreneurship.",
+    isActive: true,
+  },
+  {
+    id: "evt-film-premiere",
+    title: "Film Premiere: Gems in The Ruff: The Salonist",
+    date: normalizeDate("28/02/26"),
+    time: "4:00 PM - 7:00 PM",
+    location: "Assembly Hall",
+    description: "An inspiring film screening and discussion.",
+    isActive: true,
+  },
+];
+
 const EventsPage = () => {
   // Special Events (API)
   const [events, setEvents] = useState<EventItem[]>([]);
@@ -302,11 +332,14 @@ const EventsPage = () => {
         setLoading(true);
         const res = await eventsAPI.getAll({ active: "true" });
         const items = res.data || res.items || [];
-        setEvents(items);
+        // Merge default events with API events
+        const allEvents = [...defaultSpecialEvents, ...items];
+        setEvents(allEvents);
         setError(null);
       } catch (err: any) {
-        setError(err.message || "Failed to load special events.");
-        setEvents([]);
+        // If API fails, still show default events
+        setEvents(defaultSpecialEvents);
+        setError(null);
       } finally {
         setLoading(false);
       }
