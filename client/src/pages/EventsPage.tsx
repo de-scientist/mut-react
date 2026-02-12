@@ -327,24 +327,10 @@ const EventsPage = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const fetchActiveEvents = async () => {
-      try {
-        setLoading(true);
-        const res = await eventsAPI.getAll({ active: "true" });
-        const items = res.data || res.items || [];
-        // Merge default events with API events
-        const allEvents = [...defaultSpecialEvents, ...items];
-        setEvents(allEvents);
-        setError(null);
-      } catch (err: any) {
-        // If API fails, still show default events
-        setEvents(defaultSpecialEvents);
-        setError(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchActiveEvents();
+    setLoading(true);
+    // Show only the default special events
+    setEvents(defaultSpecialEvents);
+    setLoading(false);
   }, []);
 
   const filteredProgram = useMemo(() => {
