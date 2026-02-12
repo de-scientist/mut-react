@@ -87,6 +87,21 @@ const executiveMembers = [
   },
 ];
 
+const patrons = [
+  {
+    name: "Dr. John Ndia",
+    role: "Patron",
+    image: "/assets/images/patron.jpeg",
+    accent: "var(--brand-orange)",
+  },
+  {
+    name: "Dr. Tabitha",
+    role: "Assistant to the Patron",
+    image: "/assets/images/assistant-patron.jpeg",
+    accent: "var(--brand-teal)",
+  },
+];
+
 const coreValues = [
   {
     icon: "fa-cross",
@@ -209,7 +224,7 @@ const AboutPage = () => {
                     href="https://focuskenya.org/"
                     className="text-teal text-decoration-none fw-bold"
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noreferrer noopener"
                   >
                     Fellowship of Christian Unions (FOCUS-KENYA)
                   </a>
@@ -368,6 +383,35 @@ const AboutPage = () => {
         </div>
       </section>
 
+      {/* --- PATRON'S OFFICE --- */}
+      <section className="py-5 bg-light-navy-subtle">
+        <div className="container py-4 text-center">
+          <h2 className="fw-bold text-navy h1 mb-5">Patron's Office</h2>
+          <div className="row g-4 justify-content-center">
+            {patrons.map((patron, i) => (
+              <div key={i} className="col-6 col-md-4 col-lg-3">
+                <div className="leader-card">
+                  <div
+                    className="leader-img-box mb-3"
+                    style={{ borderColor: patron.accent }}
+                  >
+                    <img
+                      src={patron.image}
+                      alt={patron.name}
+                      className="img-fluid rounded-circle"
+                    />
+                  </div>
+                  <h6 className="fw-bold text-navy mb-1">{patron.name}</h6>
+                  <p className="text-orange x-small fw-bold text-uppercase mb-0">
+                    {patron.role}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* --- EXECUTIVE COMMITTEE --- */}
       <section className="py-5">
         <div className="container py-4 text-center">
@@ -435,6 +479,7 @@ const AboutPage = () => {
         .bg-navy { background-color: var(--brand-navy); }
         .bg-teal { background-color: var(--brand-teal); }
         .bg-orange { background-color: var(--brand-orange); }
+        .bg-light-navy-subtle { background-color: rgba(10, 24, 55, 0.03); }
 
         .about-hero {
           background: linear-gradient(rgba(10, 24, 55, 0.85), rgba(10, 24, 55, 0.85)), url('/assets/images/church2.jpg');
