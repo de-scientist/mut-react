@@ -159,6 +159,7 @@ const GalleryPage = () => {
                 target="_blank"
                 rel="noreferrer noopener"
                 className="album-card-link text-decoration-none"
+                title={`View ${album.title} photos on Google Photos`}
               >
                 <div className="album-card h-100">
                   <div className="album-icon-container">
@@ -211,6 +212,7 @@ const GalleryPage = () => {
                       download
                       onClick={(e) => e.stopPropagation()}
                       className="btn-item-download"
+                      title="Download image"
                     >
                       <i className="fas fa-arrow-down"></i>
                     </a>
@@ -236,10 +238,10 @@ const GalleryPage = () => {
             />
 
             <div className="lightbox-controls">
-              <button className="ctrl-btn" onClick={showPrev}>
+              <button className="ctrl-btn" onClick={showPrev} title="Previous image">
                 <i className="fas fa-chevron-left"></i>
               </button>
-              <button className="ctrl-btn" onClick={showNext}>
+              <button className="ctrl-btn" onClick={showNext} title="Next image">
                 <i className="fas fa-chevron-right"></i>
               </button>
             </div>
@@ -252,10 +254,10 @@ const GalleryPage = () => {
             </div>
 
             <div className="lightbox-top-actions">
-              <a href={images[index].src} download className="action-btn me-3">
+              <a href={images[index].src} download className="action-btn me-3" title="Download image">
                 <i className="fas fa-download"></i>
               </a>
-              <button className="action-btn" onClick={close}>
+              <button className="action-btn" onClick={close} title="Close gallery">
                 <i className="fas fa-times"></i>
               </button>
             </div>
