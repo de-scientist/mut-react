@@ -3,6 +3,7 @@ import type { FormEvent } from "react";
 import "../assets/mut/css/contact.css";
 import "../styles/adminForms.css";
 import ConfirmationModal from "../components/ConfirmationModal";
+import SuccessModal from "../components/SuccessModal";
 import { contactAPI } from "../services/api";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -22,6 +23,7 @@ const ContactPage = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState<React.ReactNode>(null);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 
   const openModal = (message: React.ReactNode) => {
     setModalMessage(message);
@@ -74,12 +76,8 @@ const ContactPage = () => {
         message: formData.message.trim(),
       });
 
-      openModal(
-        <p>
-          Thank you for contacting us! We&apos;ll get back to you soon. Have a
-          blessed time ahead.
-        </p>,
-      );
+      // Show success modal
+      setIsSuccessModalOpen(true);
 
       // Reset form
       setFormData({
@@ -109,16 +107,39 @@ const ContactPage = () => {
       {/* Page Hero Section */}
       <section
         className="page-hero-section d-flex align-items-center text-center text-white"
-        style={{ backgroundImage: "url('/assets/images/church3.jpg')" }}
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          position: 'relative',
+          filter: 'brightness(0.9) saturate(0.9)',
+        }}
       >
-        <div className="hero-overlay" />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'radial-gradient(ellipse at center, rgba(10,24,55,0.3) 0%, rgba(10,24,55,0.5) 100%)',
+            zIndex: 1,
+          }}
+        />
         <div
           className="container position-relative"
           data-aos="fade-up"
           data-aos-duration="1000"
+          style={{
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.03) 100%)',
+            backdropFilter: 'blur(8px)',
+            padding: '60px 40px',
+            borderRadius: '16px',
+            border: '1px solid rgba(255,255,255,0.25)',
+            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+            maxWidth: '600px',
+            zIndex: 2,
+          }}
         >
-          <h1 className="display-3 mb-3">Contact Us</h1>
-          <p className="lead">We&apos;d love to hear from you!</p>
+          <h1 className="display-3 mb-3 fw-bold" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>Contact Us</h1>
+          <p className="lead fs-5" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.2)' }}>We&apos;d love to hear from you!</p>
         </div>
       </section>
 
@@ -287,6 +308,18 @@ const ContactPage = () => {
         isOpen={isModalOpen}
         message={modalMessage ?? ""}
         onClose={closeModal}
+      />
+
+      <SuccessModal
+        isOpen={isSuccessModalOpen}
+        title="Message Sent!"
+        message={
+          <p>
+            Thank you for contacting us! We&apos;ll get back to you soon. Have a\
+            blessed time ahead.
+          </p>
+        }
+        onClose={() => setIsSuccessModalOpen(false)}
       />
     </div>
   );
