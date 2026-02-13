@@ -169,7 +169,7 @@ const HomePage = () => {
       {
         title: "Music Ministry",
         icon: "fas fa-music",
-        image: "/assets/images/music1.jpg",
+        image: "/assets/images/music2.jpg",
         description:
           "Ministering worship with excellence through Praise & Worship, Choir, Instrumentalists and the Band.",
         link: "/ministries",
@@ -193,7 +193,7 @@ const HomePage = () => {
       {
         title: "Discipleship",
         icon: "fas fa-user-friends",
-        image: "/assets/images/church1.jpg",
+        image: "/assets/images/BS3.jpg",
         description:
           "Nurturing Christ-like maturity through mentorship, follow-up, small groups, and intentional spiritual formation.",
         link: "/ministries",
@@ -201,7 +201,7 @@ const HomePage = () => {
       {
         title: "Technical & Media",
         icon: "fas fa-photo-video",
-        image: "/assets/images/church3.jpg",
+        image: "/assets/images/technicalDpt.jpg",
         description:
           "Supporting worship and communication through sound, visuals, coverage, design, and digital publicity platforms.",
         link: "/ministries",
@@ -209,7 +209,7 @@ const HomePage = () => {
       {
         title: "Creative Arts Ministry",
         icon: "fas fa-paint-brush",
-        image: "/assets/images/film1.jpg",
+        image: "/assets/images/dance3.jpg",
         description:
           "Communicating the Gospel creatively through drama, dance, spoken word, and other Christ-centred expressions.",
         link: "/ministries",
