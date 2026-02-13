@@ -91,13 +91,13 @@ const patrons = [
   {
     name: "Dr. John Ndia",
     role: "Patron",
-    image: "/assets/images/patron.jpeg",
+    image: "/assets/images/ndia.jpg",
     accent: "var(--brand-orange)",
   },
   {
-    name: "Dr. Tabitha",
+    name: "Dr. Tabitha Karanja",
     role: "Assistant to the Patron",
-    image: "/assets/images/assistant-patron.jpeg",
+    image: "/assets/images/TABITHA.jpg",
     accent: "var(--brand-teal)",
   },
 ];
