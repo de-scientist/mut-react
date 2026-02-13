@@ -91,7 +91,7 @@ const patrons = [
   {
     name: "Dr. John Ndia",
     role: "Patron",
-    image: "/assets/images/ndia.jpg",
+    image: "/assets/images/Ndia.jpg",
     accent: "var(--brand-orange)",
   },
   {
