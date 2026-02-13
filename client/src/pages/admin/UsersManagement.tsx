@@ -575,7 +575,7 @@ const UsersManagement = () => {
         message={`Are you sure you want to deactivate the account for "${selectedUser?.email}"? This will prevent them from logging in.`}
         confirmText="Deactivate"
         cancelText="Cancel"
-        confirmButtonClass="btn-warning"
+        // confirmButtonClass="btn-warning"
         // confirmText="Deactivate User"
         // type="warning"
       />
