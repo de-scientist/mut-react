@@ -2,6 +2,52 @@ import { useState, useCallback, useEffect } from "react";
 
 type Img = { src: string; alt?: string };
 
+type PhotoAlbum = {
+  id: string;
+  title: string;
+  description?: string;
+  url: string;
+  icon?: string;
+};
+
+const photoAlbums: PhotoAlbum[] = [
+  {
+    id: "1",
+    title: "BEST-P SUNDAY",
+    description: "Photos from BEST-P Sunday services",
+    url: "https://photos.app.goo.gl/RRzuYzqtNNggSyM39",
+    icon: "fa-images",
+  },
+  {
+    id: "2",
+    title: "Crusade Photos",
+    description: "Moments from our crusade events",
+    url: "https://photos.app.goo.gl/u2vJUfogQxHdhjJ5A",
+    icon: "fa-images",
+  },
+  {
+    id: "3",
+    title: "Sunday Service",
+    description: "Weekly Sunday worship celebrations",
+    url: "https://photos.app.goo.gl/8ME7ggMzPEkoo4qDA",
+    icon: "fa-images",
+  },
+  {
+    id: "4",
+    title: "Bible Study Sunday Photos",
+    description: "Photos from our Bible study sessions",
+    url: "https://photos.app.goo.gl/yXfUm1pKUNXrdAT66",
+    icon: "fa-images",
+  },
+  {
+    id: "5",
+    title: "Chastity Walk",
+    description: "Moments from our chastity awareness walk",
+    url: "https://photos.google.com/share/AF1QipMneYFrl9yQJ5cPPamn1sRx4_6sVxQkpB-jxTz-K6P0wWPfVbNks7TIZThgaJ3jjw?key=MWdRNzlGbEdIWUZxUF9LZjdMWWJfZ0toZVV2SHRR",
+    icon: "fa-images",
+  },
+];
+
 const images: Img[] = [
   { src: "/assets/images/church1.jpg", alt: "Worship" },
   { src: "/assets/images/church2.jpg", alt: "Congregation" },
@@ -100,6 +146,51 @@ const GalleryPage = () => {
         </div>
       </section>
 
+      {/* PHOTO ALBUMS SECTION */}
+      <section className="container mb-5">
+        <h2 className="display-5 fw-bold text-navy mb-4">
+          Photo <span className="text-teal">Albums</span>
+        </h2>
+        <div className="row g-4 mb-5">
+          {photoAlbums.map((album) => (
+            <div className="col-md-6 col-lg-4" key={album.id}>
+              <a
+                href={album.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="album-card-link text-decoration-none"
+              >
+                <div className="album-card h-100">
+                  <div className="album-icon-container">
+                    <i className={`fas ${album.icon || "fa-folder"} fa-3x`}></i>
+                  </div>
+                  <div className="album-info p-4">
+                    <h5 className="album-title mb-2">{album.title}</h5>
+                    {album.description && (
+                      <p className="album-desc text-muted small mb-0">
+                        {album.description}
+                      </p>
+                    )}
+                    <div className="mt-3 pt-3 border-top">
+                      <small className="text-teal fw-600">
+                        <i className="fas fa-external-link-alt me-2"></i>
+                        View on Google Photos
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <div className="divider mb-5"></div>
+
+        <h2 className="display-5 fw-bold text-navy mb-4">
+          Photo <span className="text-teal">Gallery</span>
+        </h2>
+      </section>
+
       {/* GRID SECTION */}
       <div className="container mb-5">
         <div className="row g-4">
@@ -188,6 +279,66 @@ const GalleryPage = () => {
 
         .text-navy { color: var(--brand-navy); }
         .text-teal { color: var(--brand-teal); }
+        
+        /* Photo Album Card Styles */
+        .album-card-link {
+          display: block;
+        }
+
+        .album-card {
+          background: white;
+          border-radius: 20px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+          overflow: hidden;
+          transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+          border-bottom: 4px solid transparent;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .album-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 20px 40px rgba(54, 209, 196, 0.2);
+          border-bottom: 4px solid var(--brand-teal);
+        }
+
+        .album-icon-container {
+          background: linear-gradient(135deg, #0A1837 0%, #152C5B 100%);
+          padding: 3rem 2rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--brand-teal);
+          transition: all 0.3s ease;
+        }
+
+        .album-card:hover .album-icon-container {
+          background: linear-gradient(135deg, var(--brand-teal) 0%, #36D1C4 100%);
+          color: white;
+          transform: scale(1.05);
+        }
+
+        .album-info {
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .album-title {
+          color: var(--brand-navy);
+          font-weight: 700;
+          line-height: 1.4;
+        }
+
+        .album-desc {
+          line-height: 1.5;
+        }
+        
+        .divider {
+          height: 2px;
+          background: linear-gradient(to right, transparent, #ddd, transparent);
+          margin-top: 3rem;
+        }
         
         .badge-pill {
           background: none;
