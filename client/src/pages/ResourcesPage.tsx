@@ -96,6 +96,27 @@ const ResourcesPage = () => {
     };
   }, []);
 
+  // Video preview state and helpers
+  const [previewVideoId, setPreviewVideoId] = useState<string | null>(null);
+
+  const getYouTubeId = (url?: string) => {
+    if (!url) return null;
+    // common YouTube URL patterns: watch?v=ID, youtu.be/ID, /embed/ID
+    const idMatch = url.match(/(?:youtube\.com\/(?:.*v=|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+    if (idMatch && idMatch[1]) return idMatch[1];
+    try {
+      const u = new URL(url);
+      return u.searchParams.get("v");
+    } catch (e) {
+      return null;
+    }
+  };
+
+  const getYouTubeThumb = (url?: string) => {
+    const id = getYouTubeId(url);
+    return id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : null;
+  };
+
   // Helper to determine icon based on title or type
   const getResourceIcon = (item: ResourceItem) => {
     const title = item.title.toLowerCase();
@@ -155,24 +176,42 @@ const ResourcesPage = () => {
               <div className="row g-4">
                 {featuredVideos.map((video) => (
                   <div className="col-md-6 col-lg-3" key={video.id}>
-                    <a
-                      href={video.url}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="video-card-link text-decoration-none"
+                    <div
+                      className="video-card h-100"
+                      role="button"
+                      tabIndex={0}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const id = getYouTubeId(video.url);
+                        if (id) setPreviewVideoId(id);
+                        else window.open(video.url, "_blank");
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          const id = getYouTubeId(video.url);
+                          if (id) setPreviewVideoId(id);
+                          else window.open(video.url, "_blank");
+                        }
+                      }}
                     >
-                      <div className="video-card h-100">
-                        <div className="video-thumbnail">
+                      <div className="video-thumbnail">
+                        {getYouTubeThumb(video.url) ? (
+                          <img
+                            src={getYouTubeThumb(video.url)!}
+                            alt={video.title}
+                            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                          />
+                        ) : (
                           <i className="fas fa-play-circle"></i>
-                        </div>
-                        <div className="card-body p-3">
-                          <h6 className="video-title mb-2">{video.title}</h6>
-                          <p className="video-desc text-muted small mb-0">
-                            {video.description}
-                          </p>
-                        </div>
+                        )}
                       </div>
-                    </a>
+                      <div className="card-body p-3">
+                        <h6 className="video-title mb-2">{video.title}</h6>
+                        <p className="video-desc text-muted small mb-0">
+                          {video.description}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -240,6 +279,24 @@ const ResourcesPage = () => {
           </>
         )}
       </section>
+
+      {/* Video preview modal */}
+      {previewVideoId && (
+        <div className="video-modal-overlay" onClick={() => setPreviewVideoId(null)}>
+          <div className="video-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="btn-close" onClick={() => setPreviewVideoId(null)}>×</button>
+            <iframe
+              width="100%"
+              height="480"
+              src={`https://www.youtube.com/embed/${previewVideoId}?autoplay=1&rel=0`}
+              frameBorder="0"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              title="Video preview"
+            />
+          </div>
+        </div>
+      )}
 
       <style>{`
         :root {
@@ -415,6 +472,34 @@ const ResourcesPage = () => {
           .display-4 { font-size: 2.5rem; }
           .mt-n5 { margin-top: -3rem !important; }
         }
+        /* Modal preview styles */
+        .video-modal-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,0.6);
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          z-index: 1100;
+        }
+        .video-modal {
+          width: min(1000px, 95%);
+          background: #000;
+          border-radius: 12px;
+          padding: 12px;
+          position: relative;
+        }
+        .video-modal .btn-close {
+          position: absolute;
+          top: 8px;
+          right: 10px;
+          font-size: 1.6rem;
+          background: transparent;
+          border: none;
+          color: white;
+          cursor: pointer;
+        }
+        .video-thumbnail img { display:block; }
       `}</style>
     </div>
   );
