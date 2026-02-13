@@ -137,7 +137,7 @@ const BlogsPage = () => {
           <div className="col-md-4">
             <div className="card h-100">
               <img
-                src="/assets/images/film1.jpg"
+                src="/assets/images/mbbc1.jpg"
                 className="card-img-top"
                 alt="Definition of Mental Health"
               />
@@ -160,7 +160,7 @@ const BlogsPage = () => {
           <div className="col-md-4">
             <div className="card h-100">
               <img
-                src="/assets/images/mission1.jpg"
+                src="/assets/images/service.jpg"
                 className="card-img-top"
                 alt="Rooted and Built Up in Christ"
               />
@@ -183,7 +183,7 @@ const BlogsPage = () => {
           <div className="col-md-4">
             <div className="card h-100">
               <img
-                src="/assets/images/church1.jpg"
+                src="/assets/images/MODELS.jpg"
                 className="card-img-top"
                 alt="Dame of Diligence"
               />
