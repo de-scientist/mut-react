@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { eventsAPI } from "../services/api";
 import "../assets/mut/css/events.css";
 
 interface EventItem {
@@ -291,6 +290,7 @@ const defaultSpecialEvents: EventItem[] = [
     time: "8:00 PM - 5:30 AM",
     location: "MUT Grounds",
     description: "A night of music, worship, and fellowship.",
+    imageUrl: "/assets/images/MULEWO 2026 1.png",
     isActive: true,
   },
   {
@@ -300,6 +300,7 @@ const defaultSpecialEvents: EventItem[] = [
     time: "8:00 AM - 4:00 PM",
     location: "MUT Grounds",
     description: "Explore business opportunities and entrepreneurship.",
+    imageUrl: "/assets/images/bus.jpg",
     isActive: true,
   },
   {
@@ -309,15 +310,15 @@ const defaultSpecialEvents: EventItem[] = [
     time: "4:00 PM - 7:00 PM",
     location: "Assembly Hall",
     description: "An inspiring film screening and discussion.",
+    imageUrl: "/assets/images/film1.jpg",
     isActive: true,
-  },
+  }
 ];
 
 const EventsPage = () => {
   // Special Events (API)
   const [events, setEvents] = useState<EventItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   // Program UI state
   const [tab, setTab] = useState<"SPECIAL" | "PROGRAM" | "ACTIVITIES">("SPECIAL");
@@ -346,7 +347,6 @@ const EventsPage = () => {
           p.topic,
           p.date,
           ...(p.speakers || []),
-          ...(p.notes || []),
           p.serviceType,
         ]
           .join(" ")
@@ -620,14 +620,6 @@ const EventsPage = () => {
                     role="status"
                   ></div>
                   <p className="text-muted">Loading special events...</p>
-                </div>
-              )}
-
-              {!loading && error && (
-                <div className="col-12">
-                  <div className="alert alert-warning" role="alert">
-                    {error}
-                  </div>
                 </div>
               )}
 
