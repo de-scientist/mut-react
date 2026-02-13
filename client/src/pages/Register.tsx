@@ -68,7 +68,7 @@ const Register = () => {
     }
   };
 
-  const openModal = (message: React.ReactNode) => {
+   (message: React.ReactNode) => {
     setModalMessage(message);
     setIsModalOpen(true);
   };
