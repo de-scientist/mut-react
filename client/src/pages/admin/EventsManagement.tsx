@@ -686,7 +686,6 @@ ${event.description || ""}`;
         }
         confirmText={action === "delete" ? "Delete" : "Update"}
         cancelText="Cancel"
-        confirmButtonClass={action === "delete" ? "btn-primary" : "btn-warning"}
       />
     </div>
   );
