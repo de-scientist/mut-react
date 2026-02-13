@@ -193,7 +193,7 @@ const HomePage = () => {
       {
         title: "Discipleship",
         icon: "fas fa-user-friends",
-        image: "/assets/images/church2.jpg",
+        image: "/assets/images/church1.jpg",
         description:
           "Nurturing Christ-like maturity through mentorship, follow-up, small groups, and intentional spiritual formation.",
         link: "/ministries",
