@@ -41,7 +41,7 @@ const COMMITTEES: CommitteeCard[] = [
     description:
       "Mentorship, accountability, and practical Christian living to nurture believers into maturity.",
     icon: "fa-user-friends",
-    imageUrl: "https://picsum.photos/400/300?random=2",
+    imageUrl: "/assets/images/BS3.jpg",
     route: "/ministries/discipleship",
   },
   {
@@ -71,7 +71,7 @@ const COMMITTEES: CommitteeCard[] = [
     description:
       "Choir, band, instrumentalists and Praise & Worship teams leading the Union in worship with excellence.",
     icon: "fa-music",
-    imageUrl: "/assets/images/music1.jpg",
+    imageUrl: "/assets/images/music2.jpg",
     route: "/ministries/music-ministry",
   },
   {
