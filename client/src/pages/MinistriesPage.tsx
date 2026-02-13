@@ -121,7 +121,7 @@ const COMMITTEES: CommitteeCard[] = [
     description:
       "Stewardship and mobilization of financial/material resources to support ministry work and programs.",
     icon: "fa-donate",
-    imageUrl: "/assets/images/placeholder3.jpg",
+    imageUrl: "/assets/images/placeholder2.jpg",
     route: "/ministries/rmc",
   },
 ];
