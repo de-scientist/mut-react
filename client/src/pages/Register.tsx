@@ -130,8 +130,6 @@ const Register = () => {
       await membersAPI.register({
         name: name.trim(),
         email: email.trim(),
-        phone: phone.trim() || undefined,
-        registrationNumber: registrationNumber.trim() || undefined,
         yearOfStudy: yearOfStudy.trim(),
         course: course.trim(),
         ministry1: ministry1 || undefined,
