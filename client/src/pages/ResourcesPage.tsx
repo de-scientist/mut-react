@@ -26,6 +26,40 @@ const fallbackResources: ResourceItem[] = [
   },
 ];
 
+type VideoItem = {
+  id: string;
+  title: string;
+  description: string;
+  url: string;
+};
+
+const featuredVideos: VideoItem[] = [
+  {
+    id: "1",
+    title: "Unlocking the Secrets to Academic Excellence",
+    description: "Learn the proven strategies and spiritual foundations for achieving academic success.",
+    url: "https://youtube.com/watch?v=brvyKkNHIps",
+  },
+  {
+    id: "2",
+    title: "Purpose",
+    description: "A creative experience exploring God's divine purpose for your life and ministry.",
+    url: "https://youtu.be/qqTkS5KQDyA",
+  },
+  {
+    id: "3",
+    title: "Pastor John Ng'ang'a on Purposeful Life",
+    description: "Inspiring insights on living a life aligned with God's plan and calling.",
+    url: "https://youtu.be/fbstJHBDGrc",
+  },
+  {
+    id: "4",
+    title: "Best-P Class on Homiletics",
+    description: "Master the art of preaching and Biblical communication through this comprehensive guide.",
+    url: "https://youtu.be/uSIp_D1Vpcs",
+  },
+];
+
 const ResourcesPage = () => {
   const [resources, setResources] = useState<ResourceItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -112,8 +146,47 @@ const ResourcesPage = () => {
         )}
 
         {!loading && (
-          <div className="row g-4">
-            {resources.length === 0 ? (
+          <>
+            {/* FEATURED VIDEOS SECTION */}
+            <div className="mb-5 pb-4">
+              <h2 className="display-5 fw-bold text-navy mb-4">
+                Featured <span className="text-orange">Videos</span>
+              </h2>
+              <div className="row g-4">
+                {featuredVideos.map((video) => (
+                  <div className="col-md-6 col-lg-3" key={video.id}>
+                    <a
+                      href={video.url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="video-card-link text-decoration-none"
+                    >
+                      <div className="video-card h-100">
+                        <div className="video-thumbnail">
+                          <i className="fas fa-play-circle"></i>
+                        </div>
+                        <div className="card-body p-3">
+                          <h6 className="video-title mb-2">{video.title}</h6>
+                          <p className="video-desc text-muted small mb-0">
+                            {video.description}
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* RESOURCES SECTION */}
+            <div className="border-top pt-5 mt-5">
+              <h2 className="display-5 fw-bold text-navy mb-4">
+                Additional <span className="text-orange">Resources</span>
+              </h2>
+            </div>
+
+            <div className="row g-4">
+              {resources.length === 0 ? (
               <div className="col-12 text-center py-5 shadow-sm bg-white rounded-4">
                 <i className="fas fa-box-open fa-3x text-muted mb-3"></i>
                 <p className="text-muted fw-medium">
@@ -163,7 +236,8 @@ const ResourcesPage = () => {
                 </div>
               ))
             )}
-          </div>
+            </div>
+          </>
         )}
       </section>
 
@@ -202,7 +276,74 @@ const ResourcesPage = () => {
 
         .text-orange { color: var(--brand-orange); }
 
-        /* Card Styling */
+        .text-navy { color: var(--brand-navy); }
+
+        /* Video Card Styling */
+        .video-card-link {
+          display: block;
+        }
+
+        .video-card {
+          background: white;
+          border-radius: 16px;
+          box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+          overflow: hidden;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          border-bottom: 3px solid transparent;
+        }
+
+        .video-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+          border-bottom: 3px solid var(--brand-orange);
+        }
+
+        .video-thumbnail {
+          width: 100%;
+          height: 140px;
+          background: linear-gradient(135deg, var(--brand-navy) 0%, #152C5B 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 2.5rem;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .video-thumbnail:hover {
+          background: linear-gradient(135deg, var(--brand-orange) 0%, #FF7C38 100%);
+        }
+
+        .video-thumbnail i {
+          opacity: 0.8;
+          transition: opacity 0.3s ease;
+        }
+
+        .video-card:hover .video-thumbnail i {
+          opacity: 1;
+        }
+
+        .video-title {
+          color: var(--brand-navy);
+          font-weight: 700;
+          line-height: 1.3;
+          min-height: 2.6rem;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .video-desc {
+          line-height: 1.5;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          min-height: 2.5rem;
+        }
+
         .resource-card {
           background: white;
           border: none;
