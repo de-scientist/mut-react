@@ -2,6 +2,7 @@ import { useState, useEffect, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { membersAPI, ministriesAPI } from "../services/api";
 import ConfirmationModal from "../components/ConfirmationModal";
+import SuccessModal from "../components/SuccessModal";
 import "../assets/mut/css/about.css";
 import "../styles/adminForms.css";
 
@@ -38,6 +39,7 @@ const Register = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState<React.ReactNode>(null);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phonePattern = /^[0-9\+\-\s]{7,20}$/;
@@ -137,18 +139,7 @@ const Register = () => {
         message: message.trim() || undefined,
       });
 
-      openModal(
-        <div>
-          <p className="mb-3">
-            <strong>Member Registration Submitted!</strong>
-          </p>
-          <p>
-            Thank you for registering as a member of MUTCU! Your registration
-            has been received and is pending review. We will contact you soon
-            via email.
-          </p>
-        </div>,
-      );
+      setIsSuccessModalOpen(true);
 
       // Reset form
       setName("");
@@ -176,11 +167,6 @@ const Register = () => {
         err?.data?.message ||
         "Registration failed. Please try again.";
       setError(errorMessage);
-      openModal(
-        <div>
-          <p className="text-danger mb-0">{errorMessage}</p>
-        </div>,
-      );
     } finally {
       setLoading(false);
     }
@@ -478,6 +464,23 @@ const Register = () => {
         isOpen={isModalOpen}
         message={modalMessage ?? ""}
         onClose={closeModal}
+      />
+
+      <SuccessModal
+        isOpen={isSuccessModalOpen}
+        title="Member Registration Submitted!"
+        message={
+          <div>
+            <p className="mb-2">
+              Thank you for registering as a member of MUTCU!
+            </p>
+            <p className="mb-0">
+              Your registration has been received and is pending review. We will
+              contact you soon via email.
+            </p>
+          </div>
+        }
+        onClose={() => setIsSuccessModalOpen(false)}
       />
     </div>
   );
