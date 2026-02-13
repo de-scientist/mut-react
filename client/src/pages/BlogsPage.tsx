@@ -331,9 +331,14 @@ const BlogsPage = () => {
         .blog-page { background-color: var(--bg-light); min-height: 100vh; }
 
         .blog-hero {
-          background: linear-gradient(135deg, var(--brand-navy) 0%, #152C5B 100%);
+          background: linear-gradient(135deg, rgba(10, 24, 55, 0.9) 0%, rgba(21, 44, 91, 0.85) 100%), url('/assets/images/church2.jpg');
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
           padding: 120px 0 140px 0;
           position: relative;
+          filter: brightness(1) contrast(1.1) saturate(0.95);
+          box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.4);
         }
 
         .badge-pill {

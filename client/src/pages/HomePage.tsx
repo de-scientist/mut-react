@@ -3,6 +3,7 @@ import type { FormEvent, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import "../assets/mut/css/index.css";
 import ConfirmationModal from "../components/ConfirmationModal";
+import SuccessModal from "../components/SuccessModal";
 import { prayerAPI, newsletterAPI } from "../services/api";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -26,6 +27,9 @@ const HomePage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState<ReactNode>(null);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<ReactNode>(null);
+  const [successTitle, setSuccessTitle] = useState("Success!");
   const [pendingPrayerSubmission, setPendingPrayerSubmission] = useState(false);
 
   const openModal = (message: ReactNode) => {
@@ -61,12 +65,15 @@ const HomePage = () => {
         isPublic: false,
       });
 
-      openModal(
+      setSuccessTitle("Prayer Request Received");
+      setSuccessMessage(
         <p>
           Thank you for your prayer request! Our Prayer Ministry will intercede
           for you.
         </p>,
       );
+      setIsSuccessModalOpen(true);
+      setIsModalOpen(false); // Close the confirmation modal
 
       setPrayerName("");
       setPrayerRequest("");
@@ -95,12 +102,14 @@ const HomePage = () => {
     try {
       await newsletterAPI.subscribe(newsletterEmail.trim());
 
-      openModal(
+      setSuccessTitle("Subscribed!");
+      setSuccessMessage(
         <p>
           Thank you for subscribing to our newsletter! You&apos;ll receive our
           latest updates directly in your inbox.
         </p>,
       );
+      setIsSuccessModalOpen(true);
 
       setNewsletterEmail("");
     } catch (error) {
@@ -1045,6 +1054,13 @@ const HomePage = () => {
         message={modalMessage ?? ""}
         onClose={closeModal}
         onConfirm={pendingPrayerSubmission ? confirmPrayerSubmit : undefined}
+      />
+
+      <SuccessModal
+        isOpen={isSuccessModalOpen}
+        title={successTitle}
+        message={successMessage ?? ""}
+        onClose={() => setIsSuccessModalOpen(false)}
       />
     </div>
   );
