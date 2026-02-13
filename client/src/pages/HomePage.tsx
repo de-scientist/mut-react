@@ -250,7 +250,7 @@ const HomePage = () => {
       {
         title: "Friday Fellowship: MULEWO",
         icon: "fas fa-music",
-        image: "/assets/images/church2.jpg",
+        image: "/assets/images/MULEWO 2026 1.png",
         description:
           "A vibrant night of worship, music, and fellowship celebrating God's goodness.",
         link: "/events",
@@ -289,7 +289,7 @@ const HomePage = () => {
       {
         title: "Sunday Service: Being the Salt and the Light (Gents Sunday)",
         icon: "fas fa-fire",
-        image: "/assets/images/film1.jpg",
+        image: "/assets/images/service.jpg",
         description:
           "A powerful Sunday for the men—discovering our role as salt and light in a dark world.",
         link: "/events",
@@ -302,7 +302,7 @@ const HomePage = () => {
       {
         title: "Business Exposition",
         icon: "fas fa-briefcase",
-        image: "/assets/images/church1.jpg",
+        image: "/assets/images/bus.jpg",
         description: "Explore enterprise and opportunities at our Business Exposition.",
         link: "/events",
         meta: [
@@ -904,7 +904,7 @@ const HomePage = () => {
                 className="gallery-item d-block rounded shadow-sm overflow-hidden"
               >
                 <img
-                  src="/assets/images/music1.jpg"
+                  src="/assets/images/music2.jpg"
                   className="img-fluid"
                   alt="Worship Service"
                 />
